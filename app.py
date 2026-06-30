@@ -791,6 +791,47 @@ with tab5:
     st.header("Heute lernen")
     st.caption("Aktuelle Artikel von Deutsche Welle - jeden Tag neue Texte auf Deutsch.")
 
+    # Daily vocabulary section
+    st.subheader("Tägliches Vokabeltraining")
+    st.caption("5 neue Wörter + 3 neue Verben - jeden Tag, professionelles Deutsch.")
+
+    if st.button("Neue Wörter für heute generieren", type="primary"):
+        with st.spinner("Claude wählt neue Wörter für Sie aus..."):
+            existing = [v["word"] for v in db.get_vocabulary()]
+            new_words = content_feed.generate_daily_vocab(existing)
+            if new_words:
+                to_save = [{"word": w["word"], "definition": w["definition"], "example": w["example"]} for w in new_words]
+                db.save_vocabulary(to_save, None)
+                st.session_state["daily_vocab_preview"] = new_words
+                st.rerun()
+            else:
+                st.warning("Wörter konnten nicht generiert werden.")
+
+    if st.session_state.get("daily_vocab_preview"):
+        words = st.session_state["daily_vocab_preview"]
+        verbs = [w for w in words if w.get("is_verb")]
+        nouns = [w for w in words if not w.get("is_verb")]
+
+        if nouns:
+            st.markdown("**Neue Wörter:**")
+            for w in nouns:
+                with st.container(border=True):
+                    st.markdown(f"**{w['word']}**")
+                    st.markdown(f"_{w['definition']}_")
+                    st.caption(f"Beispiel: {w['example']}")
+
+        if verbs:
+            st.markdown("**Neue Verben:**")
+            for w in verbs:
+                with st.container(border=True):
+                    st.markdown(f"**{w['word']}**")
+                    st.markdown(f"_{w['definition']}_")
+                    st.caption(f"Beispiel: {w['example']}")
+
+        st.info("Diese Wörter sind jetzt in Ihrer Vokabelliste (Tab 4). Üben Sie morgen früh damit.")
+
+    st.divider()
+
     if "dw_articles" not in st.session_state:
         with st.spinner("Artikel werden geladen..."):
             st.session_state["dw_articles"] = content_feed.fetch_dw_articles()
