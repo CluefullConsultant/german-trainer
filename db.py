@@ -2,6 +2,7 @@
 import streamlit as st
 from supabase import create_client, Client
 from datetime import datetime, timezone
+import time
 
 
 @st.cache_resource
@@ -9,6 +10,20 @@ def get_client() -> Client:
     url = st.secrets["SUPABASE_URL"]
     key = st.secrets["SUPABASE_KEY"]
     return create_client(url, key)
+
+
+def _execute_with_retry(fn, retries=3, delay=1):
+    """Execute a Supabase query with retries on connection error."""
+    import httpx
+    last_err = None
+    for attempt in range(retries):
+        try:
+            return fn()
+        except (httpx.ConnectError, httpx.TimeoutException, Exception) as e:
+            last_err = e
+            if attempt < retries - 1:
+                time.sleep(delay)
+    raise last_err
 
 
 def save_exercise(topic: str, exercise_type: str, content: dict, mentor_notes: str) -> str:
@@ -29,7 +44,7 @@ def get_exercises(topic_filter: str | None = None, status_filter: str | None = N
     ).order("created_at", desc=True)
     if topic_filter:
         query = query.eq("topic", topic_filter)
-    rows = query.execute().data
+    rows = _execute_with_retry(lambda: query.execute().data)
 
     result = []
     for row in rows:

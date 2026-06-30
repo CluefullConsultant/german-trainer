@@ -347,7 +347,11 @@ with tab2:
     topic_q = None if topic_filter == "Alle Themen" else topic_filter
     status_q = None if status_filter == "Alle" else status_filter
 
-    all_exercises = db.get_exercises(topic_q, status_q)
+    try:
+        all_exercises = db.get_exercises(topic_q, status_q)
+    except Exception:
+        st.error("Verbindung zur Datenbank fehlgeschlagen. Bitte Seite neu laden.")
+        all_exercises = []
 
     if not all_exercises:
         st.info("Keine Aufgaben gefunden. Der Mentor hat noch keine Aufgaben erstellt.")
