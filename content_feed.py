@@ -9,7 +9,9 @@ import json
 def fetch_dw_articles(max_items: int = 5) -> list[dict]:
     """Fetch today's articles from Deutsche Welle learner RSS."""
     urls = [
-        "https://rss.dw.com/rdf/rss-de-lernen",
+        "https://rss.dw.com/xml/rss-de-all",
+        "https://rss.dw.com/xml/rss-de-ger",
+        "https://www.tagesschau.de/xml/rss2",
         "https://rss.dw.com/rdf/rss-de-all",
     ]
     for url in urls:
