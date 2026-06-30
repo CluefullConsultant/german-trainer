@@ -81,40 +81,48 @@ Antworte NUR mit JSON: ["Frage 1?", "Frage 2?", "Frage 3?", "Frage 4?", "Frage 5
 
 
 def generate_daily_vocab(existing_words: list[str]) -> list[dict]:
-    """Generate 5 new professional German words + 3 verbs not already in the vocab list."""
-    api_key = st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, "secrets") else None
-    client = anthropic.Anthropic(api_key=api_key)
-    exclude = ", ".join(existing_words) if existing_words else "keine"
-    prompt = f"""Du bist ein Deutschlehrer für einen professionellen Unternehmensberater (C1-Niveau), der in Berlin lebt und Deutsch sowohl im Beruf als auch im Alltag braucht.
+    """Pick 8 words from the structured A1-C1 vocab list that the user hasn't seen yet.
 
-Erstelle heute eine Lernliste mit genau 8 Einträgen - eine ausgewogene Mischung:
-- 3 Wörter/Ausdrücke aus dem professionellen/geschäftlichen Bereich (Meetings, Berichte, E-Mails, Beratung)
-- 2 Wörter/Ausdrücke aus dem Berliner Alltag (Gespräche mit Nachbarn, Einkaufen, Behörden, Freunde)
-- 3 Verben (Mischung: 2 beruflich, 1 alltäglich) mit Angabe des Kasus wo relevant (z.B. "sich beziehen auf + Akk.")
+    Selection: 1 A1/A2 wildcard + 2 B1 + 3 B2 + 2 C1.
+    Falls back to any unseen word if a level is exhausted.
+    """
+    from vocab_list import VOCAB_LIST
+    import random
 
-Diese Wörter sind bereits bekannt und dürfen NICHT wiederholt werden: {exclude}
+    seen = set(existing_words)
+    unseen = [w for w in VOCAB_LIST if w["word"] not in seen]
 
-Für jedes Wort/Verb:
-- Eine klare deutsche Definition
-- Ein natürlicher Beispielsatz (beruflich oder alltäglich je nach Kategorie)
+    if not unseen:
+        return []
 
-Antworte NUR mit JSON:
-[
-  {{"word": "das Fazit", "definition": "die abschließende Schlussfolgerung; das Ergebnis einer Analyse", "example": "Das Fazit der Untersuchung zeigt, dass die Kosten um 20% gesenkt werden können.", "is_verb": false, "context": "beruflich"}},
-  {{"word": "das macht nichts", "definition": "Ausdruck um zu sagen, dass etwas kein Problem ist; kein Stress", "example": "Oh, Sie haben sich verspätet? Das macht nichts, wir fangen gleich an.", "is_verb": false, "context": "alltäglich"}},
-  {{"word": "sich beziehen auf", "definition": "auf etwas verweisen oder Bezug nehmen (+ Akkusativ)", "example": "Ich beziehe mich auf unser Gespräch vom letzten Dienstag.", "is_verb": true, "context": "beruflich"}}
-]"""
+    def pick(levels, n):
+        pool = [w for w in unseen if w["level"] in levels]
+        random.shuffle(pool)
+        return pool[:n]
 
-    response = client.messages.create(
-        model="claude-sonnet-4-5",
-        max_tokens=1024,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    raw = response.content[0].text
-    match = re.search(r'\[.*\]', raw, re.DOTALL)
-    if match:
-        return json.loads(match.group())
-    return []
+    selected = []
+    selected += pick(["A1", "A2"], 1)
+    selected += pick(["B1"], 2)
+    selected += pick(["B2"], 3)
+    selected += pick(["C1"], 2)
+
+    # pad if any level was exhausted
+    if len(selected) < 8:
+        remaining = [w for w in unseen if w not in selected]
+        random.shuffle(remaining)
+        selected += remaining[:8 - len(selected)]
+
+    result = []
+    for w in selected:
+        result.append({
+            "word": w["word"],
+            "definition": f"[{w['english']}] {w['definition']}",
+            "example": w["example"],
+            "is_verb": w["is_verb"],
+            "context": "beruflich" if w["level"] in ("B2", "C1") else "alltäglich",
+            "level": w["level"],
+        })
+    return result
 
 
 def extract_vocab_from_article(text: str) -> list[dict]:

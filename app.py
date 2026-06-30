@@ -813,6 +813,7 @@ with tab5:
         nouns = [w for w in words if not w.get("is_verb")]
 
         context_badge = {"beruflich": "💼 beruflich", "alltäglich": "🏙️ alltäglich"}
+        level_badge = {"A1": "🟢 A1", "A2": "🟢 A2", "B1": "🟡 B1", "B2": "🟠 B2", "C1": "🔴 C1"}
 
         if nouns:
             st.markdown("**Neue Wörter:**")
@@ -824,6 +825,7 @@ with tab5:
                         st.markdown(f"_{w['definition']}_")
                         st.caption(f"Beispiel: {w['example']}")
                     with col2:
+                        st.markdown(level_badge.get(w.get("level", ""), ""))
                         st.markdown(context_badge.get(w.get("context", ""), ""))
 
         if verbs:
@@ -836,6 +838,7 @@ with tab5:
                         st.markdown(f"_{w['definition']}_")
                         st.caption(f"Beispiel: {w['example']}")
                     with col2:
+                        st.markdown(level_badge.get(w.get("level", ""), ""))
                         st.markdown(context_badge.get(w.get("context", ""), ""))
 
         st.info("Diese Wörter sind jetzt in Ihrer Vokabelliste (Tab 4). Üben Sie morgen früh damit.")
