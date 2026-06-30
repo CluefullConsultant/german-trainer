@@ -138,6 +138,45 @@ def get_vocabulary() -> list[dict]:
     return result.data
 
 
+def get_top_errors(limit: int = 3) -> list[dict]:
+    """Return the most frequent error tags across all submissions."""
+    client = get_client()
+    result = client.table("submissions").select("error_tags").not_.is_("error_tags", "null").execute()
+    from collections import Counter
+    counter = Counter()
+    for row in result.data:
+        for tag in (row.get("error_tags") or []):
+            counter[tag] += 1
+    return [{"tag": tag, "count": count} for tag, count in counter.most_common(limit)]
+
+
+def get_submissions_for_exercise(exercise_id: str) -> list[dict]:
+    client = get_client()
+    result = client.table("submissions").select("*").eq("exercise_id", exercise_id).order("submitted_at", desc=True).execute()
+    return result.data
+
+
+def get_streak() -> int:
+    """Count consecutive days with at least one submission ending today."""
+    client = get_client()
+    from datetime import datetime, timedelta, timezone
+    result = client.table("submissions").select("submitted_at").order("submitted_at", desc=True).execute()
+    if not result.data:
+        return 0
+    dates = sorted(set(r["submitted_at"][:10] for r in result.data), reverse=True)
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    if dates[0] != today:
+        return 0
+    streak = 1
+    for i in range(1, len(dates)):
+        expected = (datetime.now(timezone.utc) - timedelta(days=i)).strftime("%Y-%m-%d")
+        if dates[i] == expected:
+            streak += 1
+        else:
+            break
+    return streak
+
+
 def get_error_stats() -> dict:
     client = get_client()
     result = client.table("submissions").select("error_tags").execute()

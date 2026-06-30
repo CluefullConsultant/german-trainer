@@ -108,6 +108,13 @@ st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 st.title("Deutsch Trainer")
 st.caption("Ein Lernwerkzeug für Horst und Antony")
 
+top_errors = db.get_top_errors(3)
+if top_errors:
+    st.warning(
+        "**Häufigste Fehler:** " +
+        " | ".join([f"{e['tag']} ({e['count']}x)" for e in top_errors])
+    )
+
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Aufgaben erstellen",
     "Üben",
@@ -367,6 +374,18 @@ with tab2:
             st.subheader(f"{ex['topic']} - {ex['exercise_type']}")
             content = ex["content"]
 
+            past_submissions = db.get_submissions_for_exercise(ex["id"])
+            if past_submissions:
+                with st.expander(f"Frühere Versuche ({len(past_submissions)})"):
+                    for i, sub in enumerate(past_submissions):
+                        st.caption(f"Versuch {len(past_submissions)-i} - {sub['submitted_at'][:10]}")
+                        render_answer(sub.get("answer", {}), ex["exercise_type"])
+                        if sub.get("claude_feedback"):
+                            st.markdown(f"**Claudes Feedback:** {sub['claude_feedback']}")
+                        if sub.get("mentor_feedback"):
+                            st.success(f"**Horsts Feedback:** {sub['mentor_feedback']}")
+                        st.divider()
+
             # Always show instruction if present
             if content.get("instruction"):
                 st.info(content["instruction"])
@@ -439,7 +458,22 @@ with tab2:
                 for punkt in content.get("reihenpunkte", []):
                     st.markdown(f"- {punkt}")
                 if content.get("time_limit_minutes"):
-                    st.info(f"Zeitlimit: {content['time_limit_minutes']} Minuten")
+                    import time as time_module
+                    timer_key = f"brief_start_{ex['id']}"
+                    if timer_key not in st.session_state:
+                        if st.button("Timer starten", key="start_timer"):
+                            st.session_state[timer_key] = time_module.time()
+                            st.rerun()
+                    else:
+                        elapsed = int(time_module.time() - st.session_state[timer_key])
+                        total = content["time_limit_minutes"] * 60
+                        remaining = max(0, total - elapsed)
+                        mins = remaining // 60
+                        secs = remaining % 60
+                        if remaining > 0:
+                            st.info(f"Zeit verbleibend: {mins:02d}:{secs:02d}")
+                        else:
+                            st.error("Zeit abgelaufen!")
                 letter = st.text_area("Ihr Brief:", height=400, key="brief_text")
                 reihenpunkte_checked = []
                 st.markdown("**Haben Sie alle Punkte behandelt?**")
@@ -491,7 +525,17 @@ with tab2:
             if "last_feedback" in st.session_state:
                 st.subheader("Claudes Feedback")
                 st.markdown(st.session_state["last_feedback"])
-                st.info("Ihr Mentor wird Ihnen zusätzliches Feedback geben.")
+
+            # Show Horst's feedback if already given
+            subs = db.get_submissions_for_exercise(ex["id"])
+            reviewed = [s for s in subs if s.get("mentor_feedback")]
+            if reviewed:
+                st.subheader("Horsts Feedback")
+                for sub in reviewed:
+                    st.success(sub["mentor_feedback"])
+                    st.caption(f"Gegeben am: {sub.get('reviewed_at', '')[:10]}")
+            else:
+                st.info("Horst hat noch kein Feedback gegeben.")
 
 # --- TAB 3: FEEDBACK ---
 with tab3:
@@ -552,7 +596,7 @@ with tab4:
     vocab = db.get_vocabulary()
 
     # Activity summary
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Aufgaben gesamt", len(all_ex))
     with col2:
@@ -560,6 +604,9 @@ with tab4:
     with col3:
         briefe = [e for e in all_ex if e.get("exercise_type") == "Brief schreiben"]
         st.metric("Briefe geschrieben", len(briefe))
+    with col4:
+        streak = db.get_streak()
+        st.metric("Tage in Folge", f"{streak} 🔥" if streak > 0 else "0")
 
     st.divider()
 
@@ -716,6 +763,20 @@ with tab5:
                             st.success(f"{len(words)} Vokabeln gespeichert!")
                         else:
                             st.warning("Keine Vokabeln gefunden.")
+
+            if st.button("Tandem-Vorbereitung", key="tandem_prep"):
+                with st.spinner("Gesprächsanlässe werden erstellt..."):
+                    prompts = content_feed.generate_tandem_prompts(
+                        article["title"], article["description"]
+                    )
+                    st.session_state["tandem_prompts"] = prompts
+                    st.rerun()
+
+            if st.session_state.get("tandem_prompts"):
+                st.subheader("Tandem-Gesprächsanlässe")
+                st.caption("Bereiten Sie sich auf diese Fragen für Ihr 16:30 Tandem-Gespräch vor.")
+                for i, prompt in enumerate(st.session_state["tandem_prompts"]):
+                    st.markdown(f"**{i+1}.** {prompt}")
 
             if st.session_state.get("dw_questions"):
                 st.subheader("Verständnisfragen")
