@@ -13,7 +13,7 @@ st.caption("Ein Lernwerkzeug für Antony und seinen Mentor")
 
 tab1, tab2, tab3, tab4 = st.tabs([
     "Aufgaben erstellen",
-    "Uben",
+    "Üben",
     "Feedback",
     "Fortschritt",
 ])
