@@ -61,6 +61,33 @@ def render_exercise(content, exercise_type):
         for hint in content.get("hints", []):
             st.markdown(f"- {hint}")
 
+    elif exercise_type == "Zuordnung":
+        if content.get("instruction"):
+            st.info(content["instruction"])
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Begriffe:**")
+            for item in content.get("items", []):
+                st.markdown(f"{item['id']}. {item['text']}")
+        with col2:
+            st.markdown("**Definitionen:**")
+            for opt in content.get("options", []):
+                st.markdown(f"{opt['id']}. {opt['text']}")
+
+    elif exercise_type == "Richtig/Falsch/Nicht im Text":
+        if content.get("instruction"):
+            st.info(content["instruction"])
+        st.markdown(content.get("text", ""))
+        st.markdown("**Aussagen:**")
+        for i, s in enumerate(content.get("statements", [])):
+            st.markdown(f"**{i+1}.** {s.get('statement', '')}  _(R / F / N)_")
+
+    elif exercise_type == "Wortbildung":
+        if content.get("instruction"):
+            st.info(content["instruction"])
+        for i, item in enumerate(content.get("items", [])):
+            st.markdown(f"**{i+1}.** {item.get('sentence', '')}  _{item.get('base_word', '')}_")
+
     else:
         st.json(content)
 
@@ -99,6 +126,15 @@ def render_answer(answer, exercise_type):
             st.markdown(f"Notizen: {notes}")
         else:
             st.markdown("_(Sprechaufgabe - keine schriftliche Antwort)_")
+    elif exercise_type == "Zuordnung":
+        for pair_id, match in answer.get("pairs", {}).items():
+            st.markdown(f"- {pair_id} → **{match}**")
+    elif exercise_type == "Richtig/Falsch/Nicht im Text":
+        for i, val in enumerate(answer.get("answers", [])):
+            st.markdown(f"- Aussage {i+1}: **{val}**")
+    elif exercise_type == "Wortbildung":
+        for i, val in enumerate(answer.get("words", [])):
+            st.markdown(f"- {i+1}: **{val}**")
     else:
         st.json(answer)
 
@@ -512,6 +548,51 @@ with tab2:
                 st.info("Sprechen Sie mit Ihrem Mentor. Keine schriftliche Eingabe erforderlich.")
                 notes = st.text_area("Notizen (optional):", key="sprech_notes", height=100)
                 answer = {"notes": notes, "type": "Sprechaufgabe"}
+
+            elif ex["exercise_type"] == "Zuordnung":
+                if content.get("instruction"):
+                    st.info(content["instruction"])
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("**Begriffe:**")
+                    for item in content.get("items", []):
+                        st.markdown(f"{item['id']}. {item['text']}")
+                with col2:
+                    st.markdown("**Definitionen:**")
+                    for opt in content.get("options", []):
+                        st.markdown(f"{opt['id']}. {opt['text']}")
+                pairs = {}
+                for item in content.get("items", []):
+                    val = st.selectbox(
+                        f"{item['id']}. {item['text'][:50]}...",
+                        options=[""] + [o["id"] for o in content.get("options", [])],
+                        key=f"zuord_{item['id']}"
+                    )
+                    pairs[item["id"]] = val
+                answer = {"pairs": pairs}
+
+            elif ex["exercise_type"] == "Richtig/Falsch/Nicht im Text":
+                if content.get("instruction"):
+                    st.info(content["instruction"])
+                st.markdown("**Text:**")
+                st.markdown(content.get("text", ""))
+                st.divider()
+                rf_answers = []
+                for i, s in enumerate(content.get("statements", [])):
+                    st.markdown(f"**{i+1}.** {s.get('statement', '')}")
+                    val = st.radio("", ["Richtig", "Falsch", "Nicht im Text"], key=f"rf_{i}", horizontal=True)
+                    rf_answers.append(val)
+                answer = {"answers": rf_answers}
+
+            elif ex["exercise_type"] == "Wortbildung":
+                if content.get("instruction"):
+                    st.info(content["instruction"])
+                wb_words = []
+                for i, item in enumerate(content.get("items", [])):
+                    st.markdown(f"**{i+1}.** {item.get('sentence', '')}  _({item.get('base_word', '')})_")
+                    val = st.text_input("Ihre Antwort:", key=f"wb_{i}")
+                    wb_words.append(val)
+                answer = {"words": wb_words}
 
             st.divider()
             if st.button("Antwort einreichen", type="primary"):
