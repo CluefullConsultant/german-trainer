@@ -9,7 +9,7 @@ import json
 st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 
 st.title("Deutsch Trainer")
-st.caption("Ein Lernwerkzeug fur Antony und seinen Mentor")
+st.caption("Ein Lernwerkzeug für Antony und seinen Mentor")
 
 tab1, tab2, tab3, tab4 = st.tabs([
     "Aufgaben erstellen",
@@ -22,9 +22,9 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.header("Neue Aufgabe erstellen")
     st.info(
-        "Wahlen Sie ein Thema und einen Aufgabentyp. "
-        "Claude erstellt die Ubung automatisch. "
-        "Sie konnen die Aufgabe dann kontrollieren und speichern."
+        "Wählen Sie ein Thema und einen Aufgabentyp. "
+        "Claude erstellt die Übung automatisch. "
+        "Sie können die Aufgabe dann kontrollieren und speichern."
     )
 
     col1, col2 = st.columns(2)
@@ -51,14 +51,14 @@ with tab1:
         pasted_text = st.text_area(
             "Text einfügen (optional)",
             height=200,
-            placeholder="Fugen Sie hier einen deutschen Text ein. Wenn leer, erstellt Claude einen passenden Text.",
-            help="Sie konnen einen Zeitungsartikel oder anderen Text einfugen. Claude erstellt dann die Fragen dazu.",
+            placeholder="Fügen Sie hier einen deutschen Text ein. Wenn leer, erstellt Claude einen passenden Text.",
+            help="Sie können einen Zeitungsartikel oder anderen Text einfügen. Claude erstellt dann die Fragen dazu.",
         )
 
     mentor_notes = st.text_input(
-        "Zusatzliche Hinweise (optional)",
+        "Zusätzliche Hinweise (optional)",
         placeholder="z.B. 'obwohl vs trotzdem' oder 'Fokus auf trennbare Verben mit statt-'",
-        help="Besondere Schwerpunkte oder Hinweise fur diese Aufgabe.",
+        help="Besondere Schwerpunkte oder Hinweise für diese Aufgabe.",
     )
 
     if st.button("Aufgabe generieren", type="primary"):
@@ -122,7 +122,7 @@ with tab1:
 
 # --- TAB 2: UBEN (stub) ---
 with tab2:
-    st.info("Ubungsbereich - wird in Schritt 7 implementiert.")
+    st.info("Übungsbereich - wird in Schritt 7 implementiert.")
 
 # --- TAB 3: FEEDBACK (stub) ---
 with tab3:
