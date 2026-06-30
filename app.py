@@ -102,7 +102,7 @@ def render_answer(answer, exercise_type):
 st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 
 st.title("Deutsch Trainer")
-st.caption("Ein Lernwerkzeug für Antony und seinen Mentor")
+st.caption("Ein Lernwerkzeug für Horst und Antony")
 
 tab1, tab2, tab3, tab4 = st.tabs([
     "Aufgaben erstellen",
