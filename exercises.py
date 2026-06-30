@@ -10,58 +10,58 @@ TOPICS = [
     "Possessivartikel",
     "Konnektoren",
     "Trennbare Verben",
-    "Wechselprasitionen",
+    "Wechselpräpositionen",
     "Konjunktiv II",
     "Passiv",
-    "Relativsatze",
+    "Relativsätze",
     "Wortstellung",
     "Temporale Konjunktionen",
-    "Genitiv-Prasitionen",
+    "Genitiv-Präpositionen",
     "Partizipialkonstruktionen",
     "Nominalisierung",
     "Infinitiv mit zu",
     "Schriftlicher Ausdruck (Brief)",
     "Leseverstehen",
-    "Horverstehen",
+    "Hörverstehen",
     "Sprechaufgabe",
     "Wortschatz in Kontext",
 ]
 
 EXERCISE_TYPES = [
-    "Luckentext",
+    "Lückentext",
     "Mehrfachauswahl",
     "Satztransformation",
     "Fehlersuche",
-    "Ubersetzung",
+    "Übersetzung",
     "Kategoriensortierung",
     "Brief schreiben",
     "Leseverstehen",
-    "Horverstehen",
+    "Hörverstehen",
     "Sprechaufgabe",
 ]
 
 EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
-    "Artikel & Genus": ["Luckentext", "Mehrfachauswahl", "Fehlersuche"],
-    "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)": ["Luckentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Personalpronomina": ["Luckentext", "Mehrfachauswahl", "Fehlersuche"],
-    "Possessivartikel": ["Luckentext", "Mehrfachauswahl", "Fehlersuche"],
-    "Konnektoren": ["Luckentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Kategoriensortierung", "Ubersetzung"],
-    "Trennbare Verben": ["Luckentext", "Satztransformation", "Fehlersuche", "Mehrfachauswahl"],
-    "Wechselprasitionen": ["Luckentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Konjunktiv II": ["Luckentext", "Satztransformation", "Fehlersuche", "Ubersetzung"],
-    "Passiv": ["Satztransformation", "Luckentext", "Fehlersuche", "Ubersetzung"],
-    "Relativsatze": ["Luckentext", "Satztransformation", "Fehlersuche"],
-    "Wortstellung": ["Fehlersuche", "Satztransformation", "Luckentext"],
-    "Temporale Konjunktionen": ["Luckentext", "Mehrfachauswahl", "Satztransformation", "Kategoriensortierung"],
-    "Genitiv-Prasitionen": ["Luckentext", "Mehrfachauswahl", "Fehlersuche"],
-    "Partizipialkonstruktionen": ["Luckentext", "Satztransformation", "Fehlersuche"],
-    "Nominalisierung": ["Satztransformation", "Luckentext", "Ubersetzung"],
-    "Infinitiv mit zu": ["Luckentext", "Satztransformation", "Fehlersuche"],
+    "Artikel & Genus": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
+    "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Personalpronomina": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
+    "Possessivartikel": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
+    "Konnektoren": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Kategoriensortierung", "Übersetzung"],
+    "Trennbare Verben": ["Lückentext", "Satztransformation", "Fehlersuche", "Mehrfachauswahl"],
+    "Wechselpräpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Konjunktiv II": ["Lückentext", "Satztransformation", "Fehlersuche", "Übersetzung"],
+    "Passiv": ["Satztransformation", "Lückentext", "Fehlersuche", "Übersetzung"],
+    "Relativsätze": ["Lückentext", "Satztransformation", "Fehlersuche"],
+    "Wortstellung": ["Fehlersuche", "Satztransformation", "Lückentext"],
+    "Temporale Konjunktionen": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Kategoriensortierung"],
+    "Genitiv-Präpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
+    "Partizipialkonstruktionen": ["Lückentext", "Satztransformation", "Fehlersuche"],
+    "Nominalisierung": ["Satztransformation", "Lückentext", "Übersetzung"],
+    "Infinitiv mit zu": ["Lückentext", "Satztransformation", "Fehlersuche"],
     "Schriftlicher Ausdruck (Brief)": ["Brief schreiben"],
     "Leseverstehen": ["Leseverstehen"],
-    "Horverstehen": ["Horverstehen"],
+    "Hörverstehen": ["Hörverstehen"],
     "Sprechaufgabe": ["Sprechaufgabe"],
-    "Wortschatz in Kontext": ["Luckentext", "Mehrfachauswahl", "Ubersetzung"],
+    "Wortschatz in Kontext": ["Lückentext", "Mehrfachauswahl", "Übersetzung"],
 }
 
 _SYSTEM_PROMPT = """Du bist ein erfahrener Deutschlehrer, der Ubungsaufgaben fur einen Lernenden auf B2/C1-Niveau erstellt.
@@ -70,7 +70,7 @@ Antworte NUR mit einem gultig formatierten JSON-Objekt - kein Markdown, kein erk
 Die Aufgabe muss pedagogisch korrekt und auf C1-Niveau sein, darf aber grundlegende Grammatik (A1-C1) als Thema haben."""
 
 _TYPE_SCHEMAS = {
-    "Luckentext": """Ausgabeformat:
+    "Lückentext": """Ausgabeformat:
 {"text_with_blanks": "Satz mit ___ fur jede Lucke", "blanks": [{"position": 0, "answer": "Antwort", "hint": "kurzer Hinweis"}], "explanation": "Grammatikerklarung"}
 Erstelle 5-8 Lucken im Text.""",
 
@@ -86,7 +86,7 @@ Erstelle 5 Transformationsaufgaben.""",
 {"sentences": [{"text": "Satz mit oder ohne Fehler", "has_error": true, "correction": "Korrektur oder null", "rule": "Regelname oder null"}]}
 Erstelle 8 Satze, davon 5 mit Fehlern und 3 ohne Fehler (gemischt).""",
 
-    "Ubersetzung": """Ausgabeformat:
+    "Übersetzung": """Ausgabeformat:
 {"direction": "EN-DE", "items": [{"source": "Englischer Satz", "answer": "Deutscher Satz", "explanation": "Grammatikhinweis"}]}
 Erstelle 5 Ubersetzungsaufgaben.""",
 
@@ -102,7 +102,7 @@ Erstelle einen realistischen Telc-Stil Briefschreibauftrag.""",
 {"text": "...vollstandiger deutscher Text...", "is_hoerverstehen": false, "questions": [{"question": "Frage", "answer": "Antwort"}]}
 Der Text muss mindestens 300 Worter haben. Erstelle 5 Verstandnisfragen auf C1-Niveau. Falls der Mentor einen Text bereitgestellt hat, verwende diesen.""",
 
-    "Horverstehen": """Ausgabeformat:
+    "Hörverstehen": """Ausgabeformat:
 {"text": "...Text der laut vorgelesen wird...", "is_hoerverstehen": true, "questions": [{"question": "Frage", "answer": "Antwort"}]}
 Der Text muss 150-250 Worter haben (ca. 1-2 Minuten Lesezeit). Erstelle 5 Fragen. Falls der Mentor einen Text bereitgestellt hat, verwende diesen.""",
 

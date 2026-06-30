@@ -12,7 +12,7 @@ def test_topics_list_not_empty():
 
 def test_exercise_types_not_empty():
     import exercises
-    assert "Luckentext" in exercises.EXERCISE_TYPES
+    assert "Lückentext" in exercises.EXERCISE_TYPES
     assert "Brief schreiben" in exercises.EXERCISE_TYPES
 
 

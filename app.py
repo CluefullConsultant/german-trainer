@@ -47,7 +47,7 @@ with tab1:
 
     # Show extra text input for Leseverstehen / Horverstehen
     pasted_text = ""
-    if selected_type in ("Leseverstehen", "Horverstehen"):
+    if selected_type in ("Leseverstehen", "Hörverstehen"):
         pasted_text = st.text_area(
             "Text einfügen (optional)",
             height=200,
