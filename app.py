@@ -5,8 +5,6 @@ import feedback
 import vocabulary
 import db
 import json
-import mailer
-import pdf_generator
 
 
 def render_exercise(content, exercise_type):
@@ -247,22 +245,8 @@ with tab1:
                             db.save_vocabulary(words, exercise_id)
                     except Exception:
                         pass  # Vocabulary extraction is best-effort
-                    # Email exercise PDF to Antony
-                    try:
-                        pdf_bytes = pdf_generator.generate_exercise_pdf(
-                            st.session_state["preview_topic"],
-                            st.session_state["preview_type"],
-                            st.session_state["preview_content"],
-                        )
-                        mailer.send_exercise_to_antony(
-                            st.session_state["preview_topic"],
-                            st.session_state["preview_type"],
-                            pdf_bytes,
-                        )
-                    except Exception:
-                        pass  # Email is best-effort, don't block save
                     del st.session_state["preview_content"]
-                    st.success("Aufgabe gespeichert und per E-Mail an Antony gesendet!")
+                    st.success("Aufgabe gespeichert!")
                     st.rerun()
 
 # --- TAB 2: UBEN ---
@@ -430,16 +414,6 @@ with tab2:
                         )
                         db.save_claude_feedback(submission_id, fb_text, error_tags)
                         st.session_state["last_feedback"] = fb_text
-                        # Email results to Horst
-                        try:
-                            mailer.send_results_to_horst(
-                                ex["topic"],
-                                ex["exercise_type"],
-                                answer,
-                                fb_text,
-                            )
-                        except Exception:
-                            pass
                     except Exception as e:
                         st.session_state["last_feedback"] = f"Feedback konnte nicht geladen werden: {e}"
                     st.rerun()
