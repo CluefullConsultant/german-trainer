@@ -354,12 +354,14 @@ with tab2:
             st.subheader(f"{ex['topic']} - {ex['exercise_type']}")
             content = ex["content"]
 
+            # Always show instruction if present
+            if content.get("instruction"):
+                st.info(content["instruction"])
+
             # Render exercise by type and collect answer
             answer = {}
 
             if ex["exercise_type"] == "Lückentext":
-                if content.get("instruction"):
-                    st.info(content["instruction"])
                 st.markdown(content.get("text_with_blanks", ""))
                 answers_list = []
                 for i, blank in enumerate(content.get("blanks", [])):

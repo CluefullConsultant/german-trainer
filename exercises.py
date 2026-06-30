@@ -53,9 +53,20 @@ EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
 }
 
 _SYSTEM_PROMPT = """Du bist ein erfahrener Deutschlehrer, der Ubungsaufgaben fur einen Lernenden auf B2/C1-Niveau erstellt.
-Erstelle immer klar strukturierte Aufgaben mit einem Losungsschlussel und einer Erklarung der Grammatikregel.
+
+WICHTIG: Jede Aufgabe muss eine glasklare Aufgabenanweisung auf Deutsch enthalten - so formuliert, dass ein Lernender ohne weitere Erklarung sofort weiss, was er tun soll. Beispiele guter Anweisungen:
+- "Ergänzen Sie den richtigen Artikel (der/die/das/dem/den/des)."
+- "Verbinden Sie die zwei Satze mit dem passenden Konnektor."
+- "Finden Sie den Fehler im Satz und schreiben Sie die richtige Version."
+- "Übersetzen Sie die Satze ins Deutsche."
+- "Wählen Sie die richtige Antwort."
+
+Schlechte Anweisungen (NICHT verwenden):
+- Grammatikjargon ohne Erklarung ("Genitiv maskulin temporal")
+- Zu kurze Anweisungen ohne konkretes Beispiel was zu tun ist
+
 Antworte NUR mit einem gultig formatierten JSON-Objekt - kein Markdown, kein erklarender Text davor oder danach.
-Die Aufgabe muss pedagogisch korrekt und auf C1-Niveau sein, darf aber grundlegende Grammatik (A1-C1) als Thema haben."""
+Die Aufgabe muss pedagogisch korrekt und auf C1-Niveau sein."""
 
 _TYPE_SCHEMAS = {
     "Lückentext": """Ausgabeformat:
@@ -63,39 +74,39 @@ _TYPE_SCHEMAS = {
 Erstelle 5-8 Lucken im Text. Das Feld 'instruction' muss immer ausgefullt sein.""",
 
     "Mehrfachauswahl": """Ausgabeformat:
-{"question": "Frage", "options": ["Option A", "Option B", "Option C", "Option D"], "correct_index": 0, "explanation": "Grammatikerklarung"}
-Erstelle 5 Fragen als Array unter dem Schlussel "items": [...]""",
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Wählen Sie die richtige Antwort (a, b, c oder d).'", "items": [{"question": "Frage", "options": ["Option A", "Option B", "Option C", "Option D"], "correct_index": 0, "explanation": "Grammatikerklarung"}]}
+Erstelle 5 Fragen.""",
 
     "Satztransformation": """Ausgabeformat:
-{"items": [{"instruction": "Anweisung", "sentences": ["Satz 1.", "Satz 2."], "answer": "Kombinierter Satz", "explanation": "Erklarung"}]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Verbinden Sie die zwei Satze zu einem Satz. Benutzen Sie den angegebenen Konnektor.'", "items": [{"instruction": "Konnektor oder Hinweis fur diese Aufgabe", "sentences": ["Satz 1.", "Satz 2."], "answer": "Kombinierter Satz", "explanation": "Erklarung"}]}
 Erstelle 5 Transformationsaufgaben.""",
 
     "Fehlersuche": """Ausgabeformat:
-{"sentences": [{"text": "Satz mit oder ohne Fehler", "has_error": true, "correction": "Korrektur oder null", "rule": "Regelname oder null"}]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Lesen Sie jeden Satz. Enthält er einen Grammatikfehler? Wenn ja, schreiben Sie den korrekten Satz.'", "sentences": [{"text": "Satz mit oder ohne Fehler", "has_error": true, "correction": "Korrektur oder null", "rule": "Regelname oder null"}]}
 Erstelle 8 Satze, davon 5 mit Fehlern und 3 ohne Fehler (gemischt).""",
 
     "Übersetzung": """Ausgabeformat:
-{"direction": "EN-DE", "items": [{"source": "Englischer Satz", "answer": "Deutscher Satz", "explanation": "Grammatikhinweis"}]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Übersetzen Sie die folgenden Satze vom Englischen ins Deutsche.'", "direction": "EN-DE", "items": [{"source": "Englischer Satz", "answer": "Deutscher Satz", "explanation": "Grammatikhinweis"}]}
 Erstelle 5 Ubersetzungsaufgaben.""",
 
     "Kategoriensortierung": """Ausgabeformat:
-{"instruction": "Sortieranweisung", "words": ["Wort1", "Wort2"], "categories": {"Kategoriename": ["Wort1"]}, "explanation": "Erklarung des Systems"}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Ordnen Sie die Konnektoren in die richtige Kategorie ein (A, B oder C).'", "words": ["Wort1", "Wort2"], "categories": {"Kategoriename": ["Wort1"]}, "explanation": "Erklarung des Systems"}
 Verwende mindestens 10 Worter auf mindestens 3 Kategorien verteilt.""",
 
     "Brief schreiben": """Ausgabeformat:
-{"prompt": "Aufgabenstellung", "reihenpunkte": ["Punkt 1", "Punkt 2", "Punkt 3"], "time_limit_minutes": 30, "register": "formell"}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Schreiben Sie einen formellen Brief (ca. 200 Wörter). Gehen Sie auf alle vier Punkte ein.'", "prompt": "Aufgabenstellung mit Kontext", "reihenpunkte": ["Punkt 1", "Punkt 2", "Punkt 3"], "time_limit_minutes": 30, "register": "formell"}
 Erstelle einen realistischen Telc-Stil Briefschreibauftrag.""",
 
     "Leseverstehen": """Ausgabeformat:
-{"text": "...vollstandiger deutscher Text...", "is_hoerverstehen": false, "questions": [{"question": "Frage", "answer": "Antwort"}]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Lesen Sie den Text und beantworten Sie die Fragen in vollständigen Satzen.'", "text": "...vollstandiger deutscher Text...", "is_hoerverstehen": false, "questions": [{"question": "Frage", "answer": "Antwort"}]}
 Der Text muss mindestens 300 Worter haben. Erstelle 5 Verstandnisfragen auf C1-Niveau. Falls der Mentor einen Text bereitgestellt hat, verwende diesen.""",
 
     "Hörverstehen": """Ausgabeformat:
-{"text": "...Text der laut vorgelesen wird...", "is_hoerverstehen": true, "questions": [{"question": "Frage", "answer": "Antwort"}]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Hören Sie dem Text zu und beantworten Sie die Fragen.'", "text": "...Text der laut vorgelesen wird...", "is_hoerverstehen": true, "questions": [{"question": "Frage", "answer": "Antwort"}]}
 Der Text muss 150-250 Worter haben (ca. 1-2 Minuten Lesezeit). Erstelle 5 Fragen. Falls der Mentor einen Text bereitgestellt hat, verwende diesen.""",
 
     "Sprechaufgabe": """Ausgabeformat:
-{"prompt": "Sprechanlass", "hints": ["Hinweis 1", "Hinweis 2", "Hinweis 3"]}
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Sprechen Sie 2-3 Minuten über das folgende Thema. Benutzen Sie die Hinweise als Hilfe.'", "prompt": "Sprechanlass", "hints": ["Hinweis 1", "Hinweis 2", "Hinweis 3"]}
 Der Sprechanlass soll eine realistische Diskussionssituation beschreiben.""",
 }
 
