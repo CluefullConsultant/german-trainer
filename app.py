@@ -5,6 +5,8 @@ import feedback
 import vocabulary
 import db
 import json
+import vocab_practice
+import content_feed
 
 
 def render_exercise(content, exercise_type):
@@ -106,11 +108,12 @@ st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 st.title("Deutsch Trainer")
 st.caption("Ein Lernwerkzeug für Horst und Antony")
 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Aufgaben erstellen",
     "Üben",
     "Feedback",
     "Fortschritt",
+    "Heute lernen",
 ])
 
 # --- TAB 1: AUFGABEN ERSTELLEN ---
@@ -562,6 +565,71 @@ with tab4:
 
     st.divider()
 
+    # Spaced repetition vocab practice
+    st.subheader("Vokabeln üben")
+    due_words = db.get_due_vocabulary()
+
+    if not due_words:
+        st.success("Keine fälligen Vokabeln - gut gemacht!")
+    else:
+        st.caption(f"{len(due_words)} Vokabeln fällig")
+
+        if "vocab_practice_index" not in st.session_state:
+            st.session_state["vocab_practice_index"] = 0
+        if "vocab_feedback" not in st.session_state:
+            st.session_state["vocab_feedback"] = None
+
+        idx = st.session_state["vocab_practice_index"]
+        if idx >= len(due_words):
+            st.success("Alle fälligen Vokabeln geübt!")
+            if st.button("Neu starten"):
+                st.session_state["vocab_practice_index"] = 0
+                st.session_state["vocab_feedback"] = None
+                st.rerun()
+        else:
+            word = due_words[idx]
+            with st.container(border=True):
+                st.markdown(f"### {word['word']}")
+                st.markdown(f"_{word['definition']}_")
+                st.caption(f"Beispiel: {word['example']}")
+
+                user_sentence = st.text_input(
+                    "Schreiben Sie einen eigenen Satz mit diesem Wort:",
+                    key=f"vocab_sentence_{idx}",
+                    placeholder=f"Schreiben Sie einen Satz mit '{word['word']}'..."
+                )
+
+                col1, col2 = st.columns(2)
+                with col1:
+                    if st.button("Prüfen", type="primary", key=f"check_{idx}"):
+                        if user_sentence.strip():
+                            with st.spinner("Claude prüft..."):
+                                result = vocab_practice.check_sentence(
+                                    word["word"], word["definition"], user_sentence
+                                )
+                                db.update_vocabulary_review(word["id"], result["correct"])
+                                st.session_state["vocab_feedback"] = result
+                                st.rerun()
+                with col2:
+                    if st.button("Überspringen", key=f"skip_{idx}"):
+                        db.update_vocabulary_review(word["id"], False)
+                        st.session_state["vocab_practice_index"] = idx + 1
+                        st.session_state["vocab_feedback"] = None
+                        st.rerun()
+
+                if st.session_state["vocab_feedback"]:
+                    fb = st.session_state["vocab_feedback"]
+                    if fb["correct"]:
+                        st.success(fb["feedback"])
+                    else:
+                        st.error(fb["feedback"])
+                    if st.button("Weiter", key=f"next_{idx}"):
+                        st.session_state["vocab_practice_index"] = idx + 1
+                        st.session_state["vocab_feedback"] = None
+                        st.rerun()
+
+    st.divider()
+
     # Vocabulary list
     st.subheader(f"Vokabelliste ({len(vocab)} Einträge)")
     if vocab:
@@ -572,3 +640,83 @@ with tab4:
                 st.caption(f"Beispiel: {entry['example']}")
     else:
         st.info("Noch keine Vokabeln gespeichert. Sie werden automatisch beim Erstellen von Aufgaben gesammelt.")
+
+# --- TAB 5: HEUTE LERNEN ---
+with tab5:
+    st.header("Heute lernen")
+    st.caption("Aktuelle Artikel von Deutsche Welle - jeden Tag neue Texte auf Deutsch.")
+
+    if "dw_articles" not in st.session_state:
+        with st.spinner("Artikel werden geladen..."):
+            st.session_state["dw_articles"] = content_feed.fetch_dw_articles()
+            st.session_state["dw_selected"] = None
+            st.session_state["dw_questions"] = []
+            st.session_state["dw_answers"] = {}
+
+    articles = st.session_state.get("dw_articles", [])
+
+    if not articles:
+        st.warning("Keine Artikel gefunden. Bitte Internetverbindung prüfen.")
+    else:
+        if st.session_state.get("dw_selected") is None:
+            st.subheader("Artikel auswählen")
+            for i, article in enumerate(articles):
+                with st.container(border=True):
+                    c1, c2 = st.columns([4, 1])
+                    with c1:
+                        st.markdown(f"**{article['title']}**")
+                        st.caption(article['description'][:150] + "..." if len(article['description']) > 150 else article['description'])
+                    with c2:
+                        if st.button("Lesen", key=f"dw_{i}"):
+                            st.session_state["dw_selected"] = i
+                            st.session_state["dw_questions"] = []
+                            st.session_state["dw_answers"] = {}
+                            st.rerun()
+            if st.button("Neue Artikel laden"):
+                del st.session_state["dw_articles"]
+                st.rerun()
+        else:
+            article = articles[st.session_state["dw_selected"]]
+            if st.button("Zurück zur Artikelliste"):
+                st.session_state["dw_selected"] = None
+                st.rerun()
+
+            st.subheader(article["title"])
+            if article.get("link"):
+                st.caption(f"Quelle: Deutsche Welle | [Artikel öffnen]({article['link']})")
+            st.markdown(article["description"])
+
+            st.divider()
+
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Verständnisfragen generieren", type="primary"):
+                    with st.spinner("Claude erstellt Fragen..."):
+                        st.session_state["dw_questions"] = content_feed.generate_questions_from_article(
+                            article["title"], article["description"]
+                        )
+                        st.session_state["dw_answers"] = {}
+                        st.rerun()
+            with col2:
+                if st.button("Vokabeln speichern"):
+                    with st.spinner("Vokabeln werden extrahiert..."):
+                        words = content_feed.extract_vocab_from_article(article["description"])
+                        if words:
+                            db.save_vocabulary(words, None)
+                            st.success(f"{len(words)} Vokabeln gespeichert!")
+                        else:
+                            st.warning("Keine Vokabeln gefunden.")
+
+            if st.session_state.get("dw_questions"):
+                st.subheader("Verständnisfragen")
+                for i, q in enumerate(st.session_state["dw_questions"]):
+                    st.markdown(f"**{i+1}. {q['question']}**")
+                    answer = st.text_area("Ihre Antwort:", key=f"dw_ans_{i}", height=80)
+                    if answer:
+                        st.session_state["dw_answers"][i] = answer
+
+                if st.session_state["dw_answers"] and st.button("Antworten prüfen", type="primary"):
+                    for i, q in enumerate(st.session_state["dw_questions"]):
+                        user_ans = st.session_state["dw_answers"].get(i, "")
+                        if user_ans:
+                            st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")

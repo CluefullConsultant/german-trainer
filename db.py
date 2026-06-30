@@ -97,14 +97,39 @@ def get_all_reviewed_submissions() -> list[dict]:
     return result.data
 
 
-def save_vocabulary(words: list[dict], exercise_id: str) -> None:
+def save_vocabulary(words: list[dict], exercise_id: str | None = None) -> None:
     client = get_client()
-    rows = [
-        {"word": w["word"], "definition": w["definition"], "example": w["example"], "exercise_id": exercise_id}
-        for w in words
-    ]
+    rows = []
+    for w in words:
+        row = {"word": w["word"], "definition": w["definition"], "example": w["example"]}
+        if exercise_id is not None:
+            row["exercise_id"] = exercise_id
+        rows.append(row)
     if rows:
         client.table("vocabulary").insert(rows).execute()
+
+
+def get_due_vocabulary():
+    """Words due for review: not reviewed in 3+ days OR never reviewed. Max 10."""
+    client = get_client()
+    from datetime import datetime, timedelta, timezone
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
+    never = client.table("vocabulary").select("*").is_("last_reviewed", "null").limit(5).execute()
+    old = client.table("vocabulary").select("*").lt("last_reviewed", cutoff).limit(5).execute()
+    seen_ids = {r["id"] for r in never.data}
+    combined = never.data + [r for r in old.data if r["id"] not in seen_ids]
+    return combined[:10]
+
+
+def update_vocabulary_review(vocab_id: str, correct: bool):
+    client = get_client()
+    from datetime import datetime, timezone
+    row = client.table("vocabulary").select("correct_count,review_count").eq("id", vocab_id).single().execute().data
+    client.table("vocabulary").update({
+        "last_reviewed": datetime.now(timezone.utc).isoformat(),
+        "review_count": row["review_count"] + 1,
+        "correct_count": row["correct_count"] + (1 if correct else 0),
+    }).eq("id", vocab_id).execute()
 
 
 def get_vocabulary() -> list[dict]:
