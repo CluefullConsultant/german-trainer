@@ -5,7 +5,10 @@ import anthropic
 
 TOPICS = [
     "Konnektoren",
+    "Zweiteilige Konnektoren (nicht nur...sondern auch, sowohl...als auch)",
     "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)",
+    "Verben mit Kasus (Verben + Dativ/Akkusativ/Genitiv)",
+    "Reflexive Verben (sich-Verben)",
     "Konjunktiv II",
     "Passiv",
     "Relativsätze",
@@ -14,11 +17,14 @@ TOPICS = [
     "Trennbare Verben",
     "Wechselpräpositionen",
     "Genitiv-Präpositionen",
+    "Modalpartikeln (doch, mal, ja, eigentlich)",
+    "Indirekte Rede",
     "Schriftlicher Ausdruck (Brief)",
     "Leseverstehen",
     "Hörverstehen",
     "Sprechaufgabe",
     "Wortschatz in Kontext",
+    "Eigenes Thema",
 ]
 
 EXERCISE_TYPES = [
@@ -50,6 +56,12 @@ EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
     "Hörverstehen": ["Hörverstehen"],
     "Sprechaufgabe": ["Sprechaufgabe"],
     "Wortschatz in Kontext": ["Lückentext", "Mehrfachauswahl", "Übersetzung"],
+    "Zweiteilige Konnektoren (nicht nur...sondern auch, sowohl...als auch)": ["Lückentext", "Satztransformation", "Fehlersuche", "Kategoriensortierung"],
+    "Verben mit Kasus (Verben + Dativ/Akkusativ/Genitiv)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Reflexive Verben (sich-Verben)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Modalpartikeln (doch, mal, ja, eigentlich)": ["Lückentext", "Mehrfachauswahl", "Übersetzung", "Fehlersuche"],
+    "Indirekte Rede": ["Satztransformation", "Lückentext", "Fehlersuche"],
+    "Eigenes Thema": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Übersetzung", "Sprechaufgabe", "Brief schreiben"],
 }
 
 _SYSTEM_PROMPT = """Du bist ein erfahrener Deutschlehrer, der Ubungsaufgaben fur einen Lernenden auf B2/C1-Niveau erstellt.

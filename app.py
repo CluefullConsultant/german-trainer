@@ -143,6 +143,15 @@ with tab1:
             help="Welche Art von Aufgabe soll erstellt werden?",
         )
 
+    # Free topic input when "Eigenes Thema" is selected
+    custom_topic = ""
+    if selected_topic == "Eigenes Thema":
+        custom_topic = st.text_input(
+            "Ihr Thema",
+            placeholder="z.B. 'Reflexive Verben mit Präpositionen' oder 'Bewerbungsschreiben' oder 'Zeitungssprache'",
+            help="Geben Sie ein beliebiges Grammatik- oder Vokabelthema ein. Claude erstellt eine passende Übung.",
+        )
+
     # Show extra text input for Leseverstehen / Hörverstehen
     pasted_text = ""
     if selected_type in ("Leseverstehen", "Hörverstehen"):
@@ -162,14 +171,15 @@ with tab1:
     if st.button("Aufgabe generieren", type="primary"):
         with st.spinner("Claude erstellt die Aufgabe..."):
             try:
+                effective_topic = custom_topic.strip() if selected_topic == "Eigenes Thema" and custom_topic.strip() else selected_topic
                 content = exercises.generate_exercise(
-                    topic=selected_topic,
+                    topic=effective_topic,
                     exercise_type=selected_type,
                     mentor_notes=mentor_notes,
                     pasted_text=pasted_text,
                 )
                 st.session_state["preview_content"] = content
-                st.session_state["preview_topic"] = selected_topic
+                st.session_state["preview_topic"] = effective_topic
                 st.session_state["preview_type"] = selected_type
                 st.session_state["preview_notes"] = mentor_notes
             except Exception as e:
