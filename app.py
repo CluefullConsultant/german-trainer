@@ -120,9 +120,179 @@ with tab1:
                     st.success("Aufgabe gespeichert!")
                     st.rerun()
 
-# --- TAB 2: UBEN (stub) ---
+# --- TAB 2: UBEN ---
 with tab2:
-    st.info("Übungsbereich - wird in Schritt 7 implementiert.")
+    st.header("Aufgaben lösen")
+
+    # Filters
+    col1, col2 = st.columns(2)
+    with col1:
+        topic_filter = st.selectbox(
+            "Thema filtern",
+            options=["Alle Themen"] + exercises.TOPICS,
+            key="uben_topic_filter",
+        )
+    with col2:
+        status_filter = st.selectbox(
+            "Status filtern",
+            options=["Alle", "Neu", "Beim Mentor", "Feedback erhalten"],
+            key="uben_status_filter",
+        )
+
+    topic_q = None if topic_filter == "Alle Themen" else topic_filter
+    status_q = None if status_filter == "Alle" else status_filter
+
+    all_exercises = db.get_exercises(topic_q, status_q)
+
+    if not all_exercises:
+        st.info("Keine Aufgaben gefunden. Der Mentor hat noch keine Aufgaben erstellt.")
+    else:
+        if "selected_exercise_id" not in st.session_state:
+            st.session_state["selected_exercise_id"] = None
+
+        if st.session_state["selected_exercise_id"] is None:
+            for ex in all_exercises:
+                status_emoji = {"Neu": "", "Beim Mentor": "", "Feedback erhalten": ""}.get(ex["status"], "")
+                with st.container(border=True):
+                    c1, c2 = st.columns([4, 1])
+                    with c1:
+                        st.markdown(f"**{ex['topic']}** - {ex['exercise_type']}")
+                        st.caption(f"{status_emoji} {ex['status']} | Erstellt: {ex['created_at'][:10]}")
+                    with c2:
+                        if st.button("Öffnen", key=f"open_{ex['id']}"):
+                            st.session_state["selected_exercise_id"] = ex["id"]
+                            st.rerun()
+        else:
+            ex = db.get_exercise(st.session_state["selected_exercise_id"])
+            if st.button("Zurück zur Liste"):
+                st.session_state["selected_exercise_id"] = None
+                st.session_state.pop("current_answer", None)
+                st.rerun()
+
+            st.subheader(f"{ex['topic']} - {ex['exercise_type']}")
+            content = ex["content"]
+
+            # Render exercise by type and collect answer
+            answer = {}
+
+            if ex["exercise_type"] == "Lückentext":
+                st.markdown(content.get("text_with_blanks", ""))
+                answers_list = []
+                for i, blank in enumerate(content.get("blanks", [])):
+                    val = st.text_input(f"Lücke {i+1} ({blank.get('hint', '')})", key=f"blank_{i}")
+                    answers_list.append(val)
+                answer = {"blanks": answers_list}
+
+            elif ex["exercise_type"] == "Mehrfachauswahl":
+                items_answers = []
+                for i, item in enumerate(content.get("items", [content])):
+                    st.markdown(f"**{i+1}.** {item.get('question', '')}")
+                    choice = st.radio(
+                        "Ihre Antwort:",
+                        options=item.get("options", []),
+                        key=f"mc_{i}",
+                        label_visibility="collapsed",
+                    )
+                    items_answers.append(choice)
+                answer = {"choices": items_answers}
+
+            elif ex["exercise_type"] == "Satztransformation":
+                items_answers = []
+                for i, item in enumerate(content.get("items", [])):
+                    st.markdown(f"**{i+1}.** {item.get('instruction', '')}")
+                    for s in item.get("sentences", []):
+                        st.markdown(f"- _{s}_")
+                    val = st.text_input("Ihre Antwort:", key=f"trans_{i}")
+                    items_answers.append(val)
+                answer = {"transformations": items_answers}
+
+            elif ex["exercise_type"] == "Fehlersuche":
+                corrections = []
+                for i, sentence in enumerate(content.get("sentences", [])):
+                    st.markdown(f"**{i+1}.** {sentence['text']}")
+                    has_err = st.checkbox("Enthält einen Fehler", key=f"haserr_{i}")
+                    correction = ""
+                    if has_err:
+                        correction = st.text_input("Korrektur:", key=f"corr_{i}")
+                    corrections.append({"has_error": has_err, "correction": correction})
+                answer = {"corrections": corrections}
+
+            elif ex["exercise_type"] == "Übersetzung":
+                translations = []
+                for i, item in enumerate(content.get("items", [])):
+                    st.markdown(f"**{i+1}.** _{item.get('source', '')}_")
+                    val = st.text_input("Übersetzung:", key=f"trans_{i}")
+                    translations.append(val)
+                answer = {"translations": translations}
+
+            elif ex["exercise_type"] == "Kategoriensortierung":
+                st.markdown(content.get("instruction", ""))
+                st.markdown("**Wörter:** " + ", ".join(content.get("words", [])))
+                cat_answers = {}
+                for cat in content.get("categories", {}).keys():
+                    val = st.text_input(f"{cat}:", key=f"cat_{cat}", placeholder="Wörter durch Komma getrennt")
+                    cat_answers[cat] = [w.strip() for w in val.split(",") if w.strip()]
+                answer = {"categories": cat_answers}
+
+            elif ex["exercise_type"] == "Brief schreiben":
+                st.markdown(f"**Aufgabe:** {content.get('prompt', '')}")
+                st.markdown("**Zu bearbeitende Punkte (Reihenpunkte):**")
+                for punkt in content.get("reihenpunkte", []):
+                    st.markdown(f"- {punkt}")
+                if content.get("time_limit_minutes"):
+                    st.info(f"Zeitlimit: {content['time_limit_minutes']} Minuten")
+                letter = st.text_area("Ihr Brief:", height=400, key="brief_text")
+                reihenpunkte_checked = []
+                st.markdown("**Haben Sie alle Punkte behandelt?**")
+                for punkt in content.get("reihenpunkte", []):
+                    checked = st.checkbox(punkt, key=f"rp_{punkt}")
+                    reihenpunkte_checked.append({"punkt": punkt, "behandelt": checked})
+                answer = {"letter": letter, "reihenpunkte": reihenpunkte_checked}
+
+            elif ex["exercise_type"] in ("Leseverstehen", "Hörverstehen"):
+                if ex["exercise_type"] == "Hörverstehen":
+                    st.info("Ihr Mentor liest den folgenden Text vor. Hören Sie gut zu.")
+                    with st.expander("Text (für den Mentor zum Vorlesen)"):
+                        st.markdown(content.get("text", ""))
+                else:
+                    st.markdown("**Text:**")
+                    st.markdown(content.get("text", ""))
+                question_answers = []
+                for i, q in enumerate(content.get("questions", [])):
+                    st.markdown(f"**Frage {i+1}:** {q['question']}")
+                    val = st.text_area("Ihre Antwort:", key=f"lv_{i}", height=80)
+                    question_answers.append(val)
+                answer = {"question_answers": question_answers}
+
+            elif ex["exercise_type"] == "Sprechaufgabe":
+                st.markdown(f"**Sprechanlass:** {content.get('prompt', '')}")
+                st.markdown("**Hinweise:**")
+                for hint in content.get("hints", []):
+                    st.markdown(f"- {hint}")
+                st.info("Sprechen Sie mit Ihrem Mentor. Keine schriftliche Eingabe erforderlich.")
+                notes = st.text_area("Notizen (optional):", key="sprech_notes", height=100)
+                answer = {"notes": notes, "type": "Sprechaufgabe"}
+
+            st.divider()
+            if st.button("Antwort einreichen", type="primary"):
+                with st.spinner("Claude bewertet Ihre Antwort..."):
+                    submission_id = db.save_submission(ex["id"], answer)
+                    try:
+                        fb_text, error_tags = feedback.generate_feedback(
+                            exercise_content=content,
+                            exercise_type=ex["exercise_type"],
+                            answer=answer,
+                        )
+                        db.save_claude_feedback(submission_id, fb_text, error_tags)
+                        st.session_state["last_feedback"] = fb_text
+                    except Exception as e:
+                        st.session_state["last_feedback"] = f"Feedback konnte nicht geladen werden: {e}"
+                    st.rerun()
+
+            if "last_feedback" in st.session_state:
+                st.subheader("Claudes Feedback")
+                st.markdown(st.session_state["last_feedback"])
+                st.info("Ihr Mentor wird Ihnen zusätzliches Feedback geben.")
 
 # --- TAB 3: FEEDBACK (stub) ---
 with tab3:
