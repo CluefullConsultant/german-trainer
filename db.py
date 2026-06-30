@@ -5,11 +5,12 @@ from datetime import datetime, timezone
 import time
 
 
-@st.cache_resource
 def get_client() -> Client:
-    url = st.secrets["SUPABASE_URL"]
-    key = st.secrets["SUPABASE_KEY"]
-    return create_client(url, key)
+    if "_supabase_client" not in st.session_state:
+        url = st.secrets["SUPABASE_URL"]
+        key = st.secrets["SUPABASE_KEY"]
+        st.session_state["_supabase_client"] = create_client(url, key)
+    return st.session_state["_supabase_client"]
 
 
 def _execute_with_retry(fn, retries=3, delay=1):
