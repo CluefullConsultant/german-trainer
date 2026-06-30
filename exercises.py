@@ -59,8 +59,8 @@ Die Aufgabe muss pedagogisch korrekt und auf C1-Niveau sein, darf aber grundlege
 
 _TYPE_SCHEMAS = {
     "Lückentext": """Ausgabeformat:
-{"text_with_blanks": "Satz mit ___ fur jede Lucke", "blanks": [{"position": 0, "answer": "Antwort", "hint": "kurzer Hinweis"}], "explanation": "Grammatikerklarung"}
-Erstelle 5-8 Lucken im Text.""",
+{"instruction": "Klare Aufgabenstellung fur den Lernenden, z.B. 'Ergänzen Sie den richtigen Artikel.' oder 'Setzen Sie das Verb in der richtigen Form ein.'", "text_with_blanks": "Satz mit ___ fur jede Lucke", "blanks": [{"position": 0, "answer": "Antwort", "hint": "kurzer Hinweis"}], "explanation": "Grammatikerklarung"}
+Erstelle 5-8 Lucken im Text. Das Feld 'instruction' muss immer ausgefullt sein.""",
 
     "Mehrfachauswahl": """Ausgabeformat:
 {"question": "Frage", "options": ["Option A", "Option B", "Option C", "Option D"], "correct_index": 0, "explanation": "Grammatikerklarung"}

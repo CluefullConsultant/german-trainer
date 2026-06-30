@@ -10,6 +10,8 @@ import json
 def render_exercise(content, exercise_type):
     """Render exercise content as readable German text (no raw JSON)."""
     if exercise_type == "Lückentext":
+        if content.get("instruction"):
+            st.info(content["instruction"])
         st.markdown(content.get("text_with_blanks", ""))
         for i, blank in enumerate(content.get("blanks", [])):
             st.markdown(f"- Lücke {i+1}: _{blank.get('hint', '')}_")
@@ -305,6 +307,8 @@ with tab2:
             answer = {}
 
             if ex["exercise_type"] == "Lückentext":
+                if content.get("instruction"):
+                    st.info(content["instruction"])
                 st.markdown(content.get("text_with_blanks", ""))
                 answers_list = []
                 for i, blank in enumerate(content.get("blanks", [])):
