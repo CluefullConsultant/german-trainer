@@ -55,6 +55,29 @@ Erstelle 3 einfache Verstaendnisfragen auf Deutsch zu diesem Artikel. Antworte N
     return []
 
 
+def generate_tandem_prompts(title: str, text: str) -> list[str]:
+    """Generate 5 conversation prompts for Tandem speaking practice based on the article."""
+    api_key = st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, "secrets") else None
+    client = anthropic.Anthropic(api_key=api_key)
+    prompt = f"""Artikel: "{title}"
+Text: "{text}"
+
+Erstelle 5 Gesprächsanlässe auf Deutsch für ein Tandem-Gespräch über diesen Artikel.
+Die Fragen sollen zum Nachdenken anregen und eine echte Diskussion ermöglichen - nicht nur Ja/Nein-Antworten.
+Antworte NUR mit JSON: ["Frage 1?", "Frage 2?", "Frage 3?", "Frage 4?", "Frage 5?"]"""
+
+    response = client.messages.create(
+        model="claude-sonnet-4-5",
+        max_tokens=512,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    raw = response.content[0].text
+    match = re.search(r'\[.*\]', raw, re.DOTALL)
+    if match:
+        return json.loads(match.group())
+    return []
+
+
 def extract_vocab_from_article(text: str) -> list[dict]:
     """Extract 5 useful vocabulary words from article."""
     api_key = st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, "secrets") else None
