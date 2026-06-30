@@ -294,9 +294,53 @@ with tab2:
                 st.markdown(st.session_state["last_feedback"])
                 st.info("Ihr Mentor wird Ihnen zusätzliches Feedback geben.")
 
-# --- TAB 3: FEEDBACK (stub) ---
+# --- TAB 3: FEEDBACK ---
 with tab3:
-    st.info("Feedback-Bereich - wird in Schritt 8 implementiert.")
+    st.header("Eingereichte Aufgaben")
+
+    unreviewed = db.get_unreviewed_submissions()
+    reviewed = db.get_all_reviewed_submissions()
+
+    if unreviewed:
+        st.subheader(f"Ausstehend ({len(unreviewed)})")
+        for sub in unreviewed:
+            ex_info = sub.get("exercises", {})
+            with st.container(border=True):
+                st.markdown(f"**{ex_info.get('topic', '')}** - {ex_info.get('exercise_type', '')}")
+                st.caption(f"Eingereicht: {sub['submitted_at'][:10]}")
+
+                with st.expander("Aufgabe anzeigen"):
+                    st.json(ex_info.get("content", {}))
+
+                with st.expander("Antwort von Antony"):
+                    st.json(sub.get("answer", {}))
+
+                if sub.get("claude_feedback"):
+                    with st.expander("Claudes automatisches Feedback"):
+                        st.markdown(sub["claude_feedback"])
+
+                mentor_fb = st.text_area(
+                    "Ihr Feedback:",
+                    key=f"mentor_fb_{sub['id']}",
+                    placeholder="Schreiben Sie hier Ihr personliches Feedback...",
+                    height=150,
+                )
+                if st.button("Feedback senden", key=f"send_fb_{sub['id']}", type="primary"):
+                    db.save_mentor_feedback(sub["id"], mentor_fb)
+                    st.success("Feedback gespeichert!")
+                    st.rerun()
+    else:
+        st.info("Keine ausstehenden Einreichungen.")
+
+    if reviewed:
+        st.divider()
+        with st.expander(f"Archiv - bereits bewertet ({len(reviewed)})"):
+            for sub in reviewed:
+                ex_info = sub.get("exercises", {})
+                st.markdown(f"**{ex_info.get('topic', '')}** | Bewertet: {sub.get('reviewed_at', '')[:10]}")
+                if sub.get("mentor_feedback"):
+                    st.markdown(f"Ihr Feedback: _{sub['mentor_feedback']}_")
+                st.divider()
 
 # --- TAB 4: FORTSCHRITT (stub) ---
 with tab4:
