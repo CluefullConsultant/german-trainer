@@ -793,7 +793,7 @@ with tab5:
 
     # Daily vocabulary section
     st.subheader("Tägliches Vokabeltraining")
-    st.caption("5 neue Wörter + 3 neue Verben - jeden Tag, professionelles Deutsch.")
+    st.caption("5 Wörter + 3 Verben täglich - Mischung aus Berufsalltag und normalem Berliner Leben.")
 
     if st.button("Neue Wörter für heute generieren", type="primary"):
         with st.spinner("Claude wählt neue Wörter für Sie aus..."):
@@ -812,21 +812,31 @@ with tab5:
         verbs = [w for w in words if w.get("is_verb")]
         nouns = [w for w in words if not w.get("is_verb")]
 
+        context_badge = {"beruflich": "💼 beruflich", "alltäglich": "🏙️ alltäglich"}
+
         if nouns:
             st.markdown("**Neue Wörter:**")
             for w in nouns:
                 with st.container(border=True):
-                    st.markdown(f"**{w['word']}**")
-                    st.markdown(f"_{w['definition']}_")
-                    st.caption(f"Beispiel: {w['example']}")
+                    col1, col2 = st.columns([4, 1])
+                    with col1:
+                        st.markdown(f"**{w['word']}**")
+                        st.markdown(f"_{w['definition']}_")
+                        st.caption(f"Beispiel: {w['example']}")
+                    with col2:
+                        st.markdown(context_badge.get(w.get("context", ""), ""))
 
         if verbs:
             st.markdown("**Neue Verben:**")
             for w in verbs:
                 with st.container(border=True):
-                    st.markdown(f"**{w['word']}**")
-                    st.markdown(f"_{w['definition']}_")
-                    st.caption(f"Beispiel: {w['example']}")
+                    col1, col2 = st.columns([4, 1])
+                    with col1:
+                        st.markdown(f"**{w['word']}**")
+                        st.markdown(f"_{w['definition']}_")
+                        st.caption(f"Beispiel: {w['example']}")
+                    with col2:
+                        st.markdown(context_badge.get(w.get("context", ""), ""))
 
         st.info("Diese Wörter sind jetzt in Ihrer Vokabelliste (Tab 4). Üben Sie morgen früh damit.")
 

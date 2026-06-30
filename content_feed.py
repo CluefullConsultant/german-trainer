@@ -85,22 +85,24 @@ def generate_daily_vocab(existing_words: list[str]) -> list[dict]:
     api_key = st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, "secrets") else None
     client = anthropic.Anthropic(api_key=api_key)
     exclude = ", ".join(existing_words) if existing_words else "keine"
-    prompt = f"""Du bist ein Deutschlehrer für einen professionellen Unternehmensberater (C1-Niveau).
+    prompt = f"""Du bist ein Deutschlehrer für einen professionellen Unternehmensberater (C1-Niveau), der in Berlin lebt und Deutsch sowohl im Beruf als auch im Alltag braucht.
 
-Erstelle heute eine Lernliste mit:
-- 5 neue Vokabeln (Nomen, Adjektive oder Ausdrücke) aus dem professionellen/geschäftlichen Bereich
-- 3 neue Verben mit Angabe des Kasus (z.B. "sich beziehen auf + Akk.") und typischer Verwendung im Büroalltag
+Erstelle heute eine Lernliste mit genau 8 Einträgen - eine ausgewogene Mischung:
+- 3 Wörter/Ausdrücke aus dem professionellen/geschäftlichen Bereich (Meetings, Berichte, E-Mails, Beratung)
+- 2 Wörter/Ausdrücke aus dem Berliner Alltag (Gespräche mit Nachbarn, Einkaufen, Behörden, Freunde)
+- 3 Verben (Mischung: 2 beruflich, 1 alltäglich) mit Angabe des Kasus wo relevant (z.B. "sich beziehen auf + Akk.")
 
 Diese Wörter sind bereits bekannt und dürfen NICHT wiederholt werden: {exclude}
 
 Für jedes Wort/Verb:
 - Eine klare deutsche Definition
-- Ein Beispielsatz aus dem Berufsalltag (Beratung, Meetings, Berichte, E-Mails)
+- Ein natürlicher Beispielsatz (beruflich oder alltäglich je nach Kategorie)
 
 Antworte NUR mit JSON:
 [
-  {{"word": "das Fazit", "definition": "die abschließende Schlussfolgerung; das Ergebnis einer Analyse", "example": "Das Fazit der Untersuchung zeigt, dass die Kosten um 20% gesenkt werden können.", "is_verb": false}},
-  {{"word": "sich beziehen auf", "definition": "auf etwas verweisen oder Bezug nehmen (+ Akkusativ)", "example": "Ich beziehe mich auf unser Gespräch vom letzten Dienstag.", "is_verb": true}}
+  {{"word": "das Fazit", "definition": "die abschließende Schlussfolgerung; das Ergebnis einer Analyse", "example": "Das Fazit der Untersuchung zeigt, dass die Kosten um 20% gesenkt werden können.", "is_verb": false, "context": "beruflich"}},
+  {{"word": "das macht nichts", "definition": "Ausdruck um zu sagen, dass etwas kein Problem ist; kein Stress", "example": "Oh, Sie haben sich verspätet? Das macht nichts, wir fangen gleich an.", "is_verb": false, "context": "alltäglich"}},
+  {{"word": "sich beziehen auf", "definition": "auf etwas verweisen oder Bezug nehmen (+ Akkusativ)", "example": "Ich beziehe mich auf unser Gespräch vom letzten Dienstag.", "is_verb": true, "context": "beruflich"}}
 ]"""
 
     response = client.messages.create(
