@@ -175,6 +175,42 @@ with tab1:
         st.subheader("Vorschau")
         render_exercise(st.session_state["preview_content"], st.session_state["preview_type"])
 
+        with st.expander("Aufgabe bearbeiten"):
+            st.caption("Sie können den Text der Aufgabe hier direkt anpassen, bevor Sie speichern.")
+            edited_fields = {}
+            content = st.session_state["preview_content"]
+            ex_type = st.session_state["preview_type"]
+
+            if ex_type == "Lückentext":
+                edited_fields["text_with_blanks"] = st.text_area(
+                    "Text mit Lücken (___)", value=content.get("text_with_blanks", ""), height=150)
+            elif ex_type == "Brief schreiben":
+                edited_fields["prompt"] = st.text_area(
+                    "Aufgabenstellung", value=content.get("prompt", ""), height=100)
+                reihenpunkte_text = "\n".join(content.get("reihenpunkte", []))
+                edited_rp = st.text_area(
+                    "Reihenpunkte (ein Punkt pro Zeile)", value=reihenpunkte_text, height=100)
+                edited_fields["reihenpunkte"] = [r.strip() for r in edited_rp.splitlines() if r.strip()]
+            elif ex_type == "Sprechaufgabe":
+                edited_fields["prompt"] = st.text_area(
+                    "Sprechanlass", value=content.get("prompt", ""), height=100)
+                hints_text = "\n".join(content.get("hints", []))
+                edited_hints = st.text_area(
+                    "Hinweise (ein Hinweis pro Zeile)", value=hints_text, height=100)
+                edited_fields["hints"] = [h.strip() for h in edited_hints.splitlines() if h.strip()]
+            elif ex_type in ("Leseverstehen", "Hörverstehen"):
+                edited_fields["text"] = st.text_area(
+                    "Text", value=content.get("text", ""), height=200)
+            else:
+                st.info("Für diesen Aufgabentyp ist keine direkte Bearbeitung verfügbar. Klicken Sie 'Neu generieren' für eine neue Version.")
+
+            if edited_fields:
+                if st.button("Änderungen übernehmen"):
+                    updated = {**content, **edited_fields}
+                    st.session_state["preview_content"] = updated
+                    st.success("Änderungen übernommen.")
+                    st.rerun()
+
         col_a, col_b = st.columns(2)
         with col_a:
             if st.button("Neu generieren"):
