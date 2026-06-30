@@ -35,7 +35,7 @@ def get_exercises(topic_filter: str | None = None, status_filter: str | None = N
         subs = row.get("submissions") or []
         if status_filter == "Neu" and subs:
             continue
-        if status_filter == "Bearbeitet" and not subs:
+        if status_filter == "Beim Mentor" and not subs:
             continue
         if status_filter == "Feedback erhalten" and not any(s.get("reviewed_at") for s in subs):
             continue
