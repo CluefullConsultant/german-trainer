@@ -342,6 +342,46 @@ with tab3:
                     st.markdown(f"Ihr Feedback: _{sub['mentor_feedback']}_")
                 st.divider()
 
-# --- TAB 4: FORTSCHRITT (stub) ---
+# --- TAB 4: FORTSCHRITT ---
 with tab4:
-    st.info("Fortschritt - wird in Schritt 9 implementiert.")
+    st.header("Fortschritt")
+
+    all_ex = db.get_exercises(None, None)
+    reviewed_subs = db.get_all_reviewed_submissions()
+    error_stats = db.get_error_stats()
+    vocab = db.get_vocabulary()
+
+    # Activity summary
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Aufgaben gesamt", len(all_ex))
+    with col2:
+        st.metric("Bewertet vom Mentor", len(reviewed_subs))
+    with col3:
+        briefe = [e for e in all_ex if e.get("exercise_type") == "Brief schreiben"]
+        st.metric("Briefe geschrieben", len(briefe))
+
+    st.divider()
+
+    # Error stats by topic
+    st.subheader("Fehler nach Thema")
+    if error_stats:
+        sorted_errors = sorted(error_stats.items(), key=lambda x: x[1], reverse=True)
+        for topic_name, count in sorted_errors:
+            st.markdown(f"**{topic_name}:** {count} Fehler")
+            st.progress(min(count / max(error_stats.values()), 1.0))
+    else:
+        st.info("Noch keine Fehlerdaten vorhanden. Lösen Sie Aufgaben und reichen Sie Antworten ein.")
+
+    st.divider()
+
+    # Vocabulary list
+    st.subheader(f"Vokabelliste ({len(vocab)} Einträge)")
+    if vocab:
+        for entry in vocab:
+            with st.container(border=True):
+                st.markdown(f"**{entry['word']}**")
+                st.markdown(f"_{entry['definition']}_")
+                st.caption(f"Beispiel: {entry['example']}")
+    else:
+        st.info("Noch keine Vokabeln gespeichert. Sie werden automatisch beim Erstellen von Aufgaben gesammelt.")
