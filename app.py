@@ -108,12 +108,15 @@ st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 st.title("Deutsch Trainer")
 st.caption("Ein Lernwerkzeug für Horst und Antony")
 
-top_errors = db.get_top_errors(3)
-if top_errors:
-    st.warning(
-        "**Häufigste Fehler:** " +
-        " | ".join([f"{e['tag']} ({e['count']}x)" for e in top_errors])
-    )
+try:
+    top_errors = db.get_top_errors(3)
+    if top_errors:
+        st.warning(
+            "**Häufigste Fehler:** " +
+            " | ".join([f"{e['tag']} ({e['count']}x)" for e in top_errors])
+        )
+except Exception:
+    pass
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Aufgaben erstellen",
