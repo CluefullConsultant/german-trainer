@@ -322,7 +322,7 @@ with tab3:
                 mentor_fb = st.text_area(
                     "Ihr Feedback:",
                     key=f"mentor_fb_{sub['id']}",
-                    placeholder="Schreiben Sie hier Ihr personliches Feedback...",
+                    placeholder="Schreiben Sie hier Ihr persönliches Feedback...",
                     height=150,
                 )
                 if st.button("Feedback senden", key=f"send_fb_{sub['id']}", type="primary"):
