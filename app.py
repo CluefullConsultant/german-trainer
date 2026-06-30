@@ -6,6 +6,99 @@ import vocabulary
 import db
 import json
 
+
+def render_exercise(content, exercise_type):
+    """Render exercise content as readable German text (no raw JSON)."""
+    if exercise_type == "Lückentext":
+        st.markdown(content.get("text_with_blanks", ""))
+        for i, blank in enumerate(content.get("blanks", [])):
+            st.markdown(f"- Lücke {i+1}: _{blank.get('hint', '')}_")
+
+    elif exercise_type == "Mehrfachauswahl":
+        for i, item in enumerate(content.get("items", [])):
+            st.markdown(f"**{i+1}.** {item.get('question', '')}")
+            for opt in item.get("options", []):
+                st.markdown(f"  - {opt}")
+
+    elif exercise_type == "Satztransformation":
+        for i, item in enumerate(content.get("items", [])):
+            st.markdown(f"**{i+1}.** {item.get('instruction', '')}")
+            for s in item.get("sentences", []):
+                st.markdown(f"  - _{s}_")
+
+    elif exercise_type == "Fehlersuche":
+        for i, sentence in enumerate(content.get("sentences", [])):
+            st.markdown(f"**{i+1}.** {sentence.get('text', '')}")
+
+    elif exercise_type == "Übersetzung":
+        for i, item in enumerate(content.get("items", [])):
+            st.markdown(f"**{i+1}.** _{item.get('source', '')}_")
+
+    elif exercise_type == "Kategoriensortierung":
+        st.markdown(content.get("instruction", ""))
+        st.markdown("**Wörter:** " + ", ".join(content.get("words", [])))
+        for cat in content.get("categories", {}).keys():
+            st.markdown(f"- {cat}")
+
+    elif exercise_type == "Brief schreiben":
+        st.markdown(f"**Aufgabe:** {content.get('prompt', '')}")
+        for punkt in content.get("reihenpunkte", []):
+            st.markdown(f"- {punkt}")
+
+    elif exercise_type in ("Leseverstehen", "Hörverstehen"):
+        if exercise_type == "Hörverstehen":
+            st.info("Text wird vom Mentor vorgelesen.")
+        st.markdown(content.get("text", ""))
+        for i, q in enumerate(content.get("questions", [])):
+            st.markdown(f"**Frage {i+1}:** {q.get('question', '')}")
+
+    elif exercise_type == "Sprechaufgabe":
+        st.markdown(f"**Sprechanlass:** {content.get('prompt', '')}")
+        for hint in content.get("hints", []):
+            st.markdown(f"- {hint}")
+
+    else:
+        st.json(content)
+
+
+def render_answer(answer, exercise_type):
+    """Render Antony's answer as readable text."""
+    if exercise_type == "Lückentext":
+        for i, val in enumerate(answer.get("blanks", [])):
+            st.markdown(f"- Lücke {i+1}: **{val}**")
+    elif exercise_type == "Mehrfachauswahl":
+        for i, val in enumerate(answer.get("choices", [])):
+            st.markdown(f"- Frage {i+1}: **{val}**")
+    elif exercise_type == "Satztransformation":
+        for i, val in enumerate(answer.get("transformations", [])):
+            st.markdown(f"- {i+1}: **{val}**")
+    elif exercise_type == "Fehlersuche":
+        for i, c in enumerate(answer.get("corrections", [])):
+            if c.get("has_error"):
+                st.markdown(f"- Satz {i+1}: Fehler - **{c.get('correction', '')}**")
+            else:
+                st.markdown(f"- Satz {i+1}: kein Fehler")
+    elif exercise_type == "Übersetzung":
+        for i, val in enumerate(answer.get("translations", [])):
+            st.markdown(f"- {i+1}: **{val}**")
+    elif exercise_type == "Kategoriensortierung":
+        for cat, words in answer.get("categories", {}).items():
+            st.markdown(f"- {cat}: **{', '.join(words)}**")
+    elif exercise_type == "Brief schreiben":
+        st.markdown(answer.get("letter", ""))
+    elif exercise_type in ("Leseverstehen", "Hörverstehen"):
+        for i, val in enumerate(answer.get("question_answers", [])):
+            st.markdown(f"- Frage {i+1}: **{val}**")
+    elif exercise_type == "Sprechaufgabe":
+        notes = answer.get("notes", "")
+        if notes:
+            st.markdown(f"Notizen: {notes}")
+        else:
+            st.markdown("_(Sprechaufgabe - keine schriftliche Antwort)_")
+    else:
+        st.json(answer)
+
+
 st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
 
 st.title("Deutsch Trainer")
@@ -45,7 +138,7 @@ with tab1:
             help="Welche Art von Aufgabe soll erstellt werden?",
         )
 
-    # Show extra text input for Leseverstehen / Horverstehen
+    # Show extra text input for Leseverstehen / Hörverstehen
     pasted_text = ""
     if selected_type in ("Leseverstehen", "Hörverstehen"):
         pasted_text = st.text_area(
@@ -80,7 +173,7 @@ with tab1:
     if "preview_content" in st.session_state:
         st.divider()
         st.subheader("Vorschau")
-        st.json(st.session_state["preview_content"])
+        render_exercise(st.session_state["preview_content"], st.session_state["preview_type"])
 
         col_a, col_b = st.columns(2)
         with col_a:
@@ -305,15 +398,16 @@ with tab3:
         st.subheader(f"Ausstehend ({len(unreviewed)})")
         for sub in unreviewed:
             ex_info = sub.get("exercises", {})
+            ex_type = ex_info.get("exercise_type", "")
             with st.container(border=True):
-                st.markdown(f"**{ex_info.get('topic', '')}** - {ex_info.get('exercise_type', '')}")
+                st.markdown(f"**{ex_info.get('topic', '')}** - {ex_type}")
                 st.caption(f"Eingereicht: {sub['submitted_at'][:10]}")
 
                 with st.expander("Aufgabe anzeigen"):
-                    st.json(ex_info.get("content", {}))
+                    render_exercise(ex_info.get("content", {}), ex_type)
 
                 with st.expander("Antwort von Antony"):
-                    st.json(sub.get("answer", {}))
+                    render_answer(sub.get("answer", {}), ex_type)
 
                 if sub.get("claude_feedback"):
                     with st.expander("Claudes automatisches Feedback"):
