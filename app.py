@@ -179,39 +179,90 @@ with tab1:
 
         with st.expander("Aufgabe bearbeiten"):
             st.caption("Sie können den Text der Aufgabe hier direkt anpassen, bevor Sie speichern.")
-            edited_fields = {}
             content = st.session_state["preview_content"]
             ex_type = st.session_state["preview_type"]
+            edited_fields = {}
 
             if ex_type == "Lückentext":
+                edited_fields["instruction"] = st.text_input(
+                    "Aufgabenanweisung", value=content.get("instruction", ""))
                 edited_fields["text_with_blanks"] = st.text_area(
                     "Text mit Lücken (___)", value=content.get("text_with_blanks", ""), height=150)
+
+            elif ex_type == "Mehrfachauswahl":
+                items = content.get("items", [])
+                edited_items = []
+                for i, item in enumerate(items):
+                    st.markdown(f"**Frage {i+1}**")
+                    q = st.text_input(f"Frage", value=item.get("question", ""), key=f"edit_mc_q_{i}")
+                    opts_text = "\n".join(item.get("options", []))
+                    opts = st.text_area(f"Antwortoptionen (eine pro Zeile)", value=opts_text, key=f"edit_mc_opts_{i}", height=100)
+                    edited_items.append({**item, "question": q, "options": [o.strip() for o in opts.splitlines() if o.strip()]})
+                edited_fields["items"] = edited_items
+
+            elif ex_type == "Satztransformation":
+                items = content.get("items", [])
+                edited_items = []
+                for i, item in enumerate(items):
+                    st.markdown(f"**Aufgabe {i+1}**")
+                    instr = st.text_input(f"Anweisung", value=item.get("instruction", ""), key=f"edit_trans_instr_{i}")
+                    sents_text = "\n".join(item.get("sentences", []))
+                    sents = st.text_area(f"Sätze (einer pro Zeile)", value=sents_text, key=f"edit_trans_sents_{i}", height=80)
+                    edited_items.append({**item, "instruction": instr, "sentences": [s.strip() for s in sents.splitlines() if s.strip()]})
+                edited_fields["items"] = edited_items
+
+            elif ex_type == "Fehlersuche":
+                sentences = content.get("sentences", [])
+                edited_sentences = []
+                for i, s in enumerate(sentences):
+                    text = st.text_input(f"Satz {i+1}", value=s.get("text", ""), key=f"edit_err_{i}")
+                    edited_sentences.append({**s, "text": text})
+                edited_fields["sentences"] = edited_sentences
+
+            elif ex_type == "Übersetzung":
+                items = content.get("items", [])
+                edited_items = []
+                for i, item in enumerate(items):
+                    src = st.text_input(f"Satz {i+1}", value=item.get("source", ""), key=f"edit_ue_{i}")
+                    edited_items.append({**item, "source": src})
+                edited_fields["items"] = edited_items
+
+            elif ex_type == "Kategoriensortierung":
+                edited_fields["instruction"] = st.text_input(
+                    "Anweisung", value=content.get("instruction", ""))
+                words_text = ", ".join(content.get("words", []))
+                edited_words = st.text_input("Wörter (durch Komma getrennt)", value=words_text)
+                edited_fields["words"] = [w.strip() for w in edited_words.split(",") if w.strip()]
+
             elif ex_type == "Brief schreiben":
                 edited_fields["prompt"] = st.text_area(
                     "Aufgabenstellung", value=content.get("prompt", ""), height=100)
-                reihenpunkte_text = "\n".join(content.get("reihenpunkte", []))
-                edited_rp = st.text_area(
-                    "Reihenpunkte (ein Punkt pro Zeile)", value=reihenpunkte_text, height=100)
+                rp_text = "\n".join(content.get("reihenpunkte", []))
+                edited_rp = st.text_area("Reihenpunkte (ein Punkt pro Zeile)", value=rp_text, height=100)
                 edited_fields["reihenpunkte"] = [r.strip() for r in edited_rp.splitlines() if r.strip()]
+
             elif ex_type == "Sprechaufgabe":
                 edited_fields["prompt"] = st.text_area(
                     "Sprechanlass", value=content.get("prompt", ""), height=100)
                 hints_text = "\n".join(content.get("hints", []))
-                edited_hints = st.text_area(
-                    "Hinweise (ein Hinweis pro Zeile)", value=hints_text, height=100)
+                edited_hints = st.text_area("Hinweise (ein Hinweis pro Zeile)", value=hints_text, height=100)
                 edited_fields["hints"] = [h.strip() for h in edited_hints.splitlines() if h.strip()]
+
             elif ex_type in ("Leseverstehen", "Hörverstehen"):
                 edited_fields["text"] = st.text_area(
                     "Text", value=content.get("text", ""), height=200)
-            else:
-                st.info("Für diesen Aufgabentyp ist keine direkte Bearbeitung verfügbar. Klicken Sie 'Neu generieren' für eine neue Version.")
+                questions = content.get("questions", [])
+                edited_questions = []
+                for i, q in enumerate(questions):
+                    qtext = st.text_input(f"Frage {i+1}", value=q.get("question", ""), key=f"edit_lv_{i}")
+                    edited_questions.append({**q, "question": qtext})
+                edited_fields["questions"] = edited_questions
 
-            if edited_fields:
-                if st.button("Änderungen übernehmen"):
-                    updated = {**content, **edited_fields}
-                    st.session_state["preview_content"] = updated
-                    st.success("Änderungen übernommen.")
-                    st.rerun()
+            if st.button("Änderungen übernehmen"):
+                updated = {**content, **edited_fields}
+                st.session_state["preview_content"] = updated
+                st.success("Änderungen übernommen.")
+                st.rerun()
 
         col_a, col_b = st.columns(2)
         with col_a:
