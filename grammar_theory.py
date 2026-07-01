@@ -807,14 +807,28 @@ Formel: **jemandem** (Dat) **etwas** (Akk) geben/schicken/zeigen...""",
 
     {
         "id": "verben_schwach_stark",
-        "title": "Schwache und starke Verben - alle Stammformen",
+        "title": "Schwache, starke und gemischte Verben - alle Stammformen",
         "level": "B1",
         "category": "Verben",
         "explanation": """**Schwache Verben (regelmäßig)** bilden das Präteritum mit **-te** und das Partizip II mit **ge-...-t**.
 **Starke Verben (unregelmäßig)** verändern den Vokal im Stammteil - diese Formen muss man auswendig lernen.
+**Gemischte Verben** ändern den Vokal wie starke Verben, nehmen aber die Endung -te/-t wie schwache Verben - eine kleine, feste Liste.
 
 Die drei **Stammformen** (Hauptformen) jedes Verbs:
 **Infinitiv → Präteritum (er/sie) → Partizip II**
+
+---
+
+### Wie erkenne ich, ob ein Verb stark oder schwach ist?
+
+Es gibt keine 100%-Regel, aber diese Muster helfen sehr:
+
+1. **Schwach ist der Normalfall.** Jedes neue oder geliehene Verb ist automatisch schwach. Alle Verben auf **-ieren** sind IMMER schwach: studieren, organisieren, informieren, telefonieren.
+2. **Starke Verben sind eine feste, geschlossene Liste** (ca. 150-200 Verben). Es kommen keine neuen starken Verben dazu. Es sind die ältesten, häufigsten Verben: sein, haben, gehen, kommen, sehen, nehmen, sprechen, finden, essen, trinken...
+3. **Zusammengesetzte Verben erben den Typ vom Basisverb.** Wenn 'stehen' stark ist (stand, gestanden), sind auch verstehen, aufstehen, entstehen, bestehen automatisch stark - gleiches Muster.
+4. **Der Praxistest:** Sagen Sie das Verb im Präteritum laut. Will der Vokal sich ändern (spreche → sprach)? → stark. Bleibt der Vokal gleich und nur -te kommt dazu (mache → machte)? → schwach.
+
+**Praktischer Rat:** Nicht versuchen, es logisch herzuleiten - die ca. 150 Basisverben auswendig lernen (siehe Tabellen unten). Jedes Verb, das auf einem bekannten Basisverb aufbaut (mit be-/ver-/ent-/auf-/ab- usw.), folgt automatisch dem gleichen Muster.
 
 ---
 
@@ -917,7 +931,22 @@ Die drei **Stammformen** (Hauptformen) jedes Verbs:
 | einbeziehen | bezog ein | **einbezogen** | to include |
 | voraussetzen | setzte voraus | **vorausgesetzt** | to presuppose |
 | hervorgehen | ging hervor | **hervorgegangen** | to emerge from |
-| zurückgreifen | griff zurück | **zurückgegriffen** | to fall back on |""",
+| zurückgreifen | griff zurück | **zurückgegriffen** | to fall back on |
+
+---
+
+### Gemischte Verben (kleine, feste Liste - Vokalwechsel wie stark, Endung wie schwach)
+| Infinitiv | Präteritum | Partizip II | Bedeutung |
+|-----------|-----------|-------------|-----------|
+| kennen | kannte | **gekannt** | to know (be acquainted with) |
+| nennen | nannte | **genannt** | to name |
+| brennen | brannte | **gebrannt** | to burn |
+| rennen | rannte | **gerannt** | to run |
+| senden | sandte | **gesandt** | to send (formal) |
+| wenden | wandte | **gewandt** | to turn |
+| denken | dachte | **gedacht** | to think |
+| bringen | brachte | **gebracht** | to bring |
+| wissen | wusste | **gewusst** | to know (a fact) |""",
         "examples": [
             {
                 "label": "Schwaches Verb im Satz",
@@ -934,11 +963,17 @@ Die drei **Stammformen** (Hauptformen) jedes Verbs:
                 "sentence": "Er **ist** nach Berlin **gefahren**. / Sie **ist** gekommen.",
                 "note": "Verben der Bewegung und des Zustandswechsels bilden Perfekt mit SEIN, nicht haben."
             },
+            {
+                "label": "Gemischtes Verb im Satz",
+                "sentence": "Ich **kannte** den Kollegen schon vorher. → Ich habe ihn schon **gekannt**.",
+                "note": "kennen → kannte → gekannt: Vokal ändert sich (e → a) wie bei starken Verben, aber Endung -te/-t wie bei schwachen Verben."
+            },
         ],
         "mistakes": [
             "Perfekt mit sein vs. haben: fahren/gehen/kommen/bleiben/sein → sein; die meisten anderen → haben",
             "Partizip II ohne ge-: Verben mit be-/er-/ver-/ent- haben KEIN ge-: bestätigt (nicht gebestätigt), erklärt (nicht geerklärt)",
             "Trennbare Verben: ge- kommt zwischen Präfix und Stamm: einladen → einGEladen, aufstehen → aufGEstanden",
+            "Gemischte Verben wie schwach behandeln: ❌ 'ich denkte' → ✅ 'ich dachte' (Vokal ändert sich trotz -te-Endung)",
         ],
         "exercise_hint": "Lückentext: richtiges Präteritum oder Partizip II einsetzen. Fehlersuche: falsche Perfektformen mit haben/sein.",
     },
