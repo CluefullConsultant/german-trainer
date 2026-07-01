@@ -154,12 +154,13 @@ try:
 except Exception:
     pass
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Aufgaben erstellen",
     "Üben",
     "Feedback",
     "Fortschritt",
     "Heute lernen",
+    "Theorie",
 ])
 
 # --- TAB 1: AUFGABEN ERSTELLEN ---
@@ -933,3 +934,45 @@ with tab5:
                         user_ans = st.session_state["dw_answers"].get(i, "")
                         if user_ans:
                             st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")
+
+# --- TAB 6: THEORIE ---
+with tab6:
+    from grammar_theory import GRAMMAR_RULES
+
+    st.header("Grammatik-Theorie")
+    st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst.")
+
+    level_filter = st.selectbox(
+        "Niveau wählen",
+        options=["Alle", "B1", "B2", "C1"],
+        key="theory_level"
+    )
+
+    filtered = [r for r in GRAMMAR_RULES if level_filter == "Alle" or r["level"] == level_filter]
+
+    level_colors = {"B1": "🟡", "B2": "🟠", "C1": "🔴"}
+
+    for rule in filtered:
+        badge = level_colors.get(rule["level"], "")
+        with st.expander(f"{badge} {rule['level']} - {rule['title']}"):
+
+            st.markdown(rule["explanation"])
+
+            if rule.get("examples"):
+                st.markdown("---")
+                st.markdown("**Beispiele:**")
+                for ex in rule["examples"]:
+                    st.markdown(f"**{ex['label']}**")
+                    st.markdown(f"> {ex['sentence']}")
+                    if ex.get("note"):
+                        st.caption(ex["note"])
+
+            if rule.get("mistakes"):
+                st.markdown("---")
+                st.markdown("**Häufige Fehler:**")
+                for m in rule["mistakes"]:
+                    st.markdown(f"- {m}")
+
+            if rule.get("exercise_hint"):
+                st.markdown("---")
+                st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
