@@ -1540,4 +1540,355 @@ Bei Verben mit Präpositionen: **Wofür? Worauf? Womit? Wovon? Worüber?** (Sach
         ],
         "exercise_hint": "Satztransformation: Präsens ↔ Perfekt ↔ Präteritum umformen. Lückentext: richtige Zeitform je nach Kontext (mündlich/schriftlich) wählen.",
     },
+
+    # ==================== ADJEKTIVE UND NOMEN ====================
+
+    {
+        "id": "adjektivdeklination",
+        "title": "Adjektivdeklination - die richtige Endung finden",
+        "level": "B1",
+        "category": "Kasus",
+        "explanation": """Ein Adjektiv vor einem Nomen bekommt immer eine Endung. Welche Endung, hängt von 3 Dingen ab:
+1. **Welcher Artikel?** (bestimmt: der/die/das - unbestimmt: ein/eine - kein Artikel)
+2. **Welcher Kasus?** (Nom/Akk/Dat/Gen)
+3. **Welches Genus/welche Zahl?** (mask./fem./neutr./Plural)
+
+**Grundprinzip:** Der Artikel ODER die Adjektivendung zeigt Genus und Kasus. Beide zusammen brauchen es nur einmal - deshalb gibt es nach bestimmtem Artikel meist nur **-e** oder **-en**.
+
+---
+
+### 1. Nach bestimmtem Artikel (der/die/das/die)
+| | mask. | fem. | neutr. | Plural |
+|--|-------|------|--------|--------|
+| **Nom.** | der schnell**e** | die schnell**e** | das schnell**e** | die schnell**en** |
+| **Akk.** | den schnell**en** | die schnell**e** | das schnell**e** | die schnell**en** |
+| **Dat.** | dem schnell**en** | der schnell**en** | dem schnell**en** | den schnell**en** |
+| **Gen.** | des schnell**en** | der schnell**en** | des schnell**en** | der schnell**en** |
+
+→ **Merke:** Fast überall -en, außer Nom. (alle Genera) und Akk. fem./neutr. → dort -e.
+
+---
+
+### 2. Nach unbestimmtem Artikel (ein/eine/ein, kein, mein...)
+| | mask. | fem. | neutr. | Plural |
+|--|-------|------|--------|--------|
+| **Nom.** | ein schnell**er** | eine schnell**e** | ein schnell**es** | keine schnell**en** |
+| **Akk.** | einen schnell**en** | eine schnell**e** | ein schnell**es** | keine schnell**en** |
+| **Dat.** | einem schnell**en** | einer schnell**en** | einem schnell**en** | keinen schnell**en** |
+| **Gen.** | eines schnell**en** | einer schnell**en** | eines schnell**en** | keiner schnell**en** |
+
+→ **Merke:** Im Nominativ (mask./neutr.) und Akkusativ (neutr.) trägt das Adjektiv die Endung, die der Artikel NICHT zeigt (weil 'ein' keine Endung hat).
+
+---
+
+### 3. Ohne Artikel (Nullartikel - z.B. bei unzählbaren Nomen oder Plural ohne Artikel)
+| | mask. | fem. | neutr. | Plural |
+|--|-------|------|--------|--------|
+| **Nom.** | schnell**er** Kaffee | frisch**e** Milch | kalt**es** Wasser | frisch**e** Äpfel |
+| **Akk.** | schnell**en** Kaffee | frisch**e** Milch | kalt**es** Wasser | frisch**e** Äpfel |
+| **Dat.** | schnell**em** Kaffee | frisch**er** Milch | kalt**em** Wasser | frisch**en** Äpfeln |
+| **Gen.** | schnell**en** Kaffees | frisch**er** Milch | kalt**en** Wassers | frisch**er** Äpfel |
+
+→ **Merke:** Ohne Artikel trägt das Adjektiv die volle Endung des bestimmten Artikels (der→er, die→e, das→es, den→en...).""",
+        "examples": [
+            {
+                "label": "Nach bestimmtem Artikel",
+                "sentence": "Der neu**e** Kollege arbeitet seit Montag mit uns.",
+                "note": "Nominativ maskulin nach 'der' → -e"
+            },
+            {
+                "label": "Nach unbestimmtem Artikel",
+                "sentence": "Wir haben ein**en** neu**en** Kollegen eingestellt.",
+                "note": "Akkusativ maskulin nach 'einen' → -en (Artikel zeigt schon Akkusativ, Adjektiv folgt dem Standardmuster)"
+            },
+            {
+                "label": "Beruflicher Kontext, Dativ",
+                "sentence": "Wir haben mit unser**em** neu**en** Kunden ein gutes Gespräch geführt.",
+                "note": "Dativ maskulin nach 'unserem' (possessiv, wie 'ein') → -en"
+            },
+            {
+                "label": "Ohne Artikel",
+                "sentence": "Gut**e** Ergebnisse erfordern sorgfältig**e** Planung.",
+                "note": "Plural Nominativ ohne Artikel → -e; feminin Akkusativ ohne Artikel → -e"
+            },
+        ],
+        "mistakes": [
+            "Adjektivendung nach 'ein' im Nominativ mask. vergessen: ❌ 'ein neu Kollege' → ✅ 'ein neuer Kollege'",
+            "-e statt -en im Dativ/Genitiv: ❌ 'mit dem neue Kollege' → ✅ 'mit dem neuen Kollegen'",
+            "Mehrere Adjektive vor einem Nomen bekommen ALLE dieselbe Endung: 'der große, wichtige Kunde' (beide -e)",
+        ],
+        "exercise_hint": "Lückentext: richtige Adjektivendung in verschiedenen Kasus/Artikeltypen einsetzen. Fehlersuche mit typischen Endungsfehlern.",
+    },
+
+    {
+        "id": "n_deklination",
+        "title": "N-Deklination (schwache Maskulina)",
+        "level": "B2",
+        "category": "Kasus",
+        "explanation": """Eine kleine Gruppe maskuliner Nomen bekommt in **allen Fällen außer Nominativ Singular** die Endung **-(e)n**. Das nennt man N-Deklination oder 'schwache Maskulina'.
+
+**Betroffen sind vor allem:**
+- Männliche Personen- und Berufsbezeichnungen auf **-e**: der Kunde, der Kollege, der Experte, der Praktikant (Ausnahme ohne -e, siehe unten)
+- Nationalitäten auf -e: der Franzose, der Ire
+- Einige männliche Wesen: der Mensch, der Herr, der Nachbar
+- Wörter auf **-ant, -ent, -ist**: der Praktikant, der Präsident, der Journalist, der Assistent
+
+| Kasus | Singular | Plural |
+|-------|----------|--------|
+| Nom. | der Kund**e** | die Kund**en** |
+| Akk. | den Kund**en** | die Kund**en** |
+| Dat. | dem Kund**en** | den Kund**en** |
+| Gen. | des Kund**en** | der Kund**en** |
+
+**Sonderfall 'der Name' und ähnliche (der Gedanke, der Glaube, der Wille):**
+Diese bekommen im Genitiv Singular zusätzlich ein -s: **des Namens** (nicht: des Namen)""",
+        "examples": [
+            {
+                "label": "der Kollege im Akkusativ",
+                "sentence": "Ich habe meinen Kollege**n** um Hilfe gebeten.",
+                "note": "Akkusativ → -n, nicht nur 'meinen Kollege'"
+            },
+            {
+                "label": "der Kunde im Dativ",
+                "sentence": "Wir haben dem Kund**en** ein neues Angebot gemacht.",
+                "note": "Dativ → -en am Nomen selbst, zusätzlich zur Artikelendung"
+            },
+            {
+                "label": "der Name (Sonderfall)",
+                "sentence": "Die Bedeutung des Name**ns** war uns zunächst unklar.",
+                "note": "Genitiv Singular: -ns statt nur -n bei 'der Name', 'der Gedanke', 'der Wille'"
+            },
+        ],
+        "mistakes": [
+            "Endung im Akkusativ/Dativ vergessen: ❌ 'Ich sehe den Kunde.' → ✅ 'Ich sehe den Kunden.'",
+            "Genitiv bei 'der Name' ohne -s: ❌ 'des Namen' → ✅ 'des Namens'",
+            "Nicht alle Maskulina auf -e sind schwach: 'der Käse', 'der Junge' (Junge ist schwach: den Jungen) - im Zweifel nachschlagen",
+        ],
+        "exercise_hint": "Lückentext: richtige Form von der Kunde/der Kollege/der Experte in verschiedenen Kasus. Fehlersuche mit fehlender -n-Endung.",
+    },
+
+    {
+        "id": "wortbildung_theorie",
+        "title": "Wortbildung - Nomen und Adjektive ableiten",
+        "level": "B2",
+        "category": "Wortschatz",
+        "explanation": """Deutsch bildet neue Wörter systematisch mit Suffixen (Nachsilben). Wenn man die Muster kennt, kann man viele Wörter selbst ableiten - sehr nützlich für C1-Schreibaufgaben und Nominalstil.
+
+---
+
+### Nomen aus Verben
+| Suffix | Genus | Beispiel | Bedeutung |
+|--------|-------|----------|-----------|
+| **-ung** | die | entscheiden → die Entscheid**ung** | sehr produktiv, funktioniert bei den meisten Verben |
+| | | lösen → die Lös**ung** | |
+| | | planen → die Plan**ung** | |
+| **(ohne Suffix)** | die/der | analysieren → die Analyse | manche Verben bilden Nomen ohne Suffix |
+| | | beginnen → der Beginn | |
+
+### Nomen aus Adjektiven
+| Suffix | Genus | Beispiel | Bedeutung |
+|--------|-------|----------|-----------|
+| **-heit** | die | wichtig → die Wichtig**heit** | nach Adjektiven auf -ig, -isch, -bar oft -heit |
+| **-keit** | die | möglich → die Möglich**keit** | nach Adjektiven auf -lich, -sam oft -keit |
+| | | schwierig → die Schwierig**keit** | |
+| **-e** | die | schwach → die Schwäch**e** (mit Umlaut) | kurze Adjektive, oft mit Umlaut |
+
+### Nomen mit anderen Suffixen
+| Suffix | Genus | Beispiel |
+|--------|-------|----------|
+| **-schaft** | die | Mitglied → die Mitglied**schaft**; Freund → die Freund**schaft** |
+| **-tum** | das | Eigentum, Wachstum |
+| **-nis** | das | Ergebnis, Verständnis, Bedürfnis |
+| **-ion/-tion** | die | organisieren → die Organisat**ion**; präsentieren → die Präsentat**ion** |
+
+### Adjektive aus Nomen
+| Suffix | Beispiel | Bedeutung |
+|--------|----------|-----------|
+| **-lich** | Geschäft → geschäft**lich** | |
+| **-ig** | Wichtigkeit → wicht**ig** (Rückbildung), Ruhe → ruh**ig** | |
+| **-isch** | Wirtschaft → wirtschaft**lich** / typisch, wirtschaft**lich** | |
+| **-bar** | (aus Verben) lösen → lös**bar**, machen → mach**bar** | kann getan werden |
+| **-voll** | Verantwortung → verantwortungs**voll** | |
+| **-los** | Verantwortung → verantwortungs**los** | Gegenteil von -voll |
+
+### Zusammengesetzte Nomen (Komposita)
+Deutsch bildet oft lange Nomen durch Zusammensetzung. **Das letzte Wort bestimmt Genus und Bedeutung:**
+die Kosten + die Analyse → **die Kostenanalyse**
+der Kunde + die Zufriedenheit → **die Kundenzufriedenheit**
+das Projekt + der Leiter → **der Projektleiter**
+oft mit Fugen-s dazwischen: Verantwortung**s**bereich, Geschäft**s**bericht""",
+        "examples": [
+            {
+                "label": "Verb → Nomen mit -ung",
+                "sentence": "Nach sorgfältiger **Prüfung** haben wir eine **Entscheidung** getroffen.",
+                "note": "prüfen → die Prüfung, entscheiden → die Entscheidung"
+            },
+            {
+                "label": "Adjektiv → Nomen mit -keit",
+                "sentence": "Die **Möglichkeit** einer Kostensenkung wird geprüft.",
+                "note": "möglich → die Möglichkeit"
+            },
+            {
+                "label": "Kompositum",
+                "sentence": "Der **Kundenzufriedenheitsbericht** wird morgen präsentiert.",
+                "note": "der Kunde + die Zufriedenheit + der Bericht - das letzte Wort bestimmt: der Bericht"
+            },
+        ],
+        "mistakes": [
+            "Falsches Genus bei -ung/-heit/-keit/-schaft/-ion: diese Suffixe sind IMMER feminin (die)",
+            "Falsches Genus bei -tum/-nis: -tum ist neutrum (das), -nis ist meistens neutrum (das Ergebnis, aber die Kenntnis - Ausnahme!)",
+            "Kompositum-Genus: nicht das erste, sondern das LETZTE Wort bestimmt Genus und Artikel",
+        ],
+        "exercise_hint": "Wortbildung-Aufgabe: Nomen aus Verben/Adjektiven ableiten. Zuordnung: Suffix zu passendem Genus.",
+    },
+
+    {
+        "id": "adjektive_mit_praepositionen",
+        "title": "Adjektive mit festen Präpositionen",
+        "level": "B2",
+        "category": "Kasus",
+        "explanation": """Wie Verben sind auch viele Adjektive fest mit einer Präposition verbunden (meist mit 'sein' + Adjektiv + Präposition). Auch diese muss man auswendig lernen.
+
+| Adjektiv | Präposition | Beispiel |
+|----------|-------------|---------|
+| stolz | auf + Akk | Wir sind **stolz auf** dieses Ergebnis. |
+| zufrieden | mit + Dat | Der Kunde ist **zufrieden mit** der Lösung. |
+| verantwortlich | für + Akk | Sie ist **verantwortlich für** das Budget. |
+| abhängig | von + Dat | Der Erfolg ist **abhängig von** der Marktlage. |
+| interessiert | an + Dat | Wir sind sehr **interessiert an** einer Zusammenarbeit. |
+| überzeugt | von + Dat | Ich bin **überzeugt von** diesem Ansatz. |
+| bekannt | für + Akk | Das Unternehmen ist **bekannt für** seine Qualität. |
+| einverstanden | mit + Dat | Ich bin **einverstanden mit** dem Vorschlag. |
+| begeistert | von + Dat | Das Team ist **begeistert von** der Idee. |
+| besorgt | über + Akk | Wir sind **besorgt über** die Entwicklung. |
+| enttäuscht | von/über + Dat/Akk | Er ist **enttäuscht von** dem Ergebnis. |
+| erfahren | in + Dat | Sie ist sehr **erfahren in** diesem Bereich. |
+| geeignet | für + Akk | Dieses Konzept ist **geeignet für** kleine Teams. |
+| notwendig | für + Akk | Das Budget ist **notwendig für** den Erfolg. |
+| vertraut | mit + Dat | Ich bin **vertraut mit** dem Thema. |""",
+        "examples": [
+            {
+                "label": "verantwortlich für",
+                "sentence": "Als Projektleiter bin ich **verantwortlich für** den gesamten Ablauf.",
+                "note": "verantwortlich + für + Akkusativ"
+            },
+            {
+                "label": "zufrieden mit",
+                "sentence": "Wir sind sehr **zufrieden mit** der Zusammenarbeit.",
+                "note": "zufrieden + mit + Dativ"
+            },
+            {
+                "label": "abhängig von",
+                "sentence": "Die Entscheidung ist **abhängig von** den verfügbaren Ressourcen.",
+                "note": "abhängig + von + Dativ, nicht 'abhängig auf'"
+            },
+        ],
+        "mistakes": [
+            "verantwortlich mit statt für: ❌ 'verantwortlich mit dem Projekt' → ✅ 'verantwortlich für das Projekt'",
+            "zufrieden für statt mit: ❌ 'zufrieden für die Lösung' → ✅ 'zufrieden mit der Lösung'",
+            "interessiert für statt an: ❌ 'interessiert für das Projekt' → ✅ 'interessiert an dem Projekt'",
+        ],
+        "exercise_hint": "Lückentext: richtige Präposition nach Adjektiv einsetzen. Zuordnung: Adjektiv + passende Präposition.",
+    },
+
+    # ==================== SATZBAU ====================
+
+    {
+        "id": "negation_nicht_kein",
+        "title": "Negation: nicht vs. kein",
+        "level": "A2",
+        "category": "Wortstellung",
+        "explanation": """Deutsch hat zwei Wörter für 'nicht/kein' - welches man benutzt, hängt vom Nomen ab.
+
+**kein** negiert ein Nomen mit unbestimmtem Artikel oder ohne Artikel:
+Ich habe ein**en** Termin. → Ich habe **kein**en Termin.
+Ich habe Zeit. → Ich habe **keine** Zeit.
+
+**nicht** negiert:
+- Verben: Ich **komme nicht**.
+- Adjektive/Adverbien: Das ist **nicht** wichtig.
+- Nomen mit bestimmtem Artikel: Das ist **nicht der** richtige Ansatz.
+- den ganzen Satz (steht dann meist am Ende)
+
+---
+
+### Position von 'nicht'
+
+**Ganzsatznegation** (der ganze Satz wird verneint) → **nicht am Ende:**
+Ich verstehe die Frage **nicht**.
+
+**Teilnegation** (nur ein Teil wird verneint) → **nicht direkt vor dem negierten Element:**
+Ich arbeite **nicht** heute, sondern morgen. (nicht 'heute' wird negiert)
+Er ist **nicht** freundlich. (nicht 'freundlich' wird negiert)
+
+**Vor Präpositionalphrasen und Ortsangaben:** nicht kommt davor:
+Ich fahre **nicht** nach Berlin, sondern nach München.""",
+        "examples": [
+            {
+                "label": "kein (Nomen ohne bestimmten Artikel)",
+                "sentence": "Wir haben **keine** Einigung erzielt.",
+                "note": "eine Einigung → keine Einigung"
+            },
+            {
+                "label": "nicht (Verb/Ganzsatz)",
+                "sentence": "Der Kunde hat das Angebot **nicht** angenommen.",
+                "note": "Ganzsatznegation → nicht möglichst weit hinten"
+            },
+            {
+                "label": "nicht (Teilnegation)",
+                "sentence": "Wir treffen uns **nicht** am Montag, sondern am Dienstag.",
+                "note": "Nur 'am Montag' wird negiert, deshalb nicht direkt davor"
+            },
+        ],
+        "mistakes": [
+            "kein statt nicht bei bestimmtem Artikel: ❌ 'Das ist keine richtige Lösung.' wenn eigentlich gemeint ist: 'Das ist nicht die richtige Lösung.' (Kontext prüfen)",
+            "nicht zu früh im Satz bei Ganzsatznegation: ❌ 'Ich nicht verstehe.' → ✅ 'Ich verstehe nicht.'",
+            "kein vor Nomen mit Possessivpronomen: ❌ 'Das ist kein mein Problem.' → ✅ 'Das ist nicht mein Problem.' (Possessiv + nicht, nicht kein)",
+        ],
+        "exercise_hint": "Fehlersuche: nicht/kein verwechselt. Lückentext: richtige Negation je nach Nomen/Verb einsetzen.",
+    },
+
+    {
+        "id": "indirekte_fragesaetze",
+        "title": "Indirekte Fragesätze",
+        "level": "B1",
+        "category": "Satzkonstruktion",
+        "explanation": """Eine indirekte Frage ist eine Frage, die in einen größeren Satz eingebettet ist. Typisch in höflichen Bitten und professioneller Kommunikation.
+
+**Zwei Typen:**
+
+**1. Ja/Nein-Fragen → mit 'ob'**
+Direkte Frage: Kommt er? → Indirekt: Ich weiß nicht, **ob** er **kommt**.
+
+**2. W-Fragen → W-Wort bleibt, Verb ans Ende**
+Direkte Frage: Wann beginnt das Meeting? → Indirekt: Ich frage mich, **wann** das Meeting **beginnt**.
+
+**Wichtig:** In beiden Fällen geht das Verb ans Ende des Nebensatzes (wie bei allen Nebensätzen).
+
+**Typische Einleitungen (sehr nützlich für formelle Kommunikation):**
+Ich möchte wissen, ob/wann/wie... / Können Sie mir sagen, ob/wann/wie... / Es ist unklar, ob/warum... / Ich frage mich, ob/wann...""",
+        "examples": [
+            {
+                "label": "ob (Ja/Nein-Frage)",
+                "sentence": "Können Sie mir sagen, **ob** die Lieferung heute **ankommt**?",
+                "note": "Direkte Frage 'Kommt die Lieferung heute an?' wird mit 'ob' eingebettet, Verb ans Ende."
+            },
+            {
+                "label": "W-Frage",
+                "sentence": "Ich möchte wissen, **wann** wir mit den Ergebnissen **rechnen können**.",
+                "note": "W-Wort 'wann' bleibt erhalten, Verb(en) ans Ende."
+            },
+            {
+                "label": "Beruflicher Kontext",
+                "sentence": "Es ist noch unklar, **warum** die Verzögerung **entstanden ist**.",
+                "note": "Perfekt im Nebensatz: beide Verbteile (ist/entstanden) ans Ende, Hilfsverb zuletzt."
+            },
+        ],
+        "mistakes": [
+            "Hauptsatzstellung im Nebensatz: ❌ 'Ich weiß nicht, ob kommt er.' → ✅ 'ob er kommt'",
+            "ob vergessen bei Ja/Nein-Fragen: ❌ 'Ich weiß nicht, kommt er.' → ✅ 'ob er kommt'",
+            "wenn statt ob: 'wenn' ist nur für Bedingungen/Zeitangaben, nicht für indirekte Ja/Nein-Fragen",
+        ],
+        "exercise_hint": "Satztransformation: direkte Fragen in indirekte Fragesätze umformen. Nützlich für höfliche E-Mails und Nachfragen.",
+    },
 ]
