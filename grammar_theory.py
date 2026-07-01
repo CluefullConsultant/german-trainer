@@ -93,7 +93,7 @@ Wenn mehrere Angaben im Satz sind, kommen sie in dieser Reihenfolge - nicht umge
     {
         "id": "b1_konjunktiv2",
         "title": "Konjunktiv II - Wünsche, Möglichkeiten, höfliche Bitten",
-        "level": "B1",
+        "level": "C1",
         "category": "Verbformen",
         "explanation": """Der Konjunktiv II drückt aus:
 - **Wünsche und Träume:** Was man gern hätte, aber (noch) nicht hat
@@ -801,5 +801,559 @@ Formel: **jemandem** (Dat) **etwas** (Akk) geben/schicken/zeigen...""",
             "zwecks + Dativ: ❌ 'zwecks dem Gespräch' → ✅ 'zwecks des Gesprächs' (Genitiv)",
         ],
         "exercise_hint": "Kategoriensortierung: Konnektoren nach kausal/final/konsekutiv einordnen. Satztransformation: einfache Konnektoren durch formellere ersetzen.",
+    },
+
+    # ==================== VERB TABLES ====================
+
+    {
+        "id": "verben_schwach_stark",
+        "title": "Schwache und starke Verben - alle Stammformen",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """**Schwache Verben (regelmäßig)** bilden das Präteritum mit **-te** und das Partizip II mit **ge-...-t**.
+**Starke Verben (unregelmäßig)** verändern den Vokal im Stammteil - diese Formen muss man auswendig lernen.
+
+Die drei **Stammformen** (Hauptformen) jedes Verbs:
+**Infinitiv → Präteritum (er/sie) → Partizip II**
+
+---
+
+### Schwache Verben (regelmäßig)
+| Infinitiv | Präteritum | Partizip II | Bedeutung |
+|-----------|-----------|-------------|-----------|
+| machen | machte | gemacht | to do/make |
+| arbeiten | arbeitete | gearbeitet | to work |
+| kaufen | kaufte | gekauft | to buy |
+| spielen | spielte | gespielt | to play |
+| lernen | lernte | gelernt | to learn |
+| fragen | fragte | gefragt | to ask |
+| sagen | sagte | gesagt | to say |
+| suchen | suchte | gesucht | to search |
+| brauchen | brauchte | gebraucht | to need |
+| leben | lebte | gelebt | to live |
+| glauben | glaubte | geglaubt | to believe |
+| hören | hörte | gehört | to hear |
+| zeigen | zeigte | gezeigt | to show |
+| wohnen | wohnte | gewohnt | to live (reside) |
+| schicken | schickte | geschickt | to send |
+| kosten | kostete | gekostet | to cost |
+| bedeuten | bedeutete | bedeutet | to mean |
+| erklären | erklärte | erklärt | to explain |
+| bestätigen | bestätigte | bestätigt | to confirm |
+| vereinbaren | vereinbarte | vereinbart | to arrange |
+| informieren | informierte | informiert | to inform |
+| organisieren | organisierte | organisiert | to organise |
+| analysieren | analysierte | analysiert | to analyse |
+| präsentieren | präsentierte | präsentiert | to present |
+| diskutieren | diskutierte | diskutiert | to discuss |
+
+---
+
+### Starke Verben A1-A2 (unregelmäßig - auswendig lernen!)
+| Infinitiv | Präteritum | Partizip II | Bedeutung |
+|-----------|-----------|-------------|-----------|
+| sein | war | **gewesen** | to be |
+| haben | hatte | **gehabt** | to have |
+| werden | wurde | **geworden** | to become |
+| gehen | ging | **gegangen** | to go |
+| kommen | kam | **gekommen** | to come |
+| fahren | fuhr | **gefahren** | to drive/travel |
+| sehen | sah | **gesehen** | to see |
+| geben | gab | **gegeben** | to give |
+| nehmen | nahm | **genommen** | to take |
+| lesen | las | **gelesen** | to read |
+| schreiben | schrieb | **geschrieben** | to write |
+| sprechen | sprach | **gesprochen** | to speak |
+| stehen | stand | **gestanden** | to stand |
+| treffen | traf | **getroffen** | to meet |
+| wissen | wusste | **gewusst** | to know (fact) |
+| tragen | trug | **getragen** | to carry/wear |
+| rufen | rief | **gerufen** | to call |
+| laufen | lief | **gelaufen** | to run/walk |
+| bleiben | blieb | **geblieben** | to stay |
+| finden | fand | **gefunden** | to find |
+| essen | aß | **gegessen** | to eat |
+| trinken | trank | **getrunken** | to drink |
+| schlafen | schlief | **geschlafen** | to sleep |
+| heißen | hieß | **geheißen** | to be called |
+
+---
+
+### Starke Verben B1-B2
+| Infinitiv | Präteritum | Partizip II | Bedeutung |
+|-----------|-----------|-------------|-----------|
+| helfen | half | **geholfen** | to help |
+| verstehen | verstand | **verstanden** | to understand |
+| verlieren | verlor | **verloren** | to lose |
+| gewinnen | gewann | **gewonnen** | to win |
+| halten | hielt | **gehalten** | to hold/stop |
+| entscheiden | entschied | **entschieden** | to decide |
+| empfehlen | empfahl | **empfohlen** | to recommend |
+| einladen | lud ein | **eingeladen** | to invite |
+| anfangen | fing an | **angefangen** | to begin |
+| aufstehen | stand auf | **aufgestanden** | to get up |
+| steigen | stieg | **gestiegen** | to climb/rise |
+| ziehen | zog | **gezogen** | to pull/move |
+| bitten | bat | **gebeten** | to ask/request |
+| vergessen | vergaß | **vergessen** | to forget |
+| beginnen | begann | **begonnen** | to begin |
+| beschreiben | beschrieb | **beschrieben** | to describe |
+| erscheinen | erschien | **erschienen** | to appear |
+| vorschlagen | schlug vor | **vorgeschlagen** | to suggest |
+| anbieten | bot an | **angeboten** | to offer |
+| aufweisen | wies auf | **aufgewiesen** | to show/exhibit |
+
+---
+
+### Starke Verben C1 (häufig in formellen Texten)
+| Infinitiv | Präteritum | Partizip II | Bedeutung |
+|-----------|-----------|-------------|-----------|
+| übertreffen | übertraf | **übertroffen** | to surpass |
+| beweisen | bewies | **bewiesen** | to prove |
+| vorantreiben | trieb voran | **vorangetrieben** | to drive forward |
+| unterliegen | unterlag | **unterlegen** | to be subject to |
+| abweichen | wich ab | **abgewichen** | to deviate |
+| beitragen | trug bei | **beigetragen** | to contribute |
+| einbeziehen | bezog ein | **einbezogen** | to include |
+| voraussetzen | setzte voraus | **vorausgesetzt** | to presuppose |
+| hervorgehen | ging hervor | **hervorgegangen** | to emerge from |
+| zurückgreifen | griff zurück | **zurückgegriffen** | to fall back on |""",
+        "examples": [
+            {
+                "label": "Schwaches Verb im Satz",
+                "sentence": "Er **schickte** gestern die Unterlagen. → Die Unterlagen wurden **geschickt**.",
+                "note": "schicken → schickte → geschickt: regelmäßig, kein Vokalwechsel."
+            },
+            {
+                "label": "Starkes Verb im Satz",
+                "sentence": "Sie **traf** den Kunden um 10 Uhr. → Sie hat den Kunden **getroffen**.",
+                "note": "treffen → traf → getroffen: Vokal ändert sich (e → a → o)."
+            },
+            {
+                "label": "Perfekt mit sein (Bewegung/Zustandswechsel)",
+                "sentence": "Er **ist** nach Berlin **gefahren**. / Sie **ist** gekommen.",
+                "note": "Verben der Bewegung und des Zustandswechsels bilden Perfekt mit SEIN, nicht haben."
+            },
+        ],
+        "mistakes": [
+            "Perfekt mit sein vs. haben: fahren/gehen/kommen/bleiben/sein → sein; die meisten anderen → haben",
+            "Partizip II ohne ge-: Verben mit be-/er-/ver-/ent- haben KEIN ge-: bestätigt (nicht gebestätigt), erklärt (nicht geerklärt)",
+            "Trennbare Verben: ge- kommt zwischen Präfix und Stamm: einladen → einGEladen, aufstehen → aufGEstanden",
+        ],
+        "exercise_hint": "Lückentext: richtiges Präteritum oder Partizip II einsetzen. Fehlersuche: falsche Perfektformen mit haben/sein.",
+    },
+
+    {
+        "id": "verben_modalverben",
+        "title": "Modalverben - alle Formen",
+        "level": "A2",
+        "category": "Verben",
+        "explanation": """Modalverben stehen mit einem zweiten Verb im Infinitiv (am Satzende). Sie drücken Notwendigkeit, Möglichkeit, Erlaubnis oder Wollen aus.
+
+**Die 6 Modalverben:**
+
+| | dürfen | können | mögen | müssen | sollen | wollen |
+|--|--------|--------|-------|--------|--------|--------|
+| **ich** | darf | kann | mag | muss | soll | will |
+| **du** | darfst | kannst | magst | musst | sollst | willst |
+| **er/sie/es** | darf | kann | mag | muss | soll | will |
+| **wir** | dürfen | können | mögen | müssen | sollen | wollen |
+| **ihr** | dürft | könnt | mögt | müsst | sollt | wollt |
+| **sie/Sie** | dürfen | können | mögen | müssen | sollen | wollen |
+
+**Präteritum (wichtig!):**
+| | dürfen | können | mögen | müssen | sollen | wollen |
+|--|--------|--------|-------|--------|--------|--------|
+| **ich/er** | durfte | konnte | mochte | musste | sollte | wollte |
+
+**Partizip II** (für Perfekt - selten aber wichtig):
+gedurft / gekonnt / gemocht / gemusst / gesollt / gewollt
+*(Aber: wenn ein Infinitiv dabei steht → Infinitiv statt Partizip II: "Ich habe kommen **können**")*
+
+---
+
+**Was bedeutet welches Modalverb?**
+
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| **müssen** | Notwendigkeit (Pflicht, innere Notwendigkeit) | Ich muss das Formular ausfüllen. |
+| **sollen** | Auftrag von außen (jemand anderes sagt es) | Sie sollen um 9 Uhr erscheinen. |
+| **können** | Fähigkeit oder Möglichkeit | Ich kann Ihnen morgen helfen. |
+| **dürfen** | Erlaubnis (oder Verbot mit nicht) | Sie dürfen das Büro betreten. |
+| **wollen** | eigener Wille/Plan | Ich will das Projekt leiten. |
+| **mögen** | Vorliebe; in indirekter Rede auch Wunsch | Er mag keine langen Meetings. |
+| **möchten** | höflicher Wunsch (Konjunktiv II von mögen) | Ich möchte einen Termin vereinbaren. |""",
+        "examples": [
+            {
+                "label": "müssen vs. sollen",
+                "sentence": "Ich **muss** früher gehen. (innerer Grund) / Ich **soll** früher gehen. (Chef hat es gesagt)",
+                "note": "müssen = eigene Notwendigkeit; sollen = Auftrag von außen"
+            },
+            {
+                "label": "dürfen nicht = Verbot",
+                "sentence": "Sie **dürfen** diese Daten **nicht** weitergeben.",
+                "note": "dürfen nicht = ist verboten (nicht: muss nicht)"
+            },
+            {
+                "label": "müssen nicht = keine Pflicht",
+                "sentence": "Sie **müssen** nicht kommen, wenn Sie keine Zeit haben.",
+                "note": "müssen nicht ≠ dürfen nicht: müssen nicht = es ist nicht nötig"
+            },
+        ],
+        "mistakes": [
+            "dürfen nicht vs. müssen nicht: ❌ 'Sie dürfen nicht pünktlich sein.' → ✅ 'Sie müssen nicht pünktlich sein.' (keine Pflicht)",
+            "Wortstellung: Modalverb Position 2, Infinitiv ans Ende: ❌ 'Ich muss gehen früher.' → ✅ 'Ich muss früher gehen.'",
+            "Perfekt mit Doppel-Infinitiv: 'Ich habe gehen müssen.' (nicht 'gemusst' wenn Infinitiv dabei)",
+        ],
+        "exercise_hint": "Lückentext: richtiges Modalverb einsetzen. Mehrfachauswahl: müssen/sollen/dürfen unterscheiden.",
+    },
+
+    {
+        "id": "verben_reflexiv",
+        "title": "Reflexive Verben (sich-Verben)",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """Reflexive Verben haben ein Reflexivpronomen (sich, mich, dich...). Das Reflexivpronomen zeigt, dass die Handlung auf das Subjekt zurückfällt.
+
+**Reflexivpronomen:**
+| Person | Akkusativ | Dativ |
+|--------|-----------|-------|
+| ich | **mich** | **mir** |
+| du | **dich** | **dir** |
+| er/sie/es | **sich** | **sich** |
+| wir | **uns** | **uns** |
+| ihr | **euch** | **euch** |
+| sie/Sie | **sich** | **sich** |
+
+**Wann Akkusativ, wann Dativ?**
+→ Akkusativ: wenn es kein anderes Akkusativobjekt gibt
+→ Dativ: wenn es ein anderes Akkusativobjekt gibt
+
+**Wichtige reflexive Verben:**
+
+| Verb | Kasus | Bedeutung |
+|------|-------|-----------|
+| sich freuen auf | + Akk | to look forward to |
+| sich freuen über | + Akk | to be happy about |
+| sich bewerben um | + Akk | to apply for |
+| sich kümmern um | + Akk | to take care of |
+| sich erinnern an | + Akk | to remember |
+| sich gewöhnen an | + Akk | to get used to |
+| sich konzentrieren auf | + Akk | to concentrate on |
+| sich beziehen auf | + Akk | to refer to |
+| sich entscheiden für | + Akk | to decide for |
+| sich beschäftigen mit | + Dat | to deal with |
+| sich befassen mit | + Dat | to be concerned with |
+| sich treffen mit | + Dat | to meet with |
+| sich abzeichnen | (kein Obj.) | to become apparent |
+| sich entwickeln | (kein Obj.) | to develop |
+| sich handeln um | + Akk | to be about (Es handelt sich um...) |""",
+        "examples": [
+            {
+                "label": "Akkusativ-Reflexiv",
+                "sentence": "Ich **bewerbe mich** um die Stelle als Berater.",
+                "note": "sich bewerben um: mich = Akkusativ (kein anderes Akkusativobjekt)"
+            },
+            {
+                "label": "Dativ-Reflexiv (mit Akkusativobjekt)",
+                "sentence": "Ich mache **mir** Notizen während des Meetings.",
+                "note": "Notizen = Akkusativobjekt → Reflexivpronomen wird Dativ: mir"
+            },
+            {
+                "label": "Beruflicher Kontext",
+                "sentence": "Das Projekt **entwickelt sich** sehr positiv. / Es **handelt sich um** einen strategischen Fehler.",
+                "note": "sich entwickeln und sich handeln um sind sehr häufig in Berichten."
+            },
+        ],
+        "mistakes": [
+            "mir vs. mich: 'Ich wasche mich.' (kein anderes Objekt → Akk) vs. 'Ich wasche mir die Hände.' (Hände = Akk → Reflexiv wird Dat)",
+            "sich im Infinitiv: 'Er möchte sich bewerben.' (sich bleibt immer dabei)",
+        ],
+        "exercise_hint": "Lückentext: richtiges Reflexivpronomen (mich/mir/sich) einsetzen. Fehlersuche mit reflexiven Verben.",
+    },
+
+    {
+        "id": "verben_trennbar_untrennbar",
+        "title": "Trennbare und untrennbare Verben",
+        "level": "A2",
+        "category": "Verben",
+        "explanation": """Manche Verben haben ein **Präfix** (Vorsilbe). Dieses Präfix ist entweder **trennbar** oder **untrennbar**.
+
+**Untrennbare Präfixe** (nie getrennt, kein Stress):
+**be-, er-, ge-, ver-, zer-, ent-, emp-, miss-**
+→ Partizip II: KEIN ge- davor
+
+| Verb | Präteritum | Partizip II |
+|------|-----------|-------------|
+| besuchen | besuchte | besucht |
+| erklären | erklärte | erklärt |
+| verstehen | verstand | verstanden |
+| vergessen | vergaß | vergessen |
+| entscheiden | entschied | entschieden |
+| empfehlen | empfahl | empfohlen |
+
+**Trennbare Präfixe** (trennen sich im Hauptsatz, Verb ans Ende):
+**an-, auf-, aus-, ein-, mit-, vor-, zu-, ab-, nach-, her-, hin-, zurück-, weiter-**
+→ Partizip II: ge- kommt ZWISCHEN Präfix und Stamm
+
+| Verb | Hauptsatz | Partizip II |
+|------|-----------|-------------|
+| anrufen | Er **ruft** mich **an**. | an**ge**rufen |
+| aufmachen | Er **macht** das Fenster **auf**. | auf**ge**macht |
+| einladen | Ich **lade** Sie **ein**. | ein**ge**laden |
+| vorschlagen | Sie **schlägt** das **vor**. | vor**ge**schlagen |
+| mitteilen | Er **teilt** es mit. | mit**ge**teilt |
+| anfangen | Wir **fangen** jetzt **an**. | an**ge**fangen |
+| aufweisen | Die Daten **weisen** Fehler **auf**. | auf**ge**wiesen |
+| beitragen | Das **trägt** viel **bei**. | bei**ge**tragen |
+
+**Verben mit zwei möglichen Bedeutungen:**
+übersetzen (trennbar) = to ferry across / übersetzen (untrennbar) = to translate
+umfahren (trennbar) = to knock over / umfahren (untrennbar) = to drive around""",
+        "examples": [
+            {
+                "label": "Trennbar im Hauptsatz",
+                "sentence": "Ich **rufe** Sie morgen **an**.",
+                "note": "anrufen: 'an' geht ans Ende des Hauptsatzes."
+            },
+            {
+                "label": "Trennbar im Nebensatz (NICHT getrennt)",
+                "sentence": "Ich bin froh, dass ich Sie **anrufen** kann.",
+                "note": "Im Nebensatz bleibt das Verb zusammen - Infinitiv ans Ende."
+            },
+            {
+                "label": "Partizip II trennbar",
+                "sentence": "Haben Sie schon **angerufen**?",
+                "note": "ge- zwischen an und rufen: an-ge-rufen"
+            },
+        ],
+        "mistakes": [
+            "Partizip II untrennbar mit ge-: ❌ 'gebesucht, geerklärt' → ✅ 'besucht, erklärt'",
+            "Trennbar im Nebensatz trennen: ❌ 'dass ich rufe an' → ✅ 'dass ich anrufe'",
+        ],
+        "exercise_hint": "Lückentext: trennbare Verben in verschiedenen Zeitformen einsetzen. Fehlersuche mit Partizip-II-Bildung.",
+    },
+
+    # ==================== PRÄPOSITIONEN ====================
+
+    {
+        "id": "praepositionen_kasus",
+        "title": "Präpositionen mit Kasus - Übersicht",
+        "level": "A2",
+        "category": "Kasus",
+        "explanation": """Jede Präposition verlangt einen bestimmten Kasus. Das ist fest - man kann es nicht wählen.
+
+---
+
+### Immer AKKUSATIV:
+| Präposition | Bedeutung | Beispiel |
+|-------------|-----------|---------|
+| **durch** | through | durch den Park |
+| **für** | for | für den Kunden |
+| **gegen** | against | gegen den Plan |
+| **ohne** | without | ohne den Kollegen |
+| **um** | around / at (time) | um den Tisch / um 9 Uhr |
+| **bis** | until / up to | bis nächsten Montag |
+| **entlang** | along | den Fluss entlang |
+
+---
+
+### Immer DATIV:
+| Präposition | Bedeutung | Beispiel |
+|-------------|-----------|---------|
+| **aus** | from / out of | aus dem Büro |
+| **bei** | at / with / near | beim (= bei dem) Chef |
+| **mit** | with | mit dem Team |
+| **nach** | after / to (cities) | nach Berlin / nach dem Meeting |
+| **seit** | since / for (time) | seit einem Jahr |
+| **von** | from / of / by | von dem Projekt / vom Chef |
+| **zu** | to (people/places) | zum (= zu dem) Arzt |
+| **gegenüber** | opposite / towards | dem Kunden gegenüber |
+| **außer** | except | außer mir |
+
+---
+
+### WECHSELPRÄPOSITIONEN (Akk oder Dat - je nach Kontext):
+**an, auf, hinter, in, neben, über, unter, vor, zwischen**
+
+**Regel:**
+- **Akkusativ** = Bewegung/Richtung (Wohin?) → Veränderung des Ortes
+- **Dativ** = Position/Zustand (Wo?) → kein Ortswechsel
+
+| | Akkusativ (Wohin?) | Dativ (Wo?) |
+|--|-------------------|-------------|
+| **an** | Ich gehe **an den** Schreibtisch. | Ich sitze **am** (= an dem) Schreibtisch. |
+| **auf** | Ich lege das Buch **auf den** Tisch. | Das Buch liegt **auf dem** Tisch. |
+| **in** | Ich gehe **in das** (ins) Büro. | Ich bin **im** (= in dem) Büro. |
+| **über** | Ich hänge das Bild **über den** Schreibtisch. | Das Bild hängt **über dem** Schreibtisch. |
+
+---
+
+### Immer GENITIV:
+wegen, trotz, während, aufgrund, anstatt, innerhalb, außerhalb, mithilfe, bezüglich, hinsichtlich
+*(Siehe separate Regel: Genitiv-Präpositionen)*""",
+        "examples": [
+            {
+                "label": "auf + Akkusativ (Wohin?)",
+                "sentence": "Ich lege die Unterlagen **auf den** Tisch.",
+                "note": "Bewegung → wohin? → Akkusativ"
+            },
+            {
+                "label": "auf + Dativ (Wo?)",
+                "sentence": "Die Unterlagen liegen **auf dem** Tisch.",
+                "note": "Position → wo? → Dativ"
+            },
+            {
+                "label": "in + Akkusativ vs. Dativ",
+                "sentence": "Ich gehe **ins** Büro. (Wohin? Akk) / Ich arbeite **im** Büro. (Wo? Dat)",
+                "note": "ins = in das (Akkusativ) / im = in dem (Dativ)"
+            },
+        ],
+        "mistakes": [
+            "nach vs. zu: nach + Städte/Länder/Hause; zu + Personen/Institutionen: 'nach Berlin' aber 'zum Arzt', 'zu meinem Kollegen'",
+            "von vs. aus: aus = Herkunft aus einem Ort/Material; von = Ausgangspunkt oder Urheber: 'aus Deutschland' (Herkunft), 'von dem Chef' (Urheber)",
+            "bei + Dativ immer: ❌ 'bei den Chef' → ✅ 'beim Chef' (bei dem = beim)",
+        ],
+        "exercise_hint": "Lückentext: Akkusativ oder Dativ nach Wechselpräpositionen. Mehrfachauswahl: richtige Präposition wählen.",
+    },
+
+    {
+        "id": "verben_mit_praepositionen",
+        "title": "Verben mit festen Präpositionen",
+        "level": "B1",
+        "category": "Kasus",
+        "explanation": """Viele deutsche Verben sind fest mit einer Präposition verbunden. Die Präposition bestimmt den Kasus des folgenden Nomens. Diese Verbindungen muss man auswendig lernen - sie sind nicht logisch übersetzbar.
+
+**Warum 'danken für'?**
+'jemandem danken' (Dativ, für die Person) + 'für etwas' (Akkusativ, für den Grund) - die für-Phrase ist eine Ergänzung, nicht das Objekt des Verbs selbst. Das gilt für viele Verben: sie haben ein Objekt (Dativ/Akkusativ) UND eine Präpositionalergänzung.
+
+---
+
+### Verben + für + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| danken für | to thank for | Ich danke Ihnen **für** Ihre Hilfe. |
+| sich entscheiden für | to decide for | Wir entscheiden uns **für** Option A. |
+| sich interessieren für | to be interested in | Er interessiert sich **für** das Projekt. |
+| sich bedanken für | to thank for | Ich bedanke mich **für** das Feedback. |
+| sorgen für | to take care of | Sie sorgt **für** die Organisation. |
+| verantwortlich sein für | to be responsible for | Er ist **für** das Budget verantwortlich. |
+| geeignet sein für | to be suitable for | Das ist **für** unsere Zwecke geeignet. |
+
+---
+
+### Verben + auf + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| warten auf | to wait for | Wir warten **auf** die Genehmigung. |
+| sich freuen auf | to look forward to | Ich freue mich **auf** das Meeting. |
+| sich beziehen auf | to refer to | Ich beziehe mich **auf** Ihre E-Mail. |
+| sich konzentrieren auf | to concentrate on | Bitte konzentrieren Sie sich **auf** das Wesentliche. |
+| sich vorbereiten auf | to prepare for | Ich bereite mich **auf** das Gespräch vor. |
+| aufpassen auf | to pay attention to | Bitte passen Sie **auf** die Details auf. |
+| hinweisen auf | to point out | Ich möchte **auf** ein Problem hinweisen. |
+| reagieren auf | to react to | Wir reagieren **auf** Kundenfeedback. |
+| sich verlassen auf | to rely on | Ich verlasse mich **auf** Ihr Team. |
+| Wert legen auf | to value | Wir legen Wert **auf** Qualität. |
+
+---
+
+### Verben + an + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| denken an | to think of | Ich denke **an** den Termin. |
+| sich erinnern an | to remember | Erinnern Sie sich **an** unser Gespräch? |
+| sich gewöhnen an | to get used to | Ich gewöhne mich **an** die neue Struktur. |
+| glauben an | to believe in | Wir glauben **an** unsere Strategie. |
+| schreiben an | to write to | Ich schreibe **an** den Kunden. |
+| appellieren an | to appeal to | Ich appelliere **an** Ihr Verständnis. |
+
+---
+
+### Verben + über + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| sprechen über | to talk about | Wir sprechen **über** das Budget. |
+| sich freuen über | to be pleased about | Ich freue mich **über** das Ergebnis. |
+| sich beschweren über | to complain about | Der Kunde beschwert sich **über** die Lieferung. |
+| nachdenken über | to think about | Ich denke **über** Ihren Vorschlag nach. |
+| diskutieren über | to discuss | Wir diskutieren **über** die Optionen. |
+| informieren über | to inform about | Bitte informieren Sie mich **über** die Änderungen. |
+| berichten über | to report on | Er berichtet **über** den Projektfortschritt. |
+| verfügen über | to have at one's disposal | Das Unternehmen verfügt **über** große Ressourcen. |
+
+---
+
+### Verben + mit + Dativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| sprechen mit | to speak with | Ich spreche **mit** dem Kunden. |
+| sich treffen mit | to meet with | Ich treffe mich **mit** dem Team. |
+| sich beschäftigen mit | to deal with | Wir beschäftigen uns **mit** dem Problem. |
+| beginnen mit | to begin with | Wir beginnen **mit** der Analyse. |
+| aufhören mit | to stop doing | Er hört **mit** der Arbeit auf. |
+| rechnen mit | to expect / count on | Ich rechne **mit** Verzögerungen. |
+| zusammenarbeiten mit | to collaborate with | Wir arbeiten **mit** dem Kunden zusammen. |
+| einverstanden sein mit | to agree with | Ich bin **mit** dem Vorschlag einverstanden. |
+
+---
+
+### Verben + von + Dativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| abhängen von | to depend on | Das hängt **vom** Budget ab. |
+| überzeugen von | to convince of | Ich überzeuge ihn **von** unserem Konzept. |
+| sprechen von | to speak of | Er sprach **von** neuen Möglichkeiten. |
+| profitieren von | to benefit from | Wir profitieren **von** der Zusammenarbeit. |
+| ausgehen von | to assume / start from | Ich gehe **von** einer positiven Entwicklung aus. |
+
+---
+
+### Verben + in + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| sich einarbeiten in | to familiarise with | Ich arbeite mich **in** das Thema ein. |
+| investieren in | to invest in | Wir investieren **in** neue Technologien. |
+| einwilligen in | to consent to | Er willigt **in** den Vertrag ein. |
+
+---
+
+### Verben + um + Akkusativ
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| bitten um | to ask for / request | Ich bitte **um** Ihre Genehmigung. |
+| sich bewerben um | to apply for | Sie bewirbt sich **um** die Stelle. |
+| sich handeln um | to be about | Es handelt sich **um** einen Fehler. |
+| kämpfen um | to fight for | Wir kämpfen **um** den Auftrag. |
+| sich kümmern um | to take care of | Ich kümmere mich **um** die Details. |
+
+---
+
+### Merkhilfe: PRÄP-FRAGEN
+Bei Verben mit Präpositionen: **Wofür? Worauf? Womit? Wovon? Worüber?** (Sachen)
+/ **Für wen? Auf wen? Mit wem? Von wem? Über wen?** (Personen)""",
+        "examples": [
+            {
+                "label": "bitten um (nicht bitten für)",
+                "sentence": "Ich bitte Sie **um** einen Termin.",
+                "note": "bitten + um + Akkusativ - immer um, nie für"
+            },
+            {
+                "label": "sich freuen auf vs. über",
+                "sentence": "Ich freue mich **auf** das Meeting. (Zukunft) / Ich freue mich **über** das Ergebnis. (Vergangenheit/Gegenwart)",
+                "note": "auf = Vorfreude auf etwas Zukünftiges; über = Freude über etwas Geschehenes"
+            },
+            {
+                "label": "abhängen von (nicht auf)",
+                "sentence": "Das **hängt vom** (= von dem) Budget **ab**.",
+                "note": "abhängen von + Dativ - nicht: abhängen auf"
+            },
+        ],
+        "mistakes": [
+            "warten auf (nicht warten für): ❌ 'Ich warte für die Antwort.' → ✅ 'Ich warte auf die Antwort.'",
+            "sich freuen über vs. auf durcheinander bringen: auf = Zukunft, über = Vergangenheit/Gegenwart",
+            "bitten um vs. fragen nach: bitten um = to request; fragen nach = to ask about/enquire",
+        ],
+        "exercise_hint": "Lückentext: richtige Präposition einsetzen. Zuordnung: Verb + passende Präposition. Fehlersuche mit falschen Präpositionen.",
     },
 ]

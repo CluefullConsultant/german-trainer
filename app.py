@@ -944,13 +944,13 @@ with tab6:
 
     level_filter = st.selectbox(
         "Niveau wählen",
-        options=["Alle", "B1", "B2", "C1"],
+        options=["Alle", "A2", "B1", "B2", "C1"],
         key="theory_level"
     )
 
     filtered = [r for r in GRAMMAR_RULES if level_filter == "Alle" or r["level"] == level_filter]
 
-    level_colors = {"B1": "🟡", "B2": "🟠", "C1": "🔴"}
+    level_colors = {"A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
 
     for rule in filtered:
         badge = level_colors.get(rule["level"], "")
