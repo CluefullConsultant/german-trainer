@@ -946,7 +946,55 @@ Es gibt keine 100%-Regel, aber diese Muster helfen sehr:
 | wenden | wandte | **gewandt** | to turn |
 | denken | dachte | **gedacht** | to think |
 | bringen | brachte | **gebracht** | to bring |
-| wissen | wusste | **gewusst** | to know (a fact) |""",
+| wissen | wusste | **gewusst** | to know (a fact) |
+
+---
+
+### Gemischte Verben - volle Konjugation (Präsens und Präteritum, alle Personen)
+
+**wissen** (Präsens ist unregelmäßig - Vorsicht!)
+| Person | Präsens | Präteritum |
+|--------|---------|-----------|
+| ich | **weiß** | wusste |
+| du | **weißt** | wusstest |
+| er/sie/es | **weiß** | wusste |
+| wir | wissen | wussten |
+| ihr | wisst | wusstet |
+| sie/Sie | wissen | wussten |
+
+**bringen** (Präsens regelmäßig, Präteritum mit Vokalwechsel)
+| Person | Präsens | Präteritum |
+|--------|---------|-----------|
+| ich | bringe | brachte |
+| du | bringst | brachtest |
+| er/sie/es | bringt | brachte |
+| wir | bringen | brachten |
+| ihr | bringt | brachtet |
+| sie/Sie | bringen | brachten |
+
+**kennen** (Präsens regelmäßig, Präteritum mit Vokalwechsel)
+| Person | Präsens | Präteritum |
+|--------|---------|-----------|
+| ich | kenne | kannte |
+| du | kennst | kanntest |
+| er/sie/es | kennt | kannte |
+| wir | kennen | kannten |
+| ihr | kennt | kanntet |
+| sie/Sie | kennen | kannten |
+
+**denken** (gleiches Muster wie bringen/kennen)
+| Person | Präsens | Präteritum |
+|--------|---------|-----------|
+| ich | denke | dachte |
+| du | denkst | dachtest |
+| er/sie/es | denkt | dachte |
+| wir | denken | dachten |
+| ihr | denkt | dachtet |
+| sie/Sie | denken | dachten |
+
+Die übrigen gemischten Verben (nennen, brennen, rennen, senden, wenden) folgen demselben Muster wie kennen: Präsens komplett regelmäßig, nur das Präteritum und Partizip II ändern den Vokal.
+
+**Alle Zeitformen im Zusammenhang** (Präsens, Präteritum, Perfekt, Plusquamperfekt, Futur) werden in der separaten Regel **"Die Zeitformen im Überblick"** erklärt.""",
         "examples": [
             {
                 "label": "Schwaches Verb im Satz",
@@ -1390,5 +1438,106 @@ Bei Verben mit Präpositionen: **Wofür? Worauf? Womit? Wovon? Worüber?** (Sach
             "bitten um vs. fragen nach: bitten um = to request; fragen nach = to ask about/enquire",
         ],
         "exercise_hint": "Lückentext: richtige Präposition einsetzen. Zuordnung: Verb + passende Präposition. Fehlersuche mit falschen Präpositionen.",
+    },
+
+    # ==================== ZEITFORMEN ====================
+
+    {
+        "id": "zeitformen_ueberblick",
+        "title": "Die Zeitformen im Überblick - wann benutzt man was?",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """Deutsch hat 6 Zeitformen (Tempora). Auf B1-C1-Niveau braucht man vor allem Präsens, Perfekt, Präteritum und Futur I - aber alle 6 sollte man erkennen können.
+
+---
+
+### 1. Präsens (Gegenwart) - "ich mache"
+**Wann?** Aktuelle Handlungen, allgemeine Wahrheiten, Zukunft mit Zeitangabe, feste Vereinbarungen.
+**Bildung:** Verbstamm + Endung (-e, -st, -t, -en, -t, -en)
+
+### 2. Präteritum (einfache Vergangenheit) - "ich machte"
+**Wann?** Schriftliche Erzählungen, Berichte, formelle Texte, schriftliches Deutsch allgemein. Auch: sein/haben/Modalverben werden fast immer im Präteritum benutzt, sogar in gesprochener Sprache ("ich war", "ich hatte", "ich konnte").
+**Bildung schwach:** Stamm + -te (+ Endung); **stark:** Vokalwechsel + Endung
+
+### 3. Perfekt (zusammengesetzte Vergangenheit) - "ich habe gemacht"
+**Wann?** Gesprochene Sprache für die Vergangenheit (mündlich fast immer Perfekt, nicht Präteritum!). "Was hast du gestern gemacht?" - nicht "Was machtest du gestern?"
+**Bildung:** haben/sein (Präsens) + Partizip II am Satzende
+
+### 4. Plusquamperfekt (Vorvergangenheit) - "ich hatte gemacht"
+**Wann?** Eine Handlung, die VOR einer anderen Vergangenheitshandlung passiert ist. Oft mit 'nachdem' oder 'bevor'.
+**Bildung:** haben/sein im Präteritum + Partizip II
+
+### 5. Futur I (Zukunft) - "ich werde machen"
+**Wann?** Zukünftige Handlungen (aber oft nimmt man einfach Präsens + Zeitangabe!), Vermutungen über die Gegenwart, Versprechen/Vorsätze.
+**Bildung:** werden (Präsens) + Infinitiv am Satzende
+
+### 6. Futur II (vollendete Zukunft) - "ich werde gemacht haben"
+**Wann?** Sehr selten. Eine Handlung, die in der Zukunft abgeschlossen sein wird. Oder: Vermutung über die Vergangenheit.
+**Bildung:** werden (Präsens) + Partizip II + haben/sein (Infinitiv)
+
+---
+
+### Volle Konjugation - drei Beispielverben (schwach, stark, gemischt)
+
+**machen (schwach)**
+| Person | Präsens | Präteritum | Perfekt | Plusquamperfekt | Futur I |
+|--------|---------|-----------|---------|-----------------|---------|
+| ich | mache | machte | habe gemacht | hatte gemacht | werde machen |
+| du | machst | machtest | hast gemacht | hattest gemacht | wirst machen |
+| er/sie/es | macht | machte | hat gemacht | hatte gemacht | wird machen |
+| wir | machen | machten | haben gemacht | hatten gemacht | werden machen |
+| ihr | macht | machtet | habt gemacht | hattet gemacht | werdet machen |
+| sie/Sie | machen | machten | haben gemacht | hatten gemacht | werden machen |
+
+**sprechen (stark)**
+| Person | Präsens | Präteritum | Perfekt | Plusquamperfekt | Futur I |
+|--------|---------|-----------|---------|-----------------|---------|
+| ich | spreche | sprach | habe gesprochen | hatte gesprochen | werde sprechen |
+| du | **sprichst** | sprachst | hast gesprochen | hattest gesprochen | wirst sprechen |
+| er/sie/es | **spricht** | sprach | hat gesprochen | hatte gesprochen | wird sprechen |
+| wir | sprechen | sprachen | haben gesprochen | hatten gesprochen | werden sprechen |
+| ihr | sprecht | spracht | habt gesprochen | hattet gesprochen | werdet sprechen |
+| sie/Sie | sprechen | sprachen | haben gesprochen | hatten gesprochen | werden sprechen |
+
+*Achtung: 'sprechen' hat Vokalwechsel im Präsens bei du/er (e → i) - das betrifft viele starke Verben (nehmen → nimmst, sehen → siehst, essen → isst).*
+
+**bringen (gemischt)**
+| Person | Präsens | Präteritum | Perfekt | Plusquamperfekt | Futur I |
+|--------|---------|-----------|---------|-----------------|---------|
+| ich | bringe | brachte | habe gebracht | hatte gebracht | werde bringen |
+| du | bringst | brachtest | hast gebracht | hattest gebracht | wirst bringen |
+| er/sie/es | bringt | brachte | hat gebracht | hatte gebracht | wird bringen |
+| wir | bringen | brachten | haben gebracht | hatten gebracht | werden bringen |
+| ihr | bringt | brachtet | habt gebracht | hattet gebracht | werdet bringen |
+| sie/Sie | bringen | brachten | haben gebracht | hatten gebracht | werden bringen |""",
+        "examples": [
+            {
+                "label": "Präteritum vs. Perfekt (mündlich vs. schriftlich)",
+                "sentence": "Mündlich: 'Ich **habe** gestern mit dem Kunden **gesprochen**.' / Schriftlich (Bericht): 'Der Berater **sprach** gestern mit dem Kunden.'",
+                "note": "Gleiche Bedeutung, andere Zeitform je nach Kontext - mündlich Perfekt, schriftlich oft Präteritum."
+            },
+            {
+                "label": "sein/haben/Modalverben im Präteritum (auch mündlich!)",
+                "sentence": "'Ich **war** gestern im Büro.' / 'Ich **konnte** die Frist nicht einhalten.'",
+                "note": "Diese Verben benutzt man auch beim Sprechen im Präteritum, nicht im Perfekt."
+            },
+            {
+                "label": "Plusquamperfekt (Vorvergangenheit)",
+                "sentence": "Nachdem wir das Angebot **abgeschickt hatten**, rief der Kunde an.",
+                "note": "Abschicken passierte VOR dem Anruf → Plusquamperfekt für die frühere Handlung."
+            },
+            {
+                "label": "Futur I für Vermutung",
+                "sentence": "Er **wird** wohl noch im Meeting **sein**.",
+                "note": "Futur I drückt hier keine Zukunft aus, sondern eine Vermutung über die Gegenwart."
+            },
+        ],
+        "mistakes": [
+            "Perfekt statt Präteritum bei sein/haben: ❌ 'Ich bin gestern müde gewesen.' klingt unnatürlich → ✅ 'Ich war gestern müde.'",
+            "Präteritum in der gesprochenen Alltagssprache übertreiben: für die meisten Verben ist mündlich Perfekt normal, nicht Präteritum",
+            "Plusquamperfekt ohne klaren zeitlichen Bezug benutzen: nur wenn eine Handlung klar VOR einer anderen Vergangenheitshandlung liegt",
+            "Futur I für einfache Zukunft überbenutzen: oft reicht Präsens + Zeitangabe: 'Ich fahre morgen nach Berlin' (nicht zwingend 'werde fahren')",
+        ],
+        "exercise_hint": "Satztransformation: Präsens ↔ Perfekt ↔ Präteritum umformen. Lückentext: richtige Zeitform je nach Kontext (mündlich/schriftlich) wählen.",
     },
 ]
