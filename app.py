@@ -211,38 +211,77 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
 # --- TAB 1: AUFGABEN ERSTELLEN ---
 with tab1:
     st.header("Neue Aufgabe erstellen")
-    st.info(
-        "Wählen Sie ein Thema und einen Aufgabentyp. "
-        "Claude erstellt die Übung automatisch. "
-        "Sie können die Aufgabe dann kontrollieren und speichern."
+
+    mode = st.radio(
+        "Modus",
+        options=["Prüfungssimulation (telc/Goethe-Format)", "Grammatikübung (frei wählbar)"],
+        horizontal=True,
+        help="Prüfungssimulation folgt dem echten Telc/Goethe-C1-Testformat (5 Prüfungsteile). Grammatikübung lässt frei ein Grammatikthema wählen.",
     )
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        selected_topic = st.selectbox(
-            "Thema",
-            options=exercises.TOPICS,
-            help="Welches Grammatikthema soll geübt werden?",
-        )
-
-    valid_types = exercises.EXERCISE_TYPES_FOR_TOPIC.get(selected_topic, exercises.EXERCISE_TYPES)
-
-    with col2:
-        selected_type = st.selectbox(
-            "Aufgabentyp",
-            options=valid_types,
-            help="Welche Art von Aufgabe soll erstellt werden?",
-        )
-
-    # Free topic input when "Eigenes Thema" is selected
     custom_topic = ""
-    if selected_topic == "Eigenes Thema":
-        custom_topic = st.text_input(
-            "Ihr Thema",
-            placeholder="z.B. 'Reflexive Verben mit Präpositionen' oder 'Bewerbungsschreiben' oder 'Zeitungssprache'",
-            help="Geben Sie ein beliebiges Grammatik- oder Vokabelthema ein. Claude erstellt eine passende Übung.",
+
+    if mode == "Prüfungssimulation (telc/Goethe-Format)":
+        st.info(
+            "Wählen Sie den Prüfungsteil und den Aufgabentyp - genau wie im echten Test. "
+            "Optional können Sie einen Grammatik-Fokus angeben."
         )
+        col1, col2 = st.columns(2)
+        with col1:
+            selected_teil = st.selectbox(
+                "Prüfungsteil",
+                options=exercises.PRUEFUNGSTEILE,
+                help="Welcher Teil der Prüfung soll geübt werden?",
+            )
+        teil_aufgaben = exercises.PRUEFUNG_AUFGABEN[selected_teil]
+        teil_labels = [label for label, _ in teil_aufgaben]
+        with col2:
+            selected_label = st.selectbox(
+                "Aufgabentyp",
+                options=teil_labels,
+                help="Welche Aufgabenform innerhalb dieses Prüfungsteils?",
+            )
+        selected_type = dict(teil_aufgaben)[selected_label]
+
+        grammatik_fokus = st.text_input(
+            "Grammatik-/Themenfokus (optional)",
+            placeholder="z.B. 'Konjunktiv II' oder 'Genitiv-Präpositionen' - leer lassen für gemischte Übung",
+            help="Leer lassen für eine realistische, gemischte Prüfungsaufgabe wie im echten Test.",
+        )
+        selected_topic = grammatik_fokus.strip() if grammatik_fokus.strip() else exercises.PRUEFUNG_DEFAULT_TOPIC.get(selected_teil, selected_teil)
+
+    else:
+        st.info(
+            "Wählen Sie ein Thema und einen Aufgabentyp. "
+            "Claude erstellt die Übung automatisch. "
+            "Sie können die Aufgabe dann kontrollieren und speichern."
+        )
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            selected_topic = st.selectbox(
+                "Thema",
+                options=exercises.TOPICS,
+                help="Welches Grammatikthema soll geübt werden?",
+            )
+
+        valid_types = exercises.EXERCISE_TYPES_FOR_TOPIC.get(selected_topic, exercises.EXERCISE_TYPES)
+
+        with col2:
+            selected_type = st.selectbox(
+                "Aufgabentyp",
+                options=valid_types,
+                help="Welche Art von Aufgabe soll erstellt werden?",
+            )
+
+        # Free topic input when "Eigenes Thema" is selected
+        if selected_topic == "Eigenes Thema":
+            custom_topic = st.text_input(
+                "Ihr Thema",
+                placeholder="z.B. 'Reflexive Verben mit Präpositionen' oder 'Bewerbungsschreiben' oder 'Zeitungssprache'",
+                help="Geben Sie ein beliebiges Grammatik- oder Vokabelthema ein. Claude erstellt eine passende Übung.",
+            )
 
     # Show register selector for Brief schreiben (writing practice)
     selected_register = "Formeller Brief (Telc-Stil)"
@@ -1093,6 +1132,7 @@ with tab5:
 # --- TAB 6: THEORIE ---
 with tab6:
     from grammar_theory import GRAMMAR_RULES
+    import theory_quiz
 
     st.header("Grammatik-Theorie")
     st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst.")
@@ -1109,6 +1149,7 @@ with tab6:
 
     for rule in filtered:
         badge = level_colors.get(rule["level"], "")
+        rid = rule["id"]
         with st.expander(f"{badge} {rule['level']} - {rule['title']}"):
 
             st.markdown(rule["explanation"])
@@ -1122,6 +1163,22 @@ with tab6:
                     if ex.get("note"):
                         st.caption(ex["note"])
 
+            extra_key = f"extra_examples_{rid}"
+            if st.session_state.get(extra_key):
+                st.markdown("**Weitere Beispiele:**")
+                for ex in st.session_state[extra_key]:
+                    st.markdown(f"**{ex.get('label', '')}**")
+                    st.markdown(f"> {ex.get('sentence', '')}")
+                    if ex.get("note"):
+                        st.caption(ex["note"])
+
+            if st.button("Weitere Beispiele generieren", key=f"more_ex_{rid}"):
+                with st.spinner("Claude erstellt neue Beispiele..."):
+                    st.session_state[extra_key] = theory_quiz.generate_more_examples(
+                        rule["title"], rule["explanation"], rule["level"]
+                    )
+                    st.rerun()
+
             if rule.get("mistakes"):
                 st.markdown("---")
                 st.markdown("**Häufige Fehler:**")
@@ -1131,6 +1188,49 @@ with tab6:
             if rule.get("exercise_hint"):
                 st.markdown("---")
                 st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
+
+            st.markdown("---")
+            st.markdown("**Kurztest zu dieser Regel**")
+            quiz_key = f"quiz_{rid}"
+            if st.button("Kurztest generieren", key=f"gen_quiz_{rid}"):
+                with st.spinner("Claude erstellt einen Test..."):
+                    st.session_state[quiz_key] = theory_quiz.generate_quiz(
+                        rule["title"], rule["explanation"], rule["level"]
+                    )
+                    st.session_state[f"{quiz_key}_submitted"] = False
+                    st.rerun()
+
+            if st.session_state.get(quiz_key):
+                quiz = st.session_state[quiz_key]
+                quiz_answers = []
+                for qi, item in enumerate(quiz):
+                    st.markdown(f"**{qi+1}. {item.get('frage', '')}**")
+                    choice = st.radio(
+                        "Antwort",
+                        options=item.get("optionen", []),
+                        key=f"{quiz_key}_q{qi}",
+                        index=None,
+                        label_visibility="collapsed",
+                    )
+                    quiz_answers.append(choice)
+
+                if st.button("Test auswerten", key=f"submit_{quiz_key}"):
+                    st.session_state[f"{quiz_key}_submitted"] = True
+                    st.rerun()
+
+                if st.session_state.get(f"{quiz_key}_submitted"):
+                    correct_count = 0
+                    for qi, item in enumerate(quiz):
+                        options = item.get("optionen", [])
+                        correct_idx = item.get("richtig_index", 0)
+                        correct_answer = options[correct_idx] if correct_idx < len(options) else ""
+                        given = quiz_answers[qi]
+                        if given == correct_answer:
+                            correct_count += 1
+                            st.success(f"{qi+1}. Richtig - {item.get('erklaerung', '')}")
+                        else:
+                            st.error(f"{qi+1}. Falsch. Richtig wäre: {correct_answer} - {item.get('erklaerung', '')}")
+                    st.metric("Ergebnis", f"{correct_count} / {len(quiz)}")
 
 # --- TAB 7: INTERVIEW ---
 with tab7:

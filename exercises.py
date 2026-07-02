@@ -45,6 +45,42 @@ EXERCISE_TYPES = [
     "Aufsatz",
 ]
 
+# Prüfungssimulation: mirrors the real telc/Goethe C1 exam structure
+# (Leseverstehen / Sprachbausteine / Hörverstehen / Schriftlicher Ausdruck / Sprechen)
+# instead of picking from 20 grammar topics first. Reuses the exact same exercise_type
+# values as the free-practice mode below, so no rendering code needs to change.
+PRUEFUNGSTEILE = ["Leseverstehen", "Sprachbausteine", "Hörverstehen", "Schriftlicher Ausdruck", "Sprechen"]
+
+PRUEFUNG_AUFGABEN: dict[str, list[tuple[str, str]]] = {
+    "Leseverstehen": [
+        ("Detailverstehen - Richtig/Falsch/Nicht im Text (Teil 3 Format)", "Richtig/Falsch/Nicht im Text"),
+        ("Textverständnis - Sätze/Begriffe zuordnen (Teil 1/2 Format)", "Zuordnung"),
+        ("Leseverstehen mit offenen Fragen", "Leseverstehen"),
+    ],
+    "Sprachbausteine": [
+        ("Multiple-Choice-Lückentext (Original-Telc-Format)", "Sprachbausteine"),
+        ("Freier Lückentext (offene Eingabe)", "Lückentext"),
+    ],
+    "Hörverstehen": [
+        ("Hörverstehen mit Fragen (Mentor liest vor)", "Hörverstehen"),
+    ],
+    "Schriftlicher Ausdruck": [
+        ("Erörterung / Stellungnahme (Telc-C1-Format)", "Aufsatz"),
+        ("Formeller Brief / Geschäftliche E-Mail / Bericht", "Brief schreiben"),
+    ],
+    "Sprechen": [
+        ("Präsentation (Kurzreferat)", "Sprechaufgabe"),
+    ],
+}
+
+PRUEFUNG_DEFAULT_TOPIC: dict[str, str] = {
+    "Leseverstehen": "Aktuelles, diskussionswürdiges Thema (frei wählbar durch Claude)",
+    "Sprachbausteine": "Wortschatz und Grammatik im beruflichen/allgemeinen Kontext (gemischt)",
+    "Hörverstehen": "Aktuelles Thema (frei wählbar durch Claude)",
+    "Schriftlicher Ausdruck": "Schriftlicher Ausdruck (Brief)",
+    "Sprechen": "Berufliche Diskussionssituation",
+}
+
 EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
     "Konnektoren": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Kategoriensortierung", "Übersetzung", "Zuordnung"],
     "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
