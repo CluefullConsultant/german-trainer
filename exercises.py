@@ -92,8 +92,11 @@ Antworte NUR mit einem gultig formatierten JSON-Objekt - kein Markdown, kein erk
 
 _TYPE_SCHEMAS = {
     "Lückentext": """Ausgabeformat:
-{"instruction": "Klare Aufgabenstellung fur den Lernenden, z.B. 'Ergänzen Sie den richtigen Artikel.' oder 'Setzen Sie das Verb in der richtigen Form ein.'", "text_with_blanks": "Satz mit ___ fur jede Lucke", "blanks": [{"position": 0, "answer": "Antwort", "hint": "kurzer Hinweis"}], "explanation": "Grammatikerklarung"}
-Erstelle 5-8 Lucken im Text. Das Feld 'instruction' muss immer ausgefullt sein.""",
+{"instruction": "Klare Aufgabenstellung fur den Lernenden, z.B. 'Ergänzen Sie den richtigen Artikel.' oder 'Setzen Sie das Verb in der richtigen Form ein.'", "text_with_blanks": "Text mit exakt drei Unterstrichen ___ fur jede Lucke", "blanks": [{"position": 0, "answer": "Antwort", "hint": "kurzer Hinweis"}], "explanation": "Grammatikerklarung"}
+Erstelle 5-8 Lucken im Text.
+WICHTIG zu 'text_with_blanks': Verwende AUSSCHLIESSLICH exakt drei Unterstriche ___ als Platzhalter im Text - KEINE Nummerierung wie (1) oder [1] im Fliesstext selbst. Die Nummerierung der Lucken ergibt sich automatisch aus der Reihenfolge der ___ im Text.
+WICHTIG zu 'hint': Der Hinweis darf NICHT den vollstandigen Kasus UND das Genus gleichzeitig nennen (das verrat direkt den Artikel). Nenne stattdessen nur EINEN hilfreichen Anhaltspunkt, z.B. das regierende Verb/die Praposition ('nach + Dativ') oder nur den Kasus ohne Genus ('Dativ'). Der Lernende soll Genus und Endung noch selbst herleiten mussen.
+Das Feld 'instruction' muss immer ausgefullt sein.""",
 
     "Mehrfachauswahl": """Ausgabeformat:
 {"instruction": "Glasklare Aufgabenanweisung, z.B. 'Wählen Sie die richtige Antwort (a, b, c oder d).'", "items": [{"question": "Frage", "options": ["Option A", "Option B", "Option C", "Option D"], "correct_index": 0, "explanation": "Grammatikerklarung"}]}
@@ -149,9 +152,9 @@ Erstelle 6 Aussagen: 2 richtig, 2 falsch, 2 nicht im Text. Der Text soll aus dem
 Erstelle 6 Wortbildungsaufgaben aus dem beruflichen Wortschatz. Decke verschiedene Typen ab: Nomen aus Verben (die Entscheid___ von entscheiden), Adjektive aus Nomen (verantwort___ von Verantwortung), zusammengesetzte Nomen. Alle Satze sollen im Geschaftskontext stehen.""",
 
     "Aufsatz": """Ausgabeformat:
-{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Schreiben Sie einen Aufsatz zum folgenden Thema (ca. 300 Wörter). Nutzen Sie die Leitfragen zur Orientierung.'", "thema": "Aufsatzthema als klare Frage oder These", "leitfragen": ["Leitfrage 1", "Leitfrage 2", "Leitfrage 3"], "wortzahl": 300, "time_limit_minutes": 40}
-Wenn ein konkretes Thema in den Zusatzhinweisen angegeben ist, verwende GENAU dieses Thema. Wenn kein Thema angegeben ist, wähle selbst ein interessantes, diskussionswürdiges C1-Thema (gesellschaftlich, beruflich oder aktuell - freie Wahl, nicht auf Business beschränkt).
-Der Aufsatz soll ein freier, argumentativer Meinungsaufsatz sein (Einleitung - Hauptteil mit Argumenten/Beispielen - Schluss mit eigener Position), kein Brief und keine E-Mail. Erstelle 3 Leitfragen, die beim Strukturieren helfen (z.B. eine für die Einleitung, eine für Gegenargumente, eine für den Schluss).""",
+{"instruction": "Glasklare Aufgabenanweisung im Telc-C1-Erörterung-Stil, z.B. 'Schreiben Sie eine Erörterung zum folgenden Thema (350-400 Wörter). Gehen Sie auf beide Positionen ein und vertreten Sie am Ende Ihre eigene Meinung.'", "thema": "Aufsatzthema als klare Frage oder These", "position_a": "Erste Position/Sichtweise zum Thema", "position_b": "Gegenteilige Position/Sichtweise zum Thema", "leitfragen": ["Leitfrage 1", "Leitfrage 2", "Leitfrage 3"], "wortzahl": 375, "time_limit_minutes": 45}
+Wenn ein konkretes Thema in den Zusatzhinweisen angegeben ist, verwende GENAU dieses Thema. Wenn kein Thema angegeben ist, wähle selbst ein diskussionswürdiges C1-Thema (gesellschaftlich, beruflich oder aktuell - freie Wahl, nicht auf Business beschränkt).
+Das Format folgt der Telc-C1-Erörterung: Formuliere ZWEI klar gegensätzliche Positionen zum Thema (position_a und position_b). Erstelle 3 Leitfragen, die beim Strukturieren helfen: eine für die Einleitung/Positionierung, eine für die Auseinandersetzung mit dem Gegenargument (mindestens ein Contra-Argument muss im Aufsatz angesprochen und entkräftet oder abgewogen werden), eine für den Schluss mit eigener begründeter Meinung. Kein Brief, keine E-Mail - ein durchgehender Fließtext mit Einleitung, Hauptteil und Schluss.""",
 }
 
 

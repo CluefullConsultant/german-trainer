@@ -14,9 +14,18 @@ def render_exercise(content, exercise_type):
     if exercise_type == "Lückentext":
         if content.get("instruction"):
             st.info(content["instruction"])
-        st.markdown(content.get("text_with_blanks", ""))
-        for i, blank in enumerate(content.get("blanks", [])):
-            st.markdown(f"- Lücke {i+1}: _{blank.get('hint', '')}_")
+        blanks = content.get("blanks", [])
+        segments = content.get("text_with_blanks", "").split("___")
+        parts = []
+        for i, seg in enumerate(segments):
+            parts.append(seg)
+            if i < len(blanks):
+                parts.append(f"**___({i+1})___**")
+        st.markdown("".join(parts))
+        if blanks:
+            with st.expander("Hinweise anzeigen"):
+                for i, blank in enumerate(blanks):
+                    st.markdown(f"- ({i+1}) {blank.get('hint', '')}")
 
     elif exercise_type == "Mehrfachauswahl":
         for i, item in enumerate(content.get("items", [])):
@@ -92,6 +101,9 @@ def render_exercise(content, exercise_type):
         if content.get("instruction"):
             st.info(content["instruction"])
         st.markdown(f"**Thema:** {content.get('thema', '')}")
+        if content.get("position_a") or content.get("position_b"):
+            st.markdown(f"- **Position A:** {content.get('position_a', '')}")
+            st.markdown(f"- **Position B:** {content.get('position_b', '')}")
         st.markdown("**Leitfragen:**")
         for hint in content.get("leitfragen", []):
             st.markdown(f"- {hint}")
@@ -223,12 +235,26 @@ with tab1:
             ],
             help="Welche Art von Text soll geübt werden?",
         )
+        if st.button("Thema vorschlagen", key="suggest_brief_topic"):
+            import random
+            from writing_topics import BRIEF_TOPICS
+            st.session_state["brief_thema_input"] = random.choice(BRIEF_TOPICS[selected_register])
+        brief_thema = st.text_input(
+            "Thema/Szenario (leer lassen für zufälliges Thema von Claude)",
+            key="brief_thema_input",
+            placeholder="z.B. 'Beschwerde über eine defekte Lieferung' - oder auf 'Thema vorschlagen' klicken",
+        )
 
     # Free topic input for Aufsatz (essay - any topic, no restriction)
     aufsatz_thema = ""
     if selected_type == "Aufsatz":
+        if st.button("Thema vorschlagen", key="suggest_aufsatz_topic"):
+            import random
+            from writing_topics import AUFSATZ_TOPICS
+            st.session_state["aufsatz_thema_input"] = random.choice(AUFSATZ_TOPICS)["thema"]
         aufsatz_thema = st.text_input(
             "Aufsatzthema (frei wählbar, leer lassen für zufälliges Thema)",
+            key="aufsatz_thema_input",
             placeholder="z.B. 'Sollte Home-Office Pflicht werden?' oder 'Digitalisierung und Datenschutz' - beliebiges Thema möglich",
             help="Egal welches Thema - geschäftlich, gesellschaftlich, persönlich. Leer lassen und Claude wählt selbst ein Thema.",
         )
@@ -256,6 +282,8 @@ with tab1:
                 effective_notes = mentor_notes
                 if selected_type == "Brief schreiben":
                     effective_notes = f"Textsorte: {selected_register}. {mentor_notes}".strip()
+                    if brief_thema.strip():
+                        effective_notes = f"Thema/Szenario: {brief_thema.strip()}. {effective_notes}".strip()
                 elif selected_type == "Aufsatz" and aufsatz_thema.strip():
                     effective_notes = f"Thema: {aufsatz_thema.strip()}. {mentor_notes}".strip()
                 content = exercises.generate_exercise(
@@ -477,11 +505,22 @@ with tab2:
             answer = {}
 
             if ex["exercise_type"] == "Lückentext":
-                st.markdown(content.get("text_with_blanks", ""))
-                answers_list = []
-                for i, blank in enumerate(content.get("blanks", [])):
-                    val = st.text_input(f"Lücke {i+1} ({blank.get('hint', '')})", key=f"blank_{i}")
-                    answers_list.append(val)
+                blanks = content.get("blanks", [])
+                segments = content.get("text_with_blanks", "").split("___")
+                answers_list = [""] * len(blanks)
+                with st.container(border=True):
+                    for i, seg in enumerate(segments):
+                        if seg.strip():
+                            st.markdown(seg)
+                        if i < len(blanks):
+                            hint = blanks[i].get("hint", "")
+                            answers_list[i] = st.text_input(
+                                f"Lücke ({i+1})",
+                                key=f"blank_{i}",
+                                help=hint if hint else None,
+                                label_visibility="collapsed",
+                                placeholder=f"({i+1}) ...",
+                            )
                 answer = {"blanks": answers_list}
 
             elif ex["exercise_type"] == "Mehrfachauswahl":
@@ -638,6 +677,9 @@ with tab2:
                 if content.get("instruction"):
                     st.info(content["instruction"])
                 st.markdown(f"**Thema:** {content.get('thema', '')}")
+                if content.get("position_a") or content.get("position_b"):
+                    st.markdown(f"- **Position A:** {content.get('position_a', '')}")
+                    st.markdown(f"- **Position B:** {content.get('position_b', '')}")
                 st.markdown("**Leitfragen zur Orientierung:**")
                 for hint in content.get("leitfragen", []):
                     st.markdown(f"- {hint}")
