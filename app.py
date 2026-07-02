@@ -1065,6 +1065,7 @@ with tab7:
 
     practice_counts = interview_state.get("practice_counts", {})
     company_variants = interview_state.get("company_variants", {})
+    scripts = interview_state.get("scripts", {})
     full_runs = interview_state.get("full_runs", 0)
     current_company = interview_state.get("current_company", "")
 
@@ -1073,6 +1074,7 @@ with tab7:
             db.save_interview_state({
                 "practice_counts": practice_counts,
                 "company_variants": company_variants,
+                "scripts": scripts,
                 "full_runs": full_runs,
                 "current_company": current_company,
             })
@@ -1111,16 +1113,28 @@ with tab7:
             if baustein["variable"]:
                 default_variant = company_variants.get(current_company, "") if current_company else ""
                 variant_text = st.text_area(
-                    f"Deine Formulierung für '{current_company or 'dieses Unternehmen'}':",
+                    f"Dein Skript für '{current_company or 'dieses Unternehmen'}' (voll ausformuliert - zum Lesen):",
                     value=default_variant,
                     key=f"variant_{bid}",
-                    height=80,
-                    placeholder="Konkretes Projekt/Beispiel dieses Unternehmens + warum es dich reizt...",
+                    height=100,
+                    placeholder="Schreib hier den vollen Satz/Absatz aus - Beispiel: 'Ich kenne euer Projekt mit Serviceplan, bei dem ihr...' Zum lauten Lesen, nicht zum Auswendiglernen.",
                 )
-                if current_company and st.button("Variante speichern", key=f"save_variant_{bid}"):
+                if current_company and st.button("Skript speichern", key=f"save_variant_{bid}"):
                     company_variants[current_company] = variant_text
                     _save_state()
-                    st.success(f"Variante für '{current_company}' gespeichert.")
+                    st.success(f"Skript für '{current_company}' gespeichert.")
+            else:
+                script_text = st.text_area(
+                    "Dein Skript (voll ausformuliert - zum Lesen):",
+                    value=scripts.get(bid, ""),
+                    key=f"script_{bid}",
+                    height=100,
+                    placeholder="Schreib hier aus den Stichpunkten oben einen vollständigen Text, den du laut vorlesen kannst.",
+                )
+                if st.button("Skript speichern", key=f"save_script_{bid}"):
+                    scripts[bid] = script_text
+                    _save_state()
+                    st.success("Skript gespeichert.")
 
             col1, col2 = st.columns(2)
             with col1:
@@ -1140,6 +1154,26 @@ with tab7:
                     practice_counts[bid] = count + 1
                     _save_state()
                     st.rerun()
+
+    st.divider()
+    st.subheader("Volltext - alle Bausteine zusammen")
+    st.caption("Zum Lesen üben. Ziel: mit der Zeit immer weniger draufschauen müssen.")
+
+    full_script_parts = []
+    for baustein in DEFAULT_BAUSTEINE:
+        bid = str(baustein["id"])
+        if baustein["variable"]:
+            text = company_variants.get(current_company, "") if current_company else ""
+        else:
+            text = scripts.get(bid, "")
+        if text.strip():
+            full_script_parts.append(f"**{baustein['id']}. {baustein['title']}**\n\n{text}")
+
+    if full_script_parts:
+        with st.container(border=True):
+            st.markdown("\n\n---\n\n".join(full_script_parts))
+    else:
+        st.info("Noch keine Skripte geschrieben. Schreib oben bei jedem Baustein deinen Text und speichere ihn - hier erscheint dann der Volltext.")
 
     st.divider()
     st.subheader("Kompletter Durchlauf")
