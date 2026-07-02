@@ -1049,6 +1049,7 @@ with tab6:
 # --- TAB 7: INTERVIEW ---
 with tab7:
     from interview_skeleton import DEFAULT_BAUSTEINE, INTERVIEW_TIPS
+    import interview_coach
     import time as time_module
 
     st.header("Interview-Vorbereitung: Selbstpräsentation")
@@ -1111,6 +1112,19 @@ with tab7:
                 st.markdown(f"- {punkt}")
 
             if baustein["variable"]:
+                extra_context = st.text_input(
+                    f"Was weißt du über '{current_company or 'das Unternehmen'}' (für den Claude-Entwurf, optional)",
+                    key=f"extra_ctx_{bid}",
+                    placeholder="z.B. 'Serviceplan-Projekt: Change Agents und künftige Nutzer wurden von Anfang an eingebunden'",
+                )
+                if current_company and st.button("Claude-Entwurf vorschlagen", key=f"draft_variant_{bid}"):
+                    with st.spinner("Claude formuliert einen Vorschlag..."):
+                        draft = interview_coach.draft_script(
+                            baustein["title"], baustein["stichpunkte"], baustein["dauer"], extra_context
+                        )
+                        st.session_state[f"variant_{bid}"] = draft
+                        st.rerun()
+
                 default_variant = company_variants.get(current_company, "") if current_company else ""
                 variant_text = st.text_area(
                     f"Dein Skript für '{current_company or 'dieses Unternehmen'}' (voll ausformuliert - zum Lesen):",
@@ -1124,12 +1138,20 @@ with tab7:
                     _save_state()
                     st.success(f"Skript für '{current_company}' gespeichert.")
             else:
+                if st.button("Claude-Entwurf vorschlagen", key=f"draft_script_{bid}"):
+                    with st.spinner("Claude formuliert einen Vorschlag..."):
+                        draft = interview_coach.draft_script(
+                            baustein["title"], baustein["stichpunkte"], baustein["dauer"]
+                        )
+                        st.session_state[f"script_{bid}"] = draft
+                        st.rerun()
+
                 script_text = st.text_area(
                     "Dein Skript (voll ausformuliert - zum Lesen):",
                     value=scripts.get(bid, ""),
                     key=f"script_{bid}",
                     height=100,
-                    placeholder="Schreib hier aus den Stichpunkten oben einen vollständigen Text, den du laut vorlesen kannst.",
+                    placeholder="Schreib hier aus den Stichpunkten oben einen vollständigen Text, den du laut vorlesen kannst - oder lass Claude einen Vorschlag machen.",
                 )
                 if st.button("Skript speichern", key=f"save_script_{bid}"):
                     scripts[bid] = script_text
