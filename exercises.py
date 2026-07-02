@@ -115,8 +115,13 @@ Erstelle 5 Ubersetzungsaufgaben.""",
 Verwende mindestens 10 Worter auf mindestens 3 Kategorien verteilt.""",
 
     "Brief schreiben": """Ausgabeformat:
-{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Schreiben Sie einen formellen Brief (ca. 200 Wörter). Gehen Sie auf alle vier Punkte ein.'", "prompt": "Aufgabenstellung mit Kontext", "reihenpunkte": ["Punkt 1", "Punkt 2", "Punkt 3"], "time_limit_minutes": 30, "register": "formell"}
-Erstelle einen realistischen Telc-Stil Briefschreibauftrag.""",
+{"instruction": "Glasklare Aufgabenanweisung passend zur angegebenen Textsorte, z.B. 'Schreiben Sie eine geschäftliche E-Mail (ca. 150 Wörter). Gehen Sie auf alle Punkte ein.'", "prompt": "Aufgabenstellung mit Kontext", "reihenpunkte": ["Punkt 1", "Punkt 2", "Punkt 3"], "time_limit_minutes": 30, "register": "formell/informell je nach Textsorte"}
+Erstelle einen realistischen Schreibauftrag GENAU in der Textsorte, die in den Zusatzhinweisen angegeben ist:
+- 'Formeller Brief (Telc-Stil)': klassischer formeller Brief, ca. 200 Wörter, 30 Minuten, Sie-Anrede, Telc-B2-Stil mit 4 Reihenpunkten.
+- 'Geschäftliche E-Mail': kürzere, direktere E-Mail an einen Kunden oder Kollegen, ca. 120-150 Wörter, 20 Minuten, professioneller aber pragmatischer Ton (Betreffzeile, kurze Einleitung, klare Punkte, Grußformel).
+- 'Kurzbericht / Protokoll': sachlicher Text im Nominalstil, ca. 150 Wörter, 20 Minuten, fasst Ergebnisse/Entscheidungen/nächste Schritte zusammen (typisch nach einem Meeting).
+- 'Informelle Nachricht': lockere Nachricht an einen Freund/Nachbarn/Kollegen, ca. 80-100 Wörter, 15 Minuten, Du-Anrede, Alltagssprache, Modalpartikeln erlaubt.
+Passe time_limit_minutes und die Wortzahl in der instruction an die Textsorte an.""",
 
     "Leseverstehen": """Ausgabeformat:
 {"instruction": "Glasklare Aufgabenanweisung, z.B. 'Lesen Sie den Text und beantworten Sie die Fragen in vollständigen Satzen.'", "text": "...vollstandiger deutscher Text...", "is_hoerverstehen": false, "questions": [{"question": "Frage", "answer": "Antwort"}]}

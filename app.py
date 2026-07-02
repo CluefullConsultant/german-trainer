@@ -199,6 +199,20 @@ with tab1:
             help="Geben Sie ein beliebiges Grammatik- oder Vokabelthema ein. Claude erstellt eine passende Übung.",
         )
 
+    # Show register selector for Brief schreiben (writing practice)
+    selected_register = "Formeller Brief (Telc-Stil)"
+    if selected_type == "Brief schreiben":
+        selected_register = st.selectbox(
+            "Textsorte",
+            options=[
+                "Formeller Brief (Telc-Stil)",
+                "Geschäftliche E-Mail",
+                "Kurzbericht / Protokoll",
+                "Informelle Nachricht",
+            ],
+            help="Welche Art von Text soll geübt werden?",
+        )
+
     # Show extra text input for Leseverstehen / Hörverstehen
     pasted_text = ""
     if selected_type in ("Leseverstehen", "Hörverstehen"):
@@ -219,10 +233,13 @@ with tab1:
         with st.spinner("Claude erstellt die Aufgabe..."):
             try:
                 effective_topic = custom_topic.strip() if selected_topic == "Eigenes Thema" and custom_topic.strip() else selected_topic
+                effective_notes = mentor_notes
+                if selected_type == "Brief schreiben":
+                    effective_notes = f"Textsorte: {selected_register}. {mentor_notes}".strip()
                 content = exercises.generate_exercise(
                     topic=effective_topic,
                     exercise_type=selected_type,
-                    mentor_notes=mentor_notes,
+                    mentor_notes=effective_notes,
                     pasted_text=pasted_text,
                 )
                 st.session_state["preview_content"] = content
