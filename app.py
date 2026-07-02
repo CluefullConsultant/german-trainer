@@ -88,6 +88,14 @@ def render_exercise(content, exercise_type):
         for i, item in enumerate(content.get("items", [])):
             st.markdown(f"**{i+1}.** {item.get('sentence', '')}  _{item.get('base_word', '')}_")
 
+    elif exercise_type == "Aufsatz":
+        if content.get("instruction"):
+            st.info(content["instruction"])
+        st.markdown(f"**Thema:** {content.get('thema', '')}")
+        st.markdown("**Leitfragen:**")
+        for hint in content.get("leitfragen", []):
+            st.markdown(f"- {hint}")
+
     else:
         st.json(content)
 
@@ -135,6 +143,8 @@ def render_answer(answer, exercise_type):
     elif exercise_type == "Wortbildung":
         for i, val in enumerate(answer.get("words", [])):
             st.markdown(f"- {i+1}: **{val}**")
+    elif exercise_type == "Aufsatz":
+        st.markdown(answer.get("essay", ""))
     else:
         st.json(answer)
 
@@ -213,6 +223,15 @@ with tab1:
             help="Welche Art von Text soll geübt werden?",
         )
 
+    # Free topic input for Aufsatz (essay - any topic, no restriction)
+    aufsatz_thema = ""
+    if selected_type == "Aufsatz":
+        aufsatz_thema = st.text_input(
+            "Aufsatzthema (frei wählbar, leer lassen für zufälliges Thema)",
+            placeholder="z.B. 'Sollte Home-Office Pflicht werden?' oder 'Digitalisierung und Datenschutz' - beliebiges Thema möglich",
+            help="Egal welches Thema - geschäftlich, gesellschaftlich, persönlich. Leer lassen und Claude wählt selbst ein Thema.",
+        )
+
     # Show extra text input for Leseverstehen / Hörverstehen
     pasted_text = ""
     if selected_type in ("Leseverstehen", "Hörverstehen"):
@@ -236,6 +255,8 @@ with tab1:
                 effective_notes = mentor_notes
                 if selected_type == "Brief schreiben":
                     effective_notes = f"Textsorte: {selected_register}. {mentor_notes}".strip()
+                elif selected_type == "Aufsatz" and aufsatz_thema.strip():
+                    effective_notes = f"Thema: {aufsatz_thema.strip()}. {mentor_notes}".strip()
                 content = exercises.generate_exercise(
                     topic=effective_topic,
                     exercise_type=selected_type,
@@ -611,6 +632,36 @@ with tab2:
                     val = st.text_input("Ihre Antwort:", key=f"wb_{i}")
                     wb_words.append(val)
                 answer = {"words": wb_words}
+
+            elif ex["exercise_type"] == "Aufsatz":
+                if content.get("instruction"):
+                    st.info(content["instruction"])
+                st.markdown(f"**Thema:** {content.get('thema', '')}")
+                st.markdown("**Leitfragen zur Orientierung:**")
+                for hint in content.get("leitfragen", []):
+                    st.markdown(f"- {hint}")
+                if content.get("time_limit_minutes"):
+                    import time as time_module
+                    timer_key = f"aufsatz_start_{ex['id']}"
+                    if timer_key not in st.session_state:
+                        if st.button("Timer starten", key="start_aufsatz_timer"):
+                            st.session_state[timer_key] = time_module.time()
+                            st.rerun()
+                    else:
+                        elapsed = int(time_module.time() - st.session_state[timer_key])
+                        total = content["time_limit_minutes"] * 60
+                        remaining = max(0, total - elapsed)
+                        mins = remaining // 60
+                        secs = remaining % 60
+                        if remaining > 0:
+                            st.info(f"Zeit verbleibend: {mins:02d}:{secs:02d}")
+                        else:
+                            st.error("Zeit abgelaufen!")
+                essay = st.text_area("Ihr Aufsatz:", height=400, key="aufsatz_text")
+                word_count = len(essay.split())
+                ziel = content.get("wortzahl", 300)
+                st.caption(f"Wörter: {word_count} / Ziel: ca. {ziel}")
+                answer = {"essay": essay}
 
             st.divider()
             if st.button("Antwort einreichen", type="primary"):

@@ -41,6 +41,7 @@ EXERCISE_TYPES = [
     "Zuordnung",
     "Richtig/Falsch/Nicht im Text",
     "Wortbildung",
+    "Aufsatz",
 ]
 
 EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
@@ -54,7 +55,7 @@ EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
     "Trennbare Verben": ["Lückentext", "Satztransformation", "Fehlersuche", "Mehrfachauswahl"],
     "Wechselpräpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
     "Genitiv-Präpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
-    "Schriftlicher Ausdruck (Brief)": ["Brief schreiben"],
+    "Schriftlicher Ausdruck (Brief)": ["Brief schreiben", "Aufsatz"],
     "Leseverstehen": ["Leseverstehen", "Richtig/Falsch/Nicht im Text", "Zuordnung"],
     "Hörverstehen": ["Hörverstehen", "Richtig/Falsch/Nicht im Text"],
     "Sprechaufgabe": ["Sprechaufgabe"],
@@ -64,7 +65,7 @@ EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
     "Reflexive Verben (sich-Verben)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
     "Modalpartikeln (doch, mal, ja, eigentlich)": ["Lückentext", "Mehrfachauswahl", "Übersetzung", "Fehlersuche"],
     "Indirekte Rede": ["Satztransformation", "Lückentext", "Fehlersuche"],
-    "Eigenes Thema": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Übersetzung", "Sprechaufgabe", "Brief schreiben", "Zuordnung", "Richtig/Falsch/Nicht im Text", "Wortbildung"],
+    "Eigenes Thema": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Übersetzung", "Sprechaufgabe", "Brief schreiben", "Aufsatz", "Zuordnung", "Richtig/Falsch/Nicht im Text", "Wortbildung"],
 }
 
 _SYSTEM_PROMPT = """Du bist ein erfahrener Deutschlehrer, der Ubungsaufgaben fur einen Lernenden auf C1-Niveau erstellt. Der Lernende ist ein professioneller Unternehmensberater, der Deutsch im Arbeitsalltag braucht: Geschafts-E-Mails, Besprechungen, Berichte, Prasentation von Daten, formelle Anfragen, Feedback geben und nehmen, Verhandlungen.
@@ -146,6 +147,11 @@ Erstelle 6 Aussagen: 2 richtig, 2 falsch, 2 nicht im Text. Der Text soll aus dem
     "Wortbildung": """Ausgabeformat:
 {"instruction": "Glasklare Aufgabenanweisung, z.B. 'Bilden Sie aus dem angegebenen Wort die richtige Form und setzen Sie sie in die Lucke ein.'", "items": [{"sentence": "Satz mit Lucke (___)", "base_word": "Grundwort in Klammern", "answer": "abgeleitetes Wort", "word_class": "Nomen/Verb/Adjektiv/Adverb", "explanation": "Bildungsregel"}]}
 Erstelle 6 Wortbildungsaufgaben aus dem beruflichen Wortschatz. Decke verschiedene Typen ab: Nomen aus Verben (die Entscheid___ von entscheiden), Adjektive aus Nomen (verantwort___ von Verantwortung), zusammengesetzte Nomen. Alle Satze sollen im Geschaftskontext stehen.""",
+
+    "Aufsatz": """Ausgabeformat:
+{"instruction": "Glasklare Aufgabenanweisung, z.B. 'Schreiben Sie einen Aufsatz zum folgenden Thema (ca. 300 Wörter). Nutzen Sie die Leitfragen zur Orientierung.'", "thema": "Aufsatzthema als klare Frage oder These", "leitfragen": ["Leitfrage 1", "Leitfrage 2", "Leitfrage 3"], "wortzahl": 300, "time_limit_minutes": 40}
+Wenn ein konkretes Thema in den Zusatzhinweisen angegeben ist, verwende GENAU dieses Thema. Wenn kein Thema angegeben ist, wähle selbst ein interessantes, diskussionswürdiges C1-Thema (gesellschaftlich, beruflich oder aktuell - freie Wahl, nicht auf Business beschränkt).
+Der Aufsatz soll ein freier, argumentativer Meinungsaufsatz sein (Einleitung - Hauptteil mit Argumenten/Beispielen - Schluss mit eigener Position), kein Brief und keine E-Mail. Erstelle 3 Leitfragen, die beim Strukturieren helfen (z.B. eine für die Einleitung, eine für Gegenargumente, eine für den Schluss).""",
 }
 
 
