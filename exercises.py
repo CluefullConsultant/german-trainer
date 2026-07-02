@@ -29,6 +29,7 @@ TOPICS = [
 
 EXERCISE_TYPES = [
     "Lückentext",
+    "Sprachbausteine",
     "Mehrfachauswahl",
     "Satztransformation",
     "Fehlersuche",
@@ -45,27 +46,27 @@ EXERCISE_TYPES = [
 ]
 
 EXERCISE_TYPES_FOR_TOPIC: dict[str, list[str]] = {
-    "Konnektoren": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Kategoriensortierung", "Übersetzung", "Zuordnung"],
-    "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Konjunktiv II": ["Lückentext", "Satztransformation", "Fehlersuche", "Übersetzung"],
-    "Passiv": ["Satztransformation", "Lückentext", "Fehlersuche", "Übersetzung"],
-    "Relativsätze": ["Lückentext", "Satztransformation", "Fehlersuche"],
-    "Partizipialkonstruktionen": ["Lückentext", "Satztransformation", "Fehlersuche"],
-    "Wortstellung": ["Fehlersuche", "Satztransformation", "Lückentext"],
-    "Trennbare Verben": ["Lückentext", "Satztransformation", "Fehlersuche", "Mehrfachauswahl"],
-    "Wechselpräpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Genitiv-Präpositionen": ["Lückentext", "Mehrfachauswahl", "Fehlersuche"],
+    "Konnektoren": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Kategoriensortierung", "Übersetzung", "Zuordnung"],
+    "Deklination (Nominativ/Akkusativ/Dativ/Genitiv)": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Konjunktiv II": ["Lückentext", "Sprachbausteine", "Satztransformation", "Fehlersuche", "Übersetzung"],
+    "Passiv": ["Satztransformation", "Lückentext", "Sprachbausteine", "Fehlersuche", "Übersetzung"],
+    "Relativsätze": ["Lückentext", "Sprachbausteine", "Satztransformation", "Fehlersuche"],
+    "Partizipialkonstruktionen": ["Lückentext", "Sprachbausteine", "Satztransformation", "Fehlersuche"],
+    "Wortstellung": ["Fehlersuche", "Satztransformation", "Lückentext", "Sprachbausteine"],
+    "Trennbare Verben": ["Lückentext", "Sprachbausteine", "Satztransformation", "Fehlersuche", "Mehrfachauswahl"],
+    "Wechselpräpositionen": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Genitiv-Präpositionen": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche"],
     "Schriftlicher Ausdruck (Brief)": ["Brief schreiben", "Aufsatz"],
     "Leseverstehen": ["Leseverstehen", "Richtig/Falsch/Nicht im Text", "Zuordnung"],
     "Hörverstehen": ["Hörverstehen", "Richtig/Falsch/Nicht im Text"],
     "Sprechaufgabe": ["Sprechaufgabe"],
-    "Wortschatz in Kontext": ["Lückentext", "Mehrfachauswahl", "Übersetzung", "Zuordnung", "Wortbildung"],
-    "Zweiteilige Konnektoren (nicht nur...sondern auch, sowohl...als auch)": ["Lückentext", "Satztransformation", "Fehlersuche", "Kategoriensortierung"],
-    "Verben mit Kasus (Verben + Dativ/Akkusativ/Genitiv)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Reflexive Verben (sich-Verben)": ["Lückentext", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
-    "Modalpartikeln (doch, mal, ja, eigentlich)": ["Lückentext", "Mehrfachauswahl", "Übersetzung", "Fehlersuche"],
-    "Indirekte Rede": ["Satztransformation", "Lückentext", "Fehlersuche"],
-    "Eigenes Thema": ["Lückentext", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Übersetzung", "Sprechaufgabe", "Brief schreiben", "Aufsatz", "Zuordnung", "Richtig/Falsch/Nicht im Text", "Wortbildung"],
+    "Wortschatz in Kontext": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Übersetzung", "Zuordnung", "Wortbildung"],
+    "Zweiteilige Konnektoren (nicht nur...sondern auch, sowohl...als auch)": ["Lückentext", "Sprachbausteine", "Satztransformation", "Fehlersuche", "Kategoriensortierung"],
+    "Verben mit Kasus (Verben + Dativ/Akkusativ/Genitiv)": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Reflexive Verben (sich-Verben)": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Fehlersuche", "Satztransformation"],
+    "Modalpartikeln (doch, mal, ja, eigentlich)": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Übersetzung", "Fehlersuche"],
+    "Indirekte Rede": ["Satztransformation", "Lückentext", "Sprachbausteine", "Fehlersuche"],
+    "Eigenes Thema": ["Lückentext", "Sprachbausteine", "Mehrfachauswahl", "Satztransformation", "Fehlersuche", "Übersetzung", "Sprechaufgabe", "Brief schreiben", "Aufsatz", "Zuordnung", "Richtig/Falsch/Nicht im Text", "Wortbildung"],
 }
 
 _SYSTEM_PROMPT = """Du bist ein erfahrener Deutschlehrer, der Ubungsaufgaben fur einen Lernenden auf C1-Niveau erstellt. Der Lernende ist ein professioneller Unternehmensberater, der Deutsch im Arbeitsalltag braucht: Geschafts-E-Mails, Besprechungen, Berichte, Prasentation von Daten, formelle Anfragen, Feedback geben und nehmen, Verhandlungen.
@@ -96,6 +97,15 @@ _TYPE_SCHEMAS = {
 Erstelle 5-8 Lucken im Text.
 WICHTIG zu 'text_with_blanks': Verwende AUSSCHLIESSLICH exakt drei Unterstriche ___ als Platzhalter im Text - KEINE Nummerierung wie (1) oder [1] im Fliesstext selbst. Die Nummerierung der Lucken ergibt sich automatisch aus der Reihenfolge der ___ im Text.
 WICHTIG zu 'hint': Der Hinweis darf NICHT den vollstandigen Kasus UND das Genus gleichzeitig nennen (das verrat direkt den Artikel). Nenne stattdessen nur EINEN hilfreichen Anhaltspunkt, z.B. das regierende Verb/die Praposition ('nach + Dativ') oder nur den Kasus ohne Genus ('Dativ'). Der Lernende soll Genus und Endung noch selbst herleiten mussen.
+Das Feld 'instruction' muss immer ausgefullt sein.""",
+
+    "Sprachbausteine": """Ausgabeformat:
+{"instruction": "Aufgabenstellung im Original-Telc-Stil, z.B. 'Lesen Sie den folgenden Text. Welche Losung (a, b, c oder d) ist jeweils richtig?'", "text_with_blanks": "Zusammenhangender Text mit exakt drei Unterstrichen ___ fur jede Lucke", "blanks": [{"position": 0, "options": ["Option a", "Option b", "Option c", "Option d"], "correct_index": 0, "explanation": "kurze Begrundung, warum diese Option richtig ist und die anderen nicht"}]}
+Erstelle EXAKT dieses Format, wie es in echten Telc-Sprachbausteine-Prufungen vorkommt:
+- Ein zusammenhangender Text von ca. 150-250 Wortern zu einem interessanten Thema (beruflich oder allgemein), mit 8-10 Lucken.
+- Jede Lucke hat GENAU 4 Antwortoptionen (a, b, c, d), von denen nur EINE grammatikalisch und inhaltlich korrekt ist. Die falschen Optionen sollen plausibel klingen (z.B. falscher Kasus, falsches Tempus, falscher Konnektor, falsche Praposition) - keine offensichtlich absurden Distraktoren.
+- Die Lucken testen eine Mischung aus Grammatik (Konnektoren, Prapositionen, Verbformen, Kasus) und Wortschatz im Kontext, genau wie im echten Test.
+WICHTIG zu 'text_with_blanks': Verwende AUSSCHLIESSLICH exakt drei Unterstriche ___ als Platzhalter - KEINE Nummerierung im Text selbst.
 Das Feld 'instruction' muss immer ausgefullt sein.""",
 
     "Mehrfachauswahl": """Ausgabeformat:

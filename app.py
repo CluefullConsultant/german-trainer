@@ -27,6 +27,25 @@ def render_exercise(content, exercise_type):
                 for i, blank in enumerate(blanks):
                     st.markdown(f"- ({i+1}) {blank.get('hint', '')}")
 
+    elif exercise_type == "Sprachbausteine":
+        if content.get("instruction"):
+            st.info(content["instruction"])
+        blanks = content.get("blanks", [])
+        segments = content.get("text_with_blanks", "").split("___")
+        parts = []
+        for i, seg in enumerate(segments):
+            parts.append(seg)
+            if i < len(blanks):
+                parts.append(f"**___({i+1})___**")
+        st.markdown("".join(parts))
+        if blanks:
+            letters = ["a", "b", "c", "d"]
+            with st.expander("Antwortoptionen anzeigen"):
+                for i, blank in enumerate(blanks):
+                    st.markdown(f"**({i+1})**")
+                    for j, opt in enumerate(blank.get("options", [])):
+                        st.markdown(f"  {letters[j]}) {opt}")
+
     elif exercise_type == "Mehrfachauswahl":
         for i, item in enumerate(content.get("items", [])):
             st.markdown(f"**{i+1}.** {item.get('question', '')}")
@@ -117,6 +136,9 @@ def render_answer(answer, exercise_type):
     if exercise_type == "Lückentext":
         for i, val in enumerate(answer.get("blanks", [])):
             st.markdown(f"- Lücke {i+1}: **{val}**")
+    elif exercise_type == "Sprachbausteine":
+        for i, val in enumerate(answer.get("blanks", [])):
+            st.markdown(f"- ({i+1}) **{val}**")
     elif exercise_type == "Mehrfachauswahl":
         for i, val in enumerate(answer.get("choices", [])):
             st.markdown(f"- Frage {i+1}: **{val}**")
@@ -521,6 +543,28 @@ with tab2:
                                 label_visibility="collapsed",
                                 placeholder=f"({i+1}) ...",
                             )
+                answer = {"blanks": answers_list}
+
+            elif ex["exercise_type"] == "Sprachbausteine":
+                blanks = content.get("blanks", [])
+                segments = content.get("text_with_blanks", "").split("___")
+                answers_list = [None] * len(blanks)
+                letters = ["a", "b", "c", "d"]
+                with st.container(border=True):
+                    for i, seg in enumerate(segments):
+                        if seg.strip():
+                            st.markdown(seg)
+                        if i < len(blanks):
+                            options = blanks[i].get("options", [])
+                            labeled_options = [f"{letters[j]}) {opt}" for j, opt in enumerate(options)]
+                            choice = st.radio(
+                                f"Lücke ({i+1})",
+                                options=labeled_options,
+                                key=f"sb_{i}",
+                                index=None,
+                                label_visibility="collapsed",
+                            )
+                            answers_list[i] = letters[labeled_options.index(choice)] if choice else ""
                 answer = {"blanks": answers_list}
 
             elif ex["exercise_type"] == "Mehrfachauswahl":
