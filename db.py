@@ -203,3 +203,24 @@ def get_error_stats() -> dict:
         for tag in tags:
             counts[tag] = counts.get(tag, 0) + 1
     return counts
+
+
+def get_interview_state() -> dict:
+    """Single-row JSONB store for interview pitch practice progress and company variants."""
+    client = get_client()
+    rows = _execute_with_retry(lambda: client.table("interview_practice").select("*").limit(1).execute().data)
+    if rows:
+        return rows[0].get("data") or {}
+    return {}
+
+
+def save_interview_state(data: dict) -> None:
+    client = get_client()
+    existing = client.table("interview_practice").select("id").limit(1).execute().data
+    if existing:
+        client.table("interview_practice").update({
+            "data": data,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }).eq("id", existing[0]["id"]).execute()
+    else:
+        client.table("interview_practice").insert({"data": data}).execute()
