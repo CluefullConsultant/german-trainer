@@ -1891,4 +1891,175 @@ Ich möchte wissen, ob/wann/wie... / Können Sie mir sagen, ob/wann/wie... / Es 
         ],
         "exercise_hint": "Satztransformation: direkte Fragen in indirekte Fragesätze umformen. Nützlich für höfliche E-Mails und Nachfragen.",
     },
+
+    # ==================== VERBACHSEN: TEMPUS, MODUS, GENUS VERBI ====================
+
+    {
+        "id": "verb_drei_achsen",
+        "title": "Die drei Achsen des Verbs: Tempus, Modus, Genus Verbi",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """Jede deutsche Verbform ist eine Kombination aus drei unabhängigen Kategorien. Wenn man diese drei Achsen kennt, hört jede Verbform auf, isoliert und verwirrend zu wirken - sie ist einfach eine Kombination aus drei Entscheidungen.
+
+**1. Tempus (Zeit) - WANN?**
+Präsens, Präteritum, Perfekt, Plusquamperfekt, Futur I, Futur II
+→ Siehe eigene Regel "Die Zeitformen im Überblick"
+
+**2. Modus (Redeweise) - WELCHE HALTUNG zur Aussage?**
+- **Indikativ** - Tatsache, das Normale (95% aller Sätze)
+- **Konjunktiv I** - fremde Aussage wiedergegeben (indirekte Rede)
+- **Konjunktiv II** - hypothetisch, unwirklich, Wunsch, höfliche Bitte
+- **Imperativ** - Aufforderung, Befehl, Bitte
+→ Siehe eigene Regeln "Indirekte Rede - Konjunktiv I", "Konjunktiv II", "Imperativ"
+
+**3. Genus Verbi (Handlungsrichtung) - WER handelt, wer wird behandelt?**
+- **Aktiv** - das Subjekt handelt selbst
+- **Passiv** - das Subjekt wird behandelt, der Handelnde tritt zurück
+→ Siehe eigene Regeln "Passiv", "Passiv mit Modalverben", "Passiv-Ersatzformen"
+
+**Jede Verbform, die du siehst, ist ein Punkt in diesem dreidimensionalen Raum: eine Zeit + ein Modus + eine Richtung.**
+
+---
+
+### Naming-Falle: Modalverben ≠ Modus
+
+"Modalverben" (können, müssen, dürfen, sollen, wollen, mögen) klingt wie "Modus", ist aber etwas völlig anderes: Modalverben sind eine lexikalische Gruppe von Verben. Modus ist die grammatische Kategorie oben (Indikativ/Konjunktiv/Imperativ). Nicht verwechseln.""",
+        "examples": [
+            {
+                "label": "Alle drei Achsen in einer Form",
+                "sentence": "**Er wäre gegangen.** = Konjunktiv II (Modus) + Plusquamperfekt (Tempus) + Aktiv (Genus Verbi)",
+                "note": "Drei unabhängige Entscheidungen, in einer Verbform kombiniert."
+            },
+            {
+                "label": "Andere Kombination",
+                "sentence": "**Es wird gemacht.** = Indikativ (Modus) + Präsens (Tempus) + Passiv (Genus Verbi)",
+                "note": "Gleiches Prinzip, andere Werte auf jeder Achse."
+            },
+            {
+                "label": "Konjunktiv I Beispiel",
+                "sentence": "**Er habe gesagt.** = Konjunktiv I (Modus) + Perfekt (Tempus) + Aktiv (Genus Verbi)",
+                "note": "Typisch in indirekter Rede/Berichten: 'Der Kunde teilte mit, er habe das Angebot bereits erhalten.'"
+            },
+        ],
+        "mistakes": [
+            "Modalverben mit Modus verwechseln: 'können/müssen' sind Verben, keine Redeweise-Kategorie.",
+            "Annehmen, Konjunktiv sei immer 'unwahrscheinlich': Konjunktiv I ist neutral berichtend, nicht automatisch zweifelhaft.",
+            "Partizip II für einen eigenen Modus halten: Partizip II ist nur ein Baustein, der in Perfekt, Passiv und Konjunktiv-Vergangenheit wiederverwendet wird - kein eigener Modus.",
+        ],
+        "exercise_hint": "Mehrfachauswahl: Verbform analysieren - welche Zeit, welcher Modus, welche Richtung? Fehlersuche: falsche Kombination der drei Achsen erkennen.",
+    },
+
+    {
+        "id": "imperativ",
+        "title": "Imperativ - Befehle und Aufforderungen",
+        "level": "A2",
+        "category": "Verben",
+        "explanation": """Der Imperativ drückt eine Aufforderung, Bitte oder einen Befehl aus. Es gibt drei Formen, je nach Anrede:
+
+**du-Form:** Verbstamm (ohne Endung; mit -e bei Stamm auf -t/-d/-ig, sonst meist ohne)
+machen → **Mach!** | gehen → **Geh!** | arbeiten → **Arbeite!** (Stamm endet auf -t)
+
+**ihr-Form:** wie Präsens ihr, aber ohne Pronomen
+machen → **Macht!** | gehen → **Geht!**
+
+**Sie-Form:** Infinitiv + Sie (Pronomen bleibt, umgekehrte Wortstellung wie bei Fragen)
+machen → **Machen Sie!** | gehen → **Gehen Sie!**
+
+---
+
+### Unregelmäßigkeiten
+
+**Vokalwechsel e→i/ie im Präsens gilt auch im du-Imperativ:**
+nehmen → **Nimm!** (nicht "Nehm!") | sprechen → **Sprich!** | lesen → **Lies!** | geben → **Gib!**
+
+**sein ist unregelmäßig:**
+**Sei** pünktlich! / **Seid** pünktlich! / **Seien Sie** pünktlich!
+
+**haben verkürzt oft:**
+**Hab** keine Angst! / **Habt** keine Angst! / **Haben Sie** keine Angst!
+
+---
+
+### Negation
+'nicht' kommt nach dem Verb (oder nach dem Objekt): **Mach das nicht!** / **Warten Sie nicht!**
+
+### Höfliche Alternative im Beruf
+Der direkte Imperativ wirkt oft zu hart für den Arbeitskontext. Höflicher mit Konjunktiv II: **Könnten Sie...?** / **Würden Sie...?** statt eines nackten Imperativs.""",
+        "examples": [
+            {
+                "label": "du-Form, regelmäßig",
+                "sentence": "**Schick** mir bitte die Unterlagen.",
+                "note": "Verbstamm ohne Endung, informell (unter Kollegen)"
+            },
+            {
+                "label": "Sie-Form, formell",
+                "sentence": "**Schicken Sie** mir bitte die Unterlagen.",
+                "note": "Infinitiv + Sie, Standard im Berufskontext"
+            },
+            {
+                "label": "Vokalwechsel im du-Imperativ",
+                "sentence": "**Nimm** dir Zeit für die Analyse, bevor du entscheidest.",
+                "note": "nehmen → nimmst (Präsens) → Nimm! (Imperativ), nicht 'Nehm!'"
+            },
+            {
+                "label": "Höfliche Alternative statt Imperativ",
+                "sentence": "Direkt: 'Schicken Sie mir die Unterlagen.' / Höflicher: '**Könnten Sie** mir die Unterlagen schicken?'",
+                "note": "Konjunktiv II mildert die Aufforderung ab - typisch in professioneller Kommunikation."
+            },
+        ],
+        "mistakes": [
+            "du-Imperativ mit -e bei Vokalwechsel-Verben: ❌ 'Nehme das!' → ✅ 'Nimm das!'",
+            "Sie-Imperativ ohne Pronomen: ❌ 'Machen!' → ✅ 'Machen Sie!'",
+            "nicht vor dem Verb: ❌ 'Nicht mach das!' → ✅ 'Mach das nicht!'",
+        ],
+        "exercise_hint": "Lückentext: richtige Imperativform (du/ihr/Sie) einsetzen, inkl. unregelmäßiger Verben (nehmen, sein, haben). Satztransformation: Aussage in Imperativ umformen, dann in höfliche Konjunktiv-II-Bitte.",
+    },
+
+    {
+        "id": "genus_verbi_ueberblick",
+        "title": "Genus Verbi: Aktiv und Passiv im Überblick",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """Genus Verbi (auch: Diathese) beschreibt, ob das Subjekt eines Satzes die Handlung selbst ausführt (Aktiv) oder die Handlung an ihm ausgeführt wird (Passiv). Es ist die dritte Achse neben Tempus und Modus (siehe "Die drei Achsen des Verbs").
+
+**Aktiv:** Subjekt = Handelnder
+"Der Berater **erstellt** den Bericht." (Der Berater tut etwas)
+
+**Passiv:** Subjekt = wird behandelt, der Handelnde tritt in den Hintergrund oder fällt ganz weg
+"Der Bericht **wird erstellt** (vom Berater)." (Der Bericht steht im Fokus, nicht wer ihn erstellt)
+
+---
+
+### Aktiv/Passiv im Vergleich (Präsens und Präteritum)
+
+| Tempus | Aktiv | Passiv |
+|--------|-------|--------|
+| Präsens | Man prüft den Bericht. | Der Bericht **wird geprüft**. |
+| Präteritum | Man prüfte den Bericht. | Der Bericht **wurde geprüft**. |
+| Perfekt | Man hat den Bericht geprüft. | Der Bericht **ist geprüft worden**. |
+
+**Ausführliche Bildungsregeln, Zeitformen im Passiv, Passiv mit Modalverben und Passiv-Ersatzformen (sein...zu, sich lassen):** siehe die eigenen Regeln "Passiv", "Passiv mit Modalverben" und "Passiv-Ersatzformen".
+
+### Warum benutzt man Passiv?
+- Der Handelnde ist unbekannt oder unwichtig: "Die Fenster **wurden** letzte Nacht **eingeschlagen**." (von wem, ist egal)
+- Formeller, distanzierter Ton in Berichten: "Die Ergebnisse **wurden** ausgewertet." statt "Wir haben die Ergebnisse ausgewertet."
+- Der Fokus soll auf der Sache liegen, nicht auf der Person.""",
+        "examples": [
+            {
+                "label": "Aktiv → Passiv, gleiche Bedeutung",
+                "sentence": "Aktiv: 'Das Team **hat** das Projekt **abgeschlossen**.' → Passiv: 'Das Projekt **ist abgeschlossen worden**.'",
+                "note": "Fokus verschiebt sich vom Team auf das Projekt."
+            },
+            {
+                "label": "Passiv ohne Nennung des Handelnden",
+                "sentence": "**Es wird** noch **diskutiert**, wie das Budget verteilt wird.",
+                "note": "Wer diskutiert, bleibt offen - typisch für Berichte."
+            },
+        ],
+        "mistakes": [
+            "Aktiv und Passiv beliebig für austauschbar halten: der Fokus/Ton ändert sich, auch wenn die Kernaussage gleich bleibt.",
+            "Passiv mit sein-Zustand verwechseln: 'Die Tür ist geschlossen.' (Zustand, kein Passiv) vs. 'Die Tür wird geschlossen.' (Vorgang, echtes Passiv)",
+        ],
+        "exercise_hint": "Satztransformation: Aktivsätze ins Passiv umformen und umgekehrt, über mehrere Zeitformen hinweg.",
+    },
 ]

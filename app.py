@@ -1119,9 +1119,59 @@ with tab4:
 with tab5:
     from grammar_theory import GRAMMAR_RULES
     import theory_quiz
+    import verb_conjugator
 
     st.header("Grammatik-Theorie")
     st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst.")
+
+    with st.expander("Vollständige Verbkonjugation - jedes Verb in jeder Zeit und jedem Modus"):
+        st.caption("Indikativ (6 Zeiten), Konjunktiv I, Konjunktiv II, Imperativ - alle 6 Personen.")
+        verb_input = st.text_input("Verb eingeben (Infinitiv)", placeholder="z.B. sprechen, gehen, sein, nehmen...")
+        if st.button("Volle Konjugation anzeigen", type="primary") and verb_input.strip():
+            with st.spinner("Claude konjugiert..."):
+                st.session_state["conjugation_result"] = verb_conjugator.generate_full_conjugation(verb_input.strip())
+
+        if st.session_state.get("conjugation_result"):
+            data = st.session_state["conjugation_result"]
+            sf = data.get("stammformen", {})
+            st.markdown(f"### {data.get('verb', verb_input)}")
+            st.caption(
+                f"Infinitiv: {sf.get('infinitiv', '')} | Präteritum (er/sie): {sf.get('praeteritum_3', '')} | "
+                f"Partizip II: {sf.get('partizip2', '')} | Hilfsverb: {sf.get('hilfsverb', '')}"
+            )
+
+            def _render_person_table(tense_dict):
+                rows = "| Person | Form |\n|---|---|\n"
+                for p in verb_conjugator.PERSON_ORDER:
+                    rows += f"| {verb_conjugator.PERSON_LABELS[p]} | {tense_dict.get(p, '')} |\n"
+                st.markdown(rows)
+
+            st.markdown("**Indikativ**")
+            ind = data.get("indikativ", {})
+            for key, label in [
+                ("praesens", "Präsens"), ("praeteritum", "Präteritum"), ("perfekt", "Perfekt"),
+                ("plusquamperfekt", "Plusquamperfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
+            ]:
+                with st.expander(label):
+                    _render_person_table(ind.get(key, {}))
+
+            st.markdown("**Konjunktiv I**")
+            k1 = data.get("konjunktiv1", {})
+            for key, label in [("praesens", "Präsens"), ("perfekt", "Perfekt")]:
+                with st.expander(f"Konjunktiv I - {label}"):
+                    _render_person_table(k1.get(key, {}))
+
+            st.markdown("**Konjunktiv II**")
+            k2 = data.get("konjunktiv2", {})
+            for key, label in [("praesens", "Präsens"), ("perfekt", "Perfekt")]:
+                with st.expander(f"Konjunktiv II - {label}"):
+                    _render_person_table(k2.get(key, {}))
+
+            st.markdown("**Imperativ**")
+            imp = data.get("imperativ", {})
+            st.markdown(f"- du: **{imp.get('du', '')}**")
+            st.markdown(f"- ihr: **{imp.get('ihr', '')}**")
+            st.markdown(f"- Sie: **{imp.get('Sie', '')}**")
 
     level_filter = st.selectbox(
         "Niveau wählen",
