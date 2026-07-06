@@ -1222,171 +1222,340 @@ with tab5:
 with tab6:
     from interview_skeleton import DEFAULT_BAUSTEINE, INTERVIEW_TIPS
     import interview_coach
+    import interview_content
+    import re as re_module
     import time as time_module
 
-    st.header("Interview-Vorbereitung: Selbstpräsentation")
-    st.caption("Fünf Bausteine mit Stichpunkten - kein auswendig gelernter Text. Du sprichst frei, die Reihenfolge und Kernfakten bleiben fix.")
+    st.header("Interview-Vorbereitung")
 
-    with st.expander("Warum diese Methode funktioniert (Recherche zu deutschen Recruitern)"):
-        for tip in INTERVIEW_TIPS:
-            st.markdown(f"- {tip}")
-
-    try:
-        interview_state = db.get_interview_state()
-    except Exception:
-        interview_state = {}
-
-    practice_counts = interview_state.get("practice_counts", {})
-    company_variants = interview_state.get("company_variants", {})
-    scripts = interview_state.get("scripts", {})
-    full_runs = interview_state.get("full_runs", 0)
-    current_company = interview_state.get("current_company", "")
-
-    def _save_state():
-        try:
-            db.save_interview_state({
-                "practice_counts": practice_counts,
-                "company_variants": company_variants,
-                "scripts": scripts,
-                "full_runs": full_runs,
-                "current_company": current_company,
-            })
-        except Exception:
-            st.warning("Fortschritt konnte nicht gespeichert werden (Verbindungsproblem).")
-
-    st.divider()
-    st.subheader("Vor diesem Gespräch: Firma eintragen")
-    company_input = st.text_input(
-        "Für welches Unternehmen übst du gerade?",
-        value=current_company,
-        placeholder="z.B. combine, Tekkr, ...",
-        key="interview_company_input",
+    interview_mode = st.radio(
+        "Ansicht",
+        options=[
+            "Selbstvorstellung üben (Skript A/B, combine)",
+            "Anker + Spokes",
+            "Story Bank (STAR)",
+            "Fragen-Training",
+            "combine: Fakten & Change-Modelle",
+            "Bausteine frei bearbeiten (jede Firma)",
+        ],
     )
-    if company_input != current_company:
-        current_company = company_input
-        _save_state()
-
-    if current_company and current_company in company_variants:
-        st.success(f"Gespeicherte Baustein-4-Variante für '{current_company}' gefunden - unten vorausgefüllt.")
-
     st.divider()
-    st.subheader("Die fünf Bausteine")
 
-    for baustein in DEFAULT_BAUSTEINE:
-        bid = str(baustein["id"])
-        count = practice_counts.get(bid, 0)
-        variable_tag = " 🔁 ändert sich pro Interview" if baustein["variable"] else ""
-        with st.container(border=True):
-            st.markdown(f"**{baustein['id']}. {baustein['title']}**{variable_tag}")
-            st.caption(f"Ziel-Dauer: {baustein['dauer']} | Geübt: {count}x")
+    def _format_beat_html(text):
+        text = re_module.sub(r'\*\*(.+?)\*\*', r'<strong style="color:#a6432f;">\1</strong>', text)
+        text = re_module.sub(r'==(.+?)==', r'<span style="background:#dcece1;border-radius:3px;padding:0 3px;">\1</span>', text)
+        return text
 
-            for punkt in baustein["stichpunkte"]:
-                st.markdown(f"- {punkt}")
+    if interview_mode == "Selbstvorstellung üben (Skript A/B, combine)":
+        script_choice = st.radio(
+            "Skript",
+            ["Skript A - Standard (~90 Sek)", "Skript B - Kompletter Werdegang (~2 Min, nur auf Nachfrage)"],
+            horizontal=True,
+        )
+        script = interview_content.SKRIPT_A if script_choice.startswith("Skript A") else interview_content.SKRIPT_B
+        st.subheader(script["title"])
 
-            if baustein["variable"]:
-                extra_context = st.text_input(
-                    f"Was weißt du über '{current_company or 'das Unternehmen'}' (für den Claude-Entwurf, optional)",
-                    key=f"extra_ctx_{bid}",
-                    placeholder="z.B. 'Serviceplan-Projekt: Change Agents und künftige Nutzer wurden von Anfang an eingebunden'",
-                )
-                if current_company and st.button("Claude-Entwurf vorschlagen", key=f"draft_variant_{bid}"):
-                    with st.spinner("Claude formuliert einen Vorschlag..."):
-                        draft = interview_coach.draft_script(
-                            baustein["title"], baustein["stichpunkte"], baustein["dauer"], extra_context
-                        )
-                        st.session_state[f"variant_{bid}"] = draft
-                        st.rerun()
+        if "corrections" in script:
+            with st.expander("Zwei Korrekturen gegenüber dem Original (zum Mitlernen)", expanded=True):
+                for c in script["corrections"]:
+                    st.markdown(f"~~{c['wrong']}~~")
+                    st.markdown(f"→ **{c['right']}**")
+                    st.caption(c["rule"])
+                    st.divider()
 
-                default_variant = company_variants.get(current_company, "") if current_company else ""
-                variant_text = st.text_area(
-                    f"Dein Skript für '{current_company or 'dieses Unternehmen'}' (voll ausformuliert - zum Lesen):",
-                    value=default_variant,
-                    key=f"variant_{bid}",
-                    height=100,
-                    placeholder="Schreib hier den vollen Satz/Absatz aus - Beispiel: 'Ich kenne euer Projekt mit Serviceplan, bei dem ihr...' Zum lauten Lesen, nicht zum Auswendiglernen.",
-                )
-                if current_company and st.button("Skript speichern", key=f"save_variant_{bid}"):
-                    company_variants[current_company] = variant_text
-                    _save_state()
-                    st.success(f"Skript für '{current_company}' gespeichert.")
-            else:
-                if st.button("Claude-Entwurf vorschlagen", key=f"draft_script_{bid}"):
-                    with st.spinner("Claude formuliert einen Vorschlag..."):
-                        draft = interview_coach.draft_script(
-                            baustein["title"], baustein["stichpunkte"], baustein["dauer"]
-                        )
-                        st.session_state[f"script_{bid}"] = draft
-                        st.rerun()
+        practice_view = st.radio("Modus", ["Volltext", "Übungsmodus"], horizontal=True, key=f"view_{script_choice}")
 
-                script_text = st.text_area(
-                    "Dein Skript (voll ausformuliert - zum Lesen):",
-                    value=scripts.get(bid, ""),
-                    key=f"script_{bid}",
-                    height=100,
-                    placeholder="Schreib hier aus den Stichpunkten oben einen vollständigen Text, den du laut vorlesen kannst - oder lass Claude einen Vorschlag machen.",
-                )
-                if st.button("Skript speichern", key=f"save_script_{bid}"):
-                    scripts[bid] = script_text
-                    _save_state()
-                    st.success("Skript gespeichert.")
-
-            col1, col2 = st.columns(2)
-            with col1:
-                timer_key = f"baustein_timer_{bid}"
-                if timer_key not in st.session_state:
-                    if st.button("Sprechzeit stoppen starten", key=f"start_{bid}"):
-                        st.session_state[timer_key] = time_module.time()
-                        st.rerun()
-                else:
-                    elapsed = time_module.time() - st.session_state[timer_key]
-                    st.info(f"Läuft: {elapsed:.1f} Sek")
-                    if st.button("Stopp", key=f"stop_{bid}"):
-                        del st.session_state[timer_key]
-                        st.rerun()
-            with col2:
-                if st.button("Runde absolviert (+1)", key=f"round_{bid}"):
-                    practice_counts[bid] = count + 1
-                    _save_state()
-                    st.rerun()
-
-    st.divider()
-    st.subheader("Volltext - alle Bausteine zusammen")
-    st.caption("Zum Lesen üben. Ziel: mit der Zeit immer weniger draufschauen müssen.")
-
-    full_script_parts = []
-    for baustein in DEFAULT_BAUSTEINE:
-        bid = str(baustein["id"])
-        if baustein["variable"]:
-            text = company_variants.get(current_company, "") if current_company else ""
+        timer_key = f"skript_timer_{script_choice}"
+        if timer_key not in st.session_state:
+            if st.button("Timer starten", key=f"start_{script_choice}"):
+                st.session_state[timer_key] = time_module.time()
+                st.rerun()
         else:
-            text = scripts.get(bid, "")
-        if text.strip():
-            full_script_parts.append(f"**{baustein['id']}. {baustein['title']}**\n\n{text}")
+            elapsed = int(time_module.time() - st.session_state[timer_key])
+            target = script["target_seconds"]
+            st.info(f"Laufzeit: {elapsed // 60}:{elapsed % 60:02d} (Ziel: {target // 60}:{target % 60:02d})")
+            if st.button("Stopp", key=f"stop_{script_choice}"):
+                del st.session_state[timer_key]
+                st.rerun()
 
-    if full_script_parts:
-        with st.container(border=True):
-            st.markdown("\n\n---\n\n".join(full_script_parts))
-    else:
-        st.info("Noch keine Skripte geschrieben. Schreib oben bei jedem Baustein deinen Text und speichere ihn - hier erscheint dann der Volltext.")
+        st.caption("Übungsmodus: nur der Einstiegssatz bleibt sichtbar. Rekonstruiere den Abschnitt frei, bevor du ihn aufklappst - nicht auswendig lernen, den roten Faden verinnerlichen.")
+        st.divider()
 
-    st.divider()
-    st.subheader("Kompletter Durchlauf")
-    st.caption("Alle fünf Bausteine am Stück, frei gesprochen. Zielzeit: ca. 1:20 - 1:40 Min.")
+        for beat in script["beats"]:
+            cue_plain = beat["cue"].replace("**", "")
+            formatted_text = _format_beat_html(beat["text"])
+            if practice_view == "Volltext":
+                with st.container(border=True):
+                    st.markdown(f"**{cue_plain}**")
+                    st.markdown(formatted_text, unsafe_allow_html=True)
+                    if beat.get("note"):
+                        st.caption(beat["note"])
+            else:
+                with st.expander(cue_plain, expanded=False):
+                    st.markdown(formatted_text, unsafe_allow_html=True)
+                    if beat.get("note"):
+                        st.caption(beat["note"])
 
-    full_timer_key = "interview_full_timer"
-    if full_timer_key not in st.session_state:
-        if st.button("Durchlauf starten", type="primary"):
-            st.session_state[full_timer_key] = time_module.time()
+    elif interview_mode == "Anker + Spokes":
+        st.caption("Aus persona-narrative.md - dieselbe Grundfrage wird oft dreimal anders formuliert. Immer denselben Anker zuerst sagen, dann den passenden Spoke wählen - nie live neu improvisieren.")
+        st.subheader("Der Anker (immer zuerst, egal wie die Frage gestellt wird)")
+        st.info(interview_content.ANCHOR)
+
+        st.subheader("Spokes (je nach genauer Formulierung der Frage)")
+        for spoke in interview_content.SPOKES:
+            with st.container(border=True):
+                st.markdown(f"**{spoke['trigger']}**")
+                st.markdown(spoke["text"])
+
+        st.subheader("Beweise auf Abruf (nur falls nachgefragt: \"Warum glaubst du das?\")")
+        for p in interview_content.PROOFS_ON_DEMAND:
+            st.markdown(f"- {p}")
+
+    elif interview_mode == "Story Bank (STAR)":
+        st.caption("Jeden Buchstaben einzeln aufdecken und frei sprechen, bevor der nächste kommt - nicht den ganzen Absatz auf einmal lesen.")
+        for story in interview_content.STAR_STORIES:
+            with st.expander(story["title"]):
+                st.caption(f"Passt zu: {story['best_for']}")
+                cols = st.columns(len(story["parts"]))
+                for i, (label, _) in enumerate(story["parts"]):
+                    key = f"star_{story['id']}_{label}"
+                    with cols[i]:
+                        if st.button(label, key=f"btn_{key}"):
+                            st.session_state[key] = not st.session_state.get(key, False)
+                for label, text in story["parts"]:
+                    key = f"star_{story['id']}_{label}"
+                    if st.session_state.get(key):
+                        st.markdown(f"**{label}:** {text}")
+
+        st.divider()
+        b = interview_content.COMBINE_BRIDGE_STORY
+        with st.expander(b["title"]):
+            st.warning(b["warning"])
+            st.markdown(f"> {b['verbatim']}")
+            st.caption(b["facts"])
+
+    elif interview_mode == "Fragen-Training":
+        pool_choice = st.radio("Fragen-Pool", ["combine-spezifisch", "Allgemein (jede Firma)"], horizontal=True)
+        pool = interview_content.COMBINE_QUESTIONS if pool_choice == "combine-spezifisch" else interview_content.GENERAL_QUESTIONS
+
+        if st.session_state.get("interview_quiz_pool") != pool_choice:
+            st.session_state["interview_quiz_pool"] = pool_choice
+            st.session_state["interview_quiz_idx"] = None
+            st.session_state["interview_quiz_revealed"] = False
+
+        st.caption("Zufällige Frage ziehen, laut beantworten, dann erst den Antwort-Anker aufdecken - nicht umgekehrt.")
+
+        import random
+        if st.button("Neue Frage", type="primary"):
+            choices = list(range(len(pool)))
+            current_idx = st.session_state.get("interview_quiz_idx")
+            if current_idx in choices and len(choices) > 1:
+                choices.remove(current_idx)
+            st.session_state["interview_quiz_idx"] = random.choice(choices)
+            st.session_state["interview_quiz_revealed"] = False
             st.rerun()
+
+        idx = st.session_state.get("interview_quiz_idx")
+        if idx is not None and idx < len(pool):
+            q, a = pool[idx]
+            with st.container(border=True):
+                st.markdown(f"### {q}")
+                if st.button("Antwort-Anker zeigen", key="reveal_interview_quiz"):
+                    st.session_state["interview_quiz_revealed"] = True
+                    st.rerun()
+                if st.session_state.get("interview_quiz_revealed"):
+                    st.info(a)
+        else:
+            st.caption("Klicke \"Neue Frage\", um zu starten.")
+
+        if pool_choice == "Allgemein (jede Firma)":
+            st.divider()
+            st.warning("**Noch offen - nicht vorgeschrieben:** \"Was ist deine größte Schwäche?\" Wähle eine echte, kalibrierte Antwort und formuliere sie selbst - das ist keine, die auswendig gelernt werden sollte.")
+
+    elif interview_mode == "combine: Fakten & Change-Modelle":
+        st.subheader("combine-Fakten (Gesprächsaufhänger)")
+        for fact in interview_content.COMBINE_FACTS:
+            with st.expander(fact["title"]):
+                st.markdown(fact["text"])
+                if fact.get("note"):
+                    st.caption(fact["note"])
+
+        st.divider()
+        st.subheader("Change-Management-Modelle (falls gefragt)")
+        st.caption("Nicht ungefragt herunterbeten. Kurz 1-2 nennen, dann zurück zu TACO als eigene Praxis.")
+        for model in interview_content.CHANGE_MODELS:
+            with st.expander(model["title"]):
+                st.markdown(model["text"])
+                if model.get("verbatim"):
+                    st.markdown(f"> {model['verbatim']}")
+                if model.get("note"):
+                    st.caption(model["note"])
+
     else:
-        elapsed = time_module.time() - st.session_state[full_timer_key]
-        mins = int(elapsed // 60)
-        secs = int(elapsed % 60)
-        st.info(f"Laufzeit: {mins}:{secs:02d}")
-        if st.button("Durchlauf beendet"):
-            del st.session_state[full_timer_key]
-            full_runs += 1
+        st.caption("Fünf Bausteine mit Stichpunkten - kein auswendig gelernter Text. Du sprichst frei, die Reihenfolge und Kernfakten bleiben fix. Für eine andere Firma als combine hier neu schreiben.")
+
+        with st.expander("Warum diese Methode funktioniert (Recherche zu deutschen Recruitern)"):
+            for tip in INTERVIEW_TIPS:
+                st.markdown(f"- {tip}")
+
+        try:
+            interview_state = db.get_interview_state()
+        except Exception:
+            interview_state = {}
+
+        practice_counts = interview_state.get("practice_counts", {})
+        company_variants = interview_state.get("company_variants", {})
+        scripts = interview_state.get("scripts", {})
+        full_runs = interview_state.get("full_runs", 0)
+        current_company = interview_state.get("current_company", "")
+
+        def _save_state():
+            try:
+                db.save_interview_state({
+                    "practice_counts": practice_counts,
+                    "company_variants": company_variants,
+                    "scripts": scripts,
+                    "full_runs": full_runs,
+                    "current_company": current_company,
+                })
+            except Exception:
+                st.warning("Fortschritt konnte nicht gespeichert werden (Verbindungsproblem).")
+
+        st.divider()
+        st.subheader("Vor diesem Gespräch: Firma eintragen")
+        company_input = st.text_input(
+            "Für welches Unternehmen übst du gerade?",
+            value=current_company,
+            placeholder="z.B. combine, Tekkr, ...",
+            key="interview_company_input",
+        )
+        if company_input != current_company:
+            current_company = company_input
             _save_state()
-            st.rerun()
 
-    st.metric("Komplette Durchläufe insgesamt", full_runs)
+        if current_company and current_company in company_variants:
+            st.success(f"Gespeicherte Baustein-4-Variante für '{current_company}' gefunden - unten vorausgefüllt.")
+
+        st.divider()
+        st.subheader("Die fünf Bausteine")
+
+        for baustein in DEFAULT_BAUSTEINE:
+            bid = str(baustein["id"])
+            count = practice_counts.get(bid, 0)
+            variable_tag = " 🔁 ändert sich pro Interview" if baustein["variable"] else ""
+            with st.container(border=True):
+                st.markdown(f"**{baustein['id']}. {baustein['title']}**{variable_tag}")
+                st.caption(f"Ziel-Dauer: {baustein['dauer']} | Geübt: {count}x")
+
+                for punkt in baustein["stichpunkte"]:
+                    st.markdown(f"- {punkt}")
+
+                if baustein["variable"]:
+                    extra_context = st.text_input(
+                        f"Was weißt du über '{current_company or 'das Unternehmen'}' (für den Claude-Entwurf, optional)",
+                        key=f"extra_ctx_{bid}",
+                        placeholder="z.B. 'Serviceplan-Projekt: Change Agents und künftige Nutzer wurden von Anfang an eingebunden'",
+                    )
+                    if current_company and st.button("Claude-Entwurf vorschlagen", key=f"draft_variant_{bid}"):
+                        with st.spinner("Claude formuliert einen Vorschlag..."):
+                            draft = interview_coach.draft_script(
+                                baustein["title"], baustein["stichpunkte"], baustein["dauer"], extra_context
+                            )
+                            st.session_state[f"variant_{bid}"] = draft
+                            st.rerun()
+
+                    default_variant = company_variants.get(current_company, "") if current_company else ""
+                    if not default_variant and current_company.strip().lower() == "combine":
+                        default_variant = interview_content.SKRIPT_A["beats"][3]["text"].replace("**", "")
+                    variant_text = st.text_area(
+                        f"Dein Skript für '{current_company or 'dieses Unternehmen'}' (voll ausformuliert - zum Lesen):",
+                        value=default_variant,
+                        key=f"variant_{bid}",
+                        height=100,
+                        placeholder="Schreib hier den vollen Satz/Absatz aus - Beispiel: 'Ich kenne euer Projekt mit Serviceplan, bei dem ihr...' Zum lauten Lesen, nicht zum Auswendiglernen.",
+                    )
+                    if current_company and st.button("Skript speichern", key=f"save_variant_{bid}"):
+                        company_variants[current_company] = variant_text
+                        _save_state()
+                        st.success(f"Skript für '{current_company}' gespeichert.")
+                else:
+                    if st.button("Claude-Entwurf vorschlagen", key=f"draft_script_{bid}"):
+                        with st.spinner("Claude formuliert einen Vorschlag..."):
+                            draft = interview_coach.draft_script(
+                                baustein["title"], baustein["stichpunkte"], baustein["dauer"]
+                            )
+                            st.session_state[f"script_{bid}"] = draft
+                            st.rerun()
+
+                    script_text = st.text_area(
+                        "Dein Skript (voll ausformuliert - zum Lesen):",
+                        value=scripts.get(bid, ""),
+                        key=f"script_{bid}",
+                        height=100,
+                        placeholder="Schreib hier aus den Stichpunkten oben einen vollständigen Text, den du laut vorlesen kannst - oder lass Claude einen Vorschlag machen.",
+                    )
+                    if st.button("Skript speichern", key=f"save_script_{bid}"):
+                        scripts[bid] = script_text
+                        _save_state()
+                        st.success("Skript gespeichert.")
+
+                col1, col2 = st.columns(2)
+                with col1:
+                    timer_key = f"baustein_timer_{bid}"
+                    if timer_key not in st.session_state:
+                        if st.button("Sprechzeit stoppen starten", key=f"start_{bid}"):
+                            st.session_state[timer_key] = time_module.time()
+                            st.rerun()
+                    else:
+                        elapsed = time_module.time() - st.session_state[timer_key]
+                        st.info(f"Läuft: {elapsed:.1f} Sek")
+                        if st.button("Stopp", key=f"stop_{bid}"):
+                            del st.session_state[timer_key]
+                            st.rerun()
+                with col2:
+                    if st.button("Runde absolviert (+1)", key=f"round_{bid}"):
+                        practice_counts[bid] = count + 1
+                        _save_state()
+                        st.rerun()
+
+        st.divider()
+        st.subheader("Volltext - alle Bausteine zusammen")
+        st.caption("Zum Lesen üben. Ziel: mit der Zeit immer weniger draufschauen müssen.")
+
+        full_script_parts = []
+        for baustein in DEFAULT_BAUSTEINE:
+            bid = str(baustein["id"])
+            if baustein["variable"]:
+                text = company_variants.get(current_company, "") if current_company else ""
+            else:
+                text = scripts.get(bid, "")
+            if text.strip():
+                full_script_parts.append(f"**{baustein['id']}. {baustein['title']}**\n\n{text}")
+
+        if full_script_parts:
+            with st.container(border=True):
+                st.markdown("\n\n---\n\n".join(full_script_parts))
+        else:
+            st.info("Noch keine Skripte geschrieben. Schreib oben bei jedem Baustein deinen Text und speichere ihn - hier erscheint dann der Volltext.")
+
+        st.divider()
+        st.subheader("Kompletter Durchlauf")
+        st.caption("Alle fünf Bausteine am Stück, frei gesprochen. Zielzeit: ca. 1:20 - 1:40 Min.")
+
+        full_timer_key = "interview_full_timer"
+        if full_timer_key not in st.session_state:
+            if st.button("Durchlauf starten", type="primary"):
+                st.session_state[full_timer_key] = time_module.time()
+                st.rerun()
+        else:
+            elapsed = time_module.time() - st.session_state[full_timer_key]
+            mins = int(elapsed // 60)
+            secs = int(elapsed % 60)
+            st.info(f"Laufzeit: {mins}:{secs:02d}")
+            if st.button("Durchlauf beendet"):
+                del st.session_state[full_timer_key]
+                full_runs += 1
+                _save_state()
+                st.rerun()
+
+        st.metric("Komplette Durchläufe insgesamt", full_runs)

@@ -30,9 +30,9 @@ DEFAULT_BAUSTEINE = [
         "id": 3,
         "title": "Praxis",
         "stichpunkte": [
-            "Accenture Berlin, SAP-Transformationsprogramm",
-            "TACO: eigenes Retro-Format, selbst entwickelt & moderiert, 3x eingesetzt",
-            "vom Programmleiter ausgezeichnet",
+            "Accenture: Beratungskultur, Stakeholder-/Kundenkommunikation beobachtet",
+            "TACO: eigenes Retro-Format, entwickelt & moderiert, vom Programmleiter ausgezeichnet",
+            "aktuell: eigene Anwendungen mit der Anthropic-API gebaut, live im Einsatz",
         ],
         "dauer": "20-25 Sek",
         "variable": False,
