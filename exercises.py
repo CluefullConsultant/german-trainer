@@ -234,3 +234,34 @@ def generate_exercise(topic: str, exercise_type: str, mentor_notes: str = "", pa
             raw += text
 
     return _parse_json(raw)
+
+
+def generate_daily_exercise() -> dict:
+    """Auto-pick a random exam section, task type, and B1/B2/C1 level, then generate the exercise.
+
+    Lets the learner self-serve a fresh exercise without waiting for the mentor to create one.
+    Avoids repeating the same Prüfungsteil as the previous call within the same session.
+    """
+    import random
+    from writing_topics import BRIEF_TOPICS, AUFSATZ_TOPICS
+
+    last_teil = st.session_state.get("_last_daily_teil")
+    choices = [t for t in PRUEFUNGSTEILE if t != last_teil] or PRUEFUNGSTEILE
+    teil = random.choice(choices)
+    st.session_state["_last_daily_teil"] = teil
+
+    _, ex_type = random.choice(PRUEFUNG_AUFGABEN[teil])
+    level = random.choice(["B1", "B2", "C1"])
+    topic = PRUEFUNG_DEFAULT_TOPIC.get(teil, teil)
+    notes = f"Zielniveau: {level}."
+
+    if ex_type == "Brief schreiben":
+        register = random.choice(list(BRIEF_TOPICS.keys()))
+        thema = random.choice(BRIEF_TOPICS[register])
+        notes = f"Textsorte: {register}. Thema/Szenario: {thema}. {notes}"
+    elif ex_type == "Aufsatz":
+        thema = random.choice(AUFSATZ_TOPICS)["thema"]
+        notes = f"Thema: {thema}. {notes}"
+
+    content = generate_exercise(topic=topic, exercise_type=ex_type, mentor_notes=notes)
+    return {"topic": topic, "exercise_type": ex_type, "content": content, "mentor_notes": notes}
