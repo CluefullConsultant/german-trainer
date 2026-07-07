@@ -1623,7 +1623,7 @@ Bei Verben mit Präpositionen: **Wofür? Worauf? Womit? Wovon? Worüber?** (Sach
     {
         "id": "n_deklination",
         "title": "N-Deklination (schwache Maskulina)",
-        "level": "B2",
+        "level": "B1",
         "category": "Kasus",
         "explanation": """Eine kleine Gruppe maskuliner Nomen bekommt in **allen Fällen außer Nominativ Singular** die Endung **-(e)n**. Das nennt man N-Deklination oder 'schwache Maskulina'.
 
@@ -1897,7 +1897,7 @@ Ich möchte wissen, ob/wann/wie... / Können Sie mir sagen, ob/wann/wie... / Es 
     {
         "id": "verb_drei_achsen",
         "title": "Die drei Achsen des Verbs: Tempus, Modus, Genus Verbi",
-        "level": "B1",
+        "level": "C1",
         "category": "Verben",
         "explanation": """Jede deutsche Verbform ist eine Kombination aus drei unabhängigen Kategorien. Wenn man diese drei Achsen kennt, hört jede Verbform auf, isoliert und verwirrend zu wirken - sie ist einfach eine Kombination aus drei Entscheidungen.
 
@@ -2061,5 +2061,219 @@ Der direkte Imperativ wirkt oft zu hart für den Arbeitskontext. Höflicher mit 
             "Passiv mit sein-Zustand verwechseln: 'Die Tür ist geschlossen.' (Zustand, kein Passiv) vs. 'Die Tür wird geschlossen.' (Vorgang, echtes Passiv)",
         ],
         "exercise_hint": "Satztransformation: Aktivsätze ins Passiv umformen und umgekehrt, über mehrere Zeitformen hinweg.",
+    },
+
+    # ==================== NEU: LÜCKEN AUS PRODUKT-AUDIT ====================
+
+    {
+        "id": "komparation",
+        "title": "Komparation - Steigerung der Adjektive und Adverbien",
+        "level": "A2",
+        "category": "Wortschatz",
+        "explanation": """Adjektive und Adverbien werden in drei Stufen gesteigert: Positiv (Grundform), Komparativ (Vergleich), Superlativ (höchste Stufe).
+
+**Regelmäßige Steigerung:**
+Positiv + **-er** (Komparativ) | **am** + Positiv + **-sten** (Superlativ)
+schnell → schnell**er** → **am** schnell**sten**
+
+**Adjektive auf -el/-er verlieren im Komparativ das e:**
+dunkel → dunk**ler** (nicht "dunkeler") | teuer → teu**rer**
+
+**Umlaut bei vielen einsilbigen Adjektiven:**
+alt → **ä**lter → am **ä**ltesten | groß → gr**ö**ßer → am gr**ö**ßten | jung → j**ü**nger → am j**ü**ngsten
+
+**Adjektive auf -d/-t/-s/-z/-sch/-ß brauchen -esten im Superlativ (Aussprache):**
+laut → lauter → am laut**esten**
+
+**Unregelmäßige Formen (auswendig lernen!):**
+| Positiv | Komparativ | Superlativ |
+|---------|-----------|-----------|
+| gut | besser | am besten |
+| viel | mehr | am meisten |
+| gern | lieber | am liebsten |
+| hoch | höher | am höchsten |
+| nah | näher | am nächsten |
+
+---
+
+### Vergleiche bilden
+
+**als** (Ungleichheit, Komparativ): "Diese Lösung ist effizienter **als** die vorherige."
+**so ... wie** (Gleichheit): "Das Ergebnis ist **so** gut **wie** erwartet."
+
+**Superlativ als Adjektiv vor dem Nomen** (normale Adjektivdeklination): "der schnell**ste** Läufer", "die beste Lösung"
+**Superlativ als Adverb** (am + -sten): "Diese Option funktioniert am besten." """,
+        "examples": [
+            {
+                "label": "Beruflicher Vergleich",
+                "sentence": "Diese Strategie ist **effizienter als** die alte, aber die neue Lösung ist **am effizientesten**.",
+                "note": "Komparativ mit als, Superlativ mit am...-sten"
+            },
+            {
+                "label": "Unregelmäßige Form",
+                "sentence": "Das ist die **beste** Option, die wir bisher gefunden haben.",
+                "note": "gut → besser → am besten / der/die/das beste (unregelmäßig)"
+            },
+            {
+                "label": "Gleichheit mit so...wie",
+                "sentence": "Das Budget ist **nicht so hoch wie** letztes Jahr geplant.",
+                "note": "so...wie für Gleichheit/Ungleichheit ohne Steigerungsform"
+            },
+        ],
+        "mistakes": [
+            "Doppelte Steigerung: ❌ 'mehr besser' → ✅ 'besser'",
+            "wie statt als beim Komparativ: ❌ 'größer wie ich' (umgangssprachlich falsch) → ✅ 'größer als ich'",
+            "Umlaut vergessen: ❌ 'alter' → ✅ 'älter'",
+        ],
+        "exercise_hint": "Lückentext: Komparativ-/Superlativformen einsetzen, inkl. unregelmäßiger Formen. Fehlersuche: als/wie-Verwechslung.",
+    },
+
+    {
+        "id": "genitiv_grundlagen",
+        "title": "Genitiv - Formen und Gebrauch",
+        "level": "B1",
+        "category": "Kasus",
+        "explanation": """Der Genitiv zeigt Zugehörigkeit oder Besitz: "das Auto **des Mannes**" = wessen Auto? Anders als bei den Genitiv-Präpositionen (eigene Regel) geht es hier um den Genitiv als **Attribut** direkt bei einem Nomen.
+
+**Bildung:**
+| | maskulin | feminin | neutral | Plural |
+|--|----------|---------|---------|--------|
+| Artikel | des | der | des | der |
+| Nomen | +(e)s | (bleibt gleich) | +(e)s | (bleibt gleich) |
+
+der Mann → **des Mannes** | die Frau → **der Frau** | das Kind → **des Kindes** | die Leute → **der Leute**
+
+**Genitiv-s:** bei einsilbigen Wörtern meist **-es** (des Mannes, des Kindes), bei mehrsilbigen meist nur **-s** (des Computers, des Berichts).
+
+---
+
+### Genitiv vs. von + Dativ
+In der gesprochenen Sprache ersetzt man den Genitiv oft durch **von + Dativ**: "das Auto **von dem** Mann". Das ist umgangssprachlich korrekt, aber **im formellen Schreiben und auf C1-Niveau gilt der Genitiv als Standard** - "von" wirkt dort stilistisch schwächer.
+
+### Genitiv bei Eigennamen
+Bei Personennamen einfach **-s** anhängen, ohne Artikel: "**Marias** Auto", "**Berlins** Sehenswürdigkeiten". Bei Namen auf -s/-x/-z: Apostroph statt -s: "**Max'** Bericht".""",
+        "examples": [
+            {
+                "label": "Genitiv als Attribut, beruflich",
+                "sentence": "Die Ergebnisse **des Projekts** übertreffen die Erwartungen.",
+                "note": "das Projekt → des Projekts (Genitiv neutral)"
+            },
+            {
+                "label": "Genitiv vs. von + Dativ",
+                "sentence": "Formell: 'die Meinung **des Kunden**.' / Umgangssprachlich: 'die Meinung **von dem** Kunden.'",
+                "note": "Im Aufsatz/Bericht immer die Genitiv-Variante bevorzugen."
+            },
+            {
+                "label": "Eigenname im Genitiv",
+                "sentence": "**Antonys** Vorschlag wurde vom Team positiv aufgenommen.",
+                "note": "Eigenname + s, kein Artikel nötig"
+            },
+        ],
+        "mistakes": [
+            "Genitiv-s vergessen: ❌ 'die Meinung des Kunde' → ✅ 'die Meinung des Kundens' - Vorsicht: 'der Kunde' ist ein N-Deklinations-Nomen (siehe eigene Regel), Genitiv: 'des Kunden'",
+            "von + Dativ im formellen Text überbenutzen: klingt auf C1-Niveau schwächer als der echte Genitiv",
+            "Apostroph vergessen bei Namen auf -s: ❌ 'Max Bericht' → ✅ 'Max' Bericht'",
+        ],
+        "exercise_hint": "Lückentext: richtige Genitivform einsetzen. Satztransformation: von+Dativ-Konstruktionen in Genitiv umformen (für formelle Texte).",
+    },
+
+    {
+        "id": "funktionsverbgefuege",
+        "title": "Funktionsverbgefüge (Nomen-Verb-Verbindungen)",
+        "level": "C1",
+        "category": "Stil",
+        "explanation": """Ein Funktionsverbgefüge ist eine feste Kombination aus einem eher "leeren" Verb (bringen, stellen, nehmen, ziehen, kommen, geben...) und einem Nomen, die zusammen eine eigene Bedeutung haben. Typisch für Berichte, offizielle Texte und C1-Register - eine Ergänzung zum Nominalstil (eigene Regel).
+
+**Häufige Funktionsverbgefüge:**
+
+| Ausdruck | Bedeutung |
+|----------|-----------|
+| **in Betracht ziehen** | erwägen |
+| **zur Verfügung stellen** | geben, bereitstellen |
+| **in Kraft treten** | gültig werden |
+| **zum Ausdruck bringen** | ausdrücken |
+| **Rücksicht nehmen auf** | berücksichtigen |
+| **eine Entscheidung treffen** | entscheiden |
+| **unter Beweis stellen** | beweisen |
+| **in Anspruch nehmen** | nutzen, beanspruchen |
+| **zum Abschluss bringen** | abschließen |
+| **Stellung nehmen zu** | sich äußern zu |
+
+**Warum benutzen?** Funktionsverbgefüge klingen formeller und nominaler als das einfache Verb - typisch für Geschäftsberichte, Verträge und offizielle Kommunikation. Das Nomen im Gefüge hat oft keinen Artikel oder einen festen Artikel, und die Präposition muss mitgelernt werden - nicht frei kombinierbar.""",
+        "examples": [
+            {
+                "label": "in Betracht ziehen",
+                "sentence": "Wir **ziehen** auch alternative Lösungen **in Betracht**.",
+                "note": "= Wir erwägen auch alternative Lösungen. Formeller Klang."
+            },
+            {
+                "label": "zur Verfügung stellen",
+                "sentence": "Das Unternehmen **stellt** den Mitarbeitenden moderne Technik **zur Verfügung**.",
+                "note": "= gibt den Mitarbeitenden moderne Technik"
+            },
+            {
+                "label": "Stellung nehmen zu",
+                "sentence": "Der Vorstand hat noch nicht **Stellung** zu dem Vorwurf **genommen**.",
+                "note": "= hat sich noch nicht geäußert zu dem Vorwurf"
+            },
+        ],
+        "mistakes": [
+            "Falsche Präposition: jedes Funktionsverbgefüge hat eine feste Präposition, die mitgelernt werden muss - 'Rücksicht nehmen AUF', nicht 'für' oder 'bei'",
+            "Verb im Gefüge frei austauschen: ❌ 'eine Entscheidung machen' → ✅ 'eine Entscheidung treffen' (fest, nicht 'machen')",
+            "Artikel falsch setzen: viele Funktionsverbgefüge stehen ohne Artikel ('Stellung nehmen', nicht 'eine Stellung nehmen')",
+        ],
+        "exercise_hint": "Zuordnung: Verb + passendes Nomen zum Funktionsverbgefüge. Lückentext: richtiges Verb im Gefüge einsetzen.",
+    },
+
+    {
+        "id": "textkohaerenz",
+        "title": "Textkohärenz: Pronominaladverbien, Verweiswörter und Gliederungssignale",
+        "level": "C1",
+        "category": "Stil",
+        "explanation": """Auf C1-Niveau muss ein Text zusammenhängend wirken, ohne Wörter ständig zu wiederholen. Drei Werkzeuge dafür:
+
+---
+
+### 1. Pronominaladverbien (da(r)- und wo(r)-Komposita)
+Wenn man sich auf eine **Sache oder Idee** bezieht (nicht auf eine Person), ersetzt man Präposition + Pronomen durch **da(r) + Präposition**:
+"Ich denke an das Meeting." → "Ich denke **daran**." (nicht "an es")
+
+Bei **Personen** bleibt die normale Form: "Ich denke an **ihn**." (keine da-Form bei Personen!)
+
+Für Fragen zu Sachen: **wo(r) + Präposition**, nicht "über was", "für was":
+"**Worüber** sprichst du?" (nicht "Über was sprichst du?")
+
+Häufige Formen: darauf, damit, dazu, davon, dagegen, dafür, darüber / worauf, womit, wozu, wovon, wogegen, wofür, worüber
+
+### 2. Verweiswörter (Rückbezug ohne Wiederholung)
+diesbezüglich · in diesem Zusammenhang · dabei · hierbei · dementsprechend · folglich · diesem Punkt zufolge
+
+### 3. Gliederungssignale (eine Argumentation strukturieren)
+**zunächst** / zum einen → **des Weiteren** / zum anderen → **abschließend** / zusammenfassend
+
+Besonders nützlich für die Erörterung (Aufsatz-Tab): Einleitung mit "zunächst ist zu betonen", Gegenargument mit "dem ist entgegenzuhalten, dass", Schluss mit "zusammenfassend lässt sich festhalten".""",
+        "examples": [
+            {
+                "label": "da-Form bei Sachbezug",
+                "sentence": "Wir haben das Budget erhöht. **Damit** können wir die Deadline halten.",
+                "note": "damit bezieht sich auf 'das Budget erhöhen' (eine Handlung/Sache), nicht auf eine Person"
+            },
+            {
+                "label": "wo-Form in der Frage",
+                "sentence": "**Worauf** bezieht sich diese Aussage genau?",
+                "note": "Frage nach einer Sache → wo(r)-Form, nicht 'Auf was'"
+            },
+            {
+                "label": "Gliederungssignale in der Erörterung",
+                "sentence": "**Zunächst** ist festzuhalten, dass... **Des Weiteren** zeigt sich... **Abschließend** lässt sich sagen, dass...",
+                "note": "Klassisches Gerüst für einen Aufsatz/eine Erörterung"
+            },
+        ],
+        "mistakes": [
+            "da- vergessen bei Sachbezug: ❌ 'Ich interessiere mich für es.' → ✅ 'Ich interessiere mich dafür.'",
+            "'über was' statt 'worüber': in geschriebenem C1-Deutsch gilt die wo-Form als Standard, 'was' + Präposition ist umgangssprachlich",
+            "da-Form bei Personen: ❌ 'Ich denke daran' wenn eine Person gemeint ist → ✅ 'Ich denke an ihn/sie'",
+        ],
+        "exercise_hint": "Satztransformation: Präposition+Pronomen in da-/wo-Form umformen. Aufsatz-Baustein: Gliederungssignale in einen Text einbauen.",
     },
 ]
