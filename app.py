@@ -1183,90 +1183,101 @@ with tab5:
 
     level_colors = {"A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
 
-    for rule in filtered:
-        badge = level_colors.get(rule["level"], "")
+    if not filtered:
+        st.info("Keine Regeln für dieses Niveau.")
+    else:
+        rule_labels = [f"{level_colors.get(r['level'], '')} {r['level']} - {r['title']}" for r in filtered]
+        selected_idx = st.radio(
+            "Regel wählen",
+            options=range(len(filtered)),
+            format_func=lambda i: rule_labels[i],
+            key=f"theory_rule_pick_{level_filter}",
+        )
+        rule = filtered[selected_idx]
         rid = rule["id"]
-        with st.expander(f"{badge} {rule['level']} - {rule['title']}"):
 
-            st.markdown(rule["explanation"])
+        st.divider()
+        st.subheader(rule["title"])
 
-            if rule.get("examples"):
-                st.markdown("---")
-                st.markdown("**Beispiele:**")
-                for ex in rule["examples"]:
-                    st.markdown(f"**{ex['label']}**")
-                    st.markdown(f"> {ex['sentence']}")
-                    if ex.get("note"):
-                        st.caption(ex["note"])
+        st.markdown(rule["explanation"])
 
-            extra_key = f"extra_examples_{rid}"
-            if st.session_state.get(extra_key):
-                st.markdown("**Weitere Beispiele:**")
-                for ex in st.session_state[extra_key]:
-                    st.markdown(f"**{ex.get('label', '')}**")
-                    st.markdown(f"> {ex.get('sentence', '')}")
-                    if ex.get("note"):
-                        st.caption(ex["note"])
-
-            if st.button("Weitere Beispiele generieren", key=f"more_ex_{rid}"):
-                with st.spinner("Claude erstellt neue Beispiele..."):
-                    st.session_state[extra_key] = theory_quiz.generate_more_examples(
-                        rule["title"], rule["explanation"], rule["level"]
-                    )
-                    st.rerun()
-
-            if rule.get("mistakes"):
-                st.markdown("---")
-                st.markdown("**Häufige Fehler:**")
-                for m in rule["mistakes"]:
-                    st.markdown(f"- {m}")
-
-            if rule.get("exercise_hint"):
-                st.markdown("---")
-                st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
-
+        if rule.get("examples"):
             st.markdown("---")
-            st.markdown("**Kurztest zu dieser Regel**")
-            quiz_key = f"quiz_{rid}"
-            if st.button("Kurztest generieren", key=f"gen_quiz_{rid}"):
-                with st.spinner("Claude erstellt einen Test..."):
-                    st.session_state[quiz_key] = theory_quiz.generate_quiz(
-                        rule["title"], rule["explanation"], rule["level"]
-                    )
-                    st.session_state[f"{quiz_key}_submitted"] = False
-                    st.rerun()
+            st.markdown("**Beispiele:**")
+            for ex in rule["examples"]:
+                st.markdown(f"**{ex['label']}**")
+                st.markdown(f"> {ex['sentence']}")
+                if ex.get("note"):
+                    st.caption(ex["note"])
 
-            if st.session_state.get(quiz_key):
-                quiz = st.session_state[quiz_key]
-                quiz_answers = []
+        extra_key = f"extra_examples_{rid}"
+        if st.session_state.get(extra_key):
+            st.markdown("**Weitere Beispiele:**")
+            for ex in st.session_state[extra_key]:
+                st.markdown(f"**{ex.get('label', '')}**")
+                st.markdown(f"> {ex.get('sentence', '')}")
+                if ex.get("note"):
+                    st.caption(ex["note"])
+
+        if st.button("Weitere Beispiele generieren", key=f"more_ex_{rid}"):
+            with st.spinner("Claude erstellt neue Beispiele..."):
+                st.session_state[extra_key] = theory_quiz.generate_more_examples(
+                    rule["title"], rule["explanation"], rule["level"]
+                )
+                st.rerun()
+
+        if rule.get("mistakes"):
+            st.markdown("---")
+            st.markdown("**Häufige Fehler:**")
+            for m in rule["mistakes"]:
+                st.markdown(f"- {m}")
+
+        if rule.get("exercise_hint"):
+            st.markdown("---")
+            st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
+
+        st.markdown("---")
+        st.markdown("**Kurztest zu dieser Regel**")
+        quiz_key = f"quiz_{rid}"
+        if st.button("Kurztest generieren", key=f"gen_quiz_{rid}"):
+            with st.spinner("Claude erstellt einen Test..."):
+                st.session_state[quiz_key] = theory_quiz.generate_quiz(
+                    rule["title"], rule["explanation"], rule["level"]
+                )
+                st.session_state[f"{quiz_key}_submitted"] = False
+                st.rerun()
+
+        if st.session_state.get(quiz_key):
+            quiz = st.session_state[quiz_key]
+            quiz_answers = []
+            for qi, item in enumerate(quiz):
+                st.markdown(f"**{qi+1}. {item.get('frage', '')}**")
+                choice = st.radio(
+                    "Antwort",
+                    options=item.get("optionen", []),
+                    key=f"{quiz_key}_q{qi}",
+                    index=None,
+                    label_visibility="collapsed",
+                )
+                quiz_answers.append(choice)
+
+            if st.button("Test auswerten", key=f"submit_{quiz_key}"):
+                st.session_state[f"{quiz_key}_submitted"] = True
+                st.rerun()
+
+            if st.session_state.get(f"{quiz_key}_submitted"):
+                correct_count = 0
                 for qi, item in enumerate(quiz):
-                    st.markdown(f"**{qi+1}. {item.get('frage', '')}**")
-                    choice = st.radio(
-                        "Antwort",
-                        options=item.get("optionen", []),
-                        key=f"{quiz_key}_q{qi}",
-                        index=None,
-                        label_visibility="collapsed",
-                    )
-                    quiz_answers.append(choice)
-
-                if st.button("Test auswerten", key=f"submit_{quiz_key}"):
-                    st.session_state[f"{quiz_key}_submitted"] = True
-                    st.rerun()
-
-                if st.session_state.get(f"{quiz_key}_submitted"):
-                    correct_count = 0
-                    for qi, item in enumerate(quiz):
-                        options = item.get("optionen", [])
-                        correct_idx = item.get("richtig_index", 0)
-                        correct_answer = options[correct_idx] if correct_idx < len(options) else ""
-                        given = quiz_answers[qi]
-                        if given == correct_answer:
-                            correct_count += 1
-                            st.success(f"{qi+1}. Richtig - {item.get('erklaerung', '')}")
-                        else:
-                            st.error(f"{qi+1}. Falsch. Richtig wäre: {correct_answer} - {item.get('erklaerung', '')}")
-                    st.metric("Ergebnis", f"{correct_count} / {len(quiz)}")
+                    options = item.get("optionen", [])
+                    correct_idx = item.get("richtig_index", 0)
+                    correct_answer = options[correct_idx] if correct_idx < len(options) else ""
+                    given = quiz_answers[qi]
+                    if given == correct_answer:
+                        correct_count += 1
+                        st.success(f"{qi+1}. Richtig - {item.get('erklaerung', '')}")
+                    else:
+                        st.error(f"{qi+1}. Falsch. Richtig wäre: {correct_answer} - {item.get('erklaerung', '')}")
+                st.metric("Ergebnis", f"{correct_count} / {len(quiz)}")
 
 # --- TAB 6: INTERVIEW ---
 with tab6:
