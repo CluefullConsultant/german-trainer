@@ -93,7 +93,7 @@ Wenn mehrere Angaben im Satz sind, kommen sie in dieser Reihenfolge - nicht umge
     {
         "id": "b1_konjunktiv2",
         "title": "Konjunktiv II - Wünsche, Möglichkeiten, höfliche Bitten",
-        "level": "C1",
+        "level": "B1",
         "category": "Verbformen",
         "explanation": """Der Konjunktiv II drückt aus:
 - **Wünsche und Träume:** Was man gern hätte, aber (noch) nicht hat
@@ -880,7 +880,6 @@ Es gibt keine 100%-Regel, aber diese Muster helfen sehr:
 | sprechen | sprach | **gesprochen** | to speak |
 | stehen | stand | **gestanden** | to stand |
 | treffen | traf | **getroffen** | to meet |
-| wissen | wusste | **gewusst** | to know (fact) |
 | tragen | trug | **getragen** | to carry/wear |
 | rufen | rief | **gerufen** | to call |
 | laufen | lief | **gelaufen** | to run/walk |
@@ -929,7 +928,6 @@ Es gibt keine 100%-Regel, aber diese Muster helfen sehr:
 | abweichen | wich ab | **abgewichen** | to deviate |
 | beitragen | trug bei | **beigetragen** | to contribute |
 | einbeziehen | bezog ein | **einbezogen** | to include |
-| voraussetzen | setzte voraus | **vorausgesetzt** | to presuppose |
 | hervorgehen | ging hervor | **hervorgegangen** | to emerge from |
 | zurückgreifen | griff zurück | **zurückgegriffen** | to fall back on |
 
@@ -1237,7 +1235,7 @@ umfahren (trennbar) = to knock over / umfahren (untrennbar) = to drive around"""
 | **ohne** | without | ohne den Kollegen |
 | **um** | around / at (time) | um den Tisch / um 9 Uhr |
 | **bis** | until / up to | bis nächsten Montag |
-| **entlang** | along | den Fluss entlang |
+| **entlang** | along | den Fluss entlang (nachgestellt → Akk.; vorangestellt: 'entlang des Flusses' Gen./formell) |
 
 ---
 
@@ -1589,7 +1587,7 @@ Bei Verben mit Präpositionen: **Wofür? Worauf? Womit? Wovon? Worüber?** (Sach
 | **Dat.** | schnell**em** Kaffee | frisch**er** Milch | kalt**em** Wasser | frisch**en** Äpfeln |
 | **Gen.** | schnell**en** Kaffees | frisch**er** Milch | kalt**en** Wassers | frisch**er** Äpfel |
 
-→ **Merke:** Ohne Artikel trägt das Adjektiv die volle Endung des bestimmten Artikels (der→er, die→e, das→es, den→en...).""",
+→ **Merke:** Ohne Artikel trägt das Adjektiv die volle Endung des bestimmten Artikels (der→er, die→e, das→es, den→en...). **Ausnahme Genitiv mask./neutr.:** dort -en, nicht -es (kalt**en** Wassers, nicht 'kaltes Wassers') - das Nomen trägt bereits die Genitiv-Endung, das Adjektiv verdoppelt sie nicht.""",
         "examples": [
             {
                 "label": "Nach bestimmtem Artikel",
@@ -1706,7 +1704,7 @@ Diese bekommen im Genitiv Singular zusätzlich ein -s: **des Namens** (nicht: de
 |--------|----------|-----------|
 | **-lich** | Geschäft → geschäft**lich** | |
 | **-ig** | Wichtigkeit → wicht**ig** (Rückbildung), Ruhe → ruh**ig** | |
-| **-isch** | Wirtschaft → wirtschaft**lich** / typisch, wirtschaft**lich** | |
+| **-isch** | Chaos → chaot**isch**, Typ → typ**isch** | |
 | **-bar** | (aus Verben) lösen → lös**bar**, machen → mach**bar** | kann getan werden |
 | **-voll** | Verantwortung → verantwortungs**voll** | |
 | **-los** | Verantwortung → verantwortungs**los** | Gegenteil von -voll |
@@ -2170,7 +2168,7 @@ Bei Personennamen einfach **-s** anhängen, ohne Artikel: "**Marias** Auto", "**
             },
         ],
         "mistakes": [
-            "Genitiv-s vergessen: ❌ 'die Meinung des Kunde' → ✅ 'die Meinung des Kundens' - Vorsicht: 'der Kunde' ist ein N-Deklinations-Nomen (siehe eigene Regel), Genitiv: 'des Kunden'",
+            "Genitiv-s vergessen: ❌ 'die Meinung des Kunde' → ✅ 'die Meinung des Kunden' - Vorsicht: 'der Kunde' ist ein N-Deklinations-Nomen (siehe eigene Regel), Genitiv Singular ist 'des Kunden' (kein zusätzliches -s)",
             "von + Dativ im formellen Text überbenutzen: klingt auf C1-Niveau schwächer als der echte Genitiv",
             "Apostroph vergessen bei Namen auf -s: ❌ 'Max Bericht' → ✅ 'Max' Bericht'",
         ],
@@ -2275,5 +2273,1033 @@ Besonders nützlich für die Erörterung (Aufsatz-Tab): Einleitung mit "zunächs
             "da-Form bei Personen: ❌ 'Ich denke daran' wenn eine Person gemeint ist → ✅ 'Ich denke an ihn/sie'",
         ],
         "exercise_hint": "Satztransformation: Präposition+Pronomen in da-/wo-Form umformen. Aufsatz-Baustein: Gliederungssignale in einen Text einbauen.",
+    },
+
+    # ==================== GRUNDLAGEN (A1) ====================
+
+    {
+        "id": "grund_wortarten",
+        "title": "Wortarten - Die Bausteine des Satzes",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Jedes Wort in einem deutschen Satz gehört zu einer **Wortart** (Wortklasse). Die Wortart bestimmt, wie sich ein Wort verhält - ob es dekliniert, konjugiert wird oder unverändert bleibt.
+
+**Die wichtigsten Wortarten:**
+
+| Wortart | Frage/Merkmal | Beispiel |
+|---------|---------------|----------|
+| **Nomen** (Substantiv) | Person, Sache, Begriff; hat immer Genus und Artikel | der Bericht, die Kollegin |
+| **Verb** | Handlung oder Zustand; wird konjugiert | arbeiten, sein |
+| **Adjektiv** | Eigenschaft; beschreibt ein Nomen näher | wichtig, schnell |
+| **Adverb** | beschreibt Verb/Adjektiv/Satz näher; bleibt unverändert | oft, dort, leider |
+| **Pronomen** | steht anstelle eines Nomens | er, dieser, mein |
+| **Präposition** | verbindet ein Nomen mit dem Satz, bestimmt den Kasus | in, mit, wegen |
+| **Konjunktion** | verbindet Sätze oder Satzteile | und, weil, aber |
+| **Artikel** | begleitet das Nomen, zeigt Genus/Kasus/Numerus | der, ein, kein |
+
+---
+
+### Wie erkennt man die Wortart?
+
+- **Nomen:** Großschreibung; man kann einen Artikel davorsetzen (der/die/das Bericht → der Bericht)
+- **Verb:** verändert sich mit der Person (ich arbeite, du arbeitest); Infinitiv endet meist auf -en
+- **Adjektiv:** kann vor einem Nomen mit Endung stehen (ein wichtig**er** Termin) oder nach 'sein' (Der Termin ist wichtig)
+- **Adverb:** bleibt immer gleich, egal in welchem Satz - bekommt selbst nie Endungen
+- **Pronomen:** ersetzt ein Nomen, das schon bekannt ist (Der Kunde ruft an. **Er** hat eine Frage.)
+- **Präposition:** steht vor einem Nomen/Pronomen und verlangt einen bestimmten Kasus (mit **dem** Kunden → Dativ)
+- **Konjunktion:** verbindet zwei Teile, verändert sich selbst nie""",
+        "examples": [
+            {
+                "label": "Nomen erkennen",
+                "sentence": "Der **Kollege** hat den **Bericht** fertiggestellt.",
+                "note": "Beide Wörter sind großgeschrieben und tragen einen Artikel - typisch für Nomen."
+            },
+            {
+                "label": "Verb erkennen",
+                "sentence": "Sie **arbeitet** seit drei Jahren im Unternehmen.",
+                "note": "'arbeitet' verändert sich mit der Person (ich arbeite, du arbeitest...) - das ist ein Verb."
+            },
+            {
+                "label": "Adjektiv vs. Adverb",
+                "sentence": "Das ist ein **schnelles** Auto. Er fährt **schnell**.",
+                "note": "Als Adjektiv vor dem Nomen bekommt 'schnell' eine Endung; als Adverb bleibt es unverändert."
+            },
+            {
+                "label": "Präposition + Kasus",
+                "sentence": "Wir sprechen **über** das Projekt.",
+                "note": "'über' ist eine Präposition und bestimmt hier den Akkusativ ('das Projekt')."
+            },
+        ],
+        "mistakes": [
+            "Adjektiv und Adverb verwechseln: ❌ 'Er fährt schnelles.' → ✅ 'Er fährt schnell.' (Adverb bekommt nie eine Endung)",
+            "Nomen ohne Großschreibung notieren: Nomen sind im Deutschen IMMER großgeschrieben, auch mitten im Satz: ❌ 'der bericht' → ✅ 'der Bericht'",
+            "Präposition und Konjunktion verwechseln: 'wegen' (Präposition + Genitiv) vs. 'weil' (Konjunktion + Nebensatz) drücken beide einen Grund aus, funktionieren aber grammatisch unterschiedlich.",
+        ],
+        "exercise_hint": "Zuordnung: Wörter aus einem Satz der passenden Wortart zuordnen. Mehrfachauswahl: Wortart eines markierten Wortes bestimmen.",
+    },
+
+    {
+        "id": "grund_kasus",
+        "title": "Die vier Kasus (Fälle) - Nominativ, Akkusativ, Dativ, Genitiv",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Der Kasus (Plural: Kasus oder Fälle) zeigt, welche Rolle ein Nomen oder Pronomen im Satz hat. Deutsch hat vier Kasus. Artikel, Adjektiv und manche Pronomen verändern ihre Form je nach Kasus (siehe eigene Regeln zur Deklination).
+
+| Kasus | Frage | Funktion im Satz |
+|-------|-------|-------------------|
+| **Nominativ** | Wer/Was? | Subjekt (wer handelt / worum es geht) |
+| **Akkusativ** | Wen/Was? | Akkusativobjekt (direktes Objekt) |
+| **Dativ** | Wem? | Dativobjekt (indirektes Objekt) |
+| **Genitiv** | Wessen? | Genitivattribut (Zugehörigkeit/Besitz, direkt bei einem Nomen) |
+
+---
+
+### Alle vier Kasus in einem Satz
+
+**Der Chef (Nominativ) gibt dem Kunden (Dativ) den Bericht (Akkusativ) des Projekts (Genitiv).**
+
+- **Der Chef** → Nominativ: Wer gibt? → Subjekt
+- **dem Kunden** → Dativ: Wem gibt er? → Dativobjekt
+- **den Bericht** → Akkusativ: Was gibt er? → Akkusativobjekt
+- **des Projekts** → Genitiv: Wessen Bericht? → Genitivattribut (gehört zu 'den Bericht', nicht zum Verb)
+
+**Wichtig:** Der Kasus hängt vom Verb (bzw. von der Präposition) ab - nicht von der Position im Satz. Deshalb kann man im Deutschen die Wortstellung relativ frei ändern, ohne die Bedeutung zu verlieren.""",
+        "examples": [
+            {
+                "label": "Nominativ (Subjekt)",
+                "sentence": "**Der Kunde** ruft an.",
+                "note": "Wer ruft an? → der Kunde → Nominativ."
+            },
+            {
+                "label": "Akkusativ (direktes Objekt)",
+                "sentence": "Ich sehe **den Kunden**.",
+                "note": "Wen sehe ich? → den Kunden → Akkusativ."
+            },
+            {
+                "label": "Dativ (indirektes Objekt)",
+                "sentence": "Ich helfe **dem Kunden**.",
+                "note": "Wem helfe ich? → dem Kunden → Dativ."
+            },
+            {
+                "label": "Genitiv (Zugehörigkeit)",
+                "sentence": "Das ist das Büro **des Kunden**.",
+                "note": "Wessen Büro? → des Kunden → Genitiv."
+            },
+        ],
+        "mistakes": [
+            "Kasus mit Satzposition verwechseln: die Reihenfolge im Satz zeigt NICHT automatisch den Kasus - nur die Frage (Wer/Wen/Wem/Wessen) zeigt den Kasus zuverlässig.",
+            "Akkusativ und Dativ vertauschen: ❌ 'Ich helfe den Kunden.' → ✅ 'Ich helfe dem Kunden.' (helfen verlangt Dativ, nicht Akkusativ - siehe eigene Regel zu Dativverben)",
+            "Genitiv für das ganze Prädikat statt für ein einzelnes Nomen halten: auf diesem Niveau gehört der Genitiv fast immer zu einem anderen Nomen ('der Bericht des Kunden'), nicht zum Verb - Ausnahme: eine kleine Gruppe seltener Genitiv-Verben wie bedürfen/gedenken (siehe eigene Regel für Fortgeschrittene).",
+        ],
+        "exercise_hint": "Mehrfachauswahl: zu einem markierten Wort im Satz die richtige Frage (Wer/Wen/Wem/Wessen?) und den Kasus bestimmen.",
+    },
+
+    {
+        "id": "grund_genus_numerus",
+        "title": "Genus und Numerus - der/die/das und Singular/Plural",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """**Genus** (grammatisches Geschlecht) und **Numerus** (Anzahl) sind zwei feste Eigenschaften jedes Nomens.
+
+### Genus: maskulin, feminin, neutral
+Jedes deutsche Nomen hat eines von drei Genera, sichtbar am bestimmten Artikel:
+- **der** → maskulin (der Bericht, der Kollege)
+- **die** → feminin (die Firma, die Kollegin)
+- **das** → neutral (das Meeting, das Team)
+
+**Wichtig:** Das Genus ist meistens **arbiträr** (zufällig) und hat oft nichts mit der realen Bedeutung zu tun (das Mädchen ist neutral, obwohl es eine Person ist - weil das Diminutivsuffix -chen immer neutral macht). Es gibt **keine zuverlässige Regel**, um das Genus eines Nomens vorherzusagen - man muss es **immer zusammen mit dem Nomen lernen** (also nicht 'Bericht' lernen, sondern 'der Bericht').
+
+**Zwei feste, ausnahmslose Regeln** (nicht nur Tendenzen):
+- Wörter auf **-chen, -lein** sind immer neutral (das Mädchen, das Fräulein)
+- Wörter auf **-ung, -heit, -keit, -schaft, -ion** sind immer feminin (die Zeitung, die Freiheit)
+
+**Ein paar schwache Tendenzen** (keine festen Regeln, viele Ausnahmen):
+- Wörter auf **-e** sind oft feminin (die Firma - aber: der Junge!)
+- Wörter auf **-ismus, -us** sind oft maskulin (der Kapitalismus)
+
+### Numerus: Singular und Plural
+Jedes Nomen kann in der Einzahl (Singular) oder Mehrzahl (Plural) stehen. Der Plural wird auf sehr unterschiedliche Weise gebildet (-e, -er, -en, -s, Umlaut, oder keine Veränderung) - auch das muss man mit jedem Nomen mitlernen.""",
+        "examples": [
+            {
+                "label": "Drei Genera",
+                "sentence": "**der** Bericht, **die** Firma, **das** Meeting",
+                "note": "Maskulin, feminin, neutral - erkennbar am bestimmten Artikel."
+            },
+            {
+                "label": "Genus ist arbiträr",
+                "sentence": "**das** Mädchen, **der** Tisch, **die** Wand",
+                "note": "Kein logischer Zusammenhang zwischen Bedeutung und Genus - jedes Genus muss auswendig gelernt werden."
+            },
+            {
+                "label": "Singular vs. Plural",
+                "sentence": "**ein** Kollege → **zwei** Kolleg**en**",
+                "note": "Der Plural verändert sowohl den Artikel als auch oft die Endung des Nomens."
+            },
+        ],
+        "mistakes": [
+            "Genus aus der Bedeutung ableiten wollen: ❌ 'das Sonne' (weil man an ein neutrales Objekt denkt) → ✅ 'die Sonne' - Genus hat oft nichts mit der Bedeutung zu tun.",
+            "Genus eines Nomens ohne Artikel lernen: Nomen sollte man nie ohne Artikel lernen, sondern immer als Einheit ('die Firma', nicht nur 'Firma').",
+            "Ein festes Pluralmuster für alle Nomen annehmen: ❌ 'die Berichts' → ✅ 'die Berichte' - jedes Nomen hat seine eigene Pluralform, die man mitlernen muss.",
+        ],
+        "exercise_hint": "Zuordnung: Nomen dem richtigen Artikel (der/die/das) zuordnen. Lückentext: Singular- und Pluralformen einsetzen.",
+    },
+
+    {
+        "id": "grund_partizipien",
+        "title": "Partizip I und Partizip II - was ist ein Partizip?",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Ein Partizip ist eine Verbform, die man wie ein Adjektiv oder Adverb benutzen kann, aber die von einem Verb abgeleitet ist. Deutsch hat zwei Partizipien.
+
+---
+
+### Partizip I - Infinitiv + d
+**Bildung:** Infinitiv + **-d** (z. B. arbeiten → arbeite**nd**, lachen → lache**nd**)
+
+**Bedeutung:** eine Handlung, die **gleichzeitig** und **aktiv** abläuft (noch im Gange) - "während sie tut"
+
+Beispiel: der **arbeitende** Kollege = der Kollege, der (gerade) arbeitet
+
+### Partizip II - ge- + Stamm + -t/-en
+**Bildung:** meistens **ge-** + Verbstamm + **-t** (schwache Verben: gearbeitet) oder **-en** (starke Verben: gesprochen); bei Verben mit untrennbarem Präfix (be-, ver-, ent-...) oder auf -ieren entfällt das ge- (besucht, organisiert)
+
+**Bedeutung:** eine Handlung, die **abgeschlossen** ist, oder ein **passiver** Vorgang - "nachdem etwas getan wurde" bzw. "das, was gemacht wurde"
+
+Beispiel: der **geschriebene** Bericht = der Bericht, der geschrieben wurde
+
+---
+
+**Wichtig auf dieser Stufe:** Diese Regel definiert nur, WAS die beiden Partizipien sind und wie sie gebildet werden. WIE man sie in Sätzen einsetzt (als Partizipialkonstruktion vor dem Nomen, im Perfekt, im Passiv), erklären die eigenen Regeln **"Partizipialkonstruktionen als Adjektiv"**, **"Erweiterte Partizipialkonstruktionen (C1)"**, **"Passiv"** und **"Die Zeitformen im Überblick"**.""",
+        "examples": [
+            {
+                "label": "Partizip I bilden",
+                "sentence": "lachen → **lachend** | steigen → **steigend**",
+                "note": "Infinitiv + d; beschreibt eine laufende, aktive Handlung."
+            },
+            {
+                "label": "Partizip II bilden (schwach)",
+                "sentence": "planen → **geplant**",
+                "note": "ge- + Stamm + -t, weil 'planen' ein schwaches Verb ist."
+            },
+            {
+                "label": "Partizip II bilden (stark)",
+                "sentence": "schreiben → **geschrieben**",
+                "note": "ge- + Stamm (mit Vokalwechsel) + -en, weil 'schreiben' ein starkes Verb ist."
+            },
+            {
+                "label": "Partizip II ohne ge-",
+                "sentence": "organisieren → **organisiert**",
+                "note": "Verben auf -ieren und mit untrennbarem Präfix (be-/ver-/ent-...) bilden das Partizip II ohne ge-."
+            },
+        ],
+        "mistakes": [
+            "Partizip I und II verwechseln: ❌ 'der geschrieben Bericht' für eine noch laufende Handlung → Partizip I (schreibend) beschreibt Gleichzeitigkeit, Partizip II (geschrieben) beschreibt Abgeschlossenes/Passives.",
+            "ge- bei Verben auf -ieren ergänzen: ❌ 'georganisiert' → ✅ 'organisiert'",
+            "Partizip I ohne vollen Infinitivstamm bilden: ❌ 'arbeitd' → ✅ 'arbeitend' (Infinitiv bleibt komplett erhalten, nur -d wird angehängt).",
+        ],
+        "exercise_hint": "Zuordnung: Infinitiv → Partizip I und Partizip II bilden. Mehrfachauswahl: Partizip I oder II im Satz erkennen.",
+    },
+
+    {
+        "id": "grund_verbformen",
+        "title": "Verbformen-Grundbegriffe - Infinitiv, Personalform, Modus",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Um Verbformen zu verstehen, braucht man drei Grundbegriffe.
+
+### Infinitiv (Grundform)
+Die Form, die im Wörterbuch steht - unverändert, ohne Bezug zu einer bestimmten Person. Endet fast immer auf **-en** (arbeiten, sein) oder **-n** (lächeln).
+→ Der Infinitiv steht z. B. nach Modalverben und am Satzende: "Ich **muss** das Angebot **prüfen**."
+
+### Personalform (finite Verbform)
+Die Form, die an eine bestimmte Person angepasst (konjugiert) ist. Sie trägt die Information über Person, Numerus und Zeit.
+Infinitiv **arbeiten** → Personalform: ich arbeit**e**, du arbeit**est**, er arbeit**et**...
+→ Jeder vollständige deutsche Hauptsatz braucht genau eine Personalform an Position 2.
+
+### Modus (Redeweise)
+Der Modus zeigt die Haltung des Sprechers zur Aussage. Es gibt drei Modi:
+- **Indikativ** - eine Tatsache, das Normale (der weitaus häufigste Modus): "Er **arbeitet** heute im Büro."
+- **Konjunktiv** - etwas Berichtetes, Hypothetisches oder Unwirkliches: "Er **arbeite** heute im Büro." (berichtet) / "Er **würde** heute im Büro **arbeiten**." (hypothetisch)
+- **Imperativ** - eine Aufforderung oder ein Befehl: "**Arbeiten** Sie heute im Büro!"
+
+**Für die Vertiefung:** siehe die eigenen Regeln **"Konjunktiv II"**, **"Indirekte Rede - Konjunktiv I"**, **"Imperativ"** und **"Die drei Achsen des Verbs: Tempus, Modus, Genus Verbi"**.""",
+        "examples": [
+            {
+                "label": "Infinitiv",
+                "sentence": "Wir planen, das Projekt bis Freitag **abzuschließen**.",
+                "note": "Grundform des Verbs, hier nach 'planen, ... zu' - keine Personalendung."
+            },
+            {
+                "label": "Personalform",
+                "sentence": "Der Kollege **prüft** die Zahlen.",
+                "note": "'prüft' ist an die 3. Person Singular angepasst - das ist die Personalform."
+            },
+            {
+                "label": "Drei Modi im Vergleich",
+                "sentence": "Indikativ: 'Sie **ist** pünktlich.' / Konjunktiv: 'Sie **wäre** pünktlich, wenn...' / Imperativ: '**Seien** Sie pünktlich!'",
+                "note": "Gleiches Verb (sein), drei verschiedene Haltungen zur Aussage."
+            },
+        ],
+        "mistakes": [
+            "Infinitiv als Personalform benutzen: ❌ 'Ich arbeiten heute.' → ✅ 'Ich arbeite heute.' (Personalform nötig, kein Infinitiv im Hauptsatz)",
+            "Modus mit Modalverben verwechseln: 'können/müssen/wollen' sind eine Wortart (Modalverben), kein Modus - siehe eigene Regel 'Die drei Achsen des Verbs'.",
+            "Konjunktiv für 'selten/unwichtig' halten: der Konjunktiv ist keine Ausnahme, sondern ein fester, häufig gebrauchter Modus (indirekte Rede, Höflichkeit, Hypothesen).",
+        ],
+        "exercise_hint": "Mehrfachauswahl: Ist die markierte Verbform ein Infinitiv oder eine Personalform? Welcher Modus liegt vor?",
+    },
+
+    {
+        "id": "grund_satzglieder",
+        "title": "Satzglieder - Subjekt, Prädikat, Objekt",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Ein Satz besteht aus **Satzgliedern** - Wörtern oder Wortgruppen, die zusammen eine grammatische Funktion erfüllen. Die wichtigsten drei:
+
+| Satzglied | Kasus | Frage | Funktion |
+|-----------|-------|-------|----------|
+| **Subjekt** | Nominativ | Wer/Was? | führt die Handlung aus / worum es im Satz geht |
+| **Prädikat** | - | Was passiert? | das Verb (konjugiert); der Kern jedes Satzes |
+| **Akkusativobjekt** | Akkusativ | Wen/Was? | das direkte Objekt der Handlung |
+| **Dativobjekt** | Dativ | Wem? | das indirekte Objekt (oft die Person, die etwas erhält) |
+
+**Wichtig:** Jeder deutsche Hauptsatz braucht ein Subjekt und ein Prädikat. Objekte sind nur nötig, wenn das Verb sie verlangt (siehe eigene Regeln zu Verben mit Dativ/Akkusativ).
+
+---
+
+### Ein Satz, alle Teile markiert
+
+**Die Assistentin (Subjekt) schickt (Prädikat) dem Kunden (Dativobjekt) die Rechnung (Akkusativobjekt).**
+
+- **Die Assistentin** → Nominativ, Subjekt: Wer schickt?
+- **schickt** → Prädikat: Was passiert?
+- **dem Kunden** → Dativ, Dativobjekt: Wem schickt sie?
+- **die Rechnung** → Akkusativ, Akkusativobjekt: Was schickt sie?""",
+        "examples": [
+            {
+                "label": "Subjekt und Prädikat",
+                "sentence": "**Das Team** (Subjekt) **arbeitet** (Prädikat) konzentriert.",
+                "note": "Minimaler vollständiger Satz: Subjekt + Prädikat reichen aus."
+            },
+            {
+                "label": "Mit Akkusativobjekt",
+                "sentence": "Die Kollegin **liest** den **Bericht**.",
+                "note": "'liest' verlangt ein Akkusativobjekt: Was liest sie? → den Bericht."
+            },
+            {
+                "label": "Mit Dativ- und Akkusativobjekt",
+                "sentence": "Der Chef **gibt** der **Praktikantin** eine **Aufgabe**.",
+                "note": "'geben' verlangt zwei Objekte: Dativ (der Praktikantin) und Akkusativ (eine Aufgabe)."
+            },
+        ],
+        "mistakes": [
+            "Subjekt und Akkusativobjekt verwechseln: nur die Frage Wer/Was (Nominativ) zeigt das Subjekt - nicht die Position am Satzanfang, da im Deutschen auch Objekte vorne stehen können: 'Den Bericht liest die Kollegin.' (Subjekt bleibt 'die Kollegin')",
+            "Prädikat für nur den Infinitiv halten: das Prädikat ist die konjugierte Verbform (Personalform), nicht der Infinitiv - siehe eigene Regel zu Infinitiv/Personalform.",
+            "Satz ohne Prädikat für vollständig halten: ❌ 'Der Kunde die Rechnung.' ist kein vollständiger Satz - es fehlt das Prädikat (Verb).",
+        ],
+        "exercise_hint": "Mehrfachauswahl: Satzglieder (Subjekt/Prädikat/Objekt) in einem Beispielsatz markieren und benennen.",
+    },
+
+    # ==================== NEUE REGELN - LÜCKENAUDIT (B1) ====================
+
+    {
+        "id": "b1_als_wenn",
+        "title": "Temporalsätze mit 'als' und 'wenn' - einmalig oder wiederholt?",
+        "level": "B1",
+        "category": "Konnektoren",
+        "explanation": """'als' und 'wenn' leiten beide einen Temporalsatz ein (Verb ans Ende) und werden oft verwechselt, weil sie im Englischen beide 'when' entsprechen können. Die Wahl hängt von zwei Fragen ab: **Wann?** und **Wie oft?**
+
+| | Zeit | Häufigkeit | Beispiel |
+|--|------|-----------|---------|
+| **als** | nur Vergangenheit | einmaliges Ereignis | **Als** ich den Vertrag unterschrieb, war ich noch skeptisch. |
+| **wenn** | Vergangenheit | wiederholtes Ereignis ('immer wenn') | **Wenn** der Kunde anrief, übernahm meistens meine Kollegin. |
+| **wenn** | Gegenwart / Zukunft | einmalig ODER wiederholt | **Wenn** das Meeting beginnt, schalte ich mein Handy aus. |
+
+**Merkregel:** 'als' gibt es NUR für die Vergangenheit, und NUR für ein einziges, abgeschlossenes Ereignis. Für alles andere (Gegenwart, Zukunft, oder Wiederholung in der Vergangenheit) nimmt man 'wenn'.""",
+        "examples": [
+            {
+                "label": "als (einmalig, Vergangenheit)",
+                "sentence": "**Als** ich am Montag ins Büro kam, war die Präsentation schon fertig.",
+                "note": "Ein einziges, konkretes Ereignis in der Vergangenheit."
+            },
+            {
+                "label": "wenn (wiederholt, Vergangenheit)",
+                "sentence": "**Wenn** ich früher Überstunden machte, brachte mir der Chef immer einen Kaffee.",
+                "note": "'immer wenn' - wiederholtes Ereignis in der Vergangenheit → wenn, nicht als."
+            },
+            {
+                "label": "wenn (Gegenwart/Zukunft)",
+                "sentence": "**Wenn** der Vertrag unterschrieben ist, informiere ich das ganze Team.",
+                "note": "Gegenwart/Zukunft nimmt immer 'wenn', egal ob einmalig oder wiederholt."
+            },
+        ],
+        "mistakes": [
+            "als für Wiederholung in der Vergangenheit: ❌ 'Als wir Probleme hatten, rief ich immer den Support an.' → ✅ 'Wenn wir Probleme hatten, ...' (immer = wiederholt → wenn)",
+            "wenn für ein einmaliges Ereignis in der Vergangenheit: ❌ 'Wenn ich letztes Jahr die Stelle wechselte, war ich nervös.' → ✅ 'Als ich letztes Jahr die Stelle wechselte, ...'",
+            "als für Gegenwart/Zukunft: ❌ 'Als das Meeting morgen beginnt, ...' → ✅ 'Wenn das Meeting morgen beginnt, ...' (als gibt es nur in der Vergangenheit)",
+        ],
+        "exercise_hint": "Lückentext: als oder wenn je nach Zeit und Häufigkeit einsetzen. Fehlersuche mit typischen als/wenn-Verwechslungen.",
+    },
+
+    {
+        "id": "b1_personalpronomen",
+        "title": "Personalpronomen - volle Deklination",
+        "level": "B1",
+        "category": "Kasus",
+        "explanation": """Personalpronomen ersetzen ein Nomen, das schon bekannt ist. Wie Nomen verändern sie ihre Form je nach Kasus - hier aber unregelmäßig und komplett auswendig zu lernen.
+
+| Person | Nominativ | Akkusativ | Dativ |
+|--------|-----------|-----------|-------|
+| ich | ich | **mich** | **mir** |
+| du | du | **dich** | **dir** |
+| er | er | **ihn** | **ihm** |
+| sie (sg.) | sie | **sie** | **ihr** |
+| es | es | **es** | **ihm** |
+| wir | wir | **uns** | **uns** |
+| ihr | ihr | **euch** | **euch** |
+| sie (Pl.) | sie | **sie** | **ihnen** |
+| Sie (Höflichkeitsform) | Sie | **Sie** | **Ihnen** |
+
+**Auffälligkeiten:**
+- **er → ihn/ihm**, aber **es → es/ihm**: es bleibt im Akkusativ gleich, bekommt im Dativ aber die gleiche Form wie 'er' (ihm).
+- **sie (Singular feminin)** und **sie (Plural)** sehen im Nominativ/Akkusativ gleich aus, unterscheiden sich aber im Dativ: **ihr** (Singular) vs. **ihnen** (Plural).
+- Die Höflichkeitsform **Sie/Sie/Ihnen** wird immer großgeschrieben und hat dieselben Endungen wie die 3. Person Plural (sie/sie/ihnen).""",
+        "examples": [
+            {
+                "label": "Akkusativ (er)",
+                "sentence": "Ich habe den Kollegen gesucht, aber ich habe **ihn** nicht gefunden.",
+                "note": "er → ihn im Akkusativ (direktes Objekt)."
+            },
+            {
+                "label": "Dativ (sie, Singular)",
+                "sentence": "Ich habe mit der Kundin gesprochen und **ihr** ein Angebot gemacht.",
+                "note": "sie (feminin, Singular) → ihr im Dativ - nicht zu verwechseln mit dem Possessivartikel 'ihr'."
+            },
+            {
+                "label": "Dativ (sie, Plural) vs. Höflichkeitsform",
+                "sentence": "Ich habe **ihnen** (den Kollegen) die Zahlen geschickt, und ich habe auch **Ihnen** (Herr Neumann) eine Kopie geschickt.",
+                "note": "ihnen (Plural, klein) vs. Ihnen (Höflichkeitsform, immer groß) - gleiche Form, unterschiedliche Bedeutung."
+            },
+        ],
+        "mistakes": [
+            "es im Dativ falsch bilden: ❌ 'Ich schenke es Aufmerksamkeit.' → ✅ 'Ich schenke ihm Aufmerksamkeit.' (es → ihm im Dativ, nicht 'es')",
+            "ihr (Dativ von sie, Singular) mit dem Possessivartikel 'ihr' verwechseln: 'Ich helfe ihr.' (Pronomen, Dativobjekt) vs. 'Das ist ihr Büro.' (Possessivartikel vor Nomen) - äußerlich gleich, grammatisch unterschiedlich.",
+            "Höflichkeitsform klein schreiben: ❌ 'Ich danke ihnen für Ihre Zeit.' wenn eine einzelne angeredete Person gemeint ist → ✅ 'Ich danke Ihnen für Ihre Zeit.' (Höflichkeitsform immer groß)",
+        ],
+        "exercise_hint": "Lückentext: richtiges Personalpronomen (Akkusativ/Dativ) für die passende Person einsetzen. Fehlersuche mit Groß-/Kleinschreibung der Höflichkeitsform.",
+    },
+
+    {
+        "id": "b1_possessivartikel",
+        "title": "Possessivartikel - volle Deklination",
+        "level": "B1",
+        "category": "Kasus",
+        "explanation": """Possessivartikel zeigen Besitz oder Zugehörigkeit (mein, dein...) und stehen wie ein Artikel vor einem Nomen. Jeder Possessivartikel hat einen festen Stamm, abhängig vom Besitzer:
+
+| Person | Possessivartikel |
+|--------|-------------------|
+| ich | **mein** |
+| du | **dein** |
+| er | **sein** |
+| sie (sg.) | **ihr** |
+| es | **sein** |
+| wir | **unser** |
+| ihr | **euer** |
+| sie (Pl.) | **ihr** |
+| Sie | **Ihr** |
+
+**Deklination:** Possessivartikel dekliniert man genau wie 'ein/kein' (siehe Regel 'Adjektivdeklination'). Am Stamm (z. B. mein-) hängt man je nach Kasus/Genus dieselben Endungen an:
+
+| | mask. | fem. | neutr. | Plural |
+|--|-------|------|--------|--------|
+| **Nom.** | mein | mein**e** | mein | mein**e** |
+| **Akk.** | mein**en** | mein**e** | mein | mein**e** |
+| **Dat.** | mein**em** | mein**er** | mein**em** | mein**en** |
+| **Gen.** | mein**es** | mein**er** | mein**es** | mein**er** |
+
+**Sonderfall 'euer':** Wenn eine Endung angehängt wird, fällt das zweite **e** im Stamm weg: **euer** → **eure**, **euren**, **eurem**, **eurer** (nicht 'euere').""",
+        "examples": [
+            {
+                "label": "Nominativ",
+                "sentence": "**Unser** Angebot ist wettbewerbsfähig.",
+                "note": "unser + keine Endung im Nominativ neutrum, wie 'ein'."
+            },
+            {
+                "label": "Akkusativ",
+                "sentence": "Wir haben **euren** Vorschlag geprüft.",
+                "note": "euer → eur- (das zweite e fällt weg) + -en im Akkusativ maskulin."
+            },
+            {
+                "label": "Dativ",
+                "sentence": "Ich habe mit **ihrer** Kollegin gesprochen.",
+                "note": "ihr (Possessivartikel, 3. Person) + -er im Dativ feminin."
+            },
+            {
+                "label": "Höflichkeitsform",
+                "sentence": "Könnten Sie mir **Ihre** Unterlagen schicken?",
+                "note": "Ihr (Höflichkeitsform, immer groß) + -e im Akkusativ Plural."
+            },
+        ],
+        "mistakes": [
+            "euer ohne Elision: ❌ 'euere Idee' → ✅ 'eure Idee' (das zweite e im Stamm fällt bei jeder Endung weg)",
+            "sein (er/es) mit ihr (sie, Singular feminin) verwechseln: 'Der Kollege bringt **seinen** Laptop mit.' (er → sein) vs. 'Die Kollegin bringt **ihren** Laptop mit.' (sie → ihr)",
+            "Possessivartikel-Endung im Dativ/Genitiv vergessen: ❌ 'mit mein Kollegen' → ✅ 'mit meinem Kollegen' (Dativ maskulin braucht -em)",
+        ],
+        "exercise_hint": "Lückentext: richtigen Possessivartikel mit passender Endung je nach Kasus/Genus einsetzen. Fehlersuche mit 'euer' → 'eure'.",
+    },
+
+    {
+        "id": "b1_indefinitpronomen",
+        "title": "Indefinitpronomen - man, jemand, niemand, etwas, nichts, jeder, alle",
+        "level": "B1",
+        "category": "Wortschatz",
+        "explanation": """Indefinitpronomen bezeichnen unbestimmte Personen oder Mengen - man weiß nicht (oder es ist unwichtig), wer oder wie viele genau gemeint sind.
+
+---
+
+### man - die unbestimmte Person
+'man' steht nur im **Nominativ** und hat keinen Plural. Es bedeutet 'jemand/die Leute/du/ich' allgemein - sehr häufig in Anleitungen und allgemeinen Aussagen.
+Die obliquen Formen (Akkusativ/Dativ) werden mit **einen/einem** gebildet, der Possessivartikel ist **sein**:
+"**Man** sollte **seine** E-Mails täglich checken. Das hilft **einem**, den Überblick zu behalten."
+
+### jemand / niemand - eine unbestimmte Person / keine Person
+Werden dekliniert, aber die Endungen im Akkusativ/Dativ sind im modernen Deutsch oft optional:
+| Nom. | Akk. | Dat. |
+|------|------|------|
+| jemand | jemand(en) | jemand(em) |
+| niemand | niemand(en) | niemand(em) |
+
+### etwas / nichts - eine unbestimmte Sache / keine Sache
+Bleiben in **jedem** Kasus unverändert: etwas, nichts (keine Deklination).
+
+### jeder / alle / einige / manche - unbestimmte Mengen
+- **jeder** (Singular, jede/r Einzelne) dekliniert wie der bestimmte Artikel: jeder, jeden, jedem, jedes
+- **alle** (Plural, die Gesamtheit) dekliniert wie der bestimmte Artikel Plural: alle, alle, allen, aller
+- **einige / manche** (Plural, ein Teil einer Menge) deklinieren wie Adjektive ohne Artikel: einige gute Ideen, mit einigen Kollegen""",
+        "examples": [
+            {
+                "label": "man (Nominativ)",
+                "sentence": "In diesem Beruf muss **man** flexibel sein.",
+                "note": "man = eine allgemeine, unbestimmte Person - nur Nominativ."
+            },
+            {
+                "label": "man → einem (obliqu)",
+                "sentence": "Solche Fehler können **einem** leicht passieren.",
+                "note": "Dativ von 'man' ist 'einem', nicht 'man'."
+            },
+            {
+                "label": "jemand / niemand",
+                "sentence": "Hat **jemand** eine Frage? - Nein, **niemand** hat eine Frage.",
+                "note": "jemand/niemand bleiben im Nominativ unverändert."
+            },
+            {
+                "label": "jeder vs. alle",
+                "sentence": "**Jeder** Mitarbeiter bekommt Zugang; **alle** Mitarbeiter wurden informiert.",
+                "note": "jeder = Singular, jeder Einzelne; alle = Plural, die Gesamtheit."
+            },
+        ],
+        "mistakes": [
+            "man im Akkusativ/Dativ verwenden: ❌ 'Das hilft man.' → ✅ 'Das hilft einem.' (man nur Nominativ, sonst einen/einem)",
+            "etwas/nichts deklinieren: ❌ 'mit etwasem Geduld' → ✅ 'mit etwas Geduld' (etwas/nichts bleiben immer unverändert)",
+            "jeder mit Plural-Verb kombinieren: ❌ 'jeder Mitarbeiter kommen' → ✅ 'jeder Mitarbeiter kommt' (jeder ist Singular, Verb entsprechend konjugieren)",
+        ],
+        "exercise_hint": "Lückentext: man/einen/einem oder jemand/niemand/etwas/nichts/jeder/alle je nach Kontext und Kasus einsetzen.",
+    },
+
+    {
+        "id": "b1_brauchen_zu",
+        "title": "brauchen + nicht + zu - Alternative zu 'nicht müssen'",
+        "level": "B1",
+        "category": "Verben",
+        "explanation": """'nicht brauchen + zu + Infinitiv' ist eine gebräuchliche Alternative zu 'nicht müssen'. Beide drücken aus, dass etwas nicht notwendig ist.
+
+**Bildung:** Subjekt + brauchen (konjugiert) + ... + nicht/nur/kein + zu + Infinitiv (am Satzende)
+
+"Sie **brauchen** das Formular **nicht** auszufüllen." = "Sie **müssen** das Formular **nicht** ausfüllen."
+
+**Wichtig:** Anders als beim einfachen Vollverb 'brauchen' (= etwas nötig haben, z. B. 'Ich brauche Zeit') steht hier ein **zu + Infinitiv**, ähnlich wie bei anderen Infinitivkonstruktionen. Im formellen/geschriebenen Deutsch (und im Telc/Goethe-Kontext) gehört das **zu** immer dazu - im gesprochenen Umgangsdeutsch wird es oft weggelassen, gilt aber als nicht standardsprachlich.
+
+**Auch mit 'nur':** 'brauchen nur ... zu' drückt eine Einschränkung aus (= es reicht, wenn...):
+"Sie **brauchen** die Unterlagen **nur** noch zu unterschreiben." = Es ist nur noch diese eine Sache nötig.""",
+        "examples": [
+            {
+                "label": "nicht brauchen zu (= nicht müssen)",
+                "sentence": "Sie **brauchen** sich **nicht** zu entschuldigen.",
+                "note": "= Sie müssen sich nicht entschuldigen. 'zu' gehört fest zur Konstruktion."
+            },
+            {
+                "label": "nur brauchen zu (Einschränkung)",
+                "sentence": "Sie **brauchen** nur **zu** unterschreiben, den Rest erledigen wir.",
+                "note": "= Es ist nur diese eine Handlung nötig, mehr nicht."
+            },
+            {
+                "label": "Beruflicher Kontext",
+                "sentence": "Der Kunde **braucht** die Rechnung **nicht** sofort **zu** bezahlen.",
+                "note": "Höflichere/formellere Alternative zu 'Der Kunde muss die Rechnung nicht sofort bezahlen.'"
+            },
+        ],
+        "mistakes": [
+            "zu weglassen im formellen Schreiben: ❌ 'Sie brauchen das nicht machen.' (nur in lockerer Umgangssprache akzeptiert) → ✅ 'Sie brauchen das nicht zu machen.'",
+            "nicht brauchen zu mit einem Verbot (dürfen nicht) verwechseln: 'nicht brauchen zu' = keine Notwendigkeit (= nicht müssen), kein Verbot: ❌ 'Sie brauchen das nicht zu tun' als Verbot missverstehen.",
+            "brauchen + zu ohne einschränkendes Wort benutzen: die Konstruktion funktioniert nur mit nicht/nur/kein davor - ohne diese bleibt 'brauchen' ein normales Vollverb mit Akkusativobjekt: 'Ich brauche mehr Zeit.' (kein Infinitiv mit zu)",
+        ],
+        "exercise_hint": "Satztransformation: Sätze mit 'nicht müssen' in 'nicht brauchen ... zu' umformen und umgekehrt.",
+    },
+
+    # ==================== NEUE REGELN - LÜCKENAUDIT (B2/C1) ====================
+
+    {
+        "id": "b2_konditionalsaetze",
+        "title": "Konditionalsätze - Typ I, II und III",
+        "level": "B2",
+        "category": "Verbformen",
+        "explanation": """Konditionalsätze (Bedingungssätze) verbinden eine Bedingung (wenn-Satz) mit einer Folge (Hauptsatz). Auf B2/C1-Niveau unterscheidet man drei Typen, je nachdem, wie realistisch die Bedingung ist. **Beide Satzteile stehen im selben Typ** - Bedingung und Folge müssen zusammenpassen.
+
+| Typ | Bedeutung | Wenn-Satz | Hauptsatz (Folge) |
+|-----|-----------|-----------|---------------------|
+| **Typ I** | real, möglich | Indikativ (Präsens) | Indikativ (Präsens/Futur) |
+| **Typ II** | hypothetisch, Gegenwart/Zukunft (unwahrscheinlich oder unwirklich) | Konjunktiv II Präsens | Konjunktiv II Präsens (würde + Infinitiv) |
+| **Typ III** | irreal, Vergangenheit (kann nicht mehr geändert werden) | Konjunktiv II Vergangenheit | Konjunktiv II Vergangenheit |
+
+---
+
+### Typ I - real
+Indikativ in beiden Teilen - die Bedingung ist real erfüllbar.
+**Wenn wir das Budget erhöhen, können wir die Kampagne ausweiten.**
+
+### Typ II - hypothetisch (Gegenwart/Zukunft)
+Konjunktiv II Präsens: 'würde + Infinitiv' (die meisten Verben) oder die unregelmäßigen Formen wäre/hätte/könnte... (siehe Regel 'Konjunktiv II').
+**Wenn wir mehr Budget hätten, würden wir die Kampagne sofort ausweiten.**
+
+### Typ III - irreal (Vergangenheit)
+**Bildung: Konjunktiv II Vergangenheit = hätte/wäre (Konjunktiv II von haben/sein) + Partizip II - in BEIDEN Satzteilen.**
+Ob hätte oder wäre, richtet sich nach demselben Prinzip wie beim Perfekt (haben oder sein als Hilfsverb - siehe Regel 'Schwache, starke und gemischte Verben').
+
+**Wenn wir das Budget erhöht hätten, hätten wir die Kampagne ausgeweitet.**
+(= Wir haben das Budget nicht erhöht → die Kampagne wurde nicht ausgeweitet. Beides liegt in der Vergangenheit und ist nicht mehr änderbar.)
+
+Mit einem sein-Verb: **Wenn er früher losgefahren wäre, wäre er nicht zu spät gekommen.**
+
+**Mit Modalverben im Typ III:** Doppelinfinitiv (Ersatzinfinitiv) statt Partizip II des Modalverbs:
+**Wenn wir das gewusst hätten, hätten wir anders entscheiden können.** (nicht: "...hätten wir anders entscheiden gekonnt")""",
+        "examples": [
+            {
+                "label": "Typ I (real)",
+                "sentence": "**Wenn** der Kunde zusagt, **unterschreiben** wir noch diese Woche.",
+                "note": "Indikativ Präsens in beiden Teilen - realistische Bedingung."
+            },
+            {
+                "label": "Typ II (hypothetisch, Gegenwart)",
+                "sentence": "**Wenn** ich mehr Zeit **hätte**, **würde** ich die Analyse noch vertiefen.",
+                "note": "Konjunktiv II Präsens - momentan nicht der Fall, aber vorstellbar."
+            },
+            {
+                "label": "Typ III (irreal, Vergangenheit)",
+                "sentence": "**Wenn** wir den Fehler früher **entdeckt hätten**, **hätten** wir den Schaden **vermeiden können**.",
+                "note": "Konjunktiv II Vergangenheit (hätten + Partizip II) in beiden Teilen; Modalverb 'können' als Doppelinfinitiv am Ende."
+            },
+            {
+                "label": "Typ III mit sein",
+                "sentence": "**Wenn** sie pünktlich **losgefahren wäre**, **wäre** sie nicht zu spät **gekommen**.",
+                "note": "losfahren/kommen bilden das Perfekt mit sein → also auch hier wäre, nicht hätte."
+            },
+        ],
+        "mistakes": [
+            "Typ III mit würde + Infinitiv statt hätte/wäre + Partizip II bilden: ❌ 'Wenn wir das gewusst würden, würden wir anders handeln.' → ✅ 'Wenn wir das gewusst hätten, hätten wir anders gehandelt.' (Vergangenheit braucht Konjunktiv II Vergangenheit, nicht die würde-Form)",
+            "hätte statt wäre bei sein-Verben: ❌ 'Wenn er früher losgefahren hätte' → ✅ 'Wenn er früher losgefahren wäre' (losfahren bildet das Perfekt mit sein)",
+            "Modalverb im Typ III als Partizip II statt Doppelinfinitiv: ❌ '...hätten wir anders entscheiden gekonnt' → ✅ '...hätten wir anders entscheiden können'",
+            "Typ II und Typ III unbeabsichtigt mischen: die beiden Satzteile sollten im selben Typ stehen, sonst entsteht eine (nur bewusst einzusetzende) gemischte Bedingung.",
+        ],
+        "exercise_hint": "Satztransformation: Sätze zwischen Typ I, II und III umformen. Fehlersuche: falsche Hilfsverb-Wahl (hätte/wäre) und falsche Modalverb-Bildung im Typ III.",
+    },
+
+    {
+        "id": "b2_substantivierte_adjektive",
+        "title": "Substantivierte Adjektive und Partizipien - der/die Angestellte, der/die Deutsche",
+        "level": "B2",
+        "category": "Kasus",
+        "explanation": """Manche Nomen sind eigentlich Adjektive oder Partizipien, die wie ein Nomen benutzt werden (großgeschrieben, mit Artikel) - aber sie **deklinieren weiterhin wie ein Adjektiv**, nicht wie ein normales Nomen.
+
+**Typische substantivierte Adjektive/Partizipien:** der/die Angestellte, der/die Deutsche, der/die Bekannte, der/die Erwachsene, der/die Vorsitzende, der/die Reisende
+
+**Grundprinzip:** Genau dieselbe Endung wie ein normales Adjektiv vor einem Nomen an derselben Stelle (siehe Regel 'Adjektivdeklination') - nur dass hier kein zusätzliches Nomen mehr folgt.
+
+---
+
+### Mit bestimmtem Artikel
+| | mask. | fem. |
+|--|-------|------|
+| **Nom.** | der Angestellt**e** | die Angestellt**e** |
+| **Akk.** | den Angestellt**en** | die Angestellt**e** |
+| **Dat.** | dem Angestellt**en** | der Angestellt**en** |
+| **Gen.** | des Angestellt**en** | der Angestellt**en** |
+
+### Mit unbestimmtem Artikel (kein Artikel zeigt die Endung → Adjektiv muss sie zeigen)
+| | mask. | fem. |
+|--|-------|------|
+| **Nom.** | ein Angestellt**er** | eine Angestellt**e** |
+| **Akk.** | einen Angestellt**en** | eine Angestellt**e** |
+| **Dat.** | einem Angestellt**en** | einer Angestellt**en** |
+| **Gen.** | eines Angestellt**en** | einer Angestellt**en** |
+
+### Plural
+mit Artikel: in allen vier Kasus dieselbe Endung -en (die/die/den/der Angestellt**en**) - nur der Artikel ändert sich; ohne Artikel: Angestellt**e** (Nom./Akk.)""",
+        "examples": [
+            {
+                "label": "Bestimmter Artikel, Nominativ",
+                "sentence": "**Der Angestellte** hat den Vertrag unterschrieben.",
+                "note": "Wie ein Adjektiv nach 'der' → Endung -e (Nominativ maskulin)."
+            },
+            {
+                "label": "Unbestimmter Artikel, Akkusativ",
+                "sentence": "Wir haben **einen Deutschen** als neuen Berater eingestellt.",
+                "note": "Nach 'einen' (kein Artikel-Ende sichtbar außer -en) → Adjektivendung -en (Akkusativ maskulin, wie bei jedem Adjektiv nach 'einen')."
+            },
+            {
+                "label": "Feminin, Dativ",
+                "sentence": "Ich habe mit **einer Bekannten** über das Angebot gesprochen.",
+                "note": "Nach 'einer' → Endung -en (Dativ feminin)."
+            },
+            {
+                "label": "Plural ohne Artikel",
+                "sentence": "**Erwachsene** zahlen den vollen Preis, Kinder die Hälfte.",
+                "note": "Plural ohne Artikel → Endung -e, wie beim Adjektiv ohne Artikel."
+            },
+        ],
+        "mistakes": [
+            "Wie ein normales Nomen ohne Adjektivendung behandeln: ❌ 'der Angestellter' → ✅ 'der Angestellte' (nach bestimmtem Artikel im Nominativ ist die Endung -e, nicht -er)",
+            "Falsche Endung nach 'ein' im Nominativ maskulin: ❌ 'ein Deutsche' → ✅ 'ein Deutscher' (kein Artikel-Signal → Adjektiv braucht -er)",
+            "Eigene weibliche Form mit -in erfinden: ❌ 'die Angestelltin' → ✅ 'die Angestellte' (substantivierte Adjektive haben keine -in-Form; das Genus zeigt allein der Artikel + die Adjektivendung)",
+        ],
+        "exercise_hint": "Lückentext: richtige Endung von der/die Angestellte, Deutsche, Bekannte je nach Artikeltyp und Kasus einsetzen.",
+    },
+
+    {
+        "id": "b2_lassen_kausativ",
+        "title": "Kausativkonstruktion mit 'lassen' - jemanden etwas machen lassen",
+        "level": "B2",
+        "category": "Verben",
+        "explanation": """'lassen' + Akkusativobjekt (Person) + Infinitiv beschreibt, dass man **jemand anderen** etwas tun **lässt** oder **veranlasst** - man tut es nicht selbst. Das ist die Kausativkonstruktion.
+
+**Bildung:** Subjekt + lassen (konjugiert) + Akkusativobjekt (Person) + ... + Infinitiv (Satzende)
+
+"Der Chef **lässt** den Assistenten die Präsentation **vorbereiten**." = Der Chef veranlasst, dass der Assistent die Präsentation vorbereitet (der Chef selbst tut es nicht).
+
+**Zwei Bedeutungen von 'lassen' + Person + Infinitiv:**
+1. **Veranlassen** (jemanden etwas tun lassen): Ich lasse den Techniker den Drucker reparieren.
+2. **Erlauben** (zulassen): Sie lässt ihren Mitarbeiter früher gehen.
+
+**Perfekt: Doppelinfinitiv (Ersatzinfinitiv)** - wie bei Modalverben - **lassen** bleibt im Infinitiv, statt 'gelassen' zu benutzen:
+"Der Chef **hat** den Assistenten die Präsentation **vorbereiten lassen**." (nicht: "...vorbereiten gelassen")
+
+**Wichtig - nicht verwechseln mit 'sich lassen' (Passiv-Ersatzform, siehe eigene Regel 'Passiv-Ersatzformen'):**
+- **Kausativ:** Subjekt lässt eine ANDERE Person etwas tun → "Er lässt **den Techniker** das Gerät reparieren." (Agent genannt)
+- **sich lassen (Passiv-Ersatz):** die SACHE selbst ist Subjekt, kein Akkusativobjekt-Person nötig → "Das Gerät **lässt sich** reparieren." (= kann repariert werden)""",
+        "examples": [
+            {
+                "label": "Kausativ (veranlassen)",
+                "sentence": "Wir **lassen** die Buchhaltung die Rechnung **prüfen**.",
+                "note": "Wir tun es nicht selbst - wir veranlassen, dass die Buchhaltung es tut."
+            },
+            {
+                "label": "Kausativ (erlauben)",
+                "sentence": "Der Vorstand **lässt** die Mitarbeiter im Homeoffice **arbeiten**.",
+                "note": "lassen = erlauben, zulassen."
+            },
+            {
+                "label": "Perfekt mit Doppelinfinitiv",
+                "sentence": "Sie **hat** ihr Auto in der Werkstatt **reparieren lassen**.",
+                "note": "Ersatzinfinitiv 'lassen' statt 'gelassen' im Perfekt."
+            },
+            {
+                "label": "Kausativ vs. sich lassen",
+                "sentence": "Er **lässt** einen Experten die Software **installieren**. / Die Software **lässt sich** leicht **installieren**.",
+                "note": "Erster Satz: jemand anderes handelt (Kausativ). Zweiter Satz: die Software selbst kann installiert werden (Passiv-Ersatz)."
+            },
+        ],
+        "mistakes": [
+            "Perfekt mit 'gelassen' statt Doppelinfinitiv: ❌ 'Er hat sein Auto reparieren gelassen.' → ✅ 'Er hat sein Auto reparieren lassen.'",
+            "Kausativ und sich lassen verwechseln: ❌ 'Er lässt sich das Problem lösen.' wenn eigentlich gemeint ist, dass das Problem gelöst werden kann → dafür braucht man die SACHE als Subjekt: 'Das Problem lässt sich lösen.'",
+            "Akkusativobjekt (Person) vergessen: ❌ 'Der Chef lässt vorbereiten.' → ✅ 'Der Chef lässt den Assistenten vorbereiten.' (die handelnde Person steht im Akkusativ)",
+        ],
+        "exercise_hint": "Satztransformation: Aktivsätze mit einem zweiten Handelnden in die Kausativkonstruktion mit 'lassen' umformen. Fehlersuche: Doppelinfinitiv im Perfekt vs. 'sich lassen'.",
+    },
+
+    {
+        "id": "b2_zustandspassiv_vorgangspassiv",
+        "title": "Zustandspassiv vs. Vorgangspassiv - Ergebnis oder Vorgang?",
+        "level": "B2",
+        "category": "Verbformen",
+        "explanation": """Deutsch unterscheidet zwei Arten von Passiv, je nachdem, ob man einen **laufenden Vorgang** oder ein **fertiges Ergebnis** beschreibt.
+
+**Vorgangspassiv: werden + Partizip II**
+→ beschreibt eine Handlung, die passiert (gerade oder regelmäßig) - der Fokus liegt auf dem Prozess.
+
+**Zustandspassiv: sein + Partizip II**
+→ beschreibt das Ergebnis einer abgeschlossenen Handlung - einen Zustand, der daraus entstanden ist.
+
+---
+
+### Direkter Vergleich
+
+| | Vorgangspassiv (werden) | Zustandspassiv (sein) |
+|--|--------------------------|-------------------------|
+| Präsens | Die Tür **wird geschlossen**. (jemand schließt sie gerade) | Die Tür **ist geschlossen**. (sie ist zu, Ergebnis) |
+| Präteritum | Die Tür **wurde geschlossen**. (der Vorgang fand statt) | Die Tür **war geschlossen**. (der Zustand bestand) |
+
+**Faustregel:** Wenn man fragt "Was passiert gerade / passierte damals?" → Vorgangspassiv. Wenn man fragt "In welchem Zustand ist/war etwas?" → Zustandspassiv.
+
+**Vorsicht bei der Abgrenzung zum echten Adjektiv:** Das Zustandspassiv sieht aus wie 'sein + Adjektiv', ist aber von einem Verb abgeleitet (Partizip II) und beschreibt das Resultat EINER Handlung: "Das Fenster **ist repariert**." (jemand hat es repariert) vs. ein echtes Adjektiv ohne zugrunde liegende Handlung: "Das Fenster **ist kaputt**." (kaputt ist kein Partizip).""",
+        "examples": [
+            {
+                "label": "Vorgangspassiv (Prozess)",
+                "sentence": "Die Unterlagen **werden** gerade **geprüft**.",
+                "note": "Der Vorgang läuft im Moment - jemand prüft sie."
+            },
+            {
+                "label": "Zustandspassiv (Ergebnis)",
+                "sentence": "Die Unterlagen **sind** bereits **geprüft**.",
+                "note": "Die Prüfung ist abgeschlossen - Fokus auf dem Ergebnis, nicht auf dem Prozess."
+            },
+            {
+                "label": "Beide im Kontrast",
+                "sentence": "Das Büro **wird** um 18 Uhr **abgeschlossen**. Ab 18 Uhr **ist** es **abgeschlossen**.",
+                "note": "Erster Satz: der Vorgang des Abschließens. Zweiter Satz: der resultierende Zustand."
+            },
+        ],
+        "mistakes": [
+            "Zustandspassiv als Vorgang missverstehen: 'Die Tür ist geschlossen' beschreibt keinen laufenden Vorgang, sondern einen Zustand - für den Vorgang braucht man 'wird geschlossen'.",
+            "Zustandspassiv mit echtem Adjektiv gleichsetzen: nicht jedes 'sein + Wort' ist Zustandspassiv - nur wenn das Wort ein Partizip II eines Verbs ist ('ist repariert'), nicht bei echten Adjektiven ('ist kaputt', 'ist neu').",
+            "werden im Zustandspassiv verwenden: ❌ 'Die Tür wird seit einer Stunde geschlossen.' wenn ein bereits bestehender Zustand gemeint ist → ✅ 'Die Tür ist seit einer Stunde geschlossen.'",
+        ],
+        "exercise_hint": "Satztransformation/Fehlersuche: Vorgangspassiv (werden) und Zustandspassiv (sein) im Kontext unterscheiden und korrekt bilden.",
+    },
+
+    {
+        "id": "b2_wahrnehmungsverben",
+        "title": "Wahrnehmungsverben + Infinitiv ohne zu - hören, sehen, fühlen, spüren",
+        "level": "B2",
+        "category": "Verben",
+        "explanation": """Verben der direkten Sinneswahrnehmung (hören, sehen, fühlen, spüren) können mit einem **Akkusativobjekt + Infinitiv ohne zu** kombiniert werden, wenn man eine Handlung direkt und gleichzeitig wahrnimmt - ähnlich wie bei Modalverben und bei 'lassen' (siehe eigene Regel).
+
+**Bildung:** Subjekt + Wahrnehmungsverb (konjugiert) + Akkusativobjekt + Infinitiv (Satzende, OHNE zu)
+
+"Ich **höre** ihn **singen**." = Ich höre, wie er (gerade) singt - direkte, gleichzeitige Wahrnehmung.
+
+**Perfekt:** Wie bei 'lassen' ist der Doppelinfinitiv (Ersatzinfinitiv) die Standardform: "Ich **habe** ihn **singen hören**." Anders als bei 'lassen' gilt bei hören/sehen im Sprachgebrauch aber auch die Form mit Partizip II ("...singen gehört") als akzeptabel - im schriftlichen/formellen Deutsch bleibt der Doppelinfinitiv trotzdem die sicherere Wahl.
+
+**Alternative mit dass-Satz:** Wenn man eher berichtet als direkt/gleichzeitig wahrnimmt, ist ein dass-Satz natürlicher:
+"Ich habe gehört, **dass** er ein neues Projekt **leitet**." (Bericht, keine direkte gleichzeitige Wahrnehmung)""",
+        "examples": [
+            {
+                "label": "hören + Infinitiv",
+                "sentence": "Ich **höre** die Kollegin telefonieren.",
+                "note": "Direkte, gleichzeitige Wahrnehmung - Infinitiv ohne zu."
+            },
+            {
+                "label": "sehen + Infinitiv",
+                "sentence": "Wir **sehen** die Kollegen ins Büro **kommen**.",
+                "note": "sehen + Akkusativobjekt (die Kollegen) + Infinitiv (kommen)."
+            },
+            {
+                "label": "Perfekt mit Doppelinfinitiv",
+                "sentence": "Ich **habe** ihn im Nebenraum **sprechen hören**.",
+                "note": "Ersatzinfinitiv 'hören' statt Partizip II 'gehört' - die Standardform im geschriebenen Deutsch."
+            },
+            {
+                "label": "Alternative mit dass",
+                "sentence": "Ich habe gehört, **dass** das Projekt verzögert **wird**.",
+                "note": "Bericht statt direkter Wahrnehmung - hier passt eher ein dass-Satz als der bloße Infinitiv."
+            },
+        ],
+        "mistakes": [
+            "zu vor dem Infinitiv ergänzen: ❌ 'Ich höre ihn zu singen.' → ✅ 'Ich höre ihn singen.' (Infinitiv ohne zu, wie bei Modalverben)",
+            "Akkusativobjekt vergessen: ❌ 'Ich höre singen.' ohne Bezug auf eine Person → ✅ 'Ich höre ihn/sie/die Kollegin singen.'",
+            "Falsche Wortstellung: ❌ 'Ich höre singen ihn.' → ✅ 'Ich höre ihn singen.' (Akkusativobjekt steht vor dem Infinitiv, Infinitiv ganz am Ende)",
+        ],
+        "exercise_hint": "Satztransformation: dass-Sätze in Wahrnehmungsverb-Konstruktionen mit Infinitiv ohne zu umformen. Fehlersuche mit 'zu' und falscher Wortstellung.",
+    },
+
+    {
+        "id": "c1_als_ob",
+        "title": "Irrealer Vergleich - 'als ob' / 'als wenn' + Konjunktiv II",
+        "level": "C1",
+        "category": "Verbformen",
+        "explanation": """'als ob' und 'als wenn' (bedeutungsgleich, 'als ob' ist gebräuchlicher) leiten einen **irrealen Vergleichssatz** ein: man vergleicht die reale Situation mit einer erfundenen, nicht-wirklichen. Deshalb steht danach immer der **Konjunktiv II**.
+
+**Bildung 1: als ob / als wenn + Nebensatz (Verb ans Ende)**
+Er tut, **als ob** er nichts **wüsste**. (in Wirklichkeit weiß er wahrscheinlich etwas)
+
+**Bildung 2: als + Inversion (ohne ob/wenn, Verb direkt nach als)**
+Er tut, **als wüsste** er nichts. (gleiche Bedeutung, kompaktere Konstruktion)
+
+**Welche Zeitform des Konjunktivs?**
+- **Konjunktiv II Präsens** (wäre, hätte, würde + Infinitiv, käme...): wenn der Vergleich sich auf die GLEICHE Zeit wie der Hauptsatz bezieht.
+- **Konjunktiv II Vergangenheit** (hätte/wäre + Partizip II): wenn der Vergleich sich auf eine FRÜHERE Zeit bezieht als der Hauptsatz.
+
+Sie sah aus, **als ob** sie die ganze Nacht **gearbeitet hätte**. (Vergleich bezieht sich auf VORHER, deshalb Konjunktiv II Vergangenheit)""",
+        "examples": [
+            {
+                "label": "als ob + Konjunktiv II Präsens",
+                "sentence": "Er tut, **als ob** er nichts **wüsste**.",
+                "note": "Gleichzeitiger, irrealer Vergleich - Konjunktiv II Präsens von 'wissen'."
+            },
+            {
+                "label": "als + Inversion (ohne ob)",
+                "sentence": "Sie reagierte, **als wäre** nichts **passiert**.",
+                "note": "Kompaktere Variante ohne 'ob' - das Verb steht direkt nach 'als'."
+            },
+            {
+                "label": "Konjunktiv II Vergangenheit (vorzeitig)",
+                "sentence": "Er klang am Telefon, **als ob** er **geweint hätte**.",
+                "note": "Der Vergleich bezieht sich auf etwas VOR dem Anruf → Konjunktiv II Vergangenheit."
+            },
+        ],
+        "mistakes": [
+            "Indikativ statt Konjunktiv II: ❌ 'Er tut, als ob er nichts weiß.' → ✅ '...als ob er nichts wüsste.'",
+            "Konjunktiv II Präsens statt Vergangenheit bei vorzeitigem Vergleich: ❌ 'Sie sah aus, als ob sie die ganze Nacht arbeiten würde.' → ✅ '...als ob sie die ganze Nacht gearbeitet hätte.' (die Handlung liegt VOR dem Hauptsatz)",
+            "als + Nebensatzstellung ohne Inversion: ❌ 'als er nichts wüsste' (ohne ob, aber ohne Inversion) → ✅ entweder 'als ob er nichts wüsste' (Verb am Ende) ODER 'als wüsste er nichts' (Verb direkt nach als, Inversion) - nicht mischen.",
+        ],
+        "exercise_hint": "Satztransformation: Sätze mit 'als ob'/Inversion und passender Konjunktiv-II-Zeitform bilden. Fehlersuche mit Indikativ-Fehlern.",
+    },
+
+    {
+        "id": "c1_indirekte_aufforderung",
+        "title": "Indirekte Aufforderung - sollen in der indirekten Rede",
+        "level": "C1",
+        "category": "Verbformen",
+        "explanation": """Die Regel 'Indirekte Rede - Konjunktiv I' behandelt wiedergegebene Aussagen. Wird stattdessen eine **Aufforderung, Bitte oder ein Befehl** wiedergegeben (im Original ein Imperativ), benutzt man **sollen** statt eines wiederholten Imperativs.
+
+**Bildung:** Einleitungsverb (sagen, bitten, auffordern...) + dass-Satz oder dass-los + sollen (Konjunktiv I oder II) + Infinitiv
+
+Direkte Aufforderung: "**Warten** Sie hier!"
+Indirekte Aufforderung: Er sagte, ich **solle** hier warten. (solle = Konjunktiv I von sollen)
+
+**Konjunktiv I oder II?** Dieselbe Regel wie bei der indirekten Rede allgemein: Wenn die Konjunktiv-I-Form mit dem Indikativ identisch ist (bei wir/sie/Sie: 'sollen' = Indikativ UND Konjunktiv I), weicht man auf **Konjunktiv II ('sollten')** aus, um eindeutig zu bleiben:
+
+Er sagte, **wir sollten** nicht zu spät kommen. (nicht 'wir sollen', das wäre nicht von der Realität unterscheidbar)
+
+**Alternative (oft eleganter):** Infinitivkonstruktion mit 'bitten/auffordern + Akkusativ + zu':
+Er bat mich **darum**, ihm die Unterlagen **zu schicken**. (= Er sagte, ich solle ihm die Unterlagen schicken.)""",
+        "examples": [
+            {
+                "label": "solle (Konjunktiv I, eindeutig)",
+                "sentence": "Der Vorgesetzte sagte, ich **solle** den Bericht bis Freitag fertigstellen.",
+                "note": "solle ≠ soll (Indikativ) - eindeutig als Konjunktiv erkennbar, deshalb keine Ausweichform nötig."
+            },
+            {
+                "label": "sollten (Konjunktiv II, weil solle=soll bei Plural gleich wäre)",
+                "sentence": "Sie teilte mit, wir **sollten** die Präsentation überarbeiten.",
+                "note": "'wir sollen' wäre mit dem Indikativ identisch, deshalb Konjunktiv II 'sollten'."
+            },
+            {
+                "label": "Negative Aufforderung",
+                "sentence": "Er ermahnte uns, wir **sollten** die Frist nicht erneut **verpassen**.",
+                "note": "Verneinte indirekte Aufforderung - 'nicht' vor dem Infinitiv, sollten trägt den Konjunktiv."
+            },
+            {
+                "label": "Alternative mit Infinitivkonstruktion",
+                "sentence": "Die Kundin bat den Kollegen darum, sie **zurückzurufen**.",
+                "note": "bitten + Akkusativ + zu + Infinitiv - oft eleganter als die sollen-Konstruktion."
+            },
+        ],
+        "mistakes": [
+            "Indikativ 'soll/sollen' statt Konjunktiv verwenden, wo Mehrdeutigkeit entsteht: ❌ 'Er sagte, wir sollen pünktlich sein.' → ✅ '...wir sollten pünktlich sein.' (sollen ist bei wir/sie/Sie mit dem Indikativ identisch)",
+            "Den ursprünglichen Imperativ direkt wiederholen: ❌ 'Er sagte, warten Sie hier.' → ✅ 'Er sagte, ich solle hier warten.' (der Imperativ wird nicht einfach zitiert, sondern mit sollen umformuliert)",
+            "sollen mit müssen verwechseln: sollen in der indirekten Aufforderung gibt den ursprünglichen Auftrag/die Bitte einer anderen Person wieder, nicht eine eigene innere Notwendigkeit (siehe Regel 'Modalverben - alle Formen', müssen vs. sollen).",
+        ],
+        "exercise_hint": "Satztransformation: direkte Imperativsätze in indirekte Aufforderungen mit sollen umformen, inklusive der Konjunktiv-I/II-Auswahlregel.",
+    },
+
+    {
+        "id": "c1_genitiv_verben",
+        "title": "Seltene Genitiv-Verben - sich erfreuen, bedürfen, gedenken",
+        "level": "C1",
+        "category": "Kasus",
+        "explanation": """Eine kleine Gruppe von Verben verlangt einen **Genitiv** als Objekt statt Akkusativ oder Dativ. Diese Verben gehören zum sehr formellen, geschriebenen Register (Reden, offizielle Texte, gehobene Berichte) und sind im gesprochenen Alltagsdeutsch selten.
+
+| Verb | Bedeutung | Beispiel |
+|------|-----------|---------|
+| **sich erfreuen + Gen.** | genießen, positiv erleben | Das Angebot erfreut sich großer Beliebtheit. |
+| **bedürfen + Gen.** | brauchen, erfordern (formell) | Die Entscheidung bedarf einer genauen Prüfung. |
+| **gedenken + Gen.** | sich erinnern an, ehren (formell, oft in Reden) | Wir gedenken der Opfer des Unglücks. |
+
+**Konjugation von 'bedürfen'** (unregelmäßig, wie 'dürfen'): ich bed**a**rf, du bed**a**rfst, er bed**a**rf, wir bedürfen, ihr bedürft, sie bedürfen. Präteritum: bedurfte. Partizip II: bedurft.
+
+**Konjugation von 'gedenken'** (wie 'denken', mit Vorsilbe ge-): ich gedenke... Präteritum: gedachte. Partizip II: gedacht.""",
+        "examples": [
+            {
+                "label": "sich erfreuen + Genitiv",
+                "sentence": "Das neue Produkt **erfreut sich** großen **Interesses** bei den Kunden.",
+                "note": "erfreuen + Gen. - formeller Ausdruck für 'ist beliebt/interessant für'."
+            },
+            {
+                "label": "bedürfen + Genitiv",
+                "sentence": "Ein Projekt dieser Größe **bedarf** einer sorgfältigen **Planung**.",
+                "note": "bedürfen + Gen. - formeller Ausdruck für 'braucht'."
+            },
+            {
+                "label": "gedenken + Genitiv",
+                "sentence": "In seiner Rede **gedachte** der Vorstand **der langjährigen Mitarbeiter**.",
+                "note": "gedenken + Gen. - typisch in Reden und Gedenkveranstaltungen."
+            },
+        ],
+        "mistakes": [
+            "Akkusativ statt Genitiv nach gedenken: ❌ 'Wir gedenken die Opfer.' → ✅ 'Wir gedenken der Opfer.'",
+            "Akkusativ statt Genitiv nach bedürfen: ❌ 'Das bedarf eine Prüfung.' → ✅ 'Das bedarf einer Prüfung.'",
+            "bedürfen im Präsens wie ein schwaches Verb konjugieren: ❌ 'es bedürft' → ✅ 'es bedarf' (Vokalwechsel wie bei dürfen: ich darf/bedarf)",
+        ],
+        "exercise_hint": "Lückentext: richtige Genitivform nach sich erfreuen/bedürfen/gedenken einsetzen. Fehlersuche mit Akkusativ-statt-Genitiv-Fehlern.",
+    },
+
+    {
+        "id": "c1_erweiterte_modalpartikeln",
+        "title": "Erweiterte Modalpartikeln - denn, schon, bloß, nur",
+        "level": "C1",
+        "category": "Wortstellung",
+        "explanation": """Über die vier Modalpartikeln aus der Regel 'Modalpartikeln - Gefühle und Haltungen ausdrücken' (doch, mal, ja, eigentlich...) hinaus gibt es weitere, die auf C1-Niveau den Ton eines Satzes feiner steuern.
+
+| Partikel | Kontext | Bedeutung |
+|----------|---------|-----------|
+| **denn** | in Fragen | macht eine Frage weicher, zeigt echtes Interesse (nicht zu verwechseln mit der Konjunktion 'denn' = weil) |
+| **schon** | Aussagen (Zuversicht) | drückt Zuversicht/Beruhigung aus (nicht zu verwechseln mit 'schon' = bereits) |
+| **bloß / nur** | in Aufforderungen (Imperativ) | verstärkt eine Warnung oder Bitte - dringlich oder beruhigend, je nach Ton |
+
+**denn (Modalpartikel) vs. denn (Konjunktion):**
+Als Modalpartikel steht 'denn' in einer Frage und macht sie höflicher/interessierter: "Wie geht es Ihnen **denn**?" Als Konjunktion verbindet 'denn' zwei Hauptsätze und bedeutet 'weil': "Er kam nicht, **denn** er war krank." Nur der Kontext (Frage vs. Grund) unterscheidet die beiden.
+
+**schon (Modalpartikel) vs. schon (Zeitadverb):**
+Als Modalpartikel drückt 'schon' Zuversicht aus: "Das **schaffen** wir **schon**." (= keine Sorge, das klappt) Als Zeitadverb bedeutet 'schon' 'bereits': "Er ist **schon** angekommen."
+
+**bloß / nur in Aufforderungen:** verstärken einen Imperativ - je nach Tonfall als dringliche Warnung oder als beruhigende Einschränkung:
+"Vergessen Sie das **bloß** nicht!" (eindringliche Warnung)
+"Rufen Sie mich **nur** an, wenn es Probleme gibt." (beruhigende Einladung, keine Dringlichkeit)""",
+        "examples": [
+            {
+                "label": "denn in einer Frage",
+                "sentence": "Wo warst du **denn** die ganze Zeit?",
+                "note": "Zeigt echtes Interesse/leichte Verwunderung - keine Konjunktion, kein zweiter Hauptsatz nötig."
+            },
+            {
+                "label": "schon (Zuversicht)",
+                "sentence": "Machen Sie sich keine Sorgen, das **wird schon klappen**.",
+                "note": "schon = Zuversicht, nicht 'bereits' - eine Zeitbedeutung wäre hier unpassend."
+            },
+            {
+                "label": "bloß im Imperativ (Warnung)",
+                "sentence": "Sag das **bloß** nicht dem Kunden!",
+                "note": "Verstärkt die Warnung - dringlicher als ohne Partikel."
+            },
+            {
+                "label": "nur im Imperativ (beruhigend)",
+                "sentence": "Fragen Sie **nur**, wenn etwas unklar ist.",
+                "note": "nur wirkt hier einladend/beruhigend, nicht dringlich."
+            },
+        ],
+        "mistakes": [
+            "denn (Modalpartikel) mit denn (Konjunktion) verwechseln: die Modalpartikel steht in Fragen und braucht keinen zweiten Hauptsatz; die Konjunktion 'denn' verbindet zwei Hauptsätze und bedeutet 'weil' - unterschiedliche Funktion, gleiches Wort.",
+            "schon als Modalpartikel für 'bereits' halten: ❌ 'Das wird schon klappen' als Zeitangabe missverstehen → hier ist 'schon' reine Zuversicht, keine Zeitangabe.",
+            "Modalpartikeln am Satzanfang verwenden: wie die meisten Modalpartikeln (siehe Grundregel) stehen auch denn/schon/bloß/nur nie am Satzanfang, sondern im Mittelfeld nach dem finiten Verb.",
+        ],
+        "exercise_hint": "Mehrfachauswahl: welche Bedeutung hat die Partikel im Kontext (Modalpartikel vs. Konjunktion/Zeitadverb)? Ton-Analyse: dringliche vs. beruhigende Wirkung von bloß/nur erkennen.",
     },
 ]

@@ -1173,15 +1173,31 @@ with tab5:
             st.markdown(f"- ihr: **{imp.get('ihr', '')}**")
             st.markdown(f"- Sie: **{imp.get('Sie', '')}**")
 
-    level_filter = st.selectbox(
-        "Niveau wählen",
-        options=["Alle", "A2", "B1", "B2", "C1"],
-        key="theory_level"
-    )
+    filter_col1, filter_col2 = st.columns(2)
+    with filter_col1:
+        level_filter = st.selectbox(
+            "Niveau wählen",
+            options=["Alle", "A1", "A2", "B1", "B2", "C1"],
+            key="theory_level"
+        )
+    with filter_col2:
+        categories = sorted(set(r["category"] for r in GRAMMAR_RULES))
+        category_filter = st.selectbox(
+            "Kategorie wählen",
+            options=["Alle"] + categories,
+            key="theory_category"
+        )
 
-    filtered = [r for r in GRAMMAR_RULES if level_filter == "Alle" or r["level"] == level_filter]
+    filtered = [
+        r for r in GRAMMAR_RULES
+        if (level_filter == "Alle" or r["level"] == level_filter)
+        and (category_filter == "Alle" or r["category"] == category_filter)
+    ]
 
-    level_colors = {"A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
+    level_order = {"A1": 0, "A2": 1, "B1": 2, "B2": 3, "C1": 4}
+    filtered.sort(key=lambda r: (level_order.get(r["level"], 99), r["category"]))
+
+    level_colors = {"A1": "🔵", "A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
 
     if not filtered:
         st.info("Keine Regeln für dieses Niveau.")
@@ -1250,8 +1266,10 @@ with tab5:
         if st.session_state.get(quiz_key):
             quiz = st.session_state[quiz_key]
             quiz_answers = []
+            diff_labels = {"leicht": "🟢 leicht", "mittel": "🟡 mittel", "schwer": "🔴 schwer"}
             for qi, item in enumerate(quiz):
-                st.markdown(f"**{qi+1}. {item.get('frage', '')}**")
+                diff = diff_labels.get(item.get("schwierigkeit", ""), "")
+                st.markdown(f"**{qi+1}. {item.get('frage', '')}** {diff}")
                 choice = st.radio(
                     "Antwort",
                     options=item.get("optionen", []),

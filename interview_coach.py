@@ -12,6 +12,7 @@ WICHTIGE REGELN (basierend auf Recherche zu deutschen Recruitern):
 - Der Text ist ein Vorschlag zum Ausformulieren, kein auswendig zu lernendes Skript - der Bewerber wird ihn in eigenen Worten sprechen. Schreibe ihn trotzdem so, dass er beim lauten Lesen natürlich klingt (kurze Sätze, keine Schachtelsätze).
 - Passe die Länge an die Ziel-Sprechdauer an (Faustregel: ca. 2,3 Wörter pro Sekunde gesprochen).
 - Register: professionell, aber persönlich und direkt - nicht steif, nicht übertrieben förmlich.
+- Einfache, alltägliche Wortwahl bevorzugen, auch wenn ein selteneres oder "gehobeneres" Wort ebenfalls passen würde. Ziel ist nicht, möglichst anspruchsvolles Vokabular zu zeigen, sondern natürlich und glaubwürdig zu klingen - genau wie ein Muttersprachler sich selbst vorstellen würde. Komplexe Grammatik ist erlaubt, seltene/gestelzte Wörter nicht.
 
 Antworte NUR mit dem fertigen deutschen Text - kein Vorspann, keine Erklärung, keine Anführungszeichen drumherum."""
 

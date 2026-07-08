@@ -35,9 +35,11 @@ def save_exercise(topic: str, exercise_type: str, content: dict, mentor_notes: s
         "content": content,
         "mentor_notes": mentor_notes,
     }).execute()
+    get_exercises.clear()
     return result.data[0]["id"]
 
 
+@st.cache_data(ttl=30)
 def get_exercises(topic_filter: str | None = None, status_filter: str | None = None) -> list[dict]:
     client = get_client()
     query = client.table("exercises").select(
@@ -79,6 +81,9 @@ def save_submission(exercise_id: str, answer: dict) -> str:
         "exercise_id": exercise_id,
         "answer": answer,
     }).execute()
+    get_exercises.clear()
+    get_submissions_for_exercise.clear()
+    get_streak.clear()
     return result.data[0]["id"]
 
 
@@ -88,6 +93,11 @@ def save_claude_feedback(submission_id: str, feedback: str, error_tags: list[str
         "claude_feedback": feedback,
         "error_tags": error_tags,
     }).eq("id", submission_id).execute()
+    get_unreviewed_submissions.clear()
+    get_all_reviewed_submissions.clear()
+    get_exercises.clear()
+    get_top_errors.clear()
+    get_error_stats.clear()
 
 
 def save_mentor_feedback(submission_id: str, feedback: str) -> None:
@@ -96,8 +106,12 @@ def save_mentor_feedback(submission_id: str, feedback: str) -> None:
         "mentor_feedback": feedback,
         "reviewed_at": datetime.now(timezone.utc).isoformat(),
     }).eq("id", submission_id).execute()
+    get_unreviewed_submissions.clear()
+    get_all_reviewed_submissions.clear()
+    get_exercises.clear()
 
 
+@st.cache_data(ttl=30)
 def get_unreviewed_submissions() -> list[dict]:
     client = get_client()
     result = client.table("submissions").select(
@@ -106,6 +120,7 @@ def get_unreviewed_submissions() -> list[dict]:
     return result.data
 
 
+@st.cache_data(ttl=30)
 def get_all_reviewed_submissions() -> list[dict]:
     client = get_client()
     result = client.table("submissions").select(
@@ -124,8 +139,11 @@ def save_vocabulary(words: list[dict], exercise_id: str | None = None) -> None:
         rows.append(row)
     if rows:
         client.table("vocabulary").insert(rows).execute()
+        get_vocabulary.clear()
+        get_due_vocabulary.clear()
 
 
+@st.cache_data(ttl=30)
 def get_due_vocabulary():
     """Words due for review: not reviewed in 3+ days OR never reviewed. Max 10."""
     client = get_client()
@@ -147,14 +165,18 @@ def update_vocabulary_review(vocab_id: str, correct: bool):
         "review_count": row["review_count"] + 1,
         "correct_count": row["correct_count"] + (1 if correct else 0),
     }).eq("id", vocab_id).execute()
+    get_vocabulary.clear()
+    get_due_vocabulary.clear()
 
 
+@st.cache_data(ttl=30)
 def get_vocabulary() -> list[dict]:
     client = get_client()
     result = client.table("vocabulary").select("*").order("added_at", desc=True).execute()
     return result.data
 
 
+@st.cache_data(ttl=30)
 def get_top_errors(limit: int = 3) -> list[dict]:
     """Return the most frequent error tags across all submissions."""
     client = get_client()
@@ -167,12 +189,14 @@ def get_top_errors(limit: int = 3) -> list[dict]:
     return [{"tag": tag, "count": count} for tag, count in counter.most_common(limit)]
 
 
+@st.cache_data(ttl=30)
 def get_submissions_for_exercise(exercise_id: str) -> list[dict]:
     client = get_client()
     result = client.table("submissions").select("*").eq("exercise_id", exercise_id).order("submitted_at", desc=True).execute()
     return result.data
 
 
+@st.cache_data(ttl=30)
 def get_streak() -> int:
     """Count consecutive days with at least one submission ending today."""
     client = get_client()
@@ -194,6 +218,7 @@ def get_streak() -> int:
     return streak
 
 
+@st.cache_data(ttl=30)
 def get_error_stats() -> dict:
     client = get_client()
     result = client.table("submissions").select("error_tags").execute()
@@ -205,6 +230,7 @@ def get_error_stats() -> dict:
     return counts
 
 
+@st.cache_data(ttl=30)
 def get_interview_state() -> dict:
     """Single-row JSONB store for interview pitch practice progress and company variants."""
     client = get_client()
@@ -224,3 +250,4 @@ def save_interview_state(data: dict) -> None:
         }).eq("id", existing[0]["id"]).execute()
     else:
         client.table("interview_practice").insert({"data": data}).execute()
+    get_interview_state.clear()
