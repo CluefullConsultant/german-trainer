@@ -3302,4 +3302,282 @@ Als Modalpartikel drückt 'schon' Zuversicht aus: "Das **schaffen** wir **schon*
         ],
         "exercise_hint": "Mehrfachauswahl: welche Bedeutung hat die Partikel im Kontext (Modalpartikel vs. Konjunktion/Zeitadverb)? Ton-Analyse: dringliche vs. beruhigende Wirkung von bloß/nur erkennen.",
     },
+
+    # ==================== ERGAENZUNG - HAUPTSATZ/NEBENSATZ, FRAGESAETZE, DASS, WANN/WENN, SATZZEICHEN ====================
+
+    {
+        "id": "grund_hauptsatz_nebensatz",
+        "title": "Hauptsatz und Nebensatz - wo steht das Verb?",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Ein deutscher Satz ist entweder ein Hauptsatz oder ein Nebensatz - das entscheidet, wo das konjugierte Verb steht.
+
+**Hauptsatz:**
+- Kann allein stehen (vollständiger Gedanke)
+- Das konjugierte Verb steht an **Position 2**
+
+"Ich lerne heute Deutsch."
+
+**Nebensatz:**
+- Kann NICHT allein stehen - braucht einen Hauptsatz dazu
+- Wird eingeleitet durch eine subordinierende Konjunktion (weil, dass, wenn, obwohl...), ein Relativpronomen (der/die/das...) oder ein Fragewort (wann, warum...)
+- Das konjugierte Verb steht am **ENDE**
+
+"..., weil ich morgen einen Test schreibe."
+
+---
+
+### Zwei Hauptsätze zusammen
+Verbunden durch und/aber/oder/denn - beide Teile bleiben Hauptsätze, jeder mit eigenem Verb an Position 2:
+"Ich lerne Deutsch, **und** ich höre auch Podcasts."
+
+### Hauptsatz + Nebensatz - Reihenfolge ist frei
+- **Hauptsatz zuerst:** "Ich schreibe eine Prüfung, weil ich Deutsch lernen **will**." (Nebensatz-Verb am Ende)
+- **Nebensatz zuerst:** "Weil ich Deutsch lernen will, **schreibe** ich eine Prüfung." (Nebensatz-Verb am Ende; danach im Hauptsatz Verb-Subjekt-Inversion)
+
+**Wichtig:** Steht der Nebensatz VOR dem Hauptsatz, zählt der ganze Nebensatz als Position 1. Das Verb des Hauptsatzes rückt direkt danach auf Position 2 - vor das Subjekt (Inversion).""",
+        "examples": [
+            {
+                "label": "Hauptsatz allein",
+                "sentence": "Ich lerne heute Deutsch.",
+                "note": "Vollständiger Satz, kann allein stehen, Verb an Position 2."
+            },
+            {
+                "label": "Nebensatz mit weil (Verb am Ende)",
+                "sentence": "Ich bin müde, weil ich schlecht **geschlafen habe**.",
+                "note": "weil leitet den Nebensatz ein, das Verb (habe) steht ganz am Ende."
+            },
+            {
+                "label": "Nebensatz vorne, Inversion im Hauptsatz",
+                "sentence": "Weil ich schlecht geschlafen habe, **bin** ich müde.",
+                "note": "Nebensatz = Position 1, danach sofort Verb, dann Subjekt im Hauptsatz."
+            },
+            {
+                "label": "Zwei Hauptsätze mit und",
+                "sentence": "Ich koche, und mein Kollege **deckt** den Tisch.",
+                "note": "Beide Teile sind Hauptsätze, jeweils mit eigenem Verb an Position 2."
+            },
+        ],
+        "mistakes": [
+            "Verb im Nebensatz an Position 2 statt am Ende: ❌ '..., weil ich bin müde.' → ✅ '..., weil ich müde bin.'",
+            "Nach vorangestelltem Nebensatz keine Inversion: ❌ 'Weil ich müde bin, ich gehe früh ins Bett.' → ✅ 'Weil ich müde bin, gehe ich früh ins Bett.'",
+            "Nebensatz als eigenständigen Satz ohne Hauptsatz stehen lassen: ❌ 'Weil ich müde bin.' (allein) ist kein vollständiger Satz - er braucht einen Hauptsatz.",
+        ],
+        "exercise_hint": "Satztransformation: Haupt- und Nebensatz kombinieren, Nebensatz einmal vorne und einmal hinten üben (mit Inversion). Fehlersuche: Verbposition im Nebensatz.",
+    },
+
+    {
+        "id": "grund_fragesaetze",
+        "title": "Fragesätze - W-Fragen und Ja/Nein-Fragen",
+        "level": "A1",
+        "category": "Grundlagen",
+        "explanation": """Es gibt zwei Fragetypen im Deutschen, mit unterschiedlicher Wortstellung.
+
+**W-Fragen (Ergänzungsfragen):**
+Fragewort (wer, was, wann, wo, warum, wie...) + Verb (Position 2) + Rest
+
+"**Wann** **beginnt** das Meeting?"
+
+**Ja/Nein-Fragen (Entscheidungsfragen):**
+Kein Fragewort - das Verb rückt direkt an den Satzanfang (Position 1), das Subjekt folgt danach.
+
+"**Beginnt** das Meeting um 9 Uhr?"
+
+---
+
+### Kontrast: Aussagesatz vs. Frage
+- Aussage: "Das Meeting beginnt um 9 Uhr." (Verb Position 2)
+- Ja/Nein-Frage: "Beginnt das Meeting um 9 Uhr?" (Verb Position 1 - dieselbe Wortstellung wie beim Imperativ)
+- W-Frage: "Wann beginnt das Meeting?" (Fragewort, dann Verb an Position 2)
+
+**Wichtig:** Diese direkte Fragewortstellung gilt nur für direkte Fragen. Wird eine Frage in einen Nebensatz eingebettet ("Er fragt, wann..."), ändert sich die Wortstellung - siehe eigene Regel "Indirekte Fragesätze".""",
+        "examples": [
+            {
+                "label": "W-Frage",
+                "sentence": "**Wo** **wohnst** du?",
+                "note": "Fragewort zuerst, dann das Verb an Position 2."
+            },
+            {
+                "label": "Ja/Nein-Frage",
+                "sentence": "**Wohnst** du in Berlin?",
+                "note": "Kein Fragewort - das Verb steht an Position 1."
+            },
+            {
+                "label": "W-Frage mit Modalverb",
+                "sentence": "**Warum** **kannst** du heute nicht kommen?",
+                "note": "Das Modalverb steht an Position 2, das Vollverb (kommen) am Satzende."
+            },
+            {
+                "label": "Drei Varianten im Vergleich",
+                "sentence": "Er kommt heute. / **Kommt** er heute? / **Wann** **kommt** er?",
+                "note": "Aussage (Verb Pos. 2) - Ja/Nein-Frage (Verb Pos. 1) - W-Frage (Fragewort + Verb Pos. 2)."
+            },
+        ],
+        "mistakes": [
+            "Ja/Nein-Frage nur durch Intonation markieren, ohne die Wortstellung zu ändern: ❌ 'Du wohnst in Berlin?' als geschriebene Frage → ✅ 'Wohnst du in Berlin?' (Verb muss an Position 1)",
+            "Nach dem Fragewort das Verb nicht an Position 2 setzen: ❌ 'Wo du wohnst?' → ✅ 'Wo wohnst du?'",
+            "Die direkte Fragewortstellung in einer indirekten Frage beibehalten: siehe eigene Regel 'Indirekte Fragesätze' - dort steht das Verb am Ende, nicht an Position 2.",
+        ],
+        "exercise_hint": "Satztransformation: Aussagesätze in W-Fragen und Ja/Nein-Fragen umformen.",
+    },
+
+    {
+        "id": "a2_dass_saetze",
+        "title": "dass-Sätze - Nebensätze mit dass",
+        "level": "A2",
+        "category": "Konnektoren",
+        "explanation": """'dass' leitet einen Nebensatz ein, der als Objekt oder Subjekt eines übergeordneten Verbs/Ausdrucks dient. Wie bei jedem Nebensatz steht das konjugierte Verb am Ende.
+
+**Typische auslösende Verben/Ausdrücke:**
+glauben, wissen, hoffen, sagen, denken, finden, sich freuen (dass), froh sein (dass), es ist wichtig (dass)...
+
+"Ich glaube, **dass** der Kunde morgen **anruft**."
+
+---
+
+### dass vs. ob - oft verwechselt
+- **dass** = eine Tatsache oder Meinung wiedergeben (kein Zweifel, DASS es passiert)
+- **ob** = Ja/Nein-Unsicherheit ausdrücken
+
+"Ich weiß, **dass** er kommt." (Tatsache) vs. "Ich weiß nicht, **ob** er kommt." (Unsicherheit)
+
+### dass vs. Infinitivkonstruktion mit zu
+Sind Haupt- und Nebensatz-Subjekt gleich, ist oft eine einfache Infinitivkonstruktion mit 'zu' eleganter als ein dass-Satz:
+
+"Ich hoffe, **dass ich** die Prüfung bestehe." = "Ich hoffe, die Prüfung **zu bestehen**." (gleiches Subjekt: ich)
+
+Sind die Subjekte unterschiedlich, MUSS ein dass-Satz stehen: "Ich hoffe, **dass er** die Prüfung besteht." (er ≠ ich - kein zu-Infinitiv möglich)""",
+        "examples": [
+            {
+                "label": "dass nach glauben",
+                "sentence": "Ich glaube, **dass** das Angebot **passt**.",
+                "note": "dass leitet den Nebensatz ein, Verb steht am Ende."
+            },
+            {
+                "label": "dass vs. ob",
+                "sentence": "Ich bin sicher, **dass** sie kommt. / Ich bin nicht sicher, **ob** sie kommt.",
+                "note": "dass = Tatsache/Meinung, ob = echte Unsicherheit."
+            },
+            {
+                "label": "dass bei unterschiedlichem Subjekt",
+                "sentence": "Er hofft, **dass** wir pünktlich **sind**.",
+                "note": "Subjekte (er/wir) sind unterschiedlich - dass-Satz nötig, kein zu-Infinitiv möglich."
+            },
+            {
+                "label": "dass-Satz als Subjekt am Satzanfang",
+                "sentence": "**Dass** er zu spät **kam**, hat niemanden überrascht.",
+                "note": "Ein dass-Satz kann auch als Subjekt des Hauptsatzes am Satzanfang stehen."
+            },
+        ],
+        "mistakes": [
+            "Verb im dass-Satz nicht ans Ende stellen: ❌ 'Ich glaube, dass ist das richtig.' → ✅ 'Ich glaube, dass das richtig ist.'",
+            "dass und ob verwechseln: ❌ 'Ich weiß nicht, dass er kommt.' bei echter Unsicherheit → ✅ 'Ich weiß nicht, ob er kommt.'",
+            "dass-Satz benutzen, obwohl das Subjekt identisch ist und ein zu-Infinitiv eleganter wäre: nicht falsch, aber auf B1+ Niveau stilistisch schwächer - 'Ich hoffe, zu kommen.' besser als 'Ich hoffe, dass ich komme.' wenn beide Subjekte gleich sind.",
+        ],
+        "exercise_hint": "Lückentext: dass oder ob je nach Kontext einsetzen. Satztransformation: dass-Satz in zu-Infinitiv umformen (bei gleichem Subjekt).",
+    },
+
+    {
+        "id": "b1_wann_wenn",
+        "title": "wann (Fragewort) vs. wenn (Konjunktion)",
+        "level": "B1",
+        "category": "Konnektoren",
+        "explanation": """'wann' und 'wenn' werden oft verwechselt, weil beide im Englischen 'when' entsprechen können - sie haben aber unterschiedliche Funktionen.
+
+**wann = Fragewort** (fragt nach einem Zeitpunkt, direkt oder indirekt)
+
+"**Wann** kommst du?" (direkte Frage) / "Ich weiß nicht, **wann** er **kommt**." (indirekte Frage - siehe eigene Regel "Indirekte Fragesätze")
+
+**wenn = Konjunktion** (leitet einen Nebensatz ein, Verb ans Ende)
+- Bedingung (= falls): "**Wenn** es regnet, bleibe ich zu Hause."
+- Zeitpunkt in Gegenwart/Zukunft, oder wiederholt in der Vergangenheit (siehe eigene Regel "als vs. wenn"): "**Wenn** das Meeting beginnt, schalte ich mein Handy aus."
+
+**Der Trigger-Test:** Lässt sich das Wort durch "zu welchem Zeitpunkt?" ersetzen und bleibt eine echte Frage? → **wann**. Lässt es sich durch "falls" oder "jedes Mal wenn" ersetzen? → **wenn**.""",
+        "examples": [
+            {
+                "label": "wann als Fragewort",
+                "sentence": "**Wann** beginnt die Prüfung?",
+                "note": "Direkte Frage nach dem Zeitpunkt."
+            },
+            {
+                "label": "wann in indirekter Frage",
+                "sentence": "Er hat gefragt, **wann** die Prüfung **beginnt**.",
+                "note": "Verb am Ende, weil es sich um einen Nebensatz handelt."
+            },
+            {
+                "label": "wenn als Bedingung",
+                "sentence": "**Wenn** ich Zeit habe, rufe ich dich an.",
+                "note": "wenn = falls, keine Frage."
+            },
+            {
+                "label": "Kontrast im selben Kontext",
+                "sentence": "**Wann** kommst du? / **Wenn** du kommst, sag Bescheid.",
+                "note": "Erstes: Frage nach dem Zeitpunkt. Zweites: Bedingung/Zeitpunkt, kein Fragewort."
+            },
+        ],
+        "mistakes": [
+            "wenn statt wann in einer echten Frage: ❌ 'Wenn beginnt das Meeting?' → ✅ 'Wann beginnt das Meeting?'",
+            "wann statt wenn in einem Bedingungssatz: ❌ 'Wann es regnet, bleibe ich zu Hause.' → ✅ 'Wenn es regnet, bleibe ich zu Hause.'",
+            "wann in indirekter Frage mit Hauptsatz-Wortstellung: ❌ 'Er hat gefragt, wann beginnt die Prüfung.' → ✅ 'Er hat gefragt, wann die Prüfung beginnt.' (Verb ans Ende, da Nebensatz)",
+        ],
+        "exercise_hint": "Lückentext: wann oder wenn je nach Funktion (Frage vs. Bedingung/Zeitpunkt) einsetzen.",
+    },
+
+    {
+        "id": "a2_satzzeichen",
+        "title": "Satzzeichen - die wichtigsten Kommaregeln",
+        "level": "A2",
+        "category": "Satzkonstruktion",
+        "explanation": """Deutsche Kommaregeln folgen meist der Satzstruktur, nicht dem Sprechrhythmus - anders als im Englischen.
+
+**Komma IMMER vor einem Nebensatz** (egal ob er vor oder nach dem Hauptsatz steht):
+"Ich bleibe zu Hause**,** weil es regnet." / "Weil es regnet**,** bleibe ich zu Hause."
+
+**Komma IMMER vor Relativsätzen:**
+"Das ist der Kollege**,** der mir geholfen hat."
+
+**Komma IMMER vor 'aber' und 'sondern'** (auch zwischen zwei vollständigen Hauptsätzen):
+"Ich wollte kommen**,** aber ich hatte keine Zeit."
+
+**Komma vor 'und'/'oder' zwischen zwei vollständigen Hauptsätzen ist OPTIONAL** (seit der Rechtschreibreform von 1996), wird aber oft zur Klarheit gesetzt:
+"Ich koche**,** und mein Kollege deckt den Tisch." (Komma möglich, aber nicht verpflichtend)
+
+**KEIN Komma vor 'und'/'oder', wenn beide Verben ein gemeinsames Subjekt teilen** (nur eine Personalform, kein zweiter vollständiger Satz):
+"Ich koche und decke den Tisch." (ein Subjekt "ich", zwei Verben - kein Komma)
+
+**Komma um Infinitivgruppen mit 'zu':**
+Bei Infinitivgruppen, die mit **um, ohne, (an)statt** eingeleitet werden, ist das Komma verpflichtend:
+"Er kam früher, **um** die Präsentation vorzubereiten."
+
+Bei anderen, einfachen zu-Infinitivgruppen (ohne um/ohne/(an)statt) ist das Komma seit der Reform von 1996 optional, wird aber oft zur Klarheit gesetzt:
+"Er hat versucht**,** pünktlich zu kommen." (Komma hier möglich, nicht verpflichtend)""",
+        "examples": [
+            {
+                "label": "Komma vor Nebensatz (weil)",
+                "sentence": "Er kam zu spät, weil der Zug Verspätung hatte.",
+                "note": "Komma trennt Hauptsatz und Nebensatz - immer verpflichtend."
+            },
+            {
+                "label": "Komma vor Relativsatz",
+                "sentence": "Das ist die E-Mail, die ich gestern geschickt habe.",
+                "note": "Komma vor dem Relativpronomen - immer verpflichtend."
+            },
+            {
+                "label": "Komma vor aber",
+                "sentence": "Wir wollten früher gehen, aber das Meeting dauerte länger.",
+                "note": "Vor 'aber' steht immer ein Komma, auch zwischen zwei Hauptsätzen."
+            },
+            {
+                "label": "Kein Komma bei gemeinsamem Subjekt und 'und'",
+                "sentence": "Sie liest den Bericht und schreibt eine Antwort.",
+                "note": "Ein Subjekt (sie), zwei Verben - kein Komma vor 'und'."
+            },
+        ],
+        "mistakes": [
+            "Komma vor Nebensatz vergessen: ❌ 'Ich bleibe zu Hause weil es regnet.' → ✅ 'Ich bleibe zu Hause, weil es regnet.'",
+            "Komma vor 'und' setzen, obwohl nur ein Subjekt vorhanden ist: ❌ 'Sie liest den Bericht, und schreibt eine Antwort.' → ✅ 'Sie liest den Bericht und schreibt eine Antwort.' (kein zweites Subjekt, kein Komma)",
+            "Komma vor 'aber' vergessen: ❌ 'Ich wollte kommen aber ich hatte keine Zeit.' → ✅ 'Ich wollte kommen, aber ich hatte keine Zeit.' (aber verlangt IMMER ein Komma davor)",
+        ],
+        "exercise_hint": "Fehlersuche: fehlende oder falsch gesetzte Kommas in Sätzen mit Nebensätzen, Relativsätzen und aber/und identifizieren und korrigieren.",
+    },
 ]

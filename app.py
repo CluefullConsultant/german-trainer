@@ -7,6 +7,175 @@ import db
 import json
 import vocab_practice
 import content_feed
+import theory_quiz
+import verb_conjugator
+
+
+def render_grammar_rule(rule):
+    """Render a single grammar_theory.py rule: explanation, examples, mistakes, quiz."""
+    rid = rule["id"]
+
+    st.divider()
+    st.subheader(rule["title"])
+
+    st.markdown(rule["explanation"])
+
+    if rule.get("examples"):
+        st.markdown("---")
+        st.markdown("**Beispiele:**")
+        for ex in rule["examples"]:
+            st.markdown(f"**{ex['label']}**")
+            st.markdown(f"> {ex['sentence']}")
+            if ex.get("note"):
+                st.caption(ex["note"])
+
+    extra_key = f"extra_examples_{rid}"
+    if st.session_state.get(extra_key):
+        st.markdown("**Weitere Beispiele:**")
+        for ex in st.session_state[extra_key]:
+            st.markdown(f"**{ex.get('label', '')}**")
+            st.markdown(f"> {ex.get('sentence', '')}")
+            if ex.get("note"):
+                st.caption(ex["note"])
+
+    if st.button("Weitere Beispiele generieren", key=f"more_ex_{rid}"):
+        with st.spinner("Claude erstellt neue Beispiele..."):
+            st.session_state[extra_key] = theory_quiz.generate_more_examples(
+                rule["title"], rule["explanation"], rule["level"]
+            )
+            st.rerun()
+
+    if rule.get("mistakes"):
+        st.markdown("---")
+        st.markdown("**Häufige Fehler:**")
+        for m in rule["mistakes"]:
+            st.markdown(f"- {m}")
+
+    if rule.get("exercise_hint"):
+        st.markdown("---")
+        st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
+
+    st.markdown("---")
+    st.markdown("**Kurztest zu dieser Regel**")
+    quiz_key = f"quiz_{rid}"
+    if st.button("Kurztest generieren", key=f"gen_quiz_{rid}"):
+        with st.spinner("Claude erstellt einen Test..."):
+            st.session_state[quiz_key] = theory_quiz.generate_quiz(
+                rule["title"], rule["explanation"], rule["level"]
+            )
+            st.session_state[f"{quiz_key}_submitted"] = False
+            st.rerun()
+
+    if st.session_state.get(quiz_key):
+        quiz = st.session_state[quiz_key]
+        quiz_answers = []
+        diff_labels = {"leicht": "🟢 leicht", "mittel": "🟡 mittel", "schwer": "🔴 schwer"}
+        for qi, item in enumerate(quiz):
+            diff = diff_labels.get(item.get("schwierigkeit", ""), "")
+            st.markdown(f"**{qi+1}. {item.get('frage', '')}** {diff}")
+            choice = st.radio(
+                "Antwort",
+                options=item.get("optionen", []),
+                key=f"{quiz_key}_q{qi}",
+                index=None,
+                label_visibility="collapsed",
+            )
+            quiz_answers.append(choice)
+
+        if st.button("Test auswerten", key=f"submit_{quiz_key}"):
+            st.session_state[f"{quiz_key}_submitted"] = True
+            st.rerun()
+
+        if st.session_state.get(f"{quiz_key}_submitted"):
+            correct_count = 0
+            for qi, item in enumerate(quiz):
+                options = item.get("optionen", [])
+                correct_idx = item.get("richtig_index", 0)
+                correct_answer = options[correct_idx] if correct_idx < len(options) else ""
+                given = quiz_answers[qi]
+                if given == correct_answer:
+                    correct_count += 1
+                    st.success(f"{qi+1}. Richtig - {item.get('erklaerung', '')}")
+                else:
+                    st.error(f"{qi+1}. Falsch. Richtig wäre: {correct_answer} - {item.get('erklaerung', '')}")
+            st.metric("Ergebnis", f"{correct_count} / {len(quiz)}")
+
+
+def render_verb_conjugator_tool():
+    """Render the on-demand full verb conjugation expander - mirrors a standard Flexionstabelle
+    (Indikativ, Konjunktiv I/II, Imperativ, Partizip Präsens/Perfekt)."""
+    with st.expander("Vollständige Verbkonjugation - jedes Verb in jeder Zeit und jedem Modus"):
+        st.caption("Indikativ (6 Zeiten), Konjunktiv I (inkl. Futur), Konjunktiv II, Imperativ, Partizip Präsens/Perfekt.")
+
+        st.markdown("**Schnellauswahl - die wichtigsten Verben:**")
+        chip_cols = st.columns(6)
+        for i, v in enumerate(verb_conjugator.WICHTIGE_VERBEN):
+            with chip_cols[i % 6]:
+                if st.button(v, key=f"verb_chip_{v}"):
+                    st.session_state["conjugator_verb_input"] = v
+                    with st.spinner(f"Claude konjugiert '{v}'..."):
+                        st.session_state["conjugation_result"] = verb_conjugator.generate_full_conjugation(v)
+                    st.rerun()
+
+        verb_input = st.text_input(
+            "Oder ein anderes Verb eingeben (Infinitiv)",
+            value=st.session_state.get("conjugator_verb_input", ""),
+            placeholder="z.B. sprechen, gehen, denken...",
+        )
+        if st.button("Volle Konjugation anzeigen", type="primary") and verb_input.strip():
+            with st.spinner("Claude konjugiert..."):
+                st.session_state["conjugation_result"] = verb_conjugator.generate_full_conjugation(verb_input.strip())
+
+        if st.session_state.get("conjugation_result"):
+            data = st.session_state["conjugation_result"]
+            sf = data.get("stammformen", {})
+            st.markdown(f"### {data.get('verb', verb_input)}")
+            st.caption(
+                f"Infinitiv: {sf.get('infinitiv', '')} | Präteritum (er/sie): {sf.get('praeteritum_3', '')} | "
+                f"Partizip II: {sf.get('partizip2', '')} | Hilfsverb: {sf.get('hilfsverb', '')}"
+            )
+
+            def _render_person_table(tense_dict):
+                rows = "| Person | Form |\n|---|---|\n"
+                for p in verb_conjugator.PERSON_ORDER:
+                    rows += f"| {verb_conjugator.PERSON_LABELS[p]} | {tense_dict.get(p, '')} |\n"
+                st.markdown(rows)
+
+            st.markdown("**Indikativ**")
+            ind = data.get("indikativ", {})
+            for key, label in [
+                ("praesens", "Präsens"), ("praeteritum", "Präteritum"), ("perfekt", "Perfekt"),
+                ("plusquamperfekt", "Plusquamperfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
+            ]:
+                with st.expander(label):
+                    _render_person_table(ind.get(key, {}))
+
+            st.markdown("**Konjunktiv I**")
+            k1 = data.get("konjunktiv1", {})
+            for key, label in [
+                ("praesens", "Präsens"), ("perfekt", "Perfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
+            ]:
+                with st.expander(f"Konjunktiv I - {label}"):
+                    _render_person_table(k1.get(key, {}))
+
+            st.markdown("**Konjunktiv II**")
+            k2 = data.get("konjunktiv2", {})
+            for key, label in [("praeteritum", "Präteritum"), ("plusquamperfekt", "Plusquamperfekt")]:
+                with st.expander(f"Konjunktiv II - {label}"):
+                    _render_person_table(k2.get(key, {}))
+
+            st.markdown("**Imperativ**")
+            imp = data.get("imperativ", {})
+            if imp.get("hat_imperativ", True):
+                st.markdown(f"- du: **{imp.get('du', '')}**")
+                st.markdown(f"- ihr: **{imp.get('ihr', '')}**")
+                st.markdown(f"- Sie: **{imp.get('Sie', '')}**")
+            else:
+                st.caption("Dieses Verb hat keinen gebräuchlichen Imperativ (z.B. Modalverben).")
+
+            st.markdown("**Unpersönliche Formen**")
+            st.markdown(f"- Partizip Präsens: **{data.get('partizip_praesens', '')}**")
+            st.markdown(f"- Partizip Perfekt: **{sf.get('partizip2', '')}**")
 
 
 def render_exercise(content, exercise_type):
@@ -198,14 +367,35 @@ try:
 except Exception:
     pass
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab4, tab_grundlagen, tab5, tab6 = st.tabs([
     "Aufgaben erstellen",
     "Üben",
-    "Fortschritt",
     "Heute lernen",
+    "Grundlagen",
     "Theorie",
     "Interview",
 ])
+
+# ==================== GRUNDLAGEN-KATEGORIE-IDS ====================
+# Diese Regeln werden im Tab "Grundlagen" gezeigt, nicht im Tab "Theorie" (keine Duplikate).
+GRUNDLAGEN_RULE_IDS = [
+    "grund_wortarten",
+    "grund_satzglieder",
+    "grund_hauptsatz_nebensatz",
+    "grund_fragesaetze",
+    "grund_kasus",
+    "grund_genus_numerus",
+    "adjektivdeklination",
+    "n_deklination",
+    "grund_verbformen",
+    "verben_schwach_stark",
+    "zeitformen_ueberblick",
+    "grund_partizipien",
+    "verb_drei_achsen",
+    "genus_verbi_ueberblick",
+    "b1_konjunktiv2",
+    "imperativ",
+]
 
 # --- TAB 1: AUFGABEN ERSTELLEN ---
 with tab1:
@@ -880,39 +1070,6 @@ with tab2:
             else:
                 st.info("Horst hat noch kein Feedback gegeben.")
 
-# --- TAB 3: FORTSCHRITT ---
-with tab3:
-    st.header("Fortschritt")
-
-    all_ex = db.get_exercises(None, None)
-    reviewed_subs = db.get_all_reviewed_submissions()
-    error_stats = db.get_error_stats()
-
-    # Activity summary
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Aufgaben gesamt", len(all_ex))
-    with col2:
-        st.metric("Bewertet vom Mentor", len(reviewed_subs))
-    with col3:
-        briefe = [e for e in all_ex if e.get("exercise_type") == "Brief schreiben"]
-        st.metric("Briefe geschrieben", len(briefe))
-    with col4:
-        streak = db.get_streak()
-        st.metric("Tage in Folge", f"{streak} 🔥" if streak > 0 else "0")
-
-    st.divider()
-
-    # Error stats by topic
-    st.subheader("Fehler nach Thema")
-    if error_stats:
-        sorted_errors = sorted(error_stats.items(), key=lambda x: x[1], reverse=True)
-        for topic_name, count in sorted_errors:
-            st.markdown(f"**{topic_name}:** {count} Fehler")
-            st.progress(min(count / max(error_stats.values()), 1.0))
-    else:
-        st.info("Noch keine Fehlerdaten vorhanden. Lösen Sie Aufgaben und reichen Sie Antworten ein.")
-
 # --- TAB 4: HEUTE LERNEN ---
 with tab4:
     st.header("Heute lernen")
@@ -1116,62 +1273,31 @@ with tab4:
                                 st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")
 
 # --- TAB 5: THEORIE ---
+with tab_grundlagen:
+    from grammar_theory import GRAMMAR_RULES
+
+    st.header("Grundlagen")
+    st.caption("Die Bausteine, auf denen alles andere aufbaut: Wortarten, Kasus, Deklination, Verbformen, Zeiten, Partizip, Konjunktiv.")
+
+    render_verb_conjugator_tool()
+
+    rules_by_id = {r["id"]: r for r in GRAMMAR_RULES}
+    grundlagen_rules = [rules_by_id[rid] for rid in GRUNDLAGEN_RULE_IDS if rid in rules_by_id]
+
+    grund_labels = [r["title"] for r in grundlagen_rules]
+    grund_idx = st.radio(
+        "Thema wählen",
+        options=range(len(grundlagen_rules)),
+        format_func=lambda i: grund_labels[i],
+        key="grundlagen_rule_pick",
+    )
+    render_grammar_rule(grundlagen_rules[grund_idx])
+
 with tab5:
     from grammar_theory import GRAMMAR_RULES
-    import theory_quiz
-    import verb_conjugator
 
     st.header("Grammatik-Theorie")
-    st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst.")
-
-    with st.expander("Vollständige Verbkonjugation - jedes Verb in jeder Zeit und jedem Modus"):
-        st.caption("Indikativ (6 Zeiten), Konjunktiv I, Konjunktiv II, Imperativ - alle 6 Personen.")
-        verb_input = st.text_input("Verb eingeben (Infinitiv)", placeholder="z.B. sprechen, gehen, sein, nehmen...")
-        if st.button("Volle Konjugation anzeigen", type="primary") and verb_input.strip():
-            with st.spinner("Claude konjugiert..."):
-                st.session_state["conjugation_result"] = verb_conjugator.generate_full_conjugation(verb_input.strip())
-
-        if st.session_state.get("conjugation_result"):
-            data = st.session_state["conjugation_result"]
-            sf = data.get("stammformen", {})
-            st.markdown(f"### {data.get('verb', verb_input)}")
-            st.caption(
-                f"Infinitiv: {sf.get('infinitiv', '')} | Präteritum (er/sie): {sf.get('praeteritum_3', '')} | "
-                f"Partizip II: {sf.get('partizip2', '')} | Hilfsverb: {sf.get('hilfsverb', '')}"
-            )
-
-            def _render_person_table(tense_dict):
-                rows = "| Person | Form |\n|---|---|\n"
-                for p in verb_conjugator.PERSON_ORDER:
-                    rows += f"| {verb_conjugator.PERSON_LABELS[p]} | {tense_dict.get(p, '')} |\n"
-                st.markdown(rows)
-
-            st.markdown("**Indikativ**")
-            ind = data.get("indikativ", {})
-            for key, label in [
-                ("praesens", "Präsens"), ("praeteritum", "Präteritum"), ("perfekt", "Perfekt"),
-                ("plusquamperfekt", "Plusquamperfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
-            ]:
-                with st.expander(label):
-                    _render_person_table(ind.get(key, {}))
-
-            st.markdown("**Konjunktiv I**")
-            k1 = data.get("konjunktiv1", {})
-            for key, label in [("praesens", "Präsens"), ("perfekt", "Perfekt")]:
-                with st.expander(f"Konjunktiv I - {label}"):
-                    _render_person_table(k1.get(key, {}))
-
-            st.markdown("**Konjunktiv II**")
-            k2 = data.get("konjunktiv2", {})
-            for key, label in [("praesens", "Präsens"), ("perfekt", "Perfekt")]:
-                with st.expander(f"Konjunktiv II - {label}"):
-                    _render_person_table(k2.get(key, {}))
-
-            st.markdown("**Imperativ**")
-            imp = data.get("imperativ", {})
-            st.markdown(f"- du: **{imp.get('du', '')}**")
-            st.markdown(f"- ihr: **{imp.get('ihr', '')}**")
-            st.markdown(f"- Sie: **{imp.get('Sie', '')}**")
+    st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst. Die Grundlagen (Kasus, Deklination, Verbformen, Zeiten) findest du im Tab \"Grundlagen\".")
 
     filter_col1, filter_col2 = st.columns(2)
     with filter_col1:
@@ -1181,7 +1307,7 @@ with tab5:
             key="theory_level"
         )
     with filter_col2:
-        categories = sorted(set(r["category"] for r in GRAMMAR_RULES))
+        categories = sorted(set(r["category"] for r in GRAMMAR_RULES if r["id"] not in GRUNDLAGEN_RULE_IDS))
         category_filter = st.selectbox(
             "Kategorie wählen",
             options=["Alle"] + categories,
@@ -1190,7 +1316,8 @@ with tab5:
 
     filtered = [
         r for r in GRAMMAR_RULES
-        if (level_filter == "Alle" or r["level"] == level_filter)
+        if r["id"] not in GRUNDLAGEN_RULE_IDS
+        and (level_filter == "Alle" or r["level"] == level_filter)
         and (category_filter == "Alle" or r["category"] == category_filter)
     ]
 
@@ -1209,93 +1336,7 @@ with tab5:
             format_func=lambda i: rule_labels[i],
             key=f"theory_rule_pick_{level_filter}",
         )
-        rule = filtered[selected_idx]
-        rid = rule["id"]
-
-        st.divider()
-        st.subheader(rule["title"])
-
-        st.markdown(rule["explanation"])
-
-        if rule.get("examples"):
-            st.markdown("---")
-            st.markdown("**Beispiele:**")
-            for ex in rule["examples"]:
-                st.markdown(f"**{ex['label']}**")
-                st.markdown(f"> {ex['sentence']}")
-                if ex.get("note"):
-                    st.caption(ex["note"])
-
-        extra_key = f"extra_examples_{rid}"
-        if st.session_state.get(extra_key):
-            st.markdown("**Weitere Beispiele:**")
-            for ex in st.session_state[extra_key]:
-                st.markdown(f"**{ex.get('label', '')}**")
-                st.markdown(f"> {ex.get('sentence', '')}")
-                if ex.get("note"):
-                    st.caption(ex["note"])
-
-        if st.button("Weitere Beispiele generieren", key=f"more_ex_{rid}"):
-            with st.spinner("Claude erstellt neue Beispiele..."):
-                st.session_state[extra_key] = theory_quiz.generate_more_examples(
-                    rule["title"], rule["explanation"], rule["level"]
-                )
-                st.rerun()
-
-        if rule.get("mistakes"):
-            st.markdown("---")
-            st.markdown("**Häufige Fehler:**")
-            for m in rule["mistakes"]:
-                st.markdown(f"- {m}")
-
-        if rule.get("exercise_hint"):
-            st.markdown("---")
-            st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
-
-        st.markdown("---")
-        st.markdown("**Kurztest zu dieser Regel**")
-        quiz_key = f"quiz_{rid}"
-        if st.button("Kurztest generieren", key=f"gen_quiz_{rid}"):
-            with st.spinner("Claude erstellt einen Test..."):
-                st.session_state[quiz_key] = theory_quiz.generate_quiz(
-                    rule["title"], rule["explanation"], rule["level"]
-                )
-                st.session_state[f"{quiz_key}_submitted"] = False
-                st.rerun()
-
-        if st.session_state.get(quiz_key):
-            quiz = st.session_state[quiz_key]
-            quiz_answers = []
-            diff_labels = {"leicht": "🟢 leicht", "mittel": "🟡 mittel", "schwer": "🔴 schwer"}
-            for qi, item in enumerate(quiz):
-                diff = diff_labels.get(item.get("schwierigkeit", ""), "")
-                st.markdown(f"**{qi+1}. {item.get('frage', '')}** {diff}")
-                choice = st.radio(
-                    "Antwort",
-                    options=item.get("optionen", []),
-                    key=f"{quiz_key}_q{qi}",
-                    index=None,
-                    label_visibility="collapsed",
-                )
-                quiz_answers.append(choice)
-
-            if st.button("Test auswerten", key=f"submit_{quiz_key}"):
-                st.session_state[f"{quiz_key}_submitted"] = True
-                st.rerun()
-
-            if st.session_state.get(f"{quiz_key}_submitted"):
-                correct_count = 0
-                for qi, item in enumerate(quiz):
-                    options = item.get("optionen", [])
-                    correct_idx = item.get("richtig_index", 0)
-                    correct_answer = options[correct_idx] if correct_idx < len(options) else ""
-                    given = quiz_answers[qi]
-                    if given == correct_answer:
-                        correct_count += 1
-                        st.success(f"{qi+1}. Richtig - {item.get('erklaerung', '')}")
-                    else:
-                        st.error(f"{qi+1}. Falsch. Richtig wäre: {correct_answer} - {item.get('erklaerung', '')}")
-                st.metric("Ergebnis", f"{correct_count} / {len(quiz)}")
+        render_grammar_rule(filtered[selected_idx])
 
 # --- TAB 6: INTERVIEW ---
 with tab6:
