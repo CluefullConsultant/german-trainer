@@ -852,44 +852,52 @@ with tab5:
     st.header("Grammatik-Theorie")
     st.caption("B1 bis C1 - alle Regeln, die du für Telc und den Arbeitsalltag brauchst. Die Grundlagen (Kasus, Deklination, Verbformen, Zeiten) findest du im Tab \"Grundlagen\".")
 
-    filter_col1, filter_col2 = st.columns(2)
-    with filter_col1:
-        level_filter = st.selectbox(
-            "Niveau wählen",
-            options=["Alle", "A1", "A2", "B1", "B2", "C1"],
-            key="theory_level"
-        )
-    with filter_col2:
-        categories = sorted(set(r["category"] for r in GRAMMAR_RULES if r["id"] not in GRUNDLAGEN_RULE_IDS))
-        category_filter = st.selectbox(
-            "Kategorie wählen",
-            options=["Alle"] + categories,
-            key="theory_category"
-        )
+    categories = sorted(set(r["category"] for r in GRAMMAR_RULES if r["id"] not in GRUNDLAGEN_RULE_IDS))
+    category_filter = st.selectbox(
+        "Kategorie wählen (optional, engt alle Niveaus gleichzeitig ein)",
+        options=["Alle"] + categories,
+        key="theory_category"
+    )
 
     filtered = [
         r for r in GRAMMAR_RULES
         if r["id"] not in GRUNDLAGEN_RULE_IDS
-        and (level_filter == "Alle" or r["level"] == level_filter)
         and (category_filter == "Alle" or r["category"] == category_filter)
     ]
 
-    level_order = {"A1": 0, "A2": 1, "B1": 2, "B2": 3, "C1": 4}
-    filtered.sort(key=lambda r: (level_order.get(r["level"], 99), r["category"]))
-
+    level_order = ["A2", "B1", "B2", "C1"]
     level_colors = {"A1": "🔵", "A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
+    level_names = {"A2": "Grundstufe", "B1": "Mittelstufe I", "B2": "Mittelstufe II", "C1": "Oberstufe"}
 
     if not filtered:
-        st.info("Keine Regeln für dieses Niveau.")
+        st.info("Keine Regeln für diese Kategorie.")
     else:
-        rule_labels = [f"{level_colors.get(r['level'], '')} {r['level']} - {r['title']}" for r in filtered]
-        selected_idx = st.radio(
-            "Regel wählen",
-            options=range(len(filtered)),
-            format_func=lambda i: rule_labels[i],
-            key=f"theory_rule_pick_{level_filter}",
-        )
-        render_grammar_rule(filtered[selected_idx])
+        if "theory_selected_rule_id" not in st.session_state:
+            st.session_state["theory_selected_rule_id"] = None
+
+        st.markdown("**Regel wählen** - nach Niveau gruppiert, auf einen Abschnitt klicken zum Öffnen:")
+        for level in level_order:
+            level_rules = sorted(
+                [r for r in filtered if r["level"] == level],
+                key=lambda r: r["category"]
+            )
+            if not level_rules:
+                continue
+            with st.expander(f"{level_colors.get(level, '')} {level} - {level_names.get(level, '')} ({len(level_rules)})"):
+                last_category = None
+                for r in level_rules:
+                    if r["category"] != last_category:
+                        st.caption(r["category"])
+                        last_category = r["category"]
+                    if st.button(r["title"], key=f"theory_pick_{r['id']}", use_container_width=True):
+                        st.session_state["theory_selected_rule_id"] = r["id"]
+                        st.rerun()
+
+        selected_rule = next((r for r in filtered if r["id"] == st.session_state["theory_selected_rule_id"]), None)
+        if selected_rule:
+            render_grammar_rule(selected_rule)
+        else:
+            st.info("Wählen Sie oben ein Niveau und dann eine Regel aus.")
 
 # --- TAB 6: INTERVIEW ---
 with tab6:
