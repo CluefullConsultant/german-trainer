@@ -133,34 +133,31 @@ def render_verb_conjugator_tool():
                 f"Partizip II: {sf.get('partizip2', '')} | Hilfsverb: {sf.get('hilfsverb', '')}"
             )
 
-            def _render_person_table(tense_dict):
-                rows = "| Person | Form |\n|---|---|\n"
+            def _render_tense_grid(tense_group, columns):
+                """One table: rows = persons, columns = the given (key, label) tenses. Shows immediately, no clicks."""
+                header = "| Person | " + " | ".join(label for _, label in columns) + " |\n"
+                header += "|---|" + "---|" * len(columns) + "\n"
+                rows = header
                 for p in verb_conjugator.PERSON_ORDER:
-                    rows += f"| {verb_conjugator.PERSON_LABELS[p]} | {tense_dict.get(p, '')} |\n"
+                    cells = [tense_group.get(key, {}).get(p, "") for key, _ in columns]
+                    rows += f"| {verb_conjugator.PERSON_LABELS[p]} | " + " | ".join(cells) + " |\n"
                 st.markdown(rows)
 
             st.markdown("**Indikativ**")
-            ind = data.get("indikativ", {})
-            for key, label in [
+            _render_tense_grid(data.get("indikativ", {}), [
                 ("praesens", "Präsens"), ("praeteritum", "Präteritum"), ("perfekt", "Perfekt"),
                 ("plusquamperfekt", "Plusquamperfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
-            ]:
-                with st.expander(label):
-                    _render_person_table(ind.get(key, {}))
+            ])
 
             st.markdown("**Konjunktiv I**")
-            k1 = data.get("konjunktiv1", {})
-            for key, label in [
+            _render_tense_grid(data.get("konjunktiv1", {}), [
                 ("praesens", "Präsens"), ("perfekt", "Perfekt"), ("futur1", "Futur I"), ("futur2", "Futur II"),
-            ]:
-                with st.expander(f"Konjunktiv I - {label}"):
-                    _render_person_table(k1.get(key, {}))
+            ])
 
             st.markdown("**Konjunktiv II**")
-            k2 = data.get("konjunktiv2", {})
-            for key, label in [("praeteritum", "Präteritum"), ("plusquamperfekt", "Plusquamperfekt")]:
-                with st.expander(f"Konjunktiv II - {label}"):
-                    _render_person_table(k2.get(key, {}))
+            _render_tense_grid(data.get("konjunktiv2", {}), [
+                ("praeteritum", "Präteritum"), ("plusquamperfekt", "Plusquamperfekt"),
+            ])
 
             st.markdown("**Imperativ**")
             imp = data.get("imperativ", {})
