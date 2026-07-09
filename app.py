@@ -8,6 +8,18 @@ import content_feed
 import theory_quiz
 import verb_conjugator
 import theme
+import pronunciation
+
+
+def render_pronunciation_button(text: str, key: str):
+    """Small inline button that plays back German audio for the given text via Amazon Polly."""
+    if st.button("🔊", key=f"pron_{key}", help=f"'{text}' anhören"):
+        with st.spinner("Audio wird geladen..."):
+            try:
+                audio_bytes = pronunciation.synthesize_speech(text)
+                st.audio(audio_bytes, format="audio/mp3", autoplay=True)
+            except Exception as e:
+                st.error(f"Aussprache konnte nicht geladen werden: {e}")
 
 
 def render_grammar_rule(rule):
@@ -22,9 +34,13 @@ def render_grammar_rule(rule):
     if rule.get("examples"):
         st.markdown("---")
         st.markdown("**Beispiele:**")
-        for ex in rule["examples"]:
+        for i, ex in enumerate(rule["examples"]):
             st.markdown(f"**{ex['label']}**")
-            st.markdown(f"> {ex['sentence']}")
+            sent_col, audio_col = st.columns([9, 1])
+            with sent_col:
+                st.markdown(f"> {ex['sentence']}")
+            with audio_col:
+                render_pronunciation_button(ex["sentence"].replace("*", ""), key=f"{rid}_ex_{i}")
             if ex.get("note"):
                 st.caption(ex["note"])
 
@@ -653,8 +669,12 @@ with tab4:
             level_badge = {"A1": "🟢", "A2": "🟢", "B1": "🟡", "B2": "🟠", "C1": "🔴"}
 
             with st.expander("Neue Wörter von heute", expanded=True):
-                for w in nouns + verbs:
-                    st.markdown(f"**{w['word']}** {level_badge.get(w.get('level', ''), '')}{context_badge.get(w.get('context', ''), '')}")
+                for wi, w in enumerate(nouns + verbs):
+                    word_col, audio_col = st.columns([9, 1])
+                    with word_col:
+                        st.markdown(f"**{w['word']}** {level_badge.get(w.get('level', ''), '')}{context_badge.get(w.get('context', ''), '')}")
+                    with audio_col:
+                        render_pronunciation_button(w['word'], key=f"daily_vocab_{wi}")
                     st.caption(w['definition'])
                     st.caption(f"_{w['example']}_")
                     st.divider()
@@ -682,7 +702,11 @@ with tab4:
             else:
                 word = due_words[idx]
                 with st.container(border=True):
-                    st.markdown(f"**{word['word']}**")
+                    word_col, audio_col = st.columns([9, 1])
+                    with word_col:
+                        st.markdown(f"**{word['word']}**")
+                    with audio_col:
+                        render_pronunciation_button(word['word'], key=f"practice_vocab_{idx}")
                     st.caption(word['definition'])
                     st.caption(f"Beispiel: {word['example']}")
 
@@ -725,7 +749,11 @@ with tab4:
         with st.expander(f"Vokabelliste ({len(vocab_list)} Einträge)"):
             if vocab_list:
                 for entry in vocab_list:
-                    st.markdown(f"**{entry['word']}**")
+                    word_col, audio_col = st.columns([9, 1])
+                    with word_col:
+                        st.markdown(f"**{entry['word']}**")
+                    with audio_col:
+                        render_pronunciation_button(entry['word'], key=f"vocab_list_{entry['id']}")
                     st.caption(entry['definition'])
                     st.caption(f"_{entry['example']}_")
                     st.divider()
