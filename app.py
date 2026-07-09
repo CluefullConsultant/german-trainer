@@ -7,6 +7,7 @@ import vocab_practice
 import content_feed
 import theory_quiz
 import verb_conjugator
+import theme
 
 
 def render_grammar_rule(rule):
@@ -296,6 +297,7 @@ def render_exercise(content, exercise_type):
 
 
 st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
+theme.inject_custom_theme()
 
 st.title("Deutsch Trainer")
 st.caption("Ein Lernwerkzeug für Horst und Antony")
