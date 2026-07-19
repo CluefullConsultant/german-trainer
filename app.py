@@ -313,10 +313,17 @@ def render_exercise(content, exercise_type):
 
 
 st.set_page_config(page_title="Deutsch Trainer", page_icon="", layout="wide")
-theme.inject_custom_theme()
 
-st.title("Deutsch Trainer")
-st.caption("Ein Lernwerkzeug für Horst und Antony")
+if "dark_mode" not in st.session_state:
+    st.session_state["dark_mode"] = False
+theme.inject_custom_theme(dark=st.session_state["dark_mode"])
+
+title_col, toggle_col = st.columns([6, 1])
+with title_col:
+    st.title("Deutsch Trainer")
+    st.caption("Ein Lernwerkzeug für Horst und Antony")
+with toggle_col:
+    st.toggle("🌙 Dunkel", key="dark_mode")
 
 try:
     top_errors = db.get_top_errors(3)
