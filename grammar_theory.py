@@ -195,7 +195,11 @@ Der Bericht wurde **vom** (= von dem) Vorstand genehmigt.""",
 | neut. | **das** | **das** | **dem** | **dessen** |
 | Pl. | **die** | **die** | **denen** | **deren** |
 
-**Verb geht immer ans Ende des Relativsatzes!**""",
+**Verb geht immer ans Ende des Relativsatzes!**
+
+**Relativsätze mit wo** (Ort/Zeit, oft eleganter als "in dem/an dem"):
+"Das ist die Firma, **wo** ich gearbeitet habe." (= in der ich gearbeitet habe)
+Bei Ortsnamen und geografischen Angaben ist "wo" sogar die einzig natürliche Option: "Berlin, wo ich wohne, ..." """,
         "examples": [
             {
                 "label": "Nominativ (der Kollege ist Subjekt im Nebensatz)",
@@ -773,7 +777,12 @@ Formel: **jemandem** (Dat) **etwas** (Akk) geben/schicken/zeigen...""",
 - **sodass** (sodass + Nebensatz, Folge)
 - **deshalb / daher / deswegen** (Inversion, Folge)
 - **folglich / infolgedessen** (formell, Schlussfolgerung)
-- **so...dass** (Grad + Folge: Es war so teuer, dass...)""",
+- **so...dass** (Grad + Folge: Es war so teuer, dass...)
+
+**IRREALE KONSEKUTIVSÄTZE (eine Folge, die NICHT eintritt):**
+- **zu... als dass** + Konjunktiv II: die Folge im Nebensatz tritt gerade NICHT ein, weil der Grad zu hoch/niedrig ist
+  "Das Projekt ist **zu** riskant, **als dass** wir es ohne Genehmigung starten **würden**." (= wir starten es nicht)
+  Unterschied zu 'sodass': 'sodass' beschreibt eine wirkliche Folge, 'zu... als dass' eine verhinderte Folge - deshalb immer Konjunktiv II im Nebensatz.""",
         "examples": [
             {
                 "label": "da (bekannter Grund, formell)",
@@ -799,8 +808,9 @@ Formel: **jemandem** (Dat) **etwas** (Akk) geben/schicken/zeigen...""",
         "mistakes": [
             "da am Satzende: ❌ 'wir starten da das Budget genehmigt ist' → Verb ans Ende: 'da das Budget genehmigt ist'",
             "zwecks + Dativ: ❌ 'zwecks dem Gespräch' → ✅ 'zwecks des Gesprächs' (Genitiv)",
+            "Indikativ statt Konjunktiv II nach 'als dass': ❌ '...als dass wir es starten.' → ✅ '...als dass wir es starten würden.' (die verhinderte Folge braucht immer Konjunktiv II)",
         ],
-        "exercise_hint": "Kategoriensortierung: Konnektoren nach kausal/final/konsekutiv einordnen. Satztransformation: einfache Konnektoren durch formellere ersetzen.",
+        "exercise_hint": "Kategoriensortierung: Konnektoren nach kausal/final/konsekutiv einordnen. Satztransformation: einfache Konnektoren durch formellere ersetzen. Kontrastpaar sodass (reale Folge) vs. zu...als dass (verhinderte Folge).",
     },
 
     # ==================== VERB TABLES ====================
@@ -3579,5 +3589,610 @@ Bei anderen, einfachen zu-Infinitivgruppen (ohne um/ohne/(an)statt) ist das Komm
             "Komma vor 'aber' vergessen: ❌ 'Ich wollte kommen aber ich hatte keine Zeit.' → ✅ 'Ich wollte kommen, aber ich hatte keine Zeit.' (aber verlangt IMMER ein Komma davor)",
         ],
         "exercise_hint": "Fehlersuche: fehlende oder falsch gesetzte Kommas in Sätzen mit Nebensätzen, Relativsätzen und aber/und identifizieren und korrigieren.",
+    },
+
+    {
+        "id": "grund_praesens",
+        "title": "Präsens - die Gegenwartsform bilden",
+        "level": "A1",
+        "category": "Verben",
+        "explanation": """Das Präsens ist die Grundform des Verbs im Deutschen - man braucht sie für die Gegenwart und oft auch für die nahe Zukunft.
+
+**Regelmäßige Endungen** (Verbstamm + Endung):
+
+| Person | Endung | arbeiten |
+|--------|--------|----------|
+| ich | -e | arbeit**e** |
+| du | -st | arbeit**est** |
+| er/sie/es | -t | arbeit**et** |
+| wir | -en | arbeit**en** |
+| ihr | -t | arbeit**et** |
+| sie/Sie | -en | arbeit**en** |
+
+**Wichtige Stammveränderungen bei du/er/sie/es** (nur bei manchen starken Verben):
+- **e → i:** sprechen → du **sprichst**, er **spricht**
+- **e → ie:** sehen → du **siehst**, er **sieht**
+- **a → ä:** fahren → du **fährst**, er **fährt**
+
+Diese Veränderung gilt NUR für du/er/sie/es - bei ich/wir/ihr/sie bleibt der Stammvokal normal.""",
+        "examples": [
+            {
+                "label": "Regelmäßig",
+                "sentence": "Ich **arbeite** heute im Büro, mein Kollege **arbeitet** von zu Hause.",
+                "note": "arbeiten: ich → -e, er → -et"
+            },
+            {
+                "label": "e → i",
+                "sentence": "Sprichst du mit dem Kunden, oder spreche ich mit ihm?",
+                "note": "sprechen: du/er wechseln zu -i-, ich bleibt bei -e-"
+            },
+            {
+                "label": "a → ä",
+                "sentence": "Der Zug **fährt** um 9 Uhr, aber wir **fahren** erst um 10 Uhr los.",
+                "note": "fahren: er → fährt (Umlaut), wir → fahren (kein Umlaut)"
+            },
+        ],
+        "mistakes": [
+            "Stammveränderung auch bei ich/wir/ihr anwenden: ❌ 'Ich spriche.' → ✅ 'Ich spreche.' (Wechsel nur bei du/er/sie/es)",
+            "-e bei du vergessen: ❌ 'Du arbeitst.' → ✅ 'Du arbeitest.' (Verbstamm endet auf -t, deshalb -est statt -st)",
+            "sein und haben unregelmäßig konjugieren wie normale Verben: ❌ 'du habst', 'er seit' → ✅ 'du hast', 'er ist' - diese zwei müssen separat auswendig gelernt werden.",
+        ],
+        "exercise_hint": "Lückentext: Verben im Präsens konjugieren, mit Fokus auf die du/er-Stammveränderungen. Verbliste mit Alltags- und Berufsverben (arbeiten, sprechen, helfen, nehmen, lesen, fahren, treffen).",
+    },
+
+    {
+        "id": "grund_perfekt",
+        "title": "Perfekt - haben oder sein, und wie man das Partizip II bildet",
+        "level": "A2",
+        "category": "Verben",
+        "explanation": """Das Perfekt ist die wichtigste Vergangenheitsform in der gesprochenen Sprache. Man braucht zwei Teile: **haben/sein (konjugiert, Position 2) + Partizip II (am Satzende)**.
+
+**1. haben oder sein?**
+- **sein**: bei Bewegung/Ortswechsel (gehen, fahren, kommen) und Zustandswechsel (aufwachen, einschlafen, werden) - plus sein, bleiben, passieren
+- **haben**: bei fast allen anderen Verben, vor allem bei Verben mit Akkusativobjekt
+
+**2. Partizip II bilden:**
+| Verbtyp | Muster | Beispiel |
+|---------|--------|----------|
+| schwach (regelmäßig) | ge- + Stamm + -t | machen → ge**macht** |
+| stark (unregelmäßig) | ge- + Stamm(oft verändert) + -en | schreiben → ge**schrieben** |
+| mit be-/er-/ver-/ent-/emp-/ge- | KEIN ge-, nur Endung | bestellen → **bestellt** (nicht 'gebestellt') |
+| trennbar | ge- zwischen Präfix und Stamm | einladen → ein**ge**laden |
+| auf -ieren | KEIN ge-, nur -t | organisieren → organisier**t**""",
+        "examples": [
+            {
+                "label": "haben, schwach",
+                "sentence": "Ich **habe** die E-Mail schon **beantwortet**.",
+                "note": "beantworten: be- Präfix → kein ge-"
+            },
+            {
+                "label": "sein, Bewegung",
+                "sentence": "Sie **ist** gestern nach Hamburg **gefahren**.",
+                "note": "fahren = Ortswechsel → sein"
+            },
+            {
+                "label": "trennbar",
+                "sentence": "Wir **haben** das Meeting kurzfristig **abgesagt**.",
+                "note": "absagen: ge- kommt zwischen ab- und -sagt"
+            },
+        ],
+        "mistakes": [
+            "sein statt haben bei Verben ohne Ortswechsel: ❌ 'Ich bin gearbeitet.' → ✅ 'Ich habe gearbeitet.' (arbeiten = keine Bewegung)",
+            "ge- bei be-/er-/ver-/ent-Verben ergänzen: ❌ 'Ich habe es geverstanden.' → ✅ 'Ich habe es verstanden.'",
+            "ge- bei trennbaren Verben ans falsche Ende setzen: ❌ 'Ich habe gestattgefunden.' → ✅ 'Ich habe stattgefunden.' wird 'es hat stattgefunden' (ge- zwischen Präfix und Stamm: statt**ge**funden)",
+        ],
+        "exercise_hint": "Sätze im Präsens in Perfekt umwandeln, mit gemischten Verbtypen (schwach, stark, be-/ver-, trennbar). Separate Runde nur zur haben/sein-Entscheidung.",
+    },
+
+    {
+        "id": "b2_subjektive_modalverben",
+        "title": "Subjektive Modalverben - Vermutungen und Behauptungen wiedergeben",
+        "level": "B2",
+        "category": "Verben",
+        "explanation": """Modalverben haben neben der bekannten (objektiven) Bedeutung - können = Fähigkeit, müssen = Notwendigkeit - eine zweite, **subjektive** Bedeutung: der Sprecher drückt aus, wie sicher er sich über etwas ist, oder gibt wieder, was jemand anderes behauptet.
+
+**Vermutungen (Gegenwart):**
+| Modalverb | Sicherheit | Beispiel |
+|-----------|-----------|----------|
+| **muss** | fast sicher | Er **muss** im Büro sein. (Licht ist an) |
+| **dürfte** | wahrscheinlich | Sie **dürfte** die Unterlagen schon haben. |
+| **kann/könnte** | möglich | Das **könnte** stimmen. |
+| **kann nicht** | fast ausgeschlossen | Das **kann nicht** richtig sein. |
+
+**Vermutungen (Vergangenheit):** Modalverb (Präsens) + Partizip II + haben/sein
+"Er **muss** das Meeting **verpasst haben**." (= vermutlich hat er es verpasst)
+
+**Wiedergabe fremder Behauptungen (sollen und wollen):**
+- **sollen**: gibt wieder, was ANDERE über die Person sagen (der Sprecher übernimmt keine Verantwortung dafür)
+  "Die neue Kollegin **soll** sehr kompetent sein." (= man sagt/es heißt, dass sie kompetent ist)
+- **wollen**: gibt wieder, was die Person SELBST über sich behauptet (oft mit Zweifel des Sprechers)
+  "Er **will** von dem Fehler nichts gewusst haben." (= er behauptet das, aber ob es stimmt, ist fraglich)""",
+        "examples": [
+            {
+                "label": "müssen, Vermutung Gegenwart",
+                "sentence": "Das Licht brennt noch - der Chef **muss** noch im Haus sein.",
+                "note": "muss (subjektiv) = fast sichere Vermutung, nicht Notwendigkeit"
+            },
+            {
+                "label": "müssen, Vermutung Vergangenheit",
+                "sentence": "Die Zahlen stimmen nicht - jemand **muss** sich **verrechnet haben**.",
+                "note": "Modalverb + Partizip II + haben (Vermutung über die Vergangenheit)"
+            },
+            {
+                "label": "sollen, fremde Behauptung",
+                "sentence": "Das neue System **soll** die Fehlerquote deutlich gesenkt haben.",
+                "note": "sollen = das wird berichtet, der Sprecher bestätigt es nicht selbst"
+            },
+            {
+                "label": "wollen, Selbstaussage mit Zweifel",
+                "sentence": "Der Kollege **will** die E-Mail nie erhalten haben.",
+                "note": "wollen = er behauptet es selbst, Zweifel mitschwingend"
+            },
+        ],
+        "mistakes": [
+            "sollen und müssen verwechseln: ❌ 'Er muss reich sein' für eine fremde, ungeprüfte Behauptung → ✅ 'Er soll reich sein' (sollen = man sagt es, nicht sicher bestätigt)",
+            "Vermutung über die Vergangenheit ohne Partizip II bilden: ❌ 'Er muss es gewusst.' → ✅ 'Er muss es gewusst haben.'",
+            "wollen (subjektiv) mit dem normalen Vollverb 'wollen' (= etwas wünschen) verwechseln: 'Er will es nicht gewusst haben' bedeutet nicht, dass er es NICHT wissen möchte, sondern dass er BEHAUPTET, es nicht gewusst zu haben.",
+        ],
+        "exercise_hint": "Situationen beschreiben, dann eine passende Vermutung mit müssen/dürfte/könnte formulieren. Zweite Runde: Gerüchte/Aussagen über Dritte mit sollen/wollen wiedergeben.",
+    },
+
+    {
+        "id": "b2_modale_nebensaetze",
+        "title": "Modale Nebensätze - Art und Weise ausdrücken (indem, dadurch dass, ohne dass)",
+        "level": "B2",
+        "category": "Satzkonstruktion",
+        "explanation": """Um auszudrücken, WIE oder WODURCH etwas geschieht, benutzt man modale Nebensätze - nicht zu verwechseln mit Kausalsätzen (warum) oder Finalsätzen (wozu).
+
+**indem** - drückt das Mittel/die Methode aus (wie erreicht man etwas?)
+"Er hat den Fehler behoben, **indem** er den Code neu geschrieben hat."
+= Die Methode war: den Code neu schreiben.
+
+**dadurch, dass** - ähnlich wie indem, etwas formeller, betont die Ursache/das Mittel
+"Wir haben Zeit gespart, **dadurch, dass** wir zwei Schritte parallel gemacht haben."
+
+**ohne dass / ohne ... zu** - eine erwartete Begleitumstand fehlt
+"Er hat gekündigt, **ohne dass** er einen neuen Job hatte." (zwei verschiedene Subjekte → ohne dass)
+"Er hat gekündigt, **ohne** einen neuen Job **zu** haben." (gleiches Subjekt → ohne...zu, eleganter)
+
+Alle drei sind Nebensätze (Kategorie C) - das Verb steht am Ende.""",
+        "examples": [
+            {
+                "label": "indem - Methode",
+                "sentence": "Sie hat das Team motiviert, **indem** sie jede Woche persönliches Feedback gegeben hat.",
+                "note": "Die Methode: persönliches Feedback geben"
+            },
+            {
+                "label": "dadurch, dass",
+                "sentence": "**Dadurch, dass** wir früh angefangen haben, konnten wir die Deadline einhalten.",
+                "note": "Kann auch am Satzanfang stehen, dann folgt Inversion im Hauptsatz"
+            },
+            {
+                "label": "ohne dass",
+                "sentence": "Die Änderung wurde umgesetzt, **ohne dass** die Kunden informiert wurden.",
+                "note": "Zwei verschiedene Subjekte (die Änderung / die Kunden) → ohne dass, nicht ohne...zu"
+            },
+        ],
+        "mistakes": [
+            "indem mit weil verwechseln: 'indem' beantwortet WIE, nicht WARUM. ❌ 'Er ist müde, indem er lange gearbeitet hat.' → ✅ 'Er ist müde, weil er lange gearbeitet hat.'",
+            "ohne...zu bei zwei verschiedenen Subjekten verwenden: ❌ 'Er ging, ohne das Licht auszuschalten.' wenn ein Dritter das Licht anlassen sollte → braucht 'ohne dass'.",
+            "Verb nicht ans Ende stellen: ❌ '..., indem er hat den Code neu geschrieben.' → ✅ '..., indem er den Code neu geschrieben hat.'",
+        ],
+        "exercise_hint": "Zwei einfache Sätze zu einem indem-Satz kombinieren (Ziel + Methode). Kontrastübung: indem vs. weil vs. damit anhand derselben Situation.",
+    },
+
+    {
+        "id": "b2_nomen_mit_praepositionen",
+        "title": "Nomen mit festen Präpositionen",
+        "level": "B2",
+        "category": "Kasus",
+        "explanation": """Wie Verben und Adjektive haben auch viele Nomen eine feste Präposition, die mitgelernt werden muss - die Präposition ergibt sich nicht aus der Bedeutung allein.
+
+**Die wichtigsten Nomen mit fester Präposition:**
+
+| Nomen + Präposition | Beispiel |
+|---|---|
+| die Freude **an** + Dat. | die Freude an der Arbeit |
+| das Interesse **an/für** | das Interesse an dem Projekt |
+| der Anspruch **auf** + Akk. | der Anspruch auf Urlaub |
+| die Angst **vor** + Dat. | die Angst vor Fehlern |
+| die Bitte **um** + Akk. | die Bitte um Feedback |
+| die Verantwortung **für** + Akk. | die Verantwortung für das Team |
+| die Beziehung **zu** + Dat. | die Beziehung zu den Kunden |
+| der Zusammenhang **mit/zwischen** | der Zusammenhang mit den Zahlen |
+
+Oft gehört das Nomen zu einem Verb oder Adjektiv mit derselben Präposition (sich freuen an/über → die Freude an), aber nicht immer identisch - im Zweifel das Nomen separat lernen.""",
+        "examples": [
+            {
+                "label": "die Freude an",
+                "sentence": "Er hat große Freude **an** seiner neuen Aufgabe.",
+                "note": "Dativ nach 'an' hier, nicht Akkusativ"
+            },
+            {
+                "label": "der Anspruch auf",
+                "sentence": "Jeder Mitarbeiter hat Anspruch **auf** 30 Tage Urlaub.",
+                "note": "Akkusativ nach 'auf'"
+            },
+            {
+                "label": "die Verantwortung für",
+                "sentence": "Sie trägt die Verantwortung **für** das gesamte Projekt.",
+                "note": "immer für + Akkusativ, nicht 'über'"
+            },
+        ],
+        "mistakes": [
+            "Präposition vom verwandten Verb falsch übertragen: 'sich interessieren FÜR' aber 'das Interesse AN' ist auch korrekt (beide möglich, nicht identisch mit jedem Verb).",
+            "Verantwortung mit über statt für: ❌ 'die Verantwortung über das Team' → ✅ 'die Verantwortung für das Team'",
+            "Präposition weglassen und nur den Kasus raten: ohne feste Präposition + Kasus-Kombination ist der Satz unvollständig - beides gehört fest zusammen, wie ein Paket.",
+        ],
+        "exercise_hint": "Lückentext: passende Präposition + Kasus zum Nomen ergänzen, Sätze aus Bewerbungs-/Berichtskontext. Kontrastpaare Nomen/Verb derselben Wortfamilie (Interesse an / sich interessieren für).",
+    },
+
+    {
+        "id": "b2_vergleichssaetze",
+        "title": "Vergleichssätze mit als und wie",
+        "level": "B2",
+        "category": "Satzkonstruktion",
+        "explanation": """Um zwei Dinge oder Situationen als Nebensatz zu vergleichen, benutzt man **als** (bei Ungleichheit) oder **wie** (bei Gleichheit) - anders als bei der einfachen Adjektiv-Steigerung (komparation), hier folgt ein ganzer Nebensatz.
+
+**als** - nach einem Komparativ, drückt Ungleichheit aus
+"Es war schwieriger, **als** ich gedacht hatte."
+"Das Meeting hat länger gedauert, **als** wir geplant hatten."
+
+**wie** - nach 'so...', drückt Gleichheit aus
+"Es ist genau so gelaufen, **wie** ich es erwartet hatte."
+"Sie arbeitet so gründlich, **wie** man es von ihr erwartet."
+
+Beide sind Nebensätze (Kategorie C) - das Verb steht am Ende. Häufig steht im Nebensatz ein Plusquamperfekt oder Konjunktiv II, weil der Vergleichspunkt oft in der Vergangenheit liegt oder hypothetisch ist.""",
+        "examples": [
+            {
+                "label": "als - Ungleichheit",
+                "sentence": "Das Projekt hat mehr Zeit gekostet, **als** wir ursprünglich kalkuliert hatten.",
+                "note": "Komparativ (mehr) + als, Verb am Ende"
+            },
+            {
+                "label": "wie - Gleichheit",
+                "sentence": "Die Präsentation lief genau so gut, **wie** wir es geübt hatten.",
+                "note": "so + Adjektiv + wie, Verb am Ende"
+            },
+            {
+                "label": "hypothetischer Vergleich",
+                "sentence": "Er reagierte, **als ob** nichts passiert wäre.",
+                "note": "als ob + Konjunktiv II (eigene, verwandte Regel: irrealer Vergleich)"
+            },
+        ],
+        "mistakes": [
+            "wie statt als nach Komparativ: ❌ 'schwieriger, wie ich dachte' (umgangssprachlich) → ✅ 'schwieriger, als ich dachte'",
+            "Verb nicht ans Ende des Vergleichssatzes stellen: ❌ '..., als wir hatten geplant.' → ✅ '..., als wir geplant hatten.'",
+            "als/wie mit als ob verwechseln: 'als ob' braucht Konjunktiv II und drückt etwas Irreales/Angenommenes aus, einfaches 'als'/'wie' vergleicht reale Fakten.",
+        ],
+        "exercise_hint": "Zwei Aussagen (Erwartung vs. Realität) zu einem als/wie-Satz kombinieren. Kontext: Projektnachbesprechungen, Erwartung vs. Ergebnis.",
+    },
+
+    {
+        "id": "b2_relativsaetze_wer_wen_wem",
+        "title": "Relativsätze mit wer, wen, wem (freie Relativsätze)",
+        "level": "B2",
+        "category": "Satzkonstruktion",
+        "explanation": """Anders als normale Relativsätze (b1_relativsaetze) beziehen sich freie Relativsätze mit **wer/wen/wem/wessen** auf KEIN konkretes Nomen - sie bedeuten "die Person, die..." / "derjenige, der...".
+
+**wer** (Nominativ): "**Wer** zu spät kommt, verpasst den Anfang." (= Derjenige, der zu spät kommt, ...)
+**wen** (Akkusativ): "**Wen** man einmal enttäuscht, gewinnt man schwer zurück."
+**wem** (Dativ): "**Wem** man vertraut, dem gibt man auch Verantwortung."
+**wessen** (Genitiv, selten): "**Wessen** Idee überzeugt, der bekommt das Budget."
+
+**Wichtig - der Hauptsatz braucht oft ein Korrelat** (der/den/dem), besonders wenn der Kasus im Hauptsatz anders ist als im Relativsatz:
+"**Wer** pünktlich ist, **den** respektiert man." (wer = Nom. im Relativsatz, den = Akk. im Hauptsatz - beide Kasus nötig, weil unterschiedlich)
+"**Wer** pünktlich ist, **wird** respektiert." (kein Korrelat nötig, wenn beide Sätze denselben Kasus/dieselbe Rolle hätten oder Passiv genutzt wird)""",
+        "examples": [
+            {
+                "label": "wer, gleicher Kasus",
+                "sentence": "**Wer** Fragen hat, kann sich gerne melden.",
+                "note": "wer = Subjekt in beiden Sätzen, kein Korrelat nötig"
+            },
+            {
+                "label": "wer + Korrelat bei unterschiedlichem Kasus",
+                "sentence": "**Wer** zu spät kommt, **den** lassen wir nicht mehr rein.",
+                "note": "wer (Nom.) im Relativsatz, den (Akk.) im Hauptsatz - beide nötig"
+            },
+            {
+                "label": "wem",
+                "sentence": "**Wem** die Entscheidung nicht gefällt, kann Einspruch einlegen.",
+                "note": "wem (Dativ, gefallen verlangt Dativ)"
+            },
+        ],
+        "mistakes": [
+            "wer mit der/die/das (normalem Relativpronomen) verwechseln: freie Relativsätze mit wer beziehen sich auf keine konkrete, vorher genannte Person - 'wer' selbst bedeutet schon 'die Person, die'.",
+            "Korrelat vergessen bei unterschiedlichem Kasus: ❌ 'Wer zu spät kommt, lassen wir nicht mehr rein.' → ✅ 'Wer zu spät kommt, den lassen wir nicht mehr rein.' (lassen braucht Akkusativobjekt)",
+            "wen/wem verwechseln: wen = Akkusativ (wen fragt man?), wem = Dativ (wem hilft man?) - denselben Test wie bei normalen Fragewörtern anwenden.",
+        ],
+        "exercise_hint": "Sprichwörter und Regeln mit wer/wen/wem vervollständigen (viele feste Redewendungen nutzen genau diese Struktur). Korrelat-Erkennung: wann ist der/den/dem im Hauptsatz nötig?",
+    },
+
+    {
+        "id": "c1_adjektivdeklination_indefinit",
+        "title": "Adjektivdeklination nach indefiniten Artikelwörtern (jeder, manche, welche, einige)",
+        "level": "C1",
+        "category": "Kasus",
+        "explanation": """Wörter wie jeder, mancher, solcher, welcher, sämtliche, einige, mehrere, viele, wenige stehen oft vor einem Adjektiv + Nomen - und sie verhalten sich nicht alle gleich. Das ist eine eigene Feinheit, zusätzlich zu den drei Grundmustern (bestimmt/unbestimmt/ohne Artikel).
+
+**Wie der bestimmte Artikel** (der-Wörter, Singular): jeder, jede, jedes, jeder (Dat.), dieser, solcher, mancher, welcher
+→ Adjektiv bekommt dieselbe Endung wie nach der/die/das
+"**jeder neue** Kollege" (wie "der neue Kollege")
+
+**Im Plural uneinheitlich:**
+- **alle, beide, sämtliche** + Adjektiv auf **-en** (wie nach 'die'): "alle neu**en** Kollegen"
+- **einige, mehrere, viele, wenige** (ohne Artikelfunktion, eher wie Zahlwörter) + Adjektiv oft auf **-e/-en** parallel zur Nullartikel-Deklination: "einige neu**e** Kollegen" (Nom./Akk.), aber "mit einigen neu**en** Kollegen" (Dat.)""",
+        "examples": [
+            {
+                "label": "jeder - wie bestimmter Artikel",
+                "sentence": "**Jeder** neu**e** Mitarbeiter bekommt eine Einführung.",
+                "note": "jeder verhält sich wie 'der' → Adjektiv -e (Nominativ)"
+            },
+            {
+                "label": "alle - Plural wie 'die'",
+                "sentence": "**Alle** wichtig**en** Unterlagen liegen bereit.",
+                "note": "alle + Adjektiv -en, parallel zu 'die wichtigen Unterlagen'"
+            },
+            {
+                "label": "einige - Nullartikel-Muster",
+                "sentence": "**Einige** erfahren**e** Kolleginnen haben das Projekt übernommen.",
+                "note": "einige (Nom.) + Adjektiv -e, wie ohne Artikel"
+            },
+        ],
+        "mistakes": [
+            "jeder/manche im Plural wie Singular behandeln: 'jeder' hat keinen Plural (dafür 'alle') - ❌ 'jede neuen Kollegen' → ✅ 'alle neuen Kollegen'.",
+            "einige/mehrere/viele im Dativ ohne -en: ❌ 'mit einigen neue Kollegen' → ✅ 'mit einigen neuen Kollegen' (im Dativ Plural immer -en, unabhängig vom Artikelwort davor)",
+            "alle/beide/sämtliche mit dem Nullartikel-Muster statt dem bestimmten Muster deklinieren: diese drei verhalten sich wie 'die', nicht wie 'einige'.",
+        ],
+        "exercise_hint": "Sortierübung: Artikelwörter in die zwei Gruppen (der-Wort-Muster vs. Nullartikel-Muster) einordnen, dann Lückentext mit Adjektivendungen dazu.",
+    },
+
+    {
+        "id": "c1_modalitaetsverben",
+        "title": "Modalitätsverben - Alternativen zu den klassischen Modalverben",
+        "level": "C1",
+        "category": "Verben",
+        "explanation": """Neben den bekannten Modalverben (müssen, können, sollen...) gibt es Verb+zu-Infinitiv-Konstruktionen, die eine ähnliche modale Bedeutung ausdrücken, aber formeller/schriftsprachlicher klingen - typisch für C1-Texte, Berichte und offizielle Kommunikation.
+
+| Konstruktion | Bedeutung | Beispiel |
+|---|---|---|
+| **haben ... zu** + Inf. | müssen (aktiv) | Sie **haben** den Bericht bis Freitag **abzugeben**. |
+| **es gilt ... zu** + Inf. | man muss/sollte | **Es gilt**, die Frist einzuhalten. |
+| **scheinen ... zu** + Inf. | vermutlich (Anschein) | Das Problem **scheint** gelöst **zu** sein. |
+| **pflegen ... zu** + Inf. | gewöhnlich tun | Er **pflegt**, montags früh anzufangen. |
+| **drohen ... zu** + Inf. | negative Erwartung | Das Projekt **droht** zu scheitern. |
+| **versprechen ... zu** + Inf. | positive Erwartung | Die Zahlen **versprechen**, gut auszufallen. |
+
+Anders als 'sein...zu' (Passiv-Ersatzform, das Subjekt ist der Betroffene) ist 'haben...zu' aktivisch - das Subjekt handelt selbst.""",
+        "examples": [
+            {
+                "label": "haben...zu (aktiv, = müssen)",
+                "sentence": "Die Abteilungsleiter **haben** ihre Berichte monatlich **einzureichen**.",
+                "note": "= Die Abteilungsleiter müssen ihre Berichte einreichen. Aktivisch, nicht Passiv."
+            },
+            {
+                "label": "scheinen...zu (Vermutung)",
+                "sentence": "Der Kunde **scheint** mit der Lösung zufrieden **zu** sein.",
+                "note": "= Es sieht so aus, als wäre der Kunde zufrieden - Vermutung aufgrund von Anzeichen"
+            },
+            {
+                "label": "drohen...zu (negative Erwartung)",
+                "sentence": "Ohne zusätzliche Ressourcen **droht** die Deadline zu **reißen**.",
+                "note": "drückt eine befürchtete, negative Entwicklung aus"
+            },
+        ],
+        "mistakes": [
+            "haben...zu mit sein...zu verwechseln: 'haben...zu' ist aktiv (das Subjekt muss handeln), 'sein...zu' ist eine Passiv-Ersatzform (das Subjekt wird betroffen) - ❌ 'Der Bericht hat abzugeben.' → ✅ 'Der Bericht ist abzugeben.' oder 'Wir haben den Bericht abzugeben.'",
+            "zu vor dem Infinitiv vergessen: ❌ 'Das Projekt droht scheitern.' → ✅ 'Das Projekt droht zu scheitern.'",
+            "scheinen...zu für eine sichere Tatsache statt eine Vermutung benutzen: 'scheinen' drückt immer einen Anschein aus, keine bestätigte Tatsache.",
+        ],
+        "exercise_hint": "Sätze mit müssen/vermutlich/gewöhnlich umformulieren mit der passenden Modalitätsverb-Konstruktion. Kontrastpaar haben...zu vs. sein...zu an denselben Sätzen üben.",
+    },
+
+    {
+        "id": "c1_infinitiv_zeitverhaeltnis",
+        "title": "Infinitiv mit zu - Gleichzeitigkeit und Vorzeitigkeit",
+        "level": "C1",
+        "category": "Verbformen",
+        "explanation": """Ein Infinitiv mit zu kann zwei verschiedene Zeitverhältnisse zum übergeordneten Satz ausdrücken - das erkennt man an der Form des Infinitivs.
+
+**Gleichzeitigkeit** (die Handlung passiert zur selben Zeit): einfacher Infinitiv
+"Er behauptet, die Wahrheit **zu sagen**." (= er sagt gerade jetzt die Wahrheit)
+
+**Vorzeitigkeit** (die Handlung ist schon vorbei, bevor die Hauptsatz-Handlung beginnt): Infinitiv Perfekt (**zu + Partizip II + haben/sein**)
+"Er behauptet, die Wahrheit **gesagt zu haben**." (= er sagt jetzt, dass er FRÜHER die Wahrheit gesagt hat)
+
+Das gilt genauso im Passiv:
+"Die Unterlagen scheinen **bearbeitet worden zu sein**." (Vorzeitigkeit + Passiv)""",
+        "examples": [
+            {
+                "label": "Gleichzeitigkeit",
+                "sentence": "Sie scheint das Problem **zu verstehen**.",
+                "note": "Sie versteht es gerade jetzt - einfacher Infinitiv"
+            },
+            {
+                "label": "Vorzeitigkeit",
+                "sentence": "Sie scheint das Problem bereits **verstanden zu haben**.",
+                "note": "Sie hat es VOR dem Zeitpunkt des Hauptsatzes verstanden - Infinitiv Perfekt"
+            },
+            {
+                "label": "Vorzeitigkeit im Passiv",
+                "sentence": "Der Vertrag scheint schon **unterschrieben worden zu sein**.",
+                "note": "Passiv + Vorzeitigkeit: Partizip II + worden + zu sein"
+            },
+        ],
+        "mistakes": [
+            "Vorzeitigkeit nicht markieren, obwohl die Handlung klar vorher passiert ist: ❌ 'Er behauptet, es zu wissen.' wenn er es schon vor langer Zeit erfahren hat und jetzt nur noch darüber spricht → ✅ 'Er behauptet, es gewusst zu haben.' (je nach gemeintem Zeitpunkt)",
+            "haben/sein bei der Vorzeitigkeit vergessen: ❌ 'zu gesagt' → ✅ 'gesagt zu haben'",
+            "worden im Passiv-Vorzeitigkeits-Infinitiv weglassen: ❌ 'bearbeitet zu sein' (das ist nur Zustandspassiv) → ✅ 'bearbeitet worden zu sein' für echte Vorzeitigkeit im Vorgangspassiv.",
+        ],
+        "exercise_hint": "Zwei Sätze (Hauptaussage + zeitlich vorherige Nebenhandlung) zu einem Infinitivsatz mit Vorzeitigkeit kombinieren. Kontrastübung Gleichzeitigkeit vs. Vorzeitigkeit an denselben Verben.",
+    },
+
+    {
+        "id": "b2_es_platzhalter",
+        "title": "Es als Platzhalter (Vorfeld-es und Korrelat-es)",
+        "level": "B2",
+        "category": "Satzkonstruktion",
+        "explanation": """'Es' hat im Deutschen mehrere Funktionen - eine davon ist der reine Platzhalter, ohne eigene Bedeutung. Zwei Fälle:
+
+**1. Vorfeld-es**: wenn ein dass-Satz, ein Infinitiv+zu oder eine indirekte Frage das eigentliche Subjekt/Objekt ist, aber nicht am Satzanfang stehen soll, springt 'es' als Platzhalter in Position 1 ein - und verschwindet, sobald etwas anderes dort steht.
+"**Es** ärgert mich, dass er zu spät kommt." → "Dass er zu spät kommt, ärgert mich." (kein 'es' mehr nötig)
+
+**2. Korrelat-es**: bei manchen Verben/Ausdrücken bleibt 'es' als feste Ankündigung stehen, auch wenn der eigentliche Inhalt (dass-Satz, Infinitiv) folgt - unabhängig von der Satzstellung:
+"Ich finde **es** wichtig, dass wir pünktlich sind." (es bleibt, weil 'finden' + Adjektiv + es-Korrelat feste Konstruktion ist)""",
+        "examples": [
+            {
+                "label": "Vorfeld-es, verschwindet",
+                "sentence": "**Es** ist schwierig, diese Frage zu beantworten.",
+                "note": "Ohne 'es' am Anfang: 'Diese Frage zu beantworten ist schwierig.'"
+            },
+            {
+                "label": "Korrelat-es, bleibt immer",
+                "sentence": "Ich habe **es** satt, immer dieselben Fehler zu korrigieren.",
+                "note": "'es satt haben' braucht das Korrelat-es immer, egal wo der Infinitiv steht"
+            },
+            {
+                "label": "indirekte Frage",
+                "sentence": "**Es** ist noch unklar, ob das Projekt genehmigt wird.",
+                "note": "Platzhalter für die indirekte Frage 'ob das Projekt genehmigt wird'"
+            },
+        ],
+        "mistakes": [
+            "Vorfeld-es stehen lassen, wenn schon etwas anderes in Position 1 steht: ❌ 'Dass er zu spät kommt, es ärgert mich.' → ✅ 'Dass er zu spät kommt, ärgert mich.'",
+            "Korrelat-es weglassen bei festen Ausdrücken: ❌ 'Ich finde wichtig, dass...' → ✅ 'Ich finde es wichtig, dass...' (bei 'finden + Adjektiv' ist das Korrelat obligatorisch)",
+            "es doppelt setzen: nur eine der beiden Funktionen gleichzeitig, nie 'es' am Anfang UND als Korrelat im selben Satz.",
+        ],
+        "exercise_hint": "Sätze umstellen (dass-Satz/Infinitiv an den Anfang) und prüfen, ob 'es' verschwindet oder bleibt - Kontrastpaare mit Vorfeld-es vs. festen Korrelat-Ausdrücken (es satt haben, es gut meinen, es sich überlegen).",
+    },
+
+    {
+        "id": "c1_modales_partizip",
+        "title": "Modales Partizip (Gerundiv) - zu + Partizip I als Adjektiv",
+        "level": "C1",
+        "category": "Verbformen",
+        "explanation": """Eine sehr knappe, formelle Konstruktion für 'etwas, das getan werden muss/kann' - typisch für Berichte, Ausschreibungen und offizielle Texte. Bildung: **zu + Partizip I**, dekliniert wie ein normales Adjektiv.
+
+**Bedeutung:** immer eine Notwendigkeit oder Möglichkeit (wie 'sein...zu' oder 'müssen/können' im Passiv), nie eine reine Beschreibung.
+
+"die **zu lösende** Aufgabe" = die Aufgabe, die gelöst werden muss
+"das **zu erwartende** Ergebnis" = das Ergebnis, das erwartet werden kann/wird
+"ein **nicht zu unterschätzendes** Risiko" = ein Risiko, das man nicht unterschätzen darf""",
+        "examples": [
+            {
+                "label": "Notwendigkeit",
+                "sentence": "Die **einzureichenden** Unterlagen finden Sie im Anhang.",
+                "note": "= die Unterlagen, die eingereicht werden müssen"
+            },
+            {
+                "label": "Möglichkeit/Erwartung",
+                "sentence": "Das **zu erwartende** Wachstum liegt bei drei Prozent.",
+                "note": "= das Wachstum, das erwartet werden kann"
+            },
+            {
+                "label": "mit Verneinung",
+                "sentence": "Ein **nicht zu vernachlässigender** Faktor ist die Kundenzufriedenheit.",
+                "note": "nicht + zu + Partizip I = etwas, das man nicht ignorieren darf"
+            },
+        ],
+        "mistakes": [
+            "Mit Partizip II statt Partizip I bilden: ❌ 'die zu gelöste Aufgabe' → ✅ 'die zu lösende Aufgabe' (immer Partizip I + Endung, nie Partizip II)",
+            "Adjektivendung vergessen: ❌ 'ein zu lösend Problem' → ✅ 'ein zu lösendes Problem' (dekliniert wie jedes andere Adjektiv vor einem Nomen)",
+            "Für reine Beschreibung ohne Notwendigkeit/Möglichkeit verwenden: das modale Partizip funktioniert nur bei Verben, die sinnvoll mit 'müssen/können + Passiv' umschrieben werden können.",
+        ],
+        "exercise_hint": "sein...zu-Sätze (schon bekannt) in das modale Partizip umformen und umgekehrt - zeigt, dass beide dieselbe Bedeutung haben, nur unterschiedlich knapp. Quelle: offizielle/formelle Beispieltexte (Ausschreibungen, Berichte).",
+    },
+
+    {
+        "id": "c1_satzstellung_vorfeld_verb",
+        "title": "Besonderheiten der Satzstellung - Infinitiv/Partizip II im Vorfeld (Position 1)",
+        "level": "C1",
+        "category": "Satzkonstruktion",
+        "explanation": """Normalerweise steht in Position 1 (Vorfeld) ein Satzglied wie Subjekt, Objekt oder eine Angabe. Auf C1-Niveau, vor allem in wissenschaftlichen/argumentativen Texten und in gesprochener Sprache zur Betonung, kann auch ein Teil des Prädikats (Infinitiv oder Partizip II) dort stehen - der Rest des Verbs (das konjugierte Hilfs-/Modalverb) bleibt an Position 2.
+
+**Funktion:** starke Fokussierung/Kontrastierung auf die Handlung selbst, oft mit einer Einschränkung danach.
+
+"**Kommen** wird er sicher, aber pünktlich wird er nicht sein." (Fokus auf 'kommen', Kontrast zu 'pünktlich sein')
+"**Gelesen** habe ich das Buch, aber verstanden habe ich es nicht wirklich." (Fokus/Kontrast zwischen zwei Handlungen)""",
+        "examples": [
+            {
+                "label": "Infinitiv im Vorfeld",
+                "sentence": "**Zustimmen** wird der Vorstand dem Vorschlag kaum.",
+                "note": "Fokus auf 'zustimmen' - das konjugierte 'wird' bleibt Position 2"
+            },
+            {
+                "label": "Partizip II im Vorfeld",
+                "sentence": "**Geplant** war das Projekt anders, **umgesetzt** wurde es dann ganz neu.",
+                "note": "Doppelter Kontrast zwischen zwei Partizipien im Vorfeld"
+            },
+        ],
+        "mistakes": [
+            "Konjugiertes Verb mit ins Vorfeld ziehen: ❌ 'Wird kommen er sicher.' → ✅ 'Kommen wird er sicher.' (nur der infinite Teil wandert, das konjugierte Verb bleibt an Position 2)",
+            "Diese Struktur ohne Kontrast/Fokus-Funktion verwenden: sie klingt nur dann natürlich, wenn wirklich eine Betonung oder ein Gegensatz gemeint ist, nicht als Standard-Wortstellung.",
+        ],
+        "exercise_hint": "Neutrale Sätze in die fokussierte Vorfeld-Struktur umformen, jeweils mit einem passenden Kontrastsatz danach - zeigt den kommunikativen Zweck, nicht nur die Form.",
+    },
+
+    {
+        "id": "c1_ausklammerung",
+        "title": "Ausklammerung - Elemente nach dem Satzende stellen",
+        "level": "C1",
+        "category": "Satzkonstruktion",
+        "explanation": """Normalerweise steht das Prädikat (Partizip II, Infinitiv, trennbares Präfix) ganz am Ende des Satzes, mit allem anderen davor (im 'Satzklammer'-Feld). Bei der Ausklammerung wird ein Element bewusst NACH diesem Satzende gestellt - meist Vergleiche, Präpositionalphrasen oder Nachträge, aus Gründen der Verständlichkeit oder Betonung.
+
+**Typische ausgeklammerte Elemente:** Vergleiche mit als/wie, lange Präpositionalphrasen, nachgestellte Erklärungen.
+
+"Er hat schneller reagiert, **als wir erwartet hatten**." (Vergleich nach dem Satzende ausgeklammert, statt 'Er hat, als wir erwartet hatten, schneller reagiert.')
+"Sie hat das Angebot abgelehnt, **aus Gründen, die sie nicht nannte**." (Nachtrag ausgeklammert, für bessere Lesbarkeit)
+
+**Warum:** ein sehr langes Element VOR dem Satzende zu stellen würde das Verb zu weit vom restlichen Satz trennen - Ausklammerung hält den Satz verständlich.""",
+        "examples": [
+            {
+                "label": "Vergleich ausgeklammert",
+                "sentence": "Das Projekt hat länger gedauert, **als ursprünglich geplant war**.",
+                "note": "Ohne Ausklammerung wäre der Satz mit allem vor dem Verb kaum lesbar"
+            },
+            {
+                "label": "Präpositionalphrase ausgeklammert",
+                "sentence": "Wir haben das Ziel erreicht, **trotz erheblicher Widerstände im Team**.",
+                "note": "Nachgestellt für Betonung und Lesbarkeit"
+            },
+        ],
+        "mistakes": [
+            "Jedes lange Element automatisch ausklammern: Ausklammerung ist eine bewusste stilistische Wahl für bestimmte Elementtypen (Vergleiche, Nachträge), nicht eine generelle Lizenz, beliebig etwas ans Ende zu hängen.",
+            "Kernelemente des Satzes (Objekte, notwendige Ergänzungen) ausklammern: nur Zusätzliches/Erklärendes gehört ausgeklammert, keine für den Satz notwendigen Teile.",
+        ],
+        "exercise_hint": "Sehr lange, schwer lesbare Sätze (alles vor dem Verb) analysieren und durch Ausklammerung des Vergleichs/Nachtrags verbessern - direkter Vorher-Nachher-Kontrast zeigt den Lesbarkeitsgewinn.",
+    },
+
+    {
+        "id": "b1_vermutungen_futur1",
+        "title": "Vermutungen mit Futur I (werden + Infinitiv)",
+        "level": "B1",
+        "category": "Verbformen",
+        "explanation": """Futur I (werden + Infinitiv) wird nicht nur für die Zukunft benutzt, sondern auch, um eine **Vermutung über die Gegenwart** auszudrücken - oft zusammen mit 'wohl', 'sicher' oder 'wahrscheinlich'.
+
+**Unterschied zur echten Zukunft:** der Kontext (oft ein Zeitbezug zur Gegenwart, kein Zukunfts-Zeitwort) zeigt, dass es sich um eine Einschätzung des JETZT handelt, nicht um etwas, das erst noch passiert.
+
+"Er **wird** wohl noch im Büro **sein**." (= vermutlich ist er gerade jetzt im Büro, nicht: er wird es später sein)
+"Sie **werden** das schon **wissen**." (= ich nehme an, sie wissen es bereits)""",
+        "examples": [
+            {
+                "label": "Vermutung über die Gegenwart",
+                "sentence": "Das **wird** wohl der Grund für die Verzögerung **sein**.",
+                "note": "Keine Zukunft gemeint - eine Einschätzung der aktuellen Situation"
+            },
+            {
+                "label": "mit sicher",
+                "sentence": "Sie **wird** sicher schon informiert **worden sein**.",
+                "note": "Futur I mit Vorzeitigkeit (Perfekt-Infinitiv) - Vermutung über etwas, das bereits geschehen ist"
+            },
+        ],
+        "mistakes": [
+            "Mit echter Zukunft verwechseln: nur der Kontext (kein Zukunfts-Zeitwort, oft 'wohl'/'sicher'/'wahrscheinlich') zeigt, dass eine Vermutung über JETZT gemeint ist, nicht ein späteres Ereignis.",
+            "wohl/sicher/wahrscheinlich weglassen, obwohl der Satz sonst wie eine echte Zukunftsaussage klingt - diese Wörter signalisieren dem Hörer, dass es sich um eine Einschätzung handelt.",
+            "Mit den subjektiven Modalverben (müssen/dürfte/können) verwechseln: beide drücken Vermutung aus, aber Futur I braucht immer 'werden', die Modalverb-Variante nie.",
+        ],
+        "exercise_hint": "Situationen beschreiben, dann eine Vermutung sowohl mit Futur I (werden + wohl/sicher) als auch mit dem subjektiven Modalverb (müssen/dürfte) formulieren - zeigt, dass beide Wege zum selben Zweck führen.",
     },
 ]

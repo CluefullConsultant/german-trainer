@@ -1,6 +1,7 @@
 # theory_quiz.py
 import re
 import json
+import random
 import streamlit as st
 import anthropic
 
@@ -14,7 +15,13 @@ def _parse_json_array(raw: str) -> list:
     match = re.search(r'\[.*\]', raw, re.DOTALL)
     if not match:
         return []
-    return json.loads(match.group())
+    try:
+        return json.loads(match.group())
+    except json.JSONDecodeError as e:
+        raise ValueError(
+            "Claude hat eine unvollständige Antwort geliefert (wahrscheinlich abgeschnitten). "
+            "Bitte nochmal versuchen."
+        ) from e
 
 
 def generate_more_examples(title: str, explanation: str, level: str) -> list[dict]:
@@ -37,6 +44,21 @@ Antworte NUR mit JSON:
     return _parse_json_array(response.content[0].text)
 
 
+def _shuffle_options(items: list[dict]) -> list[dict]:
+    """Randomize each question's option order so the correct answer isn't always in the same position."""
+    for item in items:
+        options = item.get("optionen", [])
+        correct_idx = item.get("richtig_index", 0)
+        if not options or correct_idx >= len(options):
+            continue
+        correct_text = options[correct_idx]
+        shuffled = options[:]
+        random.shuffle(shuffled)
+        item["optionen"] = shuffled
+        item["richtig_index"] = shuffled.index(correct_text)
+    return items
+
+
 def generate_quiz(title: str, explanation: str, level: str) -> list[dict]:
     """5 fresh multiple-choice questions testing exactly this rule."""
     prompt = f"""Grammatikregel: "{title}" (Niveau {level})
@@ -52,11 +74,13 @@ Mische den Schwierigkeitsgrad bewusst - nicht alle 5 Fragen gleich schwer:
 - 1 schwere Frage: ein Grenzfall, eine Ausnahme, oder eine Stelle, wo die Regel mit einer ähnlichen Regel kollidiert
 
 Antworte NUR mit JSON:
-[{{"frage": "Fragetext oder Lückensatz", "optionen": ["Option A", "Option B", "Option C", "Option D"], "richtig_index": 0, "erklaerung": "Kurze Begründung, warum diese Antwort richtig ist", "schwierigkeit": "leicht|mittel|schwer"}}]"""
+[{{"frage": "Fragetext oder Lückensatz", "optionen": ["Option A", "Option B", "Option C", "Option D"], "richtig_index": 2, "erklaerung": "Kurze Begründung, warum diese Antwort richtig ist", "schwierigkeit": "leicht|mittel|schwer"}}]
+(richtig_index ist hier nur ein Formatbeispiel - verteile die richtige Antwort über alle 5 Fragen auf unterschiedliche Positionen, nicht immer dieselbe.)"""
 
     response = _client().messages.create(
         model="claude-sonnet-4-5",
-        max_tokens=1024,
+        max_tokens=2048,
         messages=[{"role": "user", "content": prompt}]
     )
-    return _parse_json_array(response.content[0].text)
+    items = _parse_json_array(response.content[0].text)
+    return _shuffle_options(items)
