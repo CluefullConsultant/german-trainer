@@ -6,34 +6,106 @@ import re
 import json
 
 
-def fetch_dw_articles(max_items: int = 5) -> list[dict]:
-    """Fetch today's articles from Deutsche Welle learner RSS."""
-    urls = [
-        "https://rss.dw.com/xml/rss-de-all",
-        "https://rss.dw.com/xml/rss-de-ger",
-        "https://www.tagesschau.de/xml/rss2",
-        "https://rss.dw.com/rdf/rss-de-all",
-    ]
-    for url in urls:
-        try:
-            resp = requests.get(url, timeout=10)
-            if resp.status_code != 200:
-                continue
-            root = ET.fromstring(resp.content)
-            items = []
-            for item in root.findall(".//item"):
-                title = item.findtext("title", "").strip()
-                link = item.findtext("link", "").strip()
-                desc = item.findtext("description", "").strip()
-                if title and desc:
-                    items.append({"title": title, "link": link, "description": desc})
-                if len(items) >= max_items:
-                    break
-            if items:
-                return items
-        except Exception:
-            continue
-    return []
+LESEN_SOURCES = {
+    "Zeit": {
+        "Schlagzeilen": "https://newsfeed.zeit.de/index",
+    },
+    "Spiegel": {
+        "Schlagzeilen": "https://www.spiegel.de/schlagzeilen/index.rss",
+    },
+    "Handelsblatt": {
+        "Schlagzeilen": "https://feeds.cms.handelsblatt.com/schlagzeilen",
+        "Politik": "https://feeds.cms.handelsblatt.com/politik",
+        "Unternehmen": "https://feeds.cms.handelsblatt.com/unternehmen",
+        "Finanzen": "https://feeds.cms.handelsblatt.com/finanzen",
+        "Technologie": "https://feeds.cms.handelsblatt.com/technologie",
+        "Marktberichte": "https://feeds.cms.handelsblatt.com/marktberichte",
+    },
+    "WirtschaftsWoche": {
+        "Schlagzeilen": "https://feeds.cms.wiwo.de/rss/schlagzeilen",
+        "Erfolg": "https://feeds.cms.wiwo.de/rss/erfolg",
+        "Finanzen": "https://feeds.cms.wiwo.de/rss/finanzen",
+        "Politik": "https://feeds.cms.wiwo.de/rss/politik",
+        "Technologie": "https://feeds.cms.wiwo.de/rss/technologie",
+        "Unternehmen": "https://feeds.cms.wiwo.de/rss/unternehmen",
+    },
+}
+
+
+def fetch_lesen_articles(url: str, max_items: int = 8) -> list[dict]:
+    """Fetch current articles from a real (non-learner-simplified) German news RSS feed."""
+    try:
+        resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+        if resp.status_code != 200:
+            return []
+        root = ET.fromstring(resp.content)
+        items = []
+        for item in root.findall(".//item"):
+            title = item.findtext("title", "").strip()
+            link = item.findtext("link", "").strip()
+            desc = item.findtext("description", "").strip()
+            desc = re.sub(r"<[^>]+>", "", desc).strip()
+            if title:
+                items.append({"title": title, "link": link, "description": desc or title})
+            if len(items) >= max_items:
+                break
+        return items
+    except Exception:
+        return []
+
+
+HOEREN_SOURCES = {
+    "Deutschlandfunk – Der Tag": "https://www.deutschlandfunk.de/podcast-104.xml",
+    "Lage der Nation": "https://feeds.lagedernation.org/feeds/ldn-mp3.xml",
+    "Easy German Podcast": "https://podcast.easygerman.org/rss",
+    "Handelsblatt Audio": "https://feeds.cms.handelsblatt.com/podcast",
+}
+
+_ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+_PODCAST_NS = "https://podcastindex.org/namespace/1.0"
+
+
+def fetch_hoeren_episodes(url: str, max_items: int = 8) -> list[dict]:
+    """Fetch current episodes from a real German-language podcast RSS feed.
+
+    Not every feed exposes a playable audio enclosure (Handelsblatt's only links out
+    to its own player), so audio_url can be None - the UI falls back to an external link.
+    """
+    try:
+        resp = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+        if resp.status_code != 200:
+            return []
+        root = ET.fromstring(resp.content)
+        episodes = []
+        for item in root.findall(".//item"):
+            title = item.findtext("title", "").strip()
+            link = item.findtext("link", "").strip()
+            desc = item.findtext("description", "").strip()
+            desc = re.sub(r"<[^>]+>", "", desc).strip()
+
+            enclosure = item.find("enclosure")
+            audio_url = None
+            if enclosure is not None and enclosure.get("type", "").startswith("audio"):
+                audio_url = enclosure.get("url")
+
+            duration = item.findtext(f"{{{_ITUNES_NS}}}duration", "").strip()
+            transcript_el = item.find(f"{{{_PODCAST_NS}}}transcript")
+            transcript_url = transcript_el.get("url") if transcript_el is not None else None
+
+            if title:
+                episodes.append({
+                    "title": title,
+                    "link": link,
+                    "description": desc or title,
+                    "audio_url": audio_url,
+                    "duration": duration,
+                    "transcript_url": transcript_url,
+                })
+            if len(episodes) >= max_items:
+                break
+        return episodes
+    except Exception:
+        return []
 
 
 def generate_questions_from_article(title: str, text: str) -> list[dict]:

@@ -214,31 +214,42 @@ try:
 except Exception:
     pass
 
-tab4, tab_vocab, tab5 = st.tabs([
-    "Heute lernen",
-    "Vokabeln",
+tab5, tab_lesen, tab_hoeren, tab_vocab = st.tabs([
     "Grammatik",
+    "Lesen",
+    "Hören",
+    "Vokabeln",
 ])
 
-# --- TAB 4: HEUTE LERNEN ---
-with tab4:
-    st.header("Heute lernen")
-    st.subheader("Deutsche Welle - Artikel")
-    st.caption("Aktuelle Texte auf Deutsch, jeden Tag neu.")
+# --- TAB LESEN ---
+with tab_lesen:
+    st.header("Lesen")
+    st.caption("Echte C1-Texte aus der deutschen Presse, keine Lernvereinfachung.")
 
-    if "dw_articles" not in st.session_state:
+    source_col, category_col = st.columns(2)
+    with source_col:
+        source = st.selectbox("Quelle", options=list(content_feed.LESEN_SOURCES.keys()), key="lesen_source")
+    with category_col:
+        category = st.selectbox("Rubrik", options=list(content_feed.LESEN_SOURCES[source].keys()), key="lesen_category")
+
+    feed_url = content_feed.LESEN_SOURCES[source][category]
+    feed_key = f"{source}:{category}"
+
+    if st.session_state.get("lesen_feed_key") != feed_key:
         with st.spinner("Artikel werden geladen..."):
-            st.session_state["dw_articles"] = content_feed.fetch_dw_articles()
-            st.session_state["dw_selected"] = None
-            st.session_state["dw_questions"] = []
-            st.session_state["dw_answers"] = {}
+            st.session_state["lesen_articles"] = content_feed.fetch_lesen_articles(feed_url)
+            st.session_state["lesen_feed_key"] = feed_key
+            st.session_state["lesen_selected"] = None
+            st.session_state["lesen_questions"] = []
+            st.session_state["lesen_answers"] = {}
+            st.session_state["lesen_tandem_prompts"] = []
 
-    articles = st.session_state.get("dw_articles", [])
+    articles = st.session_state.get("lesen_articles", [])
 
     if not articles:
-        st.warning("Keine Artikel gefunden. Bitte Internetverbindung prüfen.")
+        st.warning("Keine Artikel gefunden. Bitte Internetverbindung prüfen oder andere Quelle/Rubrik wählen.")
     else:
-        if st.session_state.get("dw_selected") is None:
+        if st.session_state.get("lesen_selected") is None:
             st.markdown("**Artikel auswählen**")
             for i, article in enumerate(articles):
                 with st.container(border=True):
@@ -247,23 +258,24 @@ with tab4:
                         st.markdown(f"**{article['title']}**")
                         st.caption(article['description'][:150] + "..." if len(article['description']) > 150 else article['description'])
                     with c2:
-                        if st.button("Lesen", key=f"dw_{i}"):
-                            st.session_state["dw_selected"] = i
-                            st.session_state["dw_questions"] = []
-                            st.session_state["dw_answers"] = {}
+                        if st.button("Lesen", key=f"lesen_{i}"):
+                            st.session_state["lesen_selected"] = i
+                            st.session_state["lesen_questions"] = []
+                            st.session_state["lesen_answers"] = {}
+                            st.session_state["lesen_tandem_prompts"] = []
                             st.rerun()
             if st.button("Neue Artikel laden"):
-                del st.session_state["dw_articles"]
+                del st.session_state["lesen_feed_key"]
                 st.rerun()
         else:
-            article = articles[st.session_state["dw_selected"]]
+            article = articles[st.session_state["lesen_selected"]]
             if st.button("Zurück zur Artikelliste"):
-                st.session_state["dw_selected"] = None
+                st.session_state["lesen_selected"] = None
                 st.rerun()
 
             st.subheader(article["title"])
             if article.get("link"):
-                st.caption(f"Quelle: Deutsche Welle | [Artikel öffnen]({article['link']})")
+                st.caption(f"Quelle: {source} | [Artikel öffnen]({article['link']})")
             st.markdown(article["description"])
 
             st.divider()
@@ -272,10 +284,10 @@ with tab4:
             with dcol1:
                 if st.button("Verständnisfragen generieren", type="primary"):
                     with st.spinner("Claude erstellt Fragen..."):
-                        st.session_state["dw_questions"] = content_feed.generate_questions_from_article(
+                        st.session_state["lesen_questions"] = content_feed.generate_questions_from_article(
                             article["title"], article["description"]
                         )
-                        st.session_state["dw_answers"] = {}
+                        st.session_state["lesen_answers"] = {}
                         st.rerun()
             with dcol2:
                 if st.button("Vokabeln speichern"):
@@ -287,31 +299,139 @@ with tab4:
                         else:
                             st.warning("Keine Vokabeln gefunden.")
 
-            if st.button("Tandem-Vorbereitung", key="tandem_prep"):
+            if st.button("Tandem-Vorbereitung", key="lesen_tandem_prep"):
                 with st.spinner("Gesprächsanlässe werden erstellt..."):
                     prompts = content_feed.generate_tandem_prompts(
                         article["title"], article["description"]
                     )
-                    st.session_state["tandem_prompts"] = prompts
+                    st.session_state["lesen_tandem_prompts"] = prompts
                     st.rerun()
 
-            if st.session_state.get("tandem_prompts"):
+            if st.session_state.get("lesen_tandem_prompts"):
                 st.subheader("Tandem-Gesprächsanlässe")
-                st.caption("Bereiten Sie sich auf diese Fragen für Ihr 16:30 Tandem-Gespräch vor.")
-                for i, prompt in enumerate(st.session_state["tandem_prompts"]):
+                st.caption("Bereiten Sie sich auf diese Fragen für Ihr Tandem-Gespräch vor.")
+                for i, prompt in enumerate(st.session_state["lesen_tandem_prompts"]):
                     st.markdown(f"**{i+1}.** {prompt}")
 
-            if st.session_state.get("dw_questions"):
+            if st.session_state.get("lesen_questions"):
                 st.subheader("Verständnisfragen")
-                for i, q in enumerate(st.session_state["dw_questions"]):
+                for i, q in enumerate(st.session_state["lesen_questions"]):
                     st.markdown(f"**{i+1}. {q['question']}**")
-                    answer = st.text_area("Ihre Antwort:", key=f"dw_ans_{i}", height=80)
+                    answer = st.text_area("Ihre Antwort:", key=f"lesen_ans_{i}", height=80)
                     if answer:
-                        st.session_state["dw_answers"][i] = answer
+                        st.session_state["lesen_answers"][i] = answer
 
-                if st.session_state["dw_answers"] and st.button("Antworten prüfen", type="primary"):
-                    for i, q in enumerate(st.session_state["dw_questions"]):
-                        user_ans = st.session_state["dw_answers"].get(i, "")
+                if st.session_state["lesen_answers"] and st.button("Antworten prüfen", type="primary"):
+                    for i, q in enumerate(st.session_state["lesen_questions"]):
+                        user_ans = st.session_state["lesen_answers"].get(i, "")
+                        if user_ans:
+                            st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")
+
+# --- TAB HÖREN ---
+with tab_hoeren:
+    st.header("Hören")
+    st.caption("Echte Podcasts in Originalgeschwindigkeit - für Hörverständnis und Shadowing.")
+
+    hoeren_source = st.selectbox("Quelle", options=list(content_feed.HOEREN_SOURCES.keys()), key="hoeren_source")
+    hoeren_url = content_feed.HOEREN_SOURCES[hoeren_source]
+
+    if st.session_state.get("hoeren_feed_key") != hoeren_source:
+        with st.spinner("Episoden werden geladen..."):
+            st.session_state["hoeren_episodes"] = content_feed.fetch_hoeren_episodes(hoeren_url)
+            st.session_state["hoeren_feed_key"] = hoeren_source
+            st.session_state["hoeren_selected"] = None
+            st.session_state["hoeren_questions"] = []
+            st.session_state["hoeren_answers"] = {}
+            st.session_state["hoeren_tandem_prompts"] = []
+
+    episodes = st.session_state.get("hoeren_episodes", [])
+
+    if not episodes:
+        st.warning("Keine Episoden gefunden. Bitte Internetverbindung prüfen oder andere Quelle wählen.")
+    else:
+        if st.session_state.get("hoeren_selected") is None:
+            st.markdown("**Episode auswählen**")
+            for i, ep in enumerate(episodes):
+                with st.container(border=True):
+                    c1, c2 = st.columns([4, 1])
+                    with c1:
+                        st.markdown(f"**{ep['title']}**" + (f"  ⏱ {ep['duration']}" if ep.get("duration") else ""))
+                        st.caption(ep['description'][:150] + "..." if len(ep['description']) > 150 else ep['description'])
+                    with c2:
+                        if st.button("Hören", key=f"hoeren_{i}"):
+                            st.session_state["hoeren_selected"] = i
+                            st.session_state["hoeren_questions"] = []
+                            st.session_state["hoeren_answers"] = {}
+                            st.session_state["hoeren_tandem_prompts"] = []
+                            st.rerun()
+            if st.button("Neue Episoden laden"):
+                del st.session_state["hoeren_feed_key"]
+                st.rerun()
+        else:
+            ep = episodes[st.session_state["hoeren_selected"]]
+            if st.button("Zurück zur Episodenliste"):
+                st.session_state["hoeren_selected"] = None
+                st.rerun()
+
+            st.subheader(ep["title"])
+            meta = f"Quelle: {hoeren_source}"
+            if ep.get("duration"):
+                meta += f" | Dauer: {ep['duration']}"
+            st.caption(meta)
+            st.markdown(ep["description"])
+
+            if ep.get("audio_url"):
+                st.audio(ep["audio_url"])
+            elif ep.get("link"):
+                st.info(f"Kein eingebetteter Player für diese Quelle - [Episode extern anhören]({ep['link']})")
+
+            if ep.get("transcript_url"):
+                st.caption(f"[Transkript verfügbar]({ep['transcript_url']})")
+
+            st.divider()
+
+            dcol1, dcol2 = st.columns(2)
+            with dcol1:
+                if st.button("Verständnisfragen generieren", type="primary", key="hoeren_gen_q"):
+                    with st.spinner("Claude erstellt Fragen..."):
+                        st.session_state["hoeren_questions"] = content_feed.generate_questions_from_article(
+                            ep["title"], ep["description"]
+                        )
+                        st.session_state["hoeren_answers"] = {}
+                        st.rerun()
+            with dcol2:
+                if st.button("Vokabeln speichern", key="hoeren_save_vocab"):
+                    with st.spinner("Vokabeln werden extrahiert..."):
+                        words = content_feed.extract_vocab_from_article(ep["description"])
+                        if words:
+                            db.save_vocabulary(words, None)
+                            st.success(f"{len(words)} Vokabeln gespeichert!")
+                        else:
+                            st.warning("Keine Vokabeln gefunden.")
+
+            if st.button("Tandem-Vorbereitung", key="hoeren_tandem_prep"):
+                with st.spinner("Gesprächsanlässe werden erstellt..."):
+                    prompts = content_feed.generate_tandem_prompts(ep["title"], ep["description"])
+                    st.session_state["hoeren_tandem_prompts"] = prompts
+                    st.rerun()
+
+            if st.session_state.get("hoeren_tandem_prompts"):
+                st.subheader("Tandem-Gesprächsanlässe")
+                st.caption("Bereiten Sie sich auf diese Fragen für Ihr Tandem-Gespräch vor.")
+                for i, prompt in enumerate(st.session_state["hoeren_tandem_prompts"]):
+                    st.markdown(f"**{i+1}.** {prompt}")
+
+            if st.session_state.get("hoeren_questions"):
+                st.subheader("Verständnisfragen")
+                for i, q in enumerate(st.session_state["hoeren_questions"]):
+                    st.markdown(f"**{i+1}. {q['question']}**")
+                    answer = st.text_area("Ihre Antwort:", key=f"hoeren_ans_{i}", height=80)
+                    if answer:
+                        st.session_state["hoeren_answers"][i] = answer
+
+                if st.session_state["hoeren_answers"] and st.button("Antworten prüfen", type="primary", key="hoeren_check"):
+                    for i, q in enumerate(st.session_state["hoeren_questions"]):
+                        user_ans = st.session_state["hoeren_answers"].get(i, "")
                         if user_ans:
                             st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")
 
