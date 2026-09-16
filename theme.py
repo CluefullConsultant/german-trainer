@@ -53,6 +53,16 @@ _CSS_TEMPLATE = """
 }}
 [data-testid="stHeader"]{{ background:transparent; }}
 
+[data-testid="stSidebar"]{{
+  background:var(--panel);
+  border-right:1px solid var(--border);
+}}
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3{{
+  font-family:var(--display-font) !important;
+  color:var(--ink) !important;
+  border-bottom:none;
+}}
+
 html, body, [class*="css"]{{ color:var(--ink); font-family:var(--body-font); }}
 
 h1, h2, h3{{

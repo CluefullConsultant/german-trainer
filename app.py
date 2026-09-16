@@ -13,6 +13,7 @@ import sentence_correction
 import idioms
 import writing_topics
 import speaking_topics
+import translation
 
 
 def render_pronunciation_button(text: str, key: str):
@@ -210,6 +211,42 @@ with toggle_col:
 
 daily_idiom = idioms.get_daily_idiom()
 theme.render_idiom_card(daily_idiom["idiom"], daily_idiom["meaning"], daily_idiom["example"])
+
+with st.sidebar:
+    st.header("🔤 Übersetzen")
+    st.caption("Wort oder Phrase eingeben - Deutsch ↔ Englisch, automatisch erkannt.")
+
+    translate_input = st.text_input(
+        "Text",
+        key="translate_input",
+        placeholder="z.B. Herausforderung / challenge",
+        label_visibility="collapsed",
+    )
+
+    if st.button("Übersetzen", key="translate_btn", disabled=not translate_input.strip()):
+        with st.spinner("Übersetze..."):
+            st.session_state["translate_result"] = translation.translate(translate_input.strip())
+            st.session_state["translate_result_input"] = translate_input.strip()
+
+    if st.session_state.get("translate_result"):
+        r = st.session_state["translate_result"]
+        st.markdown("---")
+        st.markdown(f"**{r.get('translation', '')}**")
+        if r.get("word_type"):
+            st.caption(r["word_type"])
+        if r.get("example_source"):
+            st.caption(f"_{r['example_source']}_")
+        if r.get("example_target"):
+            st.caption(f"_{r['example_target']}_")
+
+        if st.button("Zu Vokabeln hinzufügen", key="translate_save_vocab"):
+            word_entry = {
+                "word": st.session_state.get("translate_result_input", translate_input.strip()),
+                "definition": r.get("translation", ""),
+                "example": r.get("example_source", ""),
+            }
+            db.save_vocabulary([word_entry], None)
+            st.success("Gespeichert!")
 
 try:
     top_errors = db.get_top_errors(3)
