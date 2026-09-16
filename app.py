@@ -1,4 +1,5 @@
 # app.py
+import random
 import streamlit as st
 import vocabulary
 import db
@@ -10,6 +11,8 @@ import theme
 import pronunciation
 import sentence_correction
 import idioms
+import writing_topics
+import speaking_topics
 
 
 def render_pronunciation_button(text: str, key: str):
@@ -218,12 +221,14 @@ try:
 except Exception:
     pass
 
-tab5, tab_korrektur, tab_lesen, tab_hoeren, tab_vocab = st.tabs([
+tab5, tab_lesen, tab_hoeren, tab_schreiben, tab_sprechen, tab_vocab, tab_korrektur = st.tabs([
     "Grammatik",
-    "Korrektur",
     "Lesen",
     "Hören",
+    "Schreiben",
+    "Sprechen",
     "Vokabeln",
+    "Korrektur",
 ])
 
 # --- TAB KORREKTUR ---
@@ -482,6 +487,101 @@ with tab_hoeren:
                         user_ans = st.session_state["hoeren_answers"].get(i, "")
                         if user_ans:
                             st.markdown(f"**Frage {i+1}:** Musterlösung: _{q['answer']}_")
+
+# --- TAB SCHREIBEN ---
+with tab_schreiben:
+    st.header("Schreiben")
+    st.caption("Schreibaufgaben von A1 bis C1 - Alltag, formelle Briefe, geschäftliche E-Mails, Diskussionsvorlagen.")
+
+    schreiben_level = st.selectbox("Niveau", options=writing_topics.LEVEL_ORDER, index=2, key="schreiben_level")
+    tasks_for_level = [t for t in writing_topics.WRITING_TASKS if t["level"] == schreiben_level]
+    types_for_level = sorted(set(t["type"] for t in tasks_for_level))
+    schreiben_type = st.selectbox("Aufgabentyp", options=["Alle"] + types_for_level, key="schreiben_type")
+
+    filtered_tasks = [t for t in tasks_for_level if schreiben_type == "Alle" or t["type"] == schreiben_type]
+    task_key = f"{schreiben_level}:{schreiben_type}"
+
+    if st.session_state.get("schreiben_task_key") != task_key:
+        st.session_state["schreiben_current_task"] = random.choice(filtered_tasks) if filtered_tasks else None
+        st.session_state["schreiben_task_key"] = task_key
+        st.session_state["schreiben_result"] = None
+
+    if st.button("Neue Aufgabe", key="schreiben_new_task") and filtered_tasks:
+        st.session_state["schreiben_current_task"] = random.choice(filtered_tasks)
+        st.session_state["schreiben_result"] = None
+        st.rerun()
+
+    task = st.session_state.get("schreiben_current_task")
+    if not task:
+        st.info("Keine Aufgabe für diese Auswahl gefunden.")
+    else:
+        st.markdown(f"**{task['type']}** ({task['level']})")
+        st.info(task["prompt"])
+
+        schreiben_input = st.text_area(
+            "Deine Antwort",
+            key="schreiben_input",
+            height=220,
+            placeholder="Schreib deinen Text hier...",
+        )
+
+        if st.button("Korrigieren", type="primary", key="schreiben_correct", disabled=not schreiben_input.strip()):
+            live = st.empty()
+            buffer = ""
+            for chunk in sentence_correction.stream_correction(schreiben_input):
+                buffer += chunk
+                visible = buffer.split("FEHLER:", 1)[0].replace("KORRIGIERT:", "").strip()
+                if visible:
+                    live.code(visible, language=None, wrap_lines=True)
+            st.session_state["schreiben_result"] = sentence_correction.parse_correction_response(buffer, schreiben_input)
+            st.rerun()
+
+        if st.session_state.get("schreiben_result"):
+            result = st.session_state["schreiben_result"]
+            st.markdown("---")
+            st.subheader("Korrigierte Version")
+            st.caption("Zum Kopieren: Maus über den Text, Symbol oben rechts klicken.")
+            st.code(result["corrected"], language=None, wrap_lines=True)
+
+            mistakes = result.get("mistakes", [])
+            if mistakes:
+                st.subheader(f"Fehler im Detail ({len(mistakes)})")
+                for m in mistakes:
+                    line = f"**{m.get('original', '')}** → **{m.get('correction', '')}**"
+                    if m.get("reason"):
+                        line += f"  \n_{m['reason']}_"
+                    st.markdown(line)
+                    st.divider()
+            else:
+                st.success("Keine Fehler gefunden!")
+
+# --- TAB SPRECHEN ---
+with tab_sprechen:
+    st.header("Sprechen")
+    st.caption("Gesprächsthemen für die Sprechpraxis mit deinem Mentor oder Tandempartner - Thema, kurzer Text (ab B1) und Fragen zum Diskutieren.")
+
+    sprechen_level = st.selectbox("Niveau", options=speaking_topics.LEVEL_ORDER, index=2, key="sprechen_level")
+    topics_for_level = [t for t in speaking_topics.SPEAKING_TOPICS if t["level"] == sprechen_level]
+
+    if st.session_state.get("sprechen_level_key") != sprechen_level:
+        st.session_state["sprechen_current_topic"] = random.choice(topics_for_level) if topics_for_level else None
+        st.session_state["sprechen_level_key"] = sprechen_level
+
+    if st.button("Neues Thema", key="sprechen_new_topic") and topics_for_level:
+        st.session_state["sprechen_current_topic"] = random.choice(topics_for_level)
+        st.rerun()
+
+    topic = st.session_state.get("sprechen_current_topic")
+    if not topic:
+        st.info("Keine Themen für dieses Niveau gefunden.")
+    else:
+        st.markdown("---")
+        st.subheader(topic["topic"])
+        if topic.get("text"):
+            st.markdown(f"> {topic['text']}")
+        st.markdown("**Fragen zum Gespräch:**")
+        for i, q in enumerate(topic["questions"]):
+            st.markdown(f"{i+1}. {q}")
 
 # --- TAB VOKABELN ---
 with tab_vocab:
