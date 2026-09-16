@@ -14,6 +14,9 @@ _LIGHT_VARS = """
   --accent:#2158C9;
   --accent-soft:rgba(33,88,201,0.12);
   --border:rgba(20,33,61,0.16);
+  --warm:#B8791A;
+  --warm-soft:rgba(184,121,26,0.12);
+  --warm-border:rgba(184,121,26,0.35);
 """
 
 _DARK_VARS = """
@@ -26,6 +29,9 @@ _DARK_VARS = """
   --accent:#5B9DFF;
   --accent-soft:rgba(91,157,255,0.18);
   --border:rgba(231,237,247,0.16);
+  --warm:#E3B44E;
+  --warm-soft:rgba(227,180,78,0.14);
+  --warm-border:rgba(227,180,78,0.4);
 """
 
 _CSS_TEMPLATE = """
@@ -60,11 +66,13 @@ h2, h3{{ border-bottom:1px solid var(--border); padding-bottom:.25em; }}
 [data-testid="stCaptionContainer"], .stCaption{{ color:var(--ink-faint) !important; opacity:1 !important; }}
 
 /* Tabs */
-[data-baseweb="tab-list"]{{ border-bottom:1px solid var(--border); gap:6px; }}
+[data-baseweb="tab-list"]{{ border-bottom:1px solid var(--border); gap:28px; }}
 [data-baseweb="tab"]{{
   font-family:var(--display-font);
   letter-spacing:.03em;
   color:var(--ink-soft);
+  padding-left:4px;
+  padding-right:4px;
 }}
 [data-baseweb="tab"][aria-selected="true"]{{
   color:var(--accent);
@@ -150,6 +158,68 @@ code, pre, [data-testid="stDataFrame"]{{
   color:var(--ink) !important;
 }}
 [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li{{ color:var(--ink); }}
+
+/* Textbook-style margin notes: Merke / Tipp / Beispiel callout boxes */
+.note-box{{
+  border-radius:2px;
+  border-left-width:4px;
+  border-left-style:solid;
+  padding:10px 16px;
+  margin:10px 0;
+  font-family:var(--body-font);
+}}
+.note-box .note-label{{
+  font-family:var(--display-font);
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-size:.8em;
+  display:block;
+  margin-bottom:4px;
+}}
+.note-merke{{ background:var(--accent-soft); border-left-color:var(--accent); color:var(--ink); }}
+.note-merke .note-label{{ color:var(--accent); }}
+.note-tipp{{ background:var(--warm-soft); border-left-color:var(--warm); color:var(--ink); }}
+.note-tipp .note-label{{ color:var(--warm); }}
+
+/* Umlaut-dot accent - a small recurring German-typographic signature, used sparingly */
+.umlaut-dots{{
+  display:inline-block;
+  letter-spacing:2px;
+  color:var(--warm);
+  font-weight:700;
+}}
+
+/* Idiom-of-the-day card - the one place motion is allowed in this app */
+@keyframes idiom-settle{{
+  from{{ opacity:0; transform:translateY(-6px); }}
+  to{{ opacity:1; transform:translateY(0); }}
+}}
+.idiom-card{{
+  border:1.5px solid var(--warm-border);
+  background:var(--warm-soft);
+  border-radius:4px;
+  padding:14px 20px;
+  margin-bottom:18px;
+  animation:idiom-settle .5s ease-out;
+}}
+.idiom-card .idiom-label{{
+  font-family:var(--display-font);
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  font-size:.78em;
+  color:var(--warm);
+}}
+.idiom-card .idiom-phrase{{
+  font-family:var(--display-font);
+  font-size:1.3em;
+  font-weight:700;
+  color:var(--ink);
+  margin:2px 0 6px 0;
+}}
+.idiom-card .idiom-meaning{{ color:var(--ink-soft); font-style:italic; }}
+.idiom-card .idiom-example{{ color:var(--ink-faint); margin-top:4px; }}
 </style>
 """
 
@@ -157,3 +227,25 @@ code, pre, [data-testid="stDataFrame"]{{
 def inject_custom_theme(dark: bool = False):
     theme_vars = _DARK_VARS if dark else _LIGHT_VARS
     st.markdown(_CSS_TEMPLATE.format(theme_vars=theme_vars), unsafe_allow_html=True)
+
+
+def render_note_box(kind: str, label: str, text: str):
+    """Textbook-style margin note. kind is 'merke' (grammar rule, navy) or 'tipp' (encouragement, gold)."""
+    css_class = "note-merke" if kind == "merke" else "note-tipp"
+    st.markdown(
+        f'<div class="note-box {css_class}"><span class="note-label">{label}</span>{text}</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_idiom_card(idiom: str, meaning: str, example: str):
+    """The one animated element in the app - a gold-accented 'Redewendung des Tages' card."""
+    st.markdown(
+        f'''<div class="idiom-card">
+          <span class="idiom-label">✷ Redewendung des Tages</span>
+          <div class="idiom-phrase">{idiom}</div>
+          <div class="idiom-meaning">{meaning}</div>
+          <div class="idiom-example">„{example}“</div>
+        </div>''',
+        unsafe_allow_html=True,
+    )

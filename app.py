@@ -9,6 +9,7 @@ import verb_conjugator
 import theme
 import pronunciation
 import sentence_correction
+import idioms
 
 
 def render_pronunciation_button(text: str, key: str):
@@ -62,13 +63,12 @@ def render_grammar_rule(rule):
 
     if rule.get("mistakes"):
         st.markdown("---")
-        st.markdown("**Häufige Fehler:**")
-        for m in rule["mistakes"]:
-            st.markdown(f"- {m}")
+        mistakes_html = "".join(f"<li>{m}</li>" for m in rule["mistakes"])
+        theme.render_note_box("merke", "Merke - häufige Fehler", f"<ul>{mistakes_html}</ul>")
 
     if rule.get("exercise_hint"):
         st.markdown("---")
-        st.info(f"**Übungsvorschlag für Horst:** {rule['exercise_hint']}")
+        theme.render_note_box("tipp", "Tipp für Horst", rule["exercise_hint"])
 
     st.markdown("---")
     st.markdown("**Kurztest zu dieser Regel**")
@@ -204,6 +204,9 @@ with title_col:
     st.title("Deutsch Trainer")
 with toggle_col:
     st.toggle("🌙 Dunkel", key="dark_mode")
+
+daily_idiom = idioms.get_daily_idiom()
+theme.render_idiom_card(daily_idiom["idiom"], daily_idiom["meaning"], daily_idiom["example"])
 
 try:
     top_errors = db.get_top_errors(3)
