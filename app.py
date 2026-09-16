@@ -236,9 +236,15 @@ with tab_korrektur:
     )
 
     if st.button("Korrigieren", type="primary", disabled=not korrektur_input.strip()):
-        with st.spinner("Claude prüft deinen Text..."):
-            st.session_state["korrektur_result"] = sentence_correction.correct_sentences(korrektur_input)
-            st.rerun()
+        live = st.empty()
+        buffer = ""
+        for chunk in sentence_correction.stream_correction(korrektur_input):
+            buffer += chunk
+            visible = buffer.split("FEHLER:", 1)[0].replace("KORRIGIERT:", "").strip()
+            if visible:
+                live.code(visible, language=None, wrap_lines=True)
+        st.session_state["korrektur_result"] = sentence_correction.parse_correction_response(buffer, korrektur_input)
+        st.rerun()
 
     if st.session_state.get("korrektur_result"):
         result = st.session_state["korrektur_result"]
