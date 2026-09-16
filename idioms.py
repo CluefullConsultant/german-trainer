@@ -6,8 +6,7 @@ English gloss and example sentence are written for this app. Selected for a
 positive/encouraging tone; ambiguous double-meaning idioms were trimmed to
 their positive sense (see e.g. "mit Pauken und Trompeten").
 """
-import random
-import streamlit as st
+import datetime
 
 IDIOM_LIST = [
     {"idiom": "auf Wolke sieben schweben", "meaning_de": "extrem (oft auch naiv) glücklich, euphorisch sein", "meaning_en": "cloud nine / walking on air", "example": "Seit dem ersten Date schwebt sie auf Wolke sieben."},
@@ -40,12 +39,12 @@ IDIOM_LIST = [
 
 
 def get_daily_idiom() -> dict:
-    """Pick one idiom at random, stable for the browser session so it doesn't
-    change on every button click/rerun - a fresh one shows up each time the
-    app is opened again."""
-    if "daily_idiom_index" not in st.session_state:
-        st.session_state["daily_idiom_index"] = random.randrange(len(IDIOM_LIST))
-    entry = IDIOM_LIST[st.session_state["daily_idiom_index"]]
+    """Pick the idiom for today's calendar date - the same one for every visitor all
+    day, changing at midnight. Deterministic (date ordinal, not Python's randomized
+    string hash) so it's identical across reruns, reloads, and separate sessions."""
+    today = datetime.date.today()
+    index = today.toordinal() % len(IDIOM_LIST)
+    entry = IDIOM_LIST[index]
     return {
         "idiom": entry["idiom"],
         "meaning": f"{entry['meaning_de']} ({entry['meaning_en']})",
