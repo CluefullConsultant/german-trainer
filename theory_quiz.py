@@ -68,6 +68,11 @@ Regelerklärung:
 
 Erstelle einen kurzen Test mit 5 Multiple-Choice-Fragen, die GENAU diese Regel prüfen. Jede Frage ist entweder ein Lückensatz ("Ergänzen Sie: Er dankte ___ für die Hilfe.") oder eine direkte Auswahlfrage. Genau 4 Antwortoptionen pro Frage, nur eine richtig. Falsche Optionen sollen plausible Fehler zeigen (typische Verwechslungen bei dieser Regel), keine offensichtlich falschen.
 
+**Wichtig - Variation zwischen den 5 Fragen (sonst wird der Test durchschaubar):**
+- Wenn die Regel mehrere Unterfälle/Kategorien hat (z.B. mehrere Kasus, mehrere Konnektor-Kategorien, mehrere Verbtypen), muss JEDE Frage einen ANDEREN Unterfall testen - nie zwei Fragen hintereinander zum selben Unterfall (z.B. nicht zwei Akkusativ-Fragen direkt nacheinander, wenn die Regel auch Dativ/Genitiv abdeckt).
+- Die 4 Antwortoptionen einer Frage müssen sich strukturell ähneln (ähnliche Länge, ähnliches Satzmuster) - die richtige Antwort darf sich nicht allein durch Form, Länge oder Position erraten lassen.
+- Variiere auch den Fragetyp selbst (Lückensatz vs. Auswahlfrage) und den Satzkontext (nicht 5x dieselbe Alltagssituation) über die 5 Fragen hinweg.
+
 Mische den Schwierigkeitsgrad bewusst - nicht alle 5 Fragen gleich schwer:
 - 2 leichte Fragen: die Grundregel direkt und eindeutig angewendet
 - 2 mittelschwere Fragen: etwas komplexerer Satzkontext oder eine häufige Verwechslung
