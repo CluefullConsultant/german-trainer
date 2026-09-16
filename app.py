@@ -8,6 +8,7 @@ import theory_quiz
 import verb_conjugator
 import theme
 import pronunciation
+import sentence_correction
 
 
 def render_pronunciation_button(text: str, key: str):
@@ -214,12 +215,50 @@ try:
 except Exception:
     pass
 
-tab5, tab_lesen, tab_hoeren, tab_vocab = st.tabs([
+tab5, tab_korrektur, tab_lesen, tab_hoeren, tab_vocab = st.tabs([
     "Grammatik",
+    "Korrektur",
     "Lesen",
     "Hören",
     "Vokabeln",
 ])
+
+# --- TAB KORREKTUR ---
+with tab_korrektur:
+    st.header("Korrektur")
+    st.caption("Schreib deine eigenen Sätze auf Deutsch - locker, unvollständig, wie du willst. Du bekommst die korrigierte Version und jeden Fehler einzeln erklärt.")
+
+    korrektur_input = st.text_area(
+        "Dein Text",
+        key="korrektur_input",
+        height=150,
+        placeholder="z.B. Ich denke das ich morgen zu Termin gehen muss, aber ich bin nicht sicher ob ich Zeit habe...",
+    )
+
+    if st.button("Korrigieren", type="primary", disabled=not korrektur_input.strip()):
+        with st.spinner("Claude prüft deinen Text..."):
+            st.session_state["korrektur_result"] = sentence_correction.correct_sentences(korrektur_input)
+            st.rerun()
+
+    if st.session_state.get("korrektur_result"):
+        result = st.session_state["korrektur_result"]
+
+        st.markdown("---")
+        st.subheader("Korrigierte Version")
+        st.caption("Zum Kopieren: Maus über den Text, Symbol oben rechts klicken.")
+        st.code(result["corrected"], language=None, wrap_lines=True)
+
+        mistakes = result.get("mistakes", [])
+        if mistakes:
+            st.subheader(f"Fehler im Detail ({len(mistakes)})")
+            for m in mistakes:
+                line = f"**{m.get('original', '')}** → **{m.get('correction', '')}**"
+                if m.get("reason"):
+                    line += f"  \n_{m['reason']}_"
+                st.markdown(line)
+                st.divider()
+        else:
+            st.success("Keine Fehler gefunden!")
 
 # --- TAB LESEN ---
 with tab_lesen:
